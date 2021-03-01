@@ -3,10 +3,10 @@ const { INTEGER, STRING, FLOAT } = Sequelize;
 const db = new Sequelize(process.env.DATABASE_URL || 'postgres://postgres:JerryPine@localhost/acme_db');
 
 const CMOS = db.define('cmo', {
- group: { 
+  deal: { 
     type: STRING, 
   },
-  deal: { 
+  group: { 
     type: STRING, 
   },
   cpr: { 

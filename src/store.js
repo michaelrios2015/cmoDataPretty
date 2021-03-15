@@ -88,16 +88,16 @@ const loadDataByDealandGroup = (deal, group) =>{
         console.log('---------------in loadDataByGroup dispath ----------');
         const data = (await axios.get(`/api/dealandgroup/${deal}/${group}`)).data;
         console.log(data);
-        function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace) {
-            return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace };
+        function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, actualCpr, residual) {
+            return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, actualCpr, residual };
           }
         
         const rows= [];
         
         
         data.forEach(item => {
-            // console.log(item.id)
-            rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace))
+            console.log(item.residual)
+            rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace, item.actualCpr, item.residual))
         });
         dispatch(_loadRows(rows));
     }

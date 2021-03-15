@@ -9,6 +9,12 @@ const CMOS = db.define('cmo', {
   group: { 
     type: STRING, 
   },
+  actualCpr: { 
+    type: FLOAT, 
+  },
+  residual: { 
+    type: FLOAT, 
+  },
   cpr: { 
     type: FLOAT, 
   },

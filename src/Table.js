@@ -8,8 +8,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import { loadData, loadDataByDealandGroup } from './store';
 
 // need to clean up unused code getting some sort of error when first load does not break anything but not exactly good
@@ -41,6 +39,7 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
     loadDataByDealandGroup(searchA, searchB);
   },[searchA, searchB]);
 
+  //feel like I am not really doing this right 
   function onChange(ev){
     const change = {};
     console.log(change);
@@ -69,14 +68,6 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
   
   console.log(searchA)
   console.log(searchB)
-  // if (searchA !== ''){
-  //   rows = rows.filter((item)=> item.Cusip === searchA);
-  //   // console.log(rows)
-  // }
-  // if (searchB !== ''){
-  //   rows = rows.filter((item)=> item.PoolName.includes(searchB));
-  //   console.log(rows)
-  // }
 
   return (
     <div>
@@ -114,6 +105,8 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
             <TableRow>
               <TableCell >Deal</TableCell>
               <TableCell align="right">Group</TableCell>
+              <TableCell align="right">CPR</TableCell>
+              <TableCell align="right">Residual</TableCell>
               <TableCell align="right">Feb CPR</TableCell>
               <TableCell align="right">March CPR</TableCell>
               <TableCell align="right">Feb VPR</TableCell>
@@ -128,6 +121,8 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
               <TableRow key={row.id}>
                 <TableCell component="th" scope="row"> {row.deal} </TableCell>
                 <TableCell align="right">{row.group}</TableCell>
+                <TableCell align="right">{row.actualCpr}</TableCell>
+                <TableCell align="right">{row.residual}</TableCell>
                 <TableCell align="right">{row.cpr}</TableCell>
                 <TableCell align="right">{row.cprNext}</TableCell>
                 <TableCell align="right">{row.vpr}</TableCell>

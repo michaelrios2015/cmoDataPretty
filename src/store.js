@@ -65,8 +65,8 @@ const loadRows = () =>{
     return async(dispatch)=>{
         const tests = (await axios.get('/api/cmos')).data;
         // console.log()
-        function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace) {
-            return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace };
+        function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr) {
+            return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr };
           }
         
         const rows= [];
@@ -74,7 +74,7 @@ const loadRows = () =>{
         
         tests.forEach(item => {
             // console.log(item.id)
-            rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace))
+            rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace, item.residual, item.actualCpr))
         });
 
         // console.log(rows); 
@@ -87,7 +87,7 @@ const loadDataByDealandGroup = (deal, group) =>{
     return async(dispatch)=>{
         console.log('---------------in loadDataByGroup dispath ----------');
         const data = (await axios.get(`/api/dealandgroup/${deal}/${group}`)).data;
-        console.log(data);
+        // console.log(data);
         function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, actualCpr, residual) {
             return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, actualCpr, residual };
           }
@@ -96,7 +96,7 @@ const loadDataByDealandGroup = (deal, group) =>{
         
         
         data.forEach(item => {
-            console.log(item.residual)
+            // console.log(item.residual)
             rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace, item.actualCpr, item.residual))
         });
         dispatch(_loadRows(rows));

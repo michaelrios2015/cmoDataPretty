@@ -129,7 +129,7 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
                 <TableCell align="right">{row.vprNext}</TableCell>
                 <TableCell align="right">{row.cdr}</TableCell>
                 <TableCell align="right">{row.cdrNext}</TableCell>
-                <TableCell align="right">{row.currFace}</TableCell>
+                <TableCell align="right">{numberWithCommas(row.currFace)}</TableCell>
               </TableRow>
             ))}
           </TableBody>

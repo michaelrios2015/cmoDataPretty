@@ -9,7 +9,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { loadData, loadDataByDealandGroup } from './store';
-import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 // need to clean up unused code getting some sort of error when first load does not break anything but not exactly good
@@ -73,25 +72,41 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
 
   return (
     <div>
-      <div className={ 'sideBySide' }>
-        <Autocomplete
-          id="combo-box-demo"
-          options={dealNames}
-          getOptionLabel={(option) => option}
-          style={{ width: 300 }}
-          onChange={(event, value)=>setSearchA(value)}
-          renderInput={(params) => <TextField  {...params} label="Deal Names" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchA('All')}  />}
-        />
-        
-        <Autocomplete
-          id="combo-box-pool-names"
-          options={groups}
-          getOptionLabel={(option) => option}
-          style={{ width: 300 }}
-          onChange={(event, value)=>setSearchB(value)}
-          renderInput={(params) => <TextField  {...params} label="Groups" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchB('All')} />}
-        /> 
-      </div>
+      <Autocomplete
+      id="combo-box-demo"
+      options={dealNAmes}
+      getOptionLabel={(option) => option}
+      style={{ width: 300 }}
+      // onChange={(event, value)=>setSearchA(value)}
+      renderInput={(params) => <TextField  {...params} label="Deal Names" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchA('')}  />}
+      />
+      {/* Deal Name:
+                <select name='searchA' value={ searchA } onChange = { onChange }>
+                        <option value = 'All'>All Deal Names</option>
+                        {
+                            dealNames.map( (dealName, idx) => { 
+                                    return (
+                                        <option key={ idx } value = { dealName }>
+                                            { dealName } 
+                                        </option>
+                                    );
+                                })
+                        }
+                </select>   
+      Groups:
+          <select name='searchB' value={ searchB } onChange = { onChange }>
+                  <option value = 'All'>All Groups</option>
+                  {
+                      groups.map( (group, idx) => { 
+                              return (
+                                  <option key={ idx } value = { group }>
+                                      { group } 
+                                  </option>
+                              );
+                          })
+                  }
+          </select> */}
+
 
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">

@@ -8,10 +8,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { loadData, loadDataByDealandGroup } from './store';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
+import { loadData, loadDataByDealandGroup } from './store';
 // need to clean up unused code getting some sort of error when first load does not break anything but not exactly good
 // Same thing about pagination and loading
 

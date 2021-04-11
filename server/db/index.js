@@ -38,6 +38,38 @@ const CMOS = db.define('cmo', {
   }     
 },{ timestamps: false });
 
+
+const CurrentCMOS = db.define('cmo', {
+  deal: { 
+    type: STRING, 
+  },
+  group: { 
+    type: STRING, 
+  },
+  cpr: { 
+    type: FLOAT, 
+  },
+  cprNext: { 
+    type: FLOAT, 
+  },
+  vpr: { 
+    type: FLOAT, 
+  }, 
+  vprNext: { 
+    type: FLOAT, 
+  },
+  cdr: { 
+    type: FLOAT, 
+  },
+  cdrNext: { 
+    type: FLOAT, 
+  },
+  currFace: { 
+    type: FLOAT, 
+  }     
+},{ timestamps: false });
+
+
 const CPN = db.define('cpn', {
   zero: { 
     type: FLOAT, 
@@ -96,6 +128,7 @@ module.exports = {
     db,
     models: {
       CMOS,
+      CurrentCMOS,
       CPN
     }
   }

@@ -2,7 +2,7 @@
 const express = require('express');
 const { static } = express;
 const path = require('path');
-const { db, models: { CMOS } } = require('../db');
+const { db, models: { CMOS, CurrentCMOS } } = require('../db');
 
 
 const app = express();
@@ -26,32 +26,43 @@ app.get('/api/cmos', async(req, res, next)=> {
 });
 
 
+// gets all Current cmos
+app.get('/api/cmoscurrent', async(req, res, next)=> {
+  try {
+    res.send(await CurrentCMOS.findAll());
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+
 //gets cmos by group
 app.get('/api/dealandgroup/:deal/:group', async(req, res, next)=> {
   try {
     if (req.params.deal !== 'All' && req.params.group !== 'All'){
-      console.log('-------------------------------')
-      console.log(req.params.deal);
-      console.log(req.params.group); 
+      // console.log('-------------------------------')
+      // console.log(req.params.deal);
+      // console.log(req.params.group); 
       res.send(await CMOS.findAll({where: {deal: req.params.deal, group: req.params.group}}));
     } else if ( req.params.deal !== 'All'){
-      console.log('-------------------------------')
-      console.log(req.params.deal);
-      console.log(req.params.group); 
+      // console.log('-------------------------------')
+      // console.log(req.params.deal);
+      // console.log(req.params.group); 
       res.send(await CMOS.findAll({where: {deal: req.params.deal}}));
     } else if ( req.params.group !== 'All'){
-      console.log('-------------------------------')
-      console.log(req.params.deal);
-      console.log(req.params.group); 
+      // console.log('-------------------------------')
+      // console.log(req.params.deal);
+      // console.log(req.params.group); 
       res.send(await CMOS.findAll({where: {group: req.params.group}}));
     } else{
-      console.log('-------------------------------')
-      console.log(req.params.group)
+      // console.log('-------------------------------')
+      // console.log(req.params.group)
       res.send(await CMOS.findAll());
     }
   }
   catch(ex){
-    console.log('-------------------------------')
+    // console.log('-------------------------------')
     next(ex);
   }
 });

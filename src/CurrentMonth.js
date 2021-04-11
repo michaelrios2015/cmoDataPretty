@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { loadData, loadDataByDealandGroup } from './store';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+
 
 // need to clean up unused code getting some sort of error when first load does not break anything but not exactly good
 // Same thing about pagination and loading
@@ -30,7 +30,7 @@ function numberWithCommas(x) {
 }
 
 //rows are now created in store :) 
-function BasicTable({ rows, loadDataByDealandGroup }) {
+function CurrentMonth({ currentrows, loadDataByDealandGroup }) {
   const [searchA, setSearchA ] = useState('All');
   const [searchB, setSearchB ] = useState('All');
 
@@ -54,13 +54,13 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
   const classes = useStyles();
       
   let dealNames = [];
-  rows.forEach(item=>dealNames.push(item.deal));
+  currentrows.forEach(item=>dealNames.push(item.deal));
   // seems to remove the duplicates
   dealNames = [...new Set(dealNames)]
   // console.log(dealNames);
   
   let groups = [];
-  rows.forEach(item=>groups.push(item.group));
+  currentrows.forEach(item=>groups.push(item.group));
   // data.forEach(item=>console.log(item.group));
   // seems to remove the duplicates
   groups = [...new Set(groups)]
@@ -72,14 +72,7 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
 
   return (
     <div>
-      <Autocomplete
-      id="combo-box-demo"
-      options={dealNAmes}
-      getOptionLabel={(option) => option}
-      style={{ width: 300 }}
-      // onChange={(event, value)=>setSearchA(value)}
-      renderInput={(params) => <TextField  {...params} label="Deal Names" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchA('')}  />}
-      />
+
       {/* Deal Name:
                 <select name='searchA' value={ searchA } onChange = { onChange }>
                         <option value = 'All'>All Deal Names</option>
@@ -114,8 +107,6 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
             <TableRow>
               <TableCell >Deal</TableCell>
               <TableCell align="right">Group</TableCell>
-              <TableCell align="right">CPR</TableCell>
-              <TableCell align="right">Residual</TableCell>
               <TableCell align="right">Feb CPR</TableCell>
               <TableCell align="right">March CPR</TableCell>
               <TableCell align="right">Feb VPR</TableCell>
@@ -126,12 +117,10 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {currentrows.map((row) => (
               <TableRow key={row.id}>
                 <TableCell component="th" scope="row"> {row.deal} </TableCell>
                 <TableCell align="right">{row.group}</TableCell>
-                <TableCell align="right">{row.actualCpr}</TableCell>
-                <TableCell align="right">{row.residual}</TableCell>
                 <TableCell align="right">{row.cpr}</TableCell>
                 <TableCell align="right">{row.cprNext}</TableCell>
                 <TableCell align="right">{row.vpr}</TableCell>
@@ -164,4 +153,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(BasicTable);
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentMonth);

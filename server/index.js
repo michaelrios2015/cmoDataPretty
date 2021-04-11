@@ -1,9 +1,10 @@
-const { db, models: { CMOS, CPN } } = require('./db');
+const { db, models: { CMOS, CPN, CurrentCMOS } } = require('./db');
 const app = require('./api')
 const fs = require("fs");
 const fastcsv = require("fast-csv");
 
 
+  //this is loading data.csv into CMOS
   let stream = fs.createReadStream('data.csv');
   let csvData = [];
   let csvStream = fastcsv
@@ -21,6 +22,25 @@ const fastcsv = require("fast-csv");
   });
 
 
+
+  //this is loading currentData.csv into CurrentCMOS
+  let streamCurrentData = fs.createReadStream('currentData.csv');
+  let csvCurrentData = [];
+  let csvCurrntStream = fastcsv
+  .parse()
+  .on("data", function(data) {
+    // console.log('here')
+    csvCurrentData.push(data);
+  })
+  .on("end", async function() {
+    for (let i = 0; i < csvCurrentData.length; i++ ){
+      // console.log(csvData[i][1]);
+      await CurrentCMOS.create({ deal: csvCurrentData[i][0], group: csvCurrentData[i][1], cpr: csvCurrentData[i][2], cprNext: csvCurrentData[i][3], vpr: csvCurrentData[i][4], vprNext: csvCurrentData[i][5], 
+        cdr: csvCurrentData[i][6], cdrCurrentNext: csvData[i][7], currCurrentFace: csvData[i][8] })
+    }
+  });
+
+  // this is for the table I have not tackled yet 
   let streamCPN = fs.createReadStream('cpn.csv');
   let csvDataCPN = [];
   let csvStreamCPN = fastcsv
@@ -52,7 +72,10 @@ const fastcsv = require("fast-csv");
   const syncAndSeed = async()=> {
     await db.sync({ force: true });
 
-   stream.pipe(csvStream);
+    stream.pipe(csvStream);
+
+    streamCurrentData.pipe(csvCurrentStream);
+
 
    streamCPN.pipe(csvStreamCPN);
   };

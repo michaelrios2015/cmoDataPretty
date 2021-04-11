@@ -5,6 +5,7 @@ import logger from 'redux-logger';
 
 const LOAD_DATA = 'LOAD_DATA';
 const LOAD_ROWS = 'LOAD_ROWS';
+const LOAD_CURRENT_ROWS = 'LOAD_CURRENT_ROWS';
 
 
 //segment of real data ************************
@@ -25,12 +26,20 @@ const rowsReducer = (state = [], action) =>{
     return state;
 }
 
+const currentRowsReducer = (state = [], action) =>{
+    if (action.type === LOAD_CURRENT_ROWS){
+        state = action.rows
+    }
+
+    return state;
+}
+
 // the reducer
 const reducer = combineReducers({
+    currentrows: currentRowsReducer,
     rows: rowsReducer,
     data: dataReducer
 })
-
 
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
@@ -82,6 +91,37 @@ const loadRows = () =>{
     }
 };
 
+
+const _loadCurrentRows = (rows) =>{
+    return {
+        type: LOAD_CURRENT_ROWS,
+        rows
+    };
+};
+
+
+const loadCurrentRows = () =>{
+    return async(dispatch)=>{
+        const tests = (await axios.get('/api/cmos')).data;
+        // console.log()
+        function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace) {
+            return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace};
+          }
+        
+        const rows= [];
+        
+        
+        tests.forEach(item => {
+            // console.log(item.id)
+            rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace))
+        });
+
+        // console.log(rows); 
+        dispatch(_loadCurrentRows(rows));
+    }
+};
+
+
 const loadDataByDealandGroup = (deal, group) =>{
     
     return async(dispatch)=>{
@@ -104,4 +144,4 @@ const loadDataByDealandGroup = (deal, group) =>{
 };
 
 export default store;
-export { loadData, loadRows, loadDataByDealandGroup };
+export { loadData, loadRows, loadCurrentRows, loadDataByDealandGroup };

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Provider, connect } from 'react-redux';
-import store, { loadData, loadRows } from './store';
+import store, { loadCurrentRows, loadRows } from './store';
 import BasicTable from './Table';
+import CurrentMonth from './CurrentMonth';
 import { HashRouter as Router, Route, BrowserRouter } from 'react-router-dom';
 
-
+// so I don't think is where I should load that data but nt sure how to do it with UseEffect
 class _App extends Component{
   constructor(){
     super();
@@ -19,11 +20,13 @@ class _App extends Component{
   //this works fine now need to figure out how to put my data into Material UI table and add search
   render(){
     return (
-      <BrowserRouter>
+      <Router>
         <div>
-          <Route component={ BasicTable } path = '/' />
+          <Route component={ CurrentMonth } path = '/'  exact />
+          <Route component={ BasicTable } path = '/past' />
+          
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
@@ -35,7 +38,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     bootstrap: ()=> {
-      dispatch(loadData());
+      dispatch(loadCurrentRows());
       dispatch(loadRows());
     }
   };

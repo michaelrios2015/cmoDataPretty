@@ -39,7 +39,7 @@ const CMOS = db.define('cmo', {
 },{ timestamps: false });
 
 
-const CurrentCMOS = db.define('cmo', {
+const CurrentCMOS = db.define('currentcmo', {
   deal: { 
     type: STRING, 
   },

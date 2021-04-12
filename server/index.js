@@ -15,10 +15,15 @@ const fastcsv = require("fast-csv");
   })
   .on("end", async function() {
     for (let i = 0; i < csvData.length; i++ ){
-      // console.log(csvData[i][1]);
-      await CMOS.create({ deal: csvData[i][0], group: csvData[i][1], actualCpr: csvData[i][2], residual: csvData[i][3], cpr: csvData[i][4], cprNext: csvData[i][5], vpr: csvData[i][6], vprNext: csvData[i][7], 
+      console.log(csvData[i][2]);
+      try{
+      await CMOS.create({ deal: csvData[i][0], group: csvData[i][1],  residual: csvData[i][3], cpr: csvData[i][4], cprNext: csvData[i][5], vpr: csvData[i][6], vprNext: csvData[i][7], 
         cdr: csvData[i][8], cdrNext: csvData[i][9], currFace: csvData[i][10] })
-    }
+      }
+      catch(ex){
+        console.log(ex)
+      }
+      }
   });
 
 

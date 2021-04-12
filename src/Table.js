@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import { loadData, loadDataByDealandGroup } from './store';
+import { loadData, loadDataByDealandGroup, loadRows } from './store';
 // need to clean up unused code getting some sort of error when first load does not break anything but not exactly good
 // Same thing about pagination and loading
 
@@ -34,9 +34,28 @@ function numberWithCommas(x) {
 function BasicTable({ rows, loadDataByDealandGroup }) {
   const [searchA, setSearchA ] = useState('All');
   const [searchB, setSearchB ] = useState('All');
-
+  
+  const [loading, setLoading ] = useState(true);
 
   console.log(loadDataByDealandGroup);
+  
+  useEffect(() => {
+    loadRows();
+    // console.log(rows.length)
+    // if (rows.length > 0){
+    //   setLoading('false');
+    // }
+  },[]);
+
+  useEffect(() => {
+    console.log(rows.length)
+    if (rows.length > 0){
+      setLoading(false);
+    }
+  },[rows]);
+
+
+  console.log(loading);
   useEffect(() => {
     loadDataByDealandGroup(searchA, searchB);
   },[searchA, searchB]);
@@ -93,6 +112,9 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
         /> 
       </div>
 
+      {
+              loading ? <p>LOADING</p> : <p>DONE</p>  
+      }
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -111,6 +133,7 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
             </TableRow>
           </TableHead>
           <TableBody>
+            
             {rows.map((row) => (
               <TableRow key={row.id}>
                 <TableCell component="th" scope="row"> {row.deal} </TableCell>
@@ -140,7 +163,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     bootstrap: ()=> {
-      dispatch(loadData());
+      dispatch(loadRows());
     },
     loadDataByDealandGroup: (deal, group)=> {
       dispatch(loadDataByDealandGroup(deal, group));

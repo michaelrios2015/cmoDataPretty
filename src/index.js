@@ -38,7 +38,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     bootstrap: ()=> {
-      dispatch(loadCurrentRows());
+      // dispatch(loadCurrentRows());
       dispatch(loadRows());
     }
   };

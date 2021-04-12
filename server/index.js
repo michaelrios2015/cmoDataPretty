@@ -77,7 +77,7 @@ const fastcsv = require("fast-csv");
     // streamCurrentData.pipe(csvCurrentStream);
 
 
-   streamCPN.pipe(csvStreamCPN);
+  //  streamCPN.pipe(csvStreamCPN);
   };
 
   

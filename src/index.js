@@ -22,7 +22,7 @@ class _App extends Component{
     return (
       <Router>
         <div>
-          <Route component={ CurrentMonth } path = '/past'  exact />
+          <Route component={ CurrentMonth } path = '/past'  />
           <Route component={ BasicTable } path = '/' exact/>
           
         </div>

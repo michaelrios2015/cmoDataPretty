@@ -22,8 +22,8 @@ class _App extends Component{
     return (
       <Router>
         <div>
-          <Route component={ CurrentMonth } path = '/'  exact />
-          <Route component={ BasicTable } path = '/past' />
+          <Route component={ CurrentMonth } path = '/past'  exact />
+          <Route component={ BasicTable } path = '/' exact/>
           
         </div>
       </Router>

@@ -57,6 +57,7 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
 
   console.log(loading);
   useEffect(() => {
+    setLoading(true);
     loadDataByDealandGroup(searchA, searchB);
   },[searchA, searchB]);
 
@@ -113,45 +114,48 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
       </div>
 
       {
-              loading ? <p>LOADING</p> : <p>DONE</p>  
-      }
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell >Deal</TableCell>
-              <TableCell align="right">Group</TableCell>
-              <TableCell align="right">CPR</TableCell>
-              <TableCell align="right">Residual</TableCell>
-              <TableCell align="right">Feb CPR</TableCell>
-              <TableCell align="right">March CPR</TableCell>
-              <TableCell align="right">Feb VPR</TableCell>
-              <TableCell align="right">March VPR</TableCell>
-              <TableCell align="right">Feb CDR</TableCell>
-              <TableCell align="right">March CDR</TableCell>
-              <TableCell align="right">Current Face</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            
-            {rows.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell component="th" scope="row"> {row.deal} </TableCell>
-                <TableCell align="right">{row.group}</TableCell>
-                <TableCell align="right">{row.actualCpr}</TableCell>
-                <TableCell align="right">{row.residual}</TableCell>
-                <TableCell align="right">{row.cpr}</TableCell>
-                <TableCell align="right">{row.cprNext}</TableCell>
-                <TableCell align="right">{row.vpr}</TableCell>
-                <TableCell align="right">{row.vprNext}</TableCell>
-                <TableCell align="right">{row.cdr}</TableCell>
-                <TableCell align="right">{row.cdrNext}</TableCell>
-                <TableCell align="right">{numberWithCommas(row.currFace)}</TableCell>
+        loading ? 
+        (<p>LOADING</p>) 
+        :       
+        (<TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell >Deal</TableCell>
+                <TableCell align="right">Group</TableCell>
+                <TableCell align="right">CPR</TableCell>
+                <TableCell align="right">Residual</TableCell>
+                <TableCell align="right">Feb CPR</TableCell>
+                <TableCell align="right">March CPR</TableCell>
+                <TableCell align="right">Feb VPR</TableCell>
+                <TableCell align="right">March VPR</TableCell>
+                <TableCell align="right">Feb CDR</TableCell>
+                <TableCell align="right">March CDR</TableCell>
+                <TableCell align="right">Current Face</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              
+              {rows.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row"> {row.deal} </TableCell>
+                  <TableCell align="right">{row.group}</TableCell>
+                  <TableCell align="right">{row.actualCpr}</TableCell>
+                  <TableCell align="right">{row.residual}</TableCell>
+                  <TableCell align="right">{row.cpr}</TableCell>
+                  <TableCell align="right">{row.cprNext}</TableCell>
+                  <TableCell align="right">{row.vpr}</TableCell>
+                  <TableCell align="right">{row.vprNext}</TableCell>
+                  <TableCell align="right">{row.cdr}</TableCell>
+                  <TableCell align="right">{row.cdrNext}</TableCell>
+                  <TableCell align="right">{numberWithCommas(row.currFace)}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>)   
+      }
+
      </div>
   );
 }

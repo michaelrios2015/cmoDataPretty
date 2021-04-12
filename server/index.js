@@ -74,7 +74,7 @@ const fastcsv = require("fast-csv");
 
     stream.pipe(csvStream);
 
-    streamCurrentData.pipe(csvCurrentStream);
+    // streamCurrentData.pipe(csvCurrentStream);
 
 
    streamCPN.pipe(csvStreamCPN);

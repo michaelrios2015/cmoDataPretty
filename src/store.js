@@ -102,7 +102,7 @@ const _loadCurrentRows = (rows) =>{
 
 const loadCurrentRows = () =>{
     return async(dispatch)=>{
-        const tests = (await axios.get('/api/cmos')).data;
+        const tests = (await axios.get('/api/currentcmos')).data;
         // console.log()
         function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace) {
             return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace};

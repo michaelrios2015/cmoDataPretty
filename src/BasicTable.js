@@ -12,12 +12,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import { loadData, loadDataByDealandGroup, loadRows } from './store';
-// need to clean up unused code getting some sort of error when first load does not break anything but not exactly good
-// Same thing about pagination and loading
 
-
-// lost the minwidth without this guy can probably be hard coded in somewhere 
-// changed so cusip and pool would not run together should be a better way
 const useStyles = makeStyles({
   table: {
     minWidth: 730,

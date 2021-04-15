@@ -3,7 +3,7 @@ module.exports = router;
 
 router.use("/cmos", require("./cmos"));
 
-// router.use("/games", require("./games"));
+router.use("/currentcmos", require("./currentcmos"));
 
 // router.use("/user_games", require("./user_games"));
 

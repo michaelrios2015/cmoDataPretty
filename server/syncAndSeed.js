@@ -77,13 +77,9 @@ const fastcsv = require("fast-csv");
   const syncAndSeed = async()=> {
     await db.sync({ force: true });
 
-
     stream.pipe(csvStream);
 
     streamCurrentData.pipe(csvCurrentStream);  
-
-    
-
 
     streamCPN.pipe(csvStreamCPN);
   };

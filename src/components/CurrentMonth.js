@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { loadData, loadDataByDealandGroup, loadCurrentRows } from './store';
+import { loadData, loadDataByDealandGroup, loadCurrentRows } from '../store';
 
 
 // need to clean up unused code getting some sort of error when first load does not break anything but not exactly good

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Provider, connect } from 'react-redux';
 import store from './store';
-import BasicTable from './BasicTable';
-import CurrentMonth from './CurrentMonth';
+import BasicTable from './components/BasicTable';
+import CurrentMonth from './components/CurrentMonth';
 import { HashRouter as Router, Route, BrowserRouter } from 'react-router-dom';
 
 // so I don't think is where I should load that data but nt sure how to do it with UseEffect
@@ -20,8 +20,7 @@ class _App extends Component{
       <Router>
         <div>
           <Route component={ CurrentMonth } path = '/current'  />
-          <Route component={ BasicTable } path = '/' exact/>
-          
+          <Route component={ BasicTable } path = '/' exact/>          
         </div>
       </Router>
     );
@@ -31,7 +30,6 @@ class _App extends Component{
 const mapStateToProps = (state) => {
   return state;
 }
-
 
 const App = connect(mapStateToProps, null)(_App);
 

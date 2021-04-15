@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import { loadData, loadDataByDealandGroup, loadRows } from './store';
+import { loadData, loadDataByDealandGroup, loadRows } from '../store';
 
 const useStyles = makeStyles({
   table: {

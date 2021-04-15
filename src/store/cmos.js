@@ -8,15 +8,6 @@ const LOAD_ROWS = 'LOAD_ROWS';
 const LOAD_CURRENT_ROWS = 'LOAD_CURRENT_ROWS';
 
 
-//segment of real data ************************
-const dataReducer = (state = [], action) =>{
-    if (action.type === LOAD_DATA){
-        state = action.data
-    }
-
-    return state;
-}
-
 //This is because i needed a place to load the rows for the 
 const rowsReducer = (state = [], action) =>{
     if (action.type === LOAD_ROWS){
@@ -26,41 +17,7 @@ const rowsReducer = (state = [], action) =>{
     return state;
 }
 
-const currentRowsReducer = (state = [], action) =>{
-    if (action.type === LOAD_CURRENT_ROWS){
-        state = action.rows
-    }
-
-    return state;
-}
-
-// the reducer
-const reducer = combineReducers({
-    currentrows: currentRowsReducer,
-    rows: rowsReducer,
-    data: dataReducer
-})
-
-
-const store = createStore(reducer, applyMiddleware(thunk, logger));
-
-
 //TESTS THUNKS****************************************
-
-
-const _loadData = (data) =>{
-    return {
-        type: LOAD_DATA,
-        data
-    };
-};
-
-const loadData = () =>{
-    return async(dispatch)=>{
-        const data = (await axios.get('/api/cmos')).data;
-        dispatch(_loadData(data));
-    }
-};
 
 const _loadRows = (rows) =>{
     return {
@@ -70,7 +27,7 @@ const _loadRows = (rows) =>{
 };
 
 
-const loadRows = () =>{
+export const loadRows = () =>{
     return async(dispatch)=>{
         const tests = (await axios.get('/api/cmos')).data;
         // console.log()
@@ -91,38 +48,7 @@ const loadRows = () =>{
     }
 };
 
-
-const _loadCurrentRows = (rows) =>{
-    return {
-        type: LOAD_CURRENT_ROWS,
-        rows
-    };
-};
-
-
-const loadCurrentRows = () =>{
-    return async(dispatch)=>{
-        const tests = (await axios.get('/api/currentcmos')).data;
-        // console.log()
-        function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace) {
-            return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace};
-          }
-        
-        const rows= [];
-        
-        
-        tests.forEach(item => {
-            // console.log(item.id)
-            rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace))
-        });
-
-        // console.log(rows); 
-        dispatch(_loadCurrentRows(rows));
-    }
-};
-
-
-const loadDataByDealandGroup = (deal, group) =>{
+export const loadDataByDealandGroup = (deal, group) =>{
     
     return async(dispatch)=>{
         console.log('---------------in loadDataByGroup dispath ----------');
@@ -143,5 +69,4 @@ const loadDataByDealandGroup = (deal, group) =>{
     }
 };
 
-export default store;
-export { loadData, loadRows, loadCurrentRows, loadDataByDealandGroup };
+export { rowsReducer };

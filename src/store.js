@@ -126,7 +126,7 @@ const loadDataByDealandGroup = (deal, group) =>{
     
     return async(dispatch)=>{
         console.log('---------------in loadDataByGroup dispath ----------');
-        const data = (await axios.get(`/api/dealandgroup/${deal}/${group}`)).data;
+        const data = (await axios.get(`/api/cmos/dealandgroup/${deal}/${group}`)).data;
         // console.log(data);
         function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, actualCpr, residual) {
             return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, actualCpr, residual };

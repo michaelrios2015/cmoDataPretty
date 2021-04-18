@@ -29,8 +29,8 @@ export const loadCurrentRows = () =>{
     return async(dispatch)=>{
         const tests = (await axios.get('/api/currentcmos')).data;
         // console.log()
-        function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace) {
-            return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace};
+        function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext) {
+            return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext};
           }
         
         const rows= [];
@@ -38,7 +38,7 @@ export const loadCurrentRows = () =>{
         
         tests.forEach(item => {
             // console.log(item.id)
-            rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace))
+            rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext))
         });
 
         // console.log(rows); 
@@ -47,25 +47,25 @@ export const loadCurrentRows = () =>{
 };
 
 
-// const loadDataByDealandGroup = (deal, group) =>{
+export const loadCurrentDataByDealandGroup = (deal, group) =>{
     
-//     return async(dispatch)=>{
-//         console.log('---------------in loadDataByGroup dispath ----------');
-//         const data = (await axios.get(`/api/cmos/dealandgroup/${deal}/${group}`)).data;
-//         // console.log(data);
-//         function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, actualCpr, residual) {
-//             return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, actualCpr, residual };
-//           }
+    return async(dispatch)=>{
+        console.log('---------------in loadDataByGroup dispath ----------');
+        const data = (await axios.get(`/api/currentcmos/dealandgroup/${deal}/${group}`)).data;
+        // console.log(data);
+        function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext) {
+            return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext};
+        }
+
+        const rows= [];
         
-//         const rows= [];
         
-        
-//         data.forEach(item => {
-//             // console.log(item.residual)
-//             rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace, item.actualCpr, item.residual))
-//         });
-//         dispatch(_loadRows(rows));
-//     }
-// };
+        data.forEach(item => {
+            // console.log(item.residual)
+            rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext))
+        });
+        dispatch(_loadCurrentRows(rows));
+    }
+};
 
 export { currentRowsReducer };

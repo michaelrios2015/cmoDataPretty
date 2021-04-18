@@ -8,15 +8,14 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { loadData, loadDataByDealandGroup, loadCurrentRows } from '../store';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
+import { loadCurrentDataByDealandGroup, loadCurrentRows } from '../store';
 
-// need to clean up unused code getting some sort of error when first load does not break anything but not exactly good
-// Same thing about pagination and loading
+//There should be a way of combining BasicTable and this, I think it should just be able to see the url
+// and tell what it is supposed to use but not entirely sure 
 
-
-// lost the minwidth without this guy can probably be hard coded in somewhere 
-// changed so cusip and pool would not run together should be a better way
 const useStyles = makeStyles({
   table: {
     minWidth: 730,
@@ -27,11 +26,13 @@ const useStyles = makeStyles({
 function CurrentMonth({ loadDataByDealandGroup, loadCurrentRows, currentrows }) {
   const [searchA, setSearchA ] = useState('All');
   const [searchB, setSearchB ] = useState('All');
+  const [loading, setLoading ] = useState(true);
 
-
-  console.log(loadCurrentRows)
-  console.log(loadDataByDealandGroup);
+  //console.log(loadCurrentRows)
+  //console.log(loadDataByDealandGroup);
+  
   useEffect(() => {
+    setLoading(true);
     loadDataByDealandGroup(searchA, searchB);
   },[searchA, searchB]);
 
@@ -39,18 +40,15 @@ function CurrentMonth({ loadDataByDealandGroup, loadCurrentRows, currentrows }) 
     loadCurrentRows();
   },[]);
 
-  console.log(currentrows);
-  //feel like I am not really doing this right 
-  function onChange(ev){
-    const change = {};
-    console.log(change);
-    change[ev.target.name] = ev.target.value;
-    // this.setState(change);
-    if (change.searchA){
-    setSearchA(change.searchA)}
-    if (change.searchB) {
-    setSearchB(change.searchB)}
-  }
+  useEffect(() => {
+    console.log(currentrows.length)
+    if (currentrows.length > 0){
+      setLoading(false);
+    }
+  },[currentrows]);
+
+  // console.log(currentrows);
+
   const classes = useStyles();
       
   let dealNames = [];
@@ -73,64 +71,67 @@ function CurrentMonth({ loadDataByDealandGroup, loadCurrentRows, currentrows }) 
   return (
     <div>
 
-      Deal Name:
-                <select name='searchA' value={ searchA } onChange = { onChange }>
-                        <option value = 'All'>All Deal Names</option>
-                        {
-                            dealNames.map( (dealName, idx) => { 
-                                    return (
-                                        <option key={ idx } value = { dealName }>
-                                            { dealName } 
-                                        </option>
-                                    );
-                                })
-                        }
-                </select>   
-      Groups:
-          <select name='searchB' value={ searchB } onChange = { onChange }>
-                  <option value = 'All'>All Groups</option>
-                  {
-                      groups.map( (group, idx) => { 
-                              return (
-                                  <option key={ idx } value = { group }>
-                                      { group } 
-                                  </option>
-                              );
-                          })
-                  }
-          </select> 
+      <div className={ 'sideBySide' }>
+        <Autocomplete
+          id="combo-box-demo"
+          options={dealNames}
+          getOptionLabel={(option) => option}
+          style={{ width: 300 }}
+          onChange={(event, value)=>setSearchA(value)}
+          renderInput={(params) => <TextField  {...params} label="Deal Names" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchA('All')}  />}
+        />
+        
+        <Autocomplete
+          id="combo-box-pool-names"
+          options={groups}
+          getOptionLabel={(option) => option}
+          style={{ width: 300 }}
+          onChange={(event, value)=>setSearchB(value)}
+          renderInput={(params) => <TextField  {...params} label="Groups" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchB('All')} />}
+        /> 
+      </div>
 
-
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell >Deal</TableCell>
-              <TableCell align="right">Group</TableCell>
-              <TableCell align="right">Feb CPR</TableCell>
-              <TableCell align="right">March CPR</TableCell>
-              <TableCell align="right">Feb VPR</TableCell>
-              <TableCell align="right">March VPR</TableCell>
-              <TableCell align="right">Feb CDR</TableCell>
-              <TableCell align="right">March CDR</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {currentrows.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell component="th" scope="row"> {row.deal} </TableCell>
-                <TableCell align="right">{row.group}</TableCell>
-                <TableCell align="right">{row.cpr}</TableCell>
-                <TableCell align="right">{row.cprNext}</TableCell>
-                <TableCell align="right">{row.vpr}</TableCell>
-                <TableCell align="right">{row.vprNext}</TableCell>
-                <TableCell align="right">{row.cdr}</TableCell>
-                <TableCell align="right">{row.cdrNext}</TableCell>
-               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {
+        loading ? 
+        (
+          <div>
+            <h1>LOADING</h1>
+          </div>
+        ) 
+        :  
+        ( 
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell >Deal</TableCell>
+                <TableCell align="right">Group</TableCell>
+                <TableCell align="right">Feb CPR</TableCell>
+                <TableCell align="right">March CPR</TableCell>
+                <TableCell align="right">Feb VPR</TableCell>
+                <TableCell align="right">March VPR</TableCell>
+                <TableCell align="right">Feb CDR</TableCell>
+                <TableCell align="right">March CDR</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {currentrows.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row"> {row.deal} </TableCell>
+                  <TableCell align="right">{row.group}</TableCell>
+                  <TableCell align="right">{row.cpr}</TableCell>
+                  <TableCell align="right">{row.cprNext}</TableCell>
+                  <TableCell align="right">{row.vpr}</TableCell>
+                  <TableCell align="right">{row.vprNext}</TableCell>
+                  <TableCell align="right">{row.cdr}</TableCell>
+                  <TableCell align="right">{row.cdrNext}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        )
+      }
      </div>
   );
 }
@@ -145,7 +146,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(loadCurrentRows());
     },
     loadDataByDealandGroup: (deal, group)=> {
-      // dispatch(loadDataByDealandGroup(deal, group));
+      dispatch(loadCurrentDataByDealandGroup(deal, group));
     }
   };
 }

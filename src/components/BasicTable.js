@@ -10,9 +10,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { loadData, loadDataByDealandGroup, loadRows } from '../store';
+import { loadDataByDealandGroup, loadRows } from '../store';
 
 const useStyles = makeStyles({
   table: {
@@ -33,14 +32,10 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
   
   const [loading, setLoading ] = useState(true);
 
-  console.log(loadDataByDealandGroup);
+  // console.log(loadDataByDealandGroup);
   
   useEffect(() => {
     loadRows();
-    // console.log(rows.length)
-    // if (rows.length > 0){
-    //   setLoading('false');
-    // }
   },[]);
 
   useEffect(() => {
@@ -57,17 +52,6 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
     loadDataByDealandGroup(searchA, searchB);
   },[searchA, searchB]);
 
-  //feel like I am not really doing this right 
-  function onChange(ev){
-    const change = {};
-    console.log(change);
-    change[ev.target.name] = ev.target.value;
-    // this.setState(change);
-    if (change.searchA){
-    setSearchA(change.searchA)}
-    if (change.searchB) {
-    setSearchB(change.searchB)}
-  }
   const classes = useStyles();
       
   let dealNames = [];
@@ -113,8 +97,7 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
         loading ? 
         (
           <div>
-            <CircularProgress />
-            <p>LOADING</p>
+            <h1>LOADING</h1>
           </div>
         ) 
         :       

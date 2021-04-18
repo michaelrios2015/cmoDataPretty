@@ -1,4 +1,3 @@
-//as this get's bigger you can seperate things out more
 const router = require('express').Router();
 const { models: { CMOS } } = require('../../db');
 
@@ -11,8 +10,6 @@ router.get('/', async(req, res, next)=> {
     next(ex);
   }
 });
-
-
 
 //gets cmos by group
 router.get('/dealandgroup/:deal/:group', async(req, res, next)=> {

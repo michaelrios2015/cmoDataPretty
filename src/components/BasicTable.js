@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { loadData, loadDataByDealandGroup, loadRows } from '../store';
 
@@ -110,7 +111,12 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
 
       {
         loading ? 
-        (<p>LOADING</p>) 
+        (
+          <div>
+            <CircularProgress />
+            <p>LOADING</p>
+          </div>
+        ) 
         :       
         (<TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">

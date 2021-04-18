@@ -19,15 +19,6 @@ app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, '..', '..', 'i
 //the router :)
 app.use("/api", require("./routes"));
 
-// // gets all Current cmos
-// app.get('/api/cmoscurrent', async(req, res, next)=> {
-//   try {
-//     res.send(await CurrentCMOS.findAll());
-//   }
-//   catch(ex){
-//     next(ex);
-//   }
-// });
 
 //final error catcher 
 app.use((err, req, res, next)=>{

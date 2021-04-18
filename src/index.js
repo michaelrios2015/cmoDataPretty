@@ -4,6 +4,7 @@ import { Provider, connect } from 'react-redux';
 import store from './store';
 import BasicTable from './components/BasicTable';
 import CurrentMonth from './components/CurrentMonth';
+import NavBar from './components/NavBar';
 import { HashRouter as Router, Route, BrowserRouter } from 'react-router-dom';
 
 // so I don't think is where I should load that data but nt sure how to do it with UseEffect
@@ -17,12 +18,13 @@ class _App extends Component{
   //this works fine now need to figure out how to put my data into Material UI table and add search
   render(){
     return (
-      <Router>
-        <div>
-          <Route component={ CurrentMonth } path = '/current'  />
-          <Route component={ BasicTable } path = '/' exact/>          
-        </div>
-      </Router>
+        <Router>
+          <NavBar />
+          <div>
+            <Route component={ CurrentMonth } path = '/current'  />
+            <Route component={ BasicTable } path = '/' exact/>          
+          </div>
+        </Router>
     );
   }
 }

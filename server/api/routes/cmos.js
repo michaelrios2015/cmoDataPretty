@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { models: { CMOS } } = require('../../db');
+const { Op } = require("sequelize");
 
 // gets all cmos
 router.get('/', async(req, res, next)=> {
@@ -10,6 +11,39 @@ router.get('/', async(req, res, next)=> {
     next(ex);
   }
 });
+
+router.get('/initial', async(req, res, next)=> {
+  try {
+    res.send(await CMOS.findAll({
+      where: {
+        id: {
+            [Op.lte]: 100,
+          }
+        }
+      }
+    ));
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+router.get('/year', async(req, res, next)=> {
+  try {
+    res.send(await CMOS.findAll({
+      where: {
+        deal: {
+          [Op.like]: '%2021%'
+          }
+        }
+      }
+    ));
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
 
 //gets cmos by group
 router.get('/dealandgroup/:deal/:group', async(req, res, next)=> {

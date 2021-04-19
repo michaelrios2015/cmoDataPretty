@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import { loadDataByDealandGroup, loadRows } from '../store';
+import { loadDataByDealandGroup, loadRows, loadInitialRows, loadRowsByYear } from '../store';
 
 const useStyles = makeStyles({
   table: {
@@ -26,7 +26,7 @@ function numberWithCommas(x) {
 }
 
 //rows are now created in store :) 
-function BasicTable({ rows, loadDataByDealandGroup }) {
+function BasicTable({ rows, loadDataByDealandGroup, bootstrap }) {
   const [searchA, setSearchA ] = useState('All');
   const [searchB, setSearchB ] = useState('All');
   
@@ -35,7 +35,7 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
   // console.log(loadDataByDealandGroup);
   
   useEffect(() => {
-    loadRows();
+    bootstrap();
   },[]);
 
   useEffect(() => {
@@ -45,9 +45,16 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
     }
   },[rows]);
 
+  const firstUpdate = useRef(true);
+  // console.log(loading);
+  useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
 
-  console.log(loading);
-  useEffect(() => {
+    console.log("componentDidUpdateFunction");
+
     setLoading(true);
     loadDataByDealandGroup(searchA, searchB);
   },[searchA, searchB]);
@@ -73,6 +80,7 @@ function BasicTable({ rows, loadDataByDealandGroup }) {
 
   return (
     <div>
+      <h1>February CMOs</h1>
       <div className={ 'sideBySide' }>
         <Autocomplete
           id="combo-box-demo"
@@ -151,7 +159,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     bootstrap: ()=> {
-      dispatch(loadRows());
+      // dispatch(loadRows());
+      // dispatch(loadInitialRows());
+      dispatch(loadRowsByYear());
     },
     loadDataByDealandGroup: (deal, group)=> {
       dispatch(loadDataByDealandGroup(deal, group));

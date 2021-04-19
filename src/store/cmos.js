@@ -48,6 +48,49 @@ export const loadRows = () =>{
     }
 };
 
+export const loadInitialRows = () =>{
+    return async(dispatch)=>{
+        const tests = (await axios.get('/api/cmos/initial')).data;
+        // console.log()
+        function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr) {
+            return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr };
+          }
+        
+        const rows= [];
+        
+        
+        tests.forEach(item => {
+            // console.log(item.id)
+            rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace, item.residual, item.actualCpr))
+        });
+
+        // console.log(rows); 
+        dispatch(_loadRows(rows));
+    }
+};
+
+export const loadRowsByYear = () =>{
+    return async(dispatch)=>{
+        const tests = (await axios.get('/api/cmos/year')).data;
+        // console.log()
+        function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr) {
+            return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr };
+          }
+        
+        const rows= [];
+        
+        
+        tests.forEach(item => {
+            // console.log(item.id)
+            rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace, item.residual, item.actualCpr))
+        });
+
+        // console.log(rows); 
+        dispatch(_loadRows(rows));
+    }
+};
+
+
 export const loadDataByDealandGroup = (deal, group) =>{
     
     return async(dispatch)=>{

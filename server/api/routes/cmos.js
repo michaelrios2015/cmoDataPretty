@@ -28,12 +28,13 @@ router.get('/initial', async(req, res, next)=> {
   }
 });
 
-router.get('/year', async(req, res, next)=> {
+router.get('/year/:year', async(req, res, next)=> {
   try {
+    console.log(req.params.year);
     res.send(await CMOS.findAll({
       where: {
         deal: {
-          [Op.like]: '%2021%'
+          [Op.like]: '%' + req.params.year + '%'
           }
         }
       }
@@ -63,7 +64,9 @@ router.get('/dealandgroup/:deal/:group', async(req, res, next)=> {
       // console.log(req.params.deal);
       // console.log(req.params.group); 
       res.send(await CMOS.findAll({where: {group: req.params.group}}));
-    } else{
+    } 
+    // this should never be reached so I should be able to get rid of it
+    else{
       // console.log('-------------------------------')
       // console.log(req.params.group)
       res.send(await CMOS.findAll());

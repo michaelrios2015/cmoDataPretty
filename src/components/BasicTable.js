@@ -26,18 +26,19 @@ function numberWithCommas(x) {
 }
 
 //rows are now created in store :) 
-function BasicTable({ rows, loadDataByDealandGroup, bootstrap }) {
+function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap }) {
   const [searchA, setSearchA ] = useState('All');
   const [searchB, setSearchB ] = useState('All');
+  const [searchYear, setSearchYear ] = useState('2021');
   
   const [loading, setLoading ] = useState(true);
 
-  // console.log(loadDataByDealandGroup);
-  
-  useEffect(() => {
-    bootstrap();
-  },[]);
+  //this is just supposed to be called the first time page is loaded might not be neccessary 
+  // useEffect(() => {
+  //   bootstrap('2021');
+  // },[]);
 
+  //my homemade loading true or false again needed not sure
   useEffect(() => {
     console.log(rows.length)
     if (rows.length > 0){
@@ -45,18 +46,22 @@ function BasicTable({ rows, loadDataByDealandGroup, bootstrap }) {
     }
   },[rows]);
 
+  //checks to see if year has changed
+  useEffect(() => {
+    setLoading(true);
+    loadRowsByYear(searchYear);
+  },[searchYear]);
+
   const firstUpdate = useRef(true);
-  // console.log(loading);
+
+  //checks to see if deal name or group has changed but does not run the first time
   useLayoutEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
       return;
     }
-
-    console.log("componentDidUpdateFunction");
-
     setLoading(true);
-    loadDataByDealandGroup(searchA, searchB);
+    loadDataByDealandGroup(searchA, searchB, searchYear);
   },[searchA, searchB]);
 
   const classes = useStyles();
@@ -74,14 +79,27 @@ function BasicTable({ rows, loadDataByDealandGroup, bootstrap }) {
   groups = [...new Set(groups)]
   // console.log(groups);
 
-  
-  console.log(searchA)
-  console.log(searchB)
+  let years = [];
+  for (let i=2021; i > 1998; i--){
+    years.push(i.toString())
+  }
+
+  // console.log(searchA)
+  // console.log(searchB)
+  // console.log(searchYear)
 
   return (
     <div>
       <h1>February CMOs</h1>
       <div className={ 'sideBySide' }>
+        <Autocomplete
+          id="combo-box-demo"
+          options={years}
+          getOptionLabel={(option) => option}
+          style={{ width: 300 }}
+          onChange={(event, value)=>setSearchYear(value)}
+          renderInput={(params) => <TextField  {...params} label="Year" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchYear('2021') && setSearchA('All')}  />}
+        />
         <Autocomplete
           id="combo-box-demo"
           options={dealNames}
@@ -158,13 +176,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    bootstrap: ()=> {
+    bootstrap: (year)=> {
       // dispatch(loadRows());
       // dispatch(loadInitialRows());
-      dispatch(loadRowsByYear());
+      console.log(year)
+      dispatch(loadRowsByYear(year));
     },
-    loadDataByDealandGroup: (deal, group)=> {
-      dispatch(loadDataByDealandGroup(deal, group));
+    loadDataByDealandGroup: (deal, group, year)=> {
+      dispatch(loadDataByDealandGroup(deal, group, year));
+    },
+    loadRowsByYear: (year)=> {
+      dispatch(loadRowsByYear(year));
     }
   };
 }

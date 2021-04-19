@@ -1,14 +1,7 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
 import axios from 'axios';
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
 
-const LOAD_DATA = 'LOAD_DATA';
 const LOAD_ROWS = 'LOAD_ROWS';
-const LOAD_CURRENT_ROWS = 'LOAD_CURRENT_ROWS';
 
-
-//This is because i needed a place to load the rows for the 
 const rowsReducer = (state = [], action) =>{
     if (action.type === LOAD_ROWS){
         state = action.rows
@@ -17,8 +10,6 @@ const rowsReducer = (state = [], action) =>{
     return state;
 }
 
-//TESTS THUNKS****************************************
-
 const _loadRows = (rows) =>{
     return {
         type: LOAD_ROWS,
@@ -26,7 +17,7 @@ const _loadRows = (rows) =>{
     };
 };
 
-
+// this is just find all. there is a boat load of data and it loads to slowly so not using it at the moment
 export const loadRows = () =>{
     return async(dispatch)=>{
         const tests = (await axios.get('/api/cmos')).data;
@@ -48,6 +39,7 @@ export const loadRows = () =>{
     }
 };
 
+// mot using right now was just a way of getting some data out quickly
 export const loadInitialRows = () =>{
     return async(dispatch)=>{
         const tests = (await axios.get('/api/cmos/initial')).data;
@@ -69,9 +61,15 @@ export const loadInitialRows = () =>{
     }
 };
 
-export const loadRowsByYear = () =>{
+export const loadRowsByYear = (year) =>{
+
+    // there
+    if(!year){
+        year = '2021';
+    }
+
     return async(dispatch)=>{
-        const tests = (await axios.get('/api/cmos/year')).data;
+        const tests = (await axios.get(`/api/cmos/year/${year}`)).data;
         // console.log()
         function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr) {
             return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr };
@@ -91,12 +89,18 @@ export const loadRowsByYear = () =>{
 };
 
 
-export const loadDataByDealandGroup = (deal, group) =>{
+export const loadDataByDealandGroup = (deal, group, year) =>{
     
     return async(dispatch)=>{
         console.log('---------------in loadDataByGroup dispath ----------');
-        const data = (await axios.get(`/api/cmos/dealandgroup/${deal}/${group}`)).data;
-        // console.log(data);
+        let data = [];
+        if (deal === 'All' && group === 'All'){
+            data = (await axios.get(`/api/cmos/year/${year}`)).data;
+        }
+        else {
+            data = (await axios.get(`/api/cmos/dealandgroup/${deal}/${group}`)).data;
+        }
+        console.log(data);
         function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, actualCpr, residual) {
             return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, actualCpr, residual };
           }

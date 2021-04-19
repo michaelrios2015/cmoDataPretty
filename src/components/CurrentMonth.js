@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -19,8 +19,21 @@ import { loadCurrentDataByDealandGroup, loadCurrentRows } from '../store';
 const useStyles = makeStyles({
   table: {
     minWidth: 730,
+    maxWidth: 1000
   },
 });
+
+const StyledTableContainer = withStyles((theme) => ({
+  root: {
+    width: "max-content"
+  }
+}))(TableContainer);
+const StyledTableCell = withStyles((theme) => ({
+  root: {
+    padding: "0px 0px"
+  }
+}))(TableCell);
+
 
 //rows are now created in store :) 
 function CurrentMonth({ loadDataByDealandGroup, loadCurrentRows, currentrows }) {
@@ -99,9 +112,20 @@ function CurrentMonth({ loadDataByDealandGroup, loadCurrentRows, currentrows }) 
           </div>
         ) 
         :  
-        ( 
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
+        (
+          <StyledTableContainer component={Paper}>   
+              <Table className={classes.table} aria-label="simple table">
+              <colgroup>
+                <col style={{width:'50'}}/>
+                <col style={{width:'50'}}/>
+                <col style={{width:'50'}}/>
+                <col style={{width:'50'}}/>
+                <col style={{width:'50'}}/>
+                <col style={{width:'50'}}/>
+                <col style={{width:'50'}}/>
+                <col style={{width:'50'}}/>
+                <col style={{width:'50'}}/>
+              </colgroup>
             <TableHead>
               <TableRow>
                 <TableCell >Deal</TableCell>
@@ -129,7 +153,7 @@ function CurrentMonth({ loadDataByDealandGroup, loadCurrentRows, currentrows }) 
               ))}
             </TableBody>
           </Table>
-        </TableContainer>
+        </StyledTableContainer>
         )
       }
      </div>

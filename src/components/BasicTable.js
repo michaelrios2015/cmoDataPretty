@@ -98,7 +98,7 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
           getOptionLabel={(option) => option}
           style={{ width: 300 }}
           onChange={(event, value)=>setSearchYear(value)}
-          renderInput={(params) => <TextField  {...params} label="Year" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchYear('2021') && setSearchA('All')}  />}
+          renderInput={(params) => <TextField  {...params} label="Year" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchYear('2021')}  />}
         />
         <Autocomplete
           id="combo-box-demo"

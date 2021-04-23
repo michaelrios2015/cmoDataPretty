@@ -19,7 +19,7 @@ class _App extends Component{
   render(){
     return (
         <Router>
-          <NavBar />
+          {/* <NavBar /> */}
           <div>
             {/* <Route component={ CurrentMonth } path = '/current'  /> */}
             <Route component={ BasicTable } path = '/' exact/>          

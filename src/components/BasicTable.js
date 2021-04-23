@@ -132,9 +132,28 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
+                <TableCell />
+                <TableCell />
+                <TableCell />
+                <TableCell />
+                <TableCell align="center" colSpan={2}>
+                  Actual Feb
+                </TableCell>
+                <TableCell align="center" colSpan={2}>
+                  Predicted CPR
+                </TableCell>
+                <TableCell align="center" colSpan={2}>
+                  Predicted VPR
+                </TableCell>
+                <TableCell align="center" colSpan={2}>
+                  Predicted CDR
+                </TableCell>
+              </TableRow>
+              <TableRow>
                 <TableCell >Year</TableCell>
                 <TableCell align="right">Deal</TableCell>
                 <TableCell align="right">Group</TableCell>
+                <TableCell align="right">Current Face</TableCell>
                 <TableCell align="right">CPR</TableCell>
                 <TableCell align="right">Residual</TableCell>
                 <TableCell align="right">Feb CPR</TableCell>
@@ -143,7 +162,7 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
                 <TableCell align="right">March VPR</TableCell>
                 <TableCell align="right">Feb CDR</TableCell>
                 <TableCell align="right">March CDR</TableCell>
-                <TableCell align="right">Current Face</TableCell>
+                
               </TableRow>
             </TableHead>
             <TableBody>
@@ -153,6 +172,7 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
                   <TableCell component="th" scope="row"> {row.year} </TableCell>
                   <TableCell align="right">{row.deal}</TableCell>
                   <TableCell align="right">{row.group}</TableCell>
+                  <TableCell align="right">{numberWithCommas(row.currFace)}</TableCell>
                   <TableCell align="right">{row.actualCpr}</TableCell>
                   <TableCell align="right">{row.residual}</TableCell>
                   <TableCell align="right">{row.cpr}</TableCell>
@@ -161,7 +181,6 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
                   <TableCell align="right">{row.vprNext}</TableCell>
                   <TableCell align="right">{row.cdr}</TableCell>
                   <TableCell align="right">{row.cdrNext}</TableCell>
-                  <TableCell align="right">{numberWithCommas(row.currFace)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

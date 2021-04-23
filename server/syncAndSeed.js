@@ -14,9 +14,12 @@ const fastcsv = require("fast-csv");
   })
   .on("end", async function() {
     for (let i = 0; i < csvData.length; i++ ){
-      console.log(csvData[i][2]);
+      let year = csvData[i][0].slice(4, 8);
+      let deal = csvData[i][0].slice(9, csvData[i][0].length);
+      console.log(year);
+      console.log(deal);
       try{
-      await CMOS.create({ deal: csvData[i][0], group: csvData[i][1], actualCpr: csvData[i][2], residual: csvData[i][3], cpr: csvData[i][4], cprNext: csvData[i][5], vpr: csvData[i][6], vprNext: csvData[i][7], 
+      await CMOS.create({ year: year, deal: deal, group: csvData[i][1], actualCpr: csvData[i][2], residual: csvData[i][3], cpr: csvData[i][4], cprNext: csvData[i][5], vpr: csvData[i][6], vprNext: csvData[i][7], 
         cdr: csvData[i][8], cdrNext: csvData[i][9], currFace: csvData[i][10] })
       }
       catch(ex){
@@ -79,9 +82,9 @@ const fastcsv = require("fast-csv");
 
     stream.pipe(csvStream);
 
-    streamCurrentData.pipe(csvCurrentStream);  
+    // streamCurrentData.pipe(csvCurrentStream);  
 
-    streamCPN.pipe(csvStreamCPN);
+    // streamCPN.pipe(csvStreamCPN);
   };
 
   

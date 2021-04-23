@@ -32,11 +32,10 @@ router.get('/year/:year', async(req, res, next)=> {
   try {
     console.log(req.params.year);
     res.send(await CMOS.findAll({
-      where: {
-        deal: {
-          [Op.like]: '%' + req.params.year + '%'
-          }
-        }
+      where: { 
+        year: req.params.year 
+      },
+      order: ['deal']
       }
     ));
   }
@@ -47,29 +46,40 @@ router.get('/year/:year', async(req, res, next)=> {
 
 
 //gets cmos by group
-router.get('/dealandgroup/:deal/:group', async(req, res, next)=> {
+router.get('/dealandgroup/:deal/:group/:year', async(req, res, next)=> {
   try {
     if (req.params.deal !== 'All' && req.params.group !== 'All'){
       // console.log('-------------------------------')
       // console.log(req.params.deal);
       // console.log(req.params.group); 
-      res.send(await CMOS.findAll({where: {deal: req.params.deal, group: req.params.group}}));
+      res.send(await CMOS.findAll({where: 
+        {deal: req.params.deal, group: req.params.group, year: req.params.year},
+        order: ['deal']
+      }));
     } else if ( req.params.deal !== 'All'){
       // console.log('-------------------------------')
       // console.log(req.params.deal);
       // console.log(req.params.group); 
-      res.send(await CMOS.findAll({where: {deal: req.params.deal}}));
+      res.send(await CMOS.findAll({where: 
+        {deal: req.params.deal, year: req.params.year },
+        order: ['deal']
+      }));
     } else if ( req.params.group !== 'All'){
       // console.log('-------------------------------')
       // console.log(req.params.deal);
       // console.log(req.params.group); 
-      res.send(await CMOS.findAll({where: {group: req.params.group}}));
+      res.send(await CMOS.findAll({where: 
+        {group: req.params.group, year: req.params.year},
+        order: ['deal']
+      }));
     } 
     // this should never be reached so I should be able to get rid of it
     else{
       // console.log('-------------------------------')
       // console.log(req.params.group)
-      res.send(await CMOS.findAll());
+      res.send(await CMOS.findAll({where: {year: req.params.year},
+        order: ['deal']
+      }));
     }
   }
   catch(ex){

@@ -3,8 +3,11 @@ const Sequelize = require('sequelize');
 const { INTEGER, STRING, FLOAT } = Sequelize;
 
 const CMOS = db.define('cmo', {
+  year: { 
+    type: INTEGER, 
+  },
   deal: { 
-    type: STRING, 
+    type: INTEGER, 
   },
   group: { 
     type: STRING, 

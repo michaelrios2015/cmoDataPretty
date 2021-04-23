@@ -16,6 +16,7 @@ import { loadDataByDealandGroup, loadRows, loadInitialRows, loadRowsByYear } fro
 const useStyles = makeStyles({
   table: {
     minWidth: 730,
+    maxWidth: 1200
   },
 });
 
@@ -49,8 +50,8 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
   //checks to see if year has changed
   useEffect(() => {
     setLoading(true);
-    loadRowsByYear(searchYear);
-  },[searchYear]);
+    loadRowsByYear('2021');
+  },[]);
 
   const firstUpdate = useRef(true);
 
@@ -62,12 +63,12 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
     }
     setLoading(true);
     loadDataByDealandGroup(searchA, searchB, searchYear);
-  },[searchA, searchB]);
+  },[searchA, searchB, searchYear]);
 
   const classes = useStyles();
       
   let dealNames = [];
-  rows.forEach(item=>dealNames.push(item.deal));
+  rows.forEach(item=>dealNames.push(item.deal.toString()));
   // seems to remove the duplicates
   dealNames = [...new Set(dealNames)]
   // console.log(dealNames);
@@ -92,14 +93,14 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
     <div>
       <h1>February CMOs</h1>
       <div className={ 'sideBySide' }>
-        <Autocomplete
+         <Autocomplete
           id="combo-box-demo"
           options={years}
           getOptionLabel={(option) => option}
           style={{ width: 300 }}
           onChange={(event, value)=>setSearchYear(value)}
           renderInput={(params) => <TextField  {...params} label="Year" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchYear('2021')}  />}
-        />
+        /> 
         <Autocomplete
           id="combo-box-demo"
           options={dealNames}
@@ -116,7 +117,7 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
           style={{ width: 300 }}
           onChange={(event, value)=>setSearchB(value)}
           renderInput={(params) => <TextField  {...params} label="Groups" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchB('All')} />}
-        /> 
+        />  
       </div>
 
       {
@@ -131,7 +132,8 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell >Deal</TableCell>
+                <TableCell >Year</TableCell>
+                <TableCell align="right">Deal</TableCell>
                 <TableCell align="right">Group</TableCell>
                 <TableCell align="right">CPR</TableCell>
                 <TableCell align="right">Residual</TableCell>
@@ -148,7 +150,8 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
               
               {rows.map((row) => (
                 <TableRow key={row.id}>
-                  <TableCell component="th" scope="row"> {row.deal} </TableCell>
+                  <TableCell component="th" scope="row"> {row.year} </TableCell>
+                  <TableCell align="right">{row.deal}</TableCell>
                   <TableCell align="right">{row.group}</TableCell>
                   <TableCell align="right">{row.actualCpr}</TableCell>
                   <TableCell align="right">{row.residual}</TableCell>

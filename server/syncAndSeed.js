@@ -19,7 +19,7 @@ const fastcsv = require("fast-csv");
       console.log(year);
       console.log(deal);
       try{
-      await CMOS.create({ year: year, deal: deal, group: csvData[i][1], actualCpr: csvData[i][2], residual: csvData[i][3], cpr: csvData[i][4], cprNext: csvData[i][5], vpr: csvData[i][6], vprNext: csvData[i][7], 
+      await CMOS.create({ year: year, deal: deal, group: csvData[i][1], residual: csvData[i][4], actualCpr: csvData[i][2], cpr: csvData[i][3], cprNext: csvData[i][5], vpr: csvData[i][6], vprNext: csvData[i][7], 
         cdr: csvData[i][8], cdrNext: csvData[i][9], currFace: csvData[i][10] })
       }
       catch(ex){

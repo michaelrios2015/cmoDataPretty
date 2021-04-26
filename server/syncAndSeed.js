@@ -14,15 +14,26 @@ const fastcsv = require("fast-csv");
   })
   .on("end", async function() {
     for (let i = 0; i < csvData.length; i++ ){
+      // console.log(csvData[i])
       let year = csvData[i][0].slice(4, 8);
       let deal = csvData[i][0].slice(9, csvData[i][0].length);
-      console.log(year);
-      console.log(deal);
+      // console.log(year);
+      // console.log(deal);
       try{
-        await CMOHeader.create({ year: year, deal: deal, group: csvData[i][1]})
+
+        let header = await CMOHeader.findOne({ where: {year: year, deal: deal, group: csvData[i][1]}})
+
+        if (header){
+          await CMOBody.create({ residual: csvData[i][4], actualCpr: csvData[i][2], cpr: csvData[i][3], cprNext: csvData[i][5], vpr: csvData[i][6], vprNext: csvData[i][7], 
+            cdr: csvData[i][8], cdrNext: csvData[i][9], currFace: csvData[i][10], cmoheaderId: header.id, month: 'FEB' })  
+        }
+        else {
+          // await CMOHeader.create({ year: year, deal: deal, group: csvMarchData[i][1]})
+          let newHeader =  await CMOHeader.create({ year: year, deal: deal, group: csvData[i][1]})
       
         await CMOBody.create({ residual: csvData[i][4], actualCpr: csvData[i][2], cpr: csvData[i][3], cprNext: csvData[i][5], vpr: csvData[i][6], vprNext: csvData[i][7], 
-        cdr: csvData[i][8], cdrNext: csvData[i][9], currFace: csvData[i][10], cmoheaderId: i+1 })
+        cdr: csvData[i][8], cdrNext: csvData[i][9], currFace: csvData[i][10], cmoheaderId: newHeader.id, month: 'FEB' })
+        }
       }
       catch(ex){
         console.log(ex)
@@ -34,18 +45,45 @@ const fastcsv = require("fast-csv");
 
   //this is loading currentData.csv into CurrentCMOS
   let streamCurrentData = fs.createReadStream('currentData.csv');
-  let csvCurrentData = [];
+  let csvMarchData = [];
   let csvCurrentStream = fastcsv
   .parse()
   .on("data", function(data) {
     // console.log('here')
-    csvCurrentData.push(data);
+    // console.log(data)
+    csvMarchData.push(data);
   })
   .on("end", async function() {
-    for (let i = 0; i < csvCurrentData.length; i++ ){
-      // console.log(csvData[i][1]);
-      await CurrentCMOS.create({ deal: csvCurrentData[i][0], group: csvCurrentData[i][1], cpr: csvCurrentData[i][2], cprNext: csvCurrentData[i][3], vpr: csvCurrentData[i][4], vprNext: csvCurrentData[i][5], 
-        cdr: csvCurrentData[i][6], cdrNext: csvCurrentData[i][7] })
+    for (let i = 0; i < csvMarchData.length; i++ ){
+      // console.log(csvMarchData[i][0])
+      let year = csvMarchData[i][0].slice(4, 8);
+      let deal = csvMarchData[i][0].slice(9, csvMarchData[i][0].length);
+      // console.log(year);
+      // console.log(deal);
+      // console.log(csvMarchData[i][1]);
+      try{
+      
+      let header = await CMOHeader.findOne({ where: {year: year, deal: deal, group: csvMarchData[i][1]}})
+      
+      if (header){
+        await CMOBody.create({ residual: 0, actualCpr: 0, cpr: csvMarchData[i][2], cprNext: csvMarchData[i][3], vpr: csvMarchData[i][4], vprNext: csvMarchData[i][5], 
+          cdr: csvMarchData[i][6], cdrNext: csvMarchData[i][7], currFace: 0, cmoheaderId: header.id, month: 'MARCH' })
+      }
+      else {
+        let newHeader = await CMOHeader.create({ year: year, deal: deal, group: csvMarchData[i][1]})
+
+        await CMOBody.create({ residual: 0, actualCpr: 0, cpr: csvMarchData[i][2], cprNext: csvMarchData[i][3], vpr: csvMarchData[i][4], vprNext: csvMarchData[i][5], 
+          cdr: csvMarchData[i][6], cdrNext: csvMarchData[i][7], currFace: 0, cmoheaderId: newHeader.id, month: 'MARCH' })
+        console.log(newHeader.id);
+
+      }
+
+      // await CurrentCMOS.create({ deal: csvCurrentData[i][0], group: csvCurrentData[i][1], cpr: csvCurrentData[i][2], cprNext: csvCurrentData[i][3], vpr: csvCurrentData[i][4], vprNext: csvCurrentData[i][5], 
+      //   cdr: csvCurrentData[i][6], cdrNext: csvCurrentData[i][7] })
+      }
+      catch(ex){
+        console.log(ex)
+      }
     }
   });
 
@@ -82,9 +120,9 @@ const fastcsv = require("fast-csv");
   const syncAndSeed = async()=> {
     await db.sync({ force: true });
 
-    stream.pipe(csvStream);
+    await stream.pipe(csvStream);
 
-    // streamCurrentData.pipe(csvCurrentStream);  
+    await streamCurrentData.pipe(csvCurrentStream);  
 
     // streamCPN.pipe(csvStreamCPN);
   };

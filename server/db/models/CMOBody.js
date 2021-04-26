@@ -3,6 +3,9 @@ const Sequelize = require('sequelize');
 const { INTEGER, STRING, FLOAT } = Sequelize;
 
 const CMOBody = db.define('cmobody', {
+  month: { 
+    type: STRING, 
+  },
   actualCpr: { 
     type: FLOAT, 
   },

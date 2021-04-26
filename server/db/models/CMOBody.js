@@ -2,16 +2,7 @@ const db = require('../db')
 const Sequelize = require('sequelize');
 const { INTEGER, STRING, FLOAT } = Sequelize;
 
-const CMOS = db.define('cmo', {
-  year: { 
-    type: INTEGER, 
-  },
-  deal: { 
-    type: INTEGER, 
-  },
-  group: { 
-    type: STRING, 
-  },
+const CMOBody = db.define('cmobody', {
   actualCpr: { 
     type: FLOAT, 
   },
@@ -41,4 +32,4 @@ const CMOS = db.define('cmo', {
   }     
 },{ timestamps: false });
 
-module.exports = CMOS;
+module.exports = CMOBody;

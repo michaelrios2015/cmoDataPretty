@@ -39,6 +39,7 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
   //   bootstrap('2021');
   // },[]);
 
+  console.log(rows)
   //my homemade loading true or false again needed not sure
   useEffect(() => {
     console.log(rows.length)

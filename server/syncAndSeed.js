@@ -1,4 +1,4 @@
-const { db, models: { CMOS, CPN, CurrentCMOS } } = require('./db');
+const { db, models: { CMOHeader, CMOBody, CPN, CurrentCMOS } } = require('./db');
 const fs = require("fs");
 const fastcsv = require("fast-csv");
 
@@ -19,8 +19,10 @@ const fastcsv = require("fast-csv");
       console.log(year);
       console.log(deal);
       try{
-      await CMOS.create({ year: year, deal: deal, group: csvData[i][1], residual: csvData[i][4], actualCpr: csvData[i][2], cpr: csvData[i][3], cprNext: csvData[i][5], vpr: csvData[i][6], vprNext: csvData[i][7], 
-        cdr: csvData[i][8], cdrNext: csvData[i][9], currFace: csvData[i][10] })
+        await CMOHeader.create({ year: year, deal: deal, group: csvData[i][1]})
+      
+        await CMOBody.create({ residual: csvData[i][4], actualCpr: csvData[i][2], cpr: csvData[i][3], cprNext: csvData[i][5], vpr: csvData[i][6], vprNext: csvData[i][7], 
+        cdr: csvData[i][8], cdrNext: csvData[i][9], currFace: csvData[i][10], cmoheaderId: i+1 })
       }
       catch(ex){
         console.log(ex)

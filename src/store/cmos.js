@@ -8,12 +8,18 @@ const loadData = (arr) => {
         return {id, year, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr };
     }
 
+    // function createData(id, year, deal, group, cpr) {
+    //     return {id, year, deal, group, cpr};
+    // }
+
     const rows= [];
 
 
     arr.forEach(item => {
         // console.log(item.id)
-        rows.push(createData(item.id, item.year, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace, item.residual, item.actualCpr))
+        rows.push(createData(item.id, item.year, item.deal, item.group, item.cmobodies[0].cpr, item.cmobodies[0].cprNext, item.cmobodies[0].vpr, item.cmobodies[0].vprNext, item.cmobodies[0].cdr, 
+        item.cmobodies[0].cdrNext, item.cmobodies[0].currFace, item.cmobodies[0].residual, item.cmobodies[0].actualCpr))
+        // rows.push(createData(item.id, item.year, item.deal, item.group, item.cmobodies[0].cpr))
     });
 
 
@@ -89,7 +95,7 @@ export const loadRowsByYear = (year) =>{
 
     return async(dispatch)=>{
         const tests = (await axios.get(`/api/cmos/year/${year}`)).data;
-        // console.log()
+        console.log(tests)
         // function createData(id, year, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr) {
         //     return {id, year, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr };
         // }

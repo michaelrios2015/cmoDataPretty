@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const { models: { CMOS } } = require('../../db');
+const { models: { CMOHeader, CMOBody } } = require('../../db');
 const { Op } = require("sequelize");
+
 
 // gets all cmos
 router.get('/', async(req, res, next)=> {
@@ -31,11 +32,13 @@ router.get('/initial', async(req, res, next)=> {
 router.get('/year/:year', async(req, res, next)=> {
   try {
     console.log(req.params.year);
-    res.send(await CMOS.findAll({
+    res.send(await CMOHeader.findAll({
       where: { 
         year: req.params.year 
       },
-      order: ['deal']
+      order: ['deal'],
+      include: [{
+        model: CMOBody}]
       }
     ));
   }
@@ -52,34 +55,46 @@ router.get('/dealandgroup/:deal/:group/:year', async(req, res, next)=> {
       // console.log('-------------------------------')
       // console.log(req.params.deal);
       // console.log(req.params.group); 
-      res.send(await CMOS.findAll({where: 
+      res.send(await CMOHeader.findAll({where: 
         {deal: req.params.deal, group: req.params.group, year: req.params.year},
-        order: ['deal']
-      }));
+        order: ['deal'],
+        include: [{
+          model: CMOBody}]
+        }
+      ));
     } else if ( req.params.deal !== 'All'){
       // console.log('-------------------------------')
       // console.log(req.params.deal);
       // console.log(req.params.group); 
-      res.send(await CMOS.findAll({where: 
+      res.send(await CMOHeader.findAll({where: 
         {deal: req.params.deal, year: req.params.year },
-        order: ['deal']
-      }));
+        order: ['deal'],
+        include: [{
+          model: CMOBody}]
+        }
+      ));
     } else if ( req.params.group !== 'All'){
       // console.log('-------------------------------')
       // console.log(req.params.deal);
       // console.log(req.params.group); 
-      res.send(await CMOS.findAll({where: 
+      res.send(await CMOHeader.findAll({where: 
         {group: req.params.group, year: req.params.year},
-        order: ['deal']
-      }));
+        order: ['deal'],
+        include: [{
+          model: CMOBody}]
+        }
+      ));
     } 
     // this should never be reached so I should be able to get rid of it
     else{
       // console.log('-------------------------------')
       // console.log(req.params.group)
-      res.send(await CMOS.findAll({where: {year: req.params.year},
-        order: ['deal']
-      }));
+      res.send(await CMOHeader.findAll({where: {year: req.params.year},
+        order: ['deal'],
+        include: [{
+          model: CMOBody}]
+        }
+      ));
     }
   }
   catch(ex){

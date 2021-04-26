@@ -1,4 +1,4 @@
-const { db, models: { CMOS, CPN, CurrentCMOS } } = require('./db');
+// const { db, models: { CMOS, CPN, CurrentCMOS } } = require('./db');
 const app = require('./api')
 const syncAndSeed = require('./syncAndSeed');
 

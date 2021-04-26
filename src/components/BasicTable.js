@@ -95,7 +95,7 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
 
   return (
     <div>
-      <h1>February CMOs</h1>
+      {/* <h1>February CMOs</h1> */}
       <Autocomplete
           id="combo-box-demo"
           options={months}
@@ -168,12 +168,12 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
                 <TableCell align="right">Current Face</TableCell>
                 <TableCell align="right">CPR</TableCell>
                 <TableCell align="right">Residual</TableCell>
-                <TableCell align="right">Feb CPR</TableCell>
-                <TableCell align="right">March CPR</TableCell>
-                <TableCell align="right">Feb VPR</TableCell>
-                <TableCell align="right">March VPR</TableCell>
-                <TableCell align="right">Feb CDR</TableCell>
-                <TableCell align="right">March CDR</TableCell>
+                <TableCell align="right">Currnet CPR</TableCell>
+                <TableCell align="right">Next CPR</TableCell>
+                <TableCell align="right">Currnet VPR</TableCell>
+                <TableCell align="right">Next VPR</TableCell>
+                <TableCell align="right">Currnet CDR</TableCell>
+                <TableCell align="right">Next CDR</TableCell>
                 
               </TableRow>
             </TableHead>

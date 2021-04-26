@@ -88,7 +88,6 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
   }
 
   let months = ['FEB', 'MARCH'];
-
   // console.log(searchA)
   // console.log(searchB)
   // console.log(searchYear)

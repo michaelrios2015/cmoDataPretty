@@ -148,7 +148,7 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
                 <TableCell />
                 <TableCell />
                 <TableCell align="center" colSpan={2}>
-                  Actual Feb
+                  Actual {searchMonth}
                 </TableCell>
                 <TableCell align="center" colSpan={2}>
                   Predicted CPR

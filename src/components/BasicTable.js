@@ -31,6 +31,7 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
   const [searchA, setSearchA ] = useState('All');
   const [searchB, setSearchB ] = useState('All');
   const [searchYear, setSearchYear ] = useState('2021');
+  const [searchMonth, setSearchMonth ] = useState('FEB');
   
   const [loading, setLoading ] = useState(true);
 
@@ -51,7 +52,7 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
   //checks to see if year has changed
   useEffect(() => {
     setLoading(true);
-    loadRowsByYear('2021');
+    loadRowsByYear('2021', 'FEB');
   },[]);
 
   const firstUpdate = useRef(true);
@@ -63,8 +64,8 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
       return;
     }
     setLoading(true);
-    loadDataByDealandGroup(searchA, searchB, searchYear);
-  },[searchA, searchB, searchYear]);
+    loadDataByDealandGroup(searchA, searchB, searchYear, searchMonth);
+  },[searchA, searchB, searchYear, searchMonth]);
 
   const classes = useStyles();
       
@@ -86,6 +87,8 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
     years.push(i.toString())
   }
 
+  let months = ['FEB', 'MARCH'];
+
   // console.log(searchA)
   // console.log(searchB)
   // console.log(searchYear)
@@ -93,6 +96,14 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
   return (
     <div>
       <h1>February CMOs</h1>
+      <Autocomplete
+          id="combo-box-demo"
+          options={months}
+          getOptionLabel={(option) => option}
+          style={{ width: 300 }}
+          onChange={(event, value)=>setSearchMonth(value)}
+          renderInput={(params) => <TextField  {...params} label="Month" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchMonth('FEB')}  />}
+        /> 
       <div className={ 'sideBySide' }>
          <Autocomplete
           id="combo-box-demo"
@@ -199,14 +210,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    bootstrap: (year)=> {
+    bootstrap: (year, month)=> {
       // dispatch(loadRows());
       // dispatch(loadInitialRows());
       console.log(year)
-      dispatch(loadRowsByYear(year));
+      dispatch(loadRowsByYear(year, month));
     },
-    loadDataByDealandGroup: (deal, group, year)=> {
-      dispatch(loadDataByDealandGroup(deal, group, year));
+    loadDataByDealandGroup: (deal, group, year, month)=> {
+      dispatch(loadDataByDealandGroup(deal, group, year, month));
     },
     loadRowsByYear: (year)=> {
       dispatch(loadRowsByYear(year));

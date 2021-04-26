@@ -86,15 +86,20 @@ export const loadInitialRows = () =>{
     }
 };
 
-export const loadRowsByYear = (year) =>{
+export const loadRowsByYear = (year, month) =>{
 
     // there
     if(!year){
         year = '2021';
     }
+    if(!month){
+        month = 'FEB';
+    }
+
+    console.log(month);
 
     return async(dispatch)=>{
-        const tests = (await axios.get(`/api/cmos/year/${year}`)).data;
+        const tests = (await axios.get(`/api/cmos/year/${year}/${month}`)).data;
         console.log(tests)
         // function createData(id, year, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr) {
         //     return {id, year, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr };
@@ -116,16 +121,17 @@ export const loadRowsByYear = (year) =>{
 };
 
 
-export const loadDataByDealandGroup = (deal, group, year) =>{
+export const loadDataByDealandGroup = (deal, group, year, month) =>{
     
+    console.log(month);
     return async(dispatch)=>{
         console.log('---------------in loadDataByGroup dispath ----------');
         let data = [];
         if (deal === 'All' && group === 'All'){
-            data = (await axios.get(`/api/cmos/year/${year}`)).data;
+            data = (await axios.get(`/api/cmos/year/${year}/${month}`)).data;
         }
         else {
-            data = (await axios.get(`/api/cmos/dealandgroup/${deal}/${group}/${year}`)).data;
+            data = (await axios.get(`/api/cmos/dealandgroup/${deal}/${group}/${year}/${month}`)).data;
         }
         console.log(data);
         // function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, actualCpr, residual) {

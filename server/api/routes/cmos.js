@@ -29,7 +29,7 @@ router.get('/initial', async(req, res, next)=> {
   }
 });
 
-router.get('/year/:year', async(req, res, next)=> {
+router.get('/year/:year/:month', async(req, res, next)=> {
   try {
     console.log(req.params.year);
     res.send(await CMOHeader.findAll({
@@ -38,7 +38,11 @@ router.get('/year/:year', async(req, res, next)=> {
       },
       order: ['deal'],
       include: [{
-        model: CMOBody}]
+        model: CMOBody,
+        where: {
+          month: req.params.month
+        }
+      }]
       }
     ));
   }
@@ -49,7 +53,7 @@ router.get('/year/:year', async(req, res, next)=> {
 
 
 //gets cmos by group
-router.get('/dealandgroup/:deal/:group/:year', async(req, res, next)=> {
+router.get('/dealandgroup/:deal/:group/:year/:month', async(req, res, next)=> {
   try {
     if (req.params.deal !== 'All' && req.params.group !== 'All'){
       // console.log('-------------------------------')
@@ -59,7 +63,11 @@ router.get('/dealandgroup/:deal/:group/:year', async(req, res, next)=> {
         {deal: req.params.deal, group: req.params.group, year: req.params.year},
         order: ['deal'],
         include: [{
-          model: CMOBody}]
+          model: CMOBody,
+          where: {
+            month: req.params.month
+          }
+        }]
         }
       ));
     } else if ( req.params.deal !== 'All'){
@@ -70,7 +78,11 @@ router.get('/dealandgroup/:deal/:group/:year', async(req, res, next)=> {
         {deal: req.params.deal, year: req.params.year },
         order: ['deal'],
         include: [{
-          model: CMOBody}]
+          model: CMOBody,
+          where: {
+            month: req.params.month
+          }
+        }]
         }
       ));
     } else if ( req.params.group !== 'All'){
@@ -81,7 +93,11 @@ router.get('/dealandgroup/:deal/:group/:year', async(req, res, next)=> {
         {group: req.params.group, year: req.params.year},
         order: ['deal'],
         include: [{
-          model: CMOBody}]
+          model: CMOBody,
+          where: {
+            month: req.params.month
+          }
+        }]
         }
       ));
     } 
@@ -92,7 +108,11 @@ router.get('/dealandgroup/:deal/:group/:year', async(req, res, next)=> {
       res.send(await CMOHeader.findAll({where: {year: req.params.year},
         order: ['deal'],
         include: [{
-          model: CMOBody}]
+          model: CMOBody,
+          where: {
+            month: req.params.month
+          }
+        }]
         }
       ));
     }

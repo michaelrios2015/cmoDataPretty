@@ -3,32 +3,6 @@ const { models: { CMOHeader, CMOBody } } = require('../../db');
 const { Op } = require("sequelize");
 
 
-// gets all cmos
-router.get('/', async(req, res, next)=> {
-  try {
-    res.send(await CMOS.findAll());
-  }
-  catch(ex){
-    next(ex);
-  }
-});
-
-router.get('/initial', async(req, res, next)=> {
-  try {
-    res.send(await CMOS.findAll({
-      where: {
-        id: {
-            [Op.lte]: 100,
-          }
-        }
-      }
-    ));
-  }
-  catch(ex){
-    next(ex);
-  }
-});
-
 router.get('/year/:year/:month', async(req, res, next)=> {
   try {
     console.log(req.params.year);

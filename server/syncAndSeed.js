@@ -1,9 +1,10 @@
-const { db, models: { CMOHeader, CMOBody, CPN, CurrentCMOS } } = require('./db');
+const { db, models: { CMOHeader, CMOBody, CPN } } = require('./db');
 const fs = require("fs");
 const fastcsv = require("fast-csv");
 
 
   //this is loading data.csv into CMOS
+  // Should probbaly be renamed as FEB
   let stream = fs.createReadStream('data.csv');  
   let csvData = [];
   let csvStream = fastcsv
@@ -44,6 +45,7 @@ const fastcsv = require("fast-csv");
 
 
   //this is loading currentData.csv into CurrentCMOS
+  // sould be totally renamed March
   let streamCurrentData = fs.createReadStream('currentData.csv');
   let csvMarchData = [];
   let csvCurrentStream = fastcsv

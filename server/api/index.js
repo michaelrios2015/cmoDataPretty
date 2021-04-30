@@ -2,7 +2,7 @@
 const express = require('express');
 const { static } = express;
 const path = require('path');
-const { db, models: { CMOS, CurrentCMOS } } = require('../db');
+// const { db, models: { CMOS, CurrentCMOS } } = require('../db');
 
 
 const app = express();

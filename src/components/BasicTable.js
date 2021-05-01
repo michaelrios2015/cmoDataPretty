@@ -35,11 +35,6 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
   
   const [loading, setLoading ] = useState(true);
 
-  //this is just supposed to be called the first time page is loaded might not be neccessary 
-  // useEffect(() => {
-  //   bootstrap('2021');
-  // },[]);
-
   console.log(rows)
   //my homemade loading true or false again needed not sure
   useEffect(() => {
@@ -49,9 +44,9 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
     }
   },[rows]);
 
-  //checks to see if year has changed
+  //should be the first thing to load
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     loadRowsByYear('2021', 'FEB');
   },[]);
 

@@ -1,6 +1,6 @@
 const db = require('../db')
 const Sequelize = require('sequelize');
-const { INTEGER, STRING, FLOAT } = Sequelize;
+const { STRING, FLOAT } = Sequelize;
 
 const CMOBody = db.define('cmobody', {
   month: { 

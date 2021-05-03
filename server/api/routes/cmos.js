@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { models: { CMOHeader, CMOBody } } = require('../../db');
-const { Op } = require("sequelize");
 
 
 router.get('/year/:year/:month', async(req, res, next)=> {

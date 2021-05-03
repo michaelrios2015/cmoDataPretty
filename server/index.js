@@ -2,11 +2,6 @@
 const app = require('./api')
 const syncAndSeed = require('./syncAndSeed');
 
-
-const test = require('./test.js');
-
-// test()
-
 const init = async()=> {
     try {
       if (process.env.SEED){

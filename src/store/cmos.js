@@ -8,20 +8,12 @@ const loadData = (arr) => {
         return {id, year, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr };
     }
 
-    // function createData(id, year, deal, group, cpr) {
-    //     return {id, year, deal, group, cpr};
-    // }
-
     const rows= [];
 
-
     arr.forEach(item => {
-        // console.log(item.id)
         rows.push(createData(item.id, item.year, item.deal, item.group, item.cmobodies[0].cpr, item.cmobodies[0].cprNext, item.cmobodies[0].vpr, item.cmobodies[0].vprNext, item.cmobodies[0].cdr, 
         item.cmobodies[0].cdrNext, item.cmobodies[0].currFace, item.cmobodies[0].residual, item.cmobodies[0].actualCpr))
-        // rows.push(createData(item.id, item.year, item.deal, item.group, item.cmobodies[0].cpr))
     });
-
 
     return rows;
 }
@@ -42,49 +34,6 @@ const _loadRows = (rows) =>{
     };
 };
 
-// this is just find all. there is a boat load of data and it loads to slowly so not using it at the moment
-export const loadRows = () =>{
-    return async(dispatch)=>{
-        const tests = (await axios.get('/api/cmos')).data;
-        // console.log()
-        function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr) {
-            return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr };
-          }
-        
-        const rows= [];
-        
-        
-        tests.forEach(item => {
-            // console.log(item.id)
-            rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace, item.residual, item.actualCpr))
-        });
-
-        // console.log(rows); 
-        dispatch(_loadRows(rows));
-    }
-};
-
-// mot using right now was just a way of getting some data out quickly
-export const loadInitialRows = () =>{
-    return async(dispatch)=>{
-        const tests = (await axios.get('/api/cmos/initial')).data;
-        // console.log()
-        function createData(id, year, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr) {
-            return {id, year, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr };
-          }
-        
-        const rows= [];
-        
-        
-        tests.forEach(item => {
-            // console.log(item.id)
-            rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace, item.residual, item.actualCpr))
-        });
-
-        // console.log(rows); 
-        dispatch(_loadRows(rows));
-    }
-};
 
 export const loadRowsByYear = (year, month) =>{
 
@@ -100,22 +49,7 @@ export const loadRowsByYear = (year, month) =>{
 
     return async(dispatch)=>{
         const tests = (await axios.get(`/api/cmos/year/${year}/${month}`)).data;
-        console.log(tests)
-        // function createData(id, year, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr) {
-        //     return {id, year, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr };
-        // }
-        
-        // const rows= [];
-        
-        
-        // tests.forEach(item => {
-        //     // console.log(item.id)
-        //     rows.push(createData(item.id, item.year, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace, item.residual, item.actualCpr))
-        // });
-
-        
-
-        // console.log(rows); 
+        // console.log(tests) 
         dispatch(_loadRows(loadData(tests)));
     }
 };
@@ -134,17 +68,6 @@ export const loadDataByDealandGroup = (deal, group, year, month) =>{
             data = (await axios.get(`/api/cmos/dealandgroup/${deal}/${group}/${year}/${month}`)).data;
         }
         console.log(data);
-        // function createData(id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, actualCpr, residual) {
-        //     return {id, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, actualCpr, residual };
-        //   }
-        
-        // const rows= [];
-        
-        
-        // data.forEach(item => {
-        //     // console.log(item.residual)
-        //     rows.push(createData(item.id, item.deal, item.group, item.cpr, item.cprNext, item.vpr, item.vprNext, item.cdr, item.cdrNext, item.currFace, item.actualCpr, item.residual))
-        // });
         dispatch(_loadRows(loadData(data)));
     }
 };

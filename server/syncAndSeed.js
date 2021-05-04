@@ -86,7 +86,9 @@ const fastcsv = require("fast-csv");
           body.vprNext = csvMarchData[i][5]; 
           body.cdr = csvMarchData[i][6];
           body.cdrNext = csvMarchData[i][7];
+          body.residual = Math.round((body.actualCpr - csvMarchData[i][2]) * 10) / 10;
 
+          // Math.round(actualCpr * 10) / 10
           await body.save()
 
         }
@@ -141,6 +143,7 @@ const fastcsv = require("fast-csv");
       let group = csvMarchUpdateData[i][1];
 
       let actualCpr = csvMarchUpdateData[i][2] * 100;
+      actualCpr = Math.round(actualCpr * 10) / 10
 
       group = group.replace(/\s+/g, '');
       // deal = deal.replace(/\s+/g, '');
@@ -167,6 +170,7 @@ const fastcsv = require("fast-csv");
 
         if (body){
           body.actualCpr = actualCpr
+          body.residual = Math.round((actualCpr - body.cpr) * 10) / 10 
 
           await body.save()
         }

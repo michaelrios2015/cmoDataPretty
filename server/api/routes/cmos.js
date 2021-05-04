@@ -9,7 +9,7 @@ router.get('/year/:year/:month', async(req, res, next)=> {
       where: { 
         year: req.params.year 
       },
-      order: ['deal'],
+      order: [['deal'], ['group']],
       include: [{
         model: CMOBody,
         where: {
@@ -49,7 +49,7 @@ router.get('/dealandgroup/:deal/:group/:year/:month', async(req, res, next)=> {
       // console.log(req.params.group); 
       res.send(await CMOHeader.findAll({where: 
         {deal: req.params.deal, year: req.params.year },
-        order: ['deal'],
+        order: [['deal'], ['group']],
         include: [{
           model: CMOBody,
           where: {
@@ -64,7 +64,7 @@ router.get('/dealandgroup/:deal/:group/:year/:month', async(req, res, next)=> {
       // console.log(req.params.group); 
       res.send(await CMOHeader.findAll({where: 
         {group: req.params.group, year: req.params.year},
-        order: ['deal'],
+        order: [['deal'], ['group']],
         include: [{
           model: CMOBody,
           where: {
@@ -79,7 +79,7 @@ router.get('/dealandgroup/:deal/:group/:year/:month', async(req, res, next)=> {
       // console.log('-------------------------------')
       // console.log(req.params.group)
       res.send(await CMOHeader.findAll({where: {year: req.params.year},
-        order: ['deal'],
+        order: [['deal'], ['group']],
         include: [{
           model: CMOBody,
           where: {

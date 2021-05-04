@@ -15,13 +15,15 @@ const fastcsv = require("fast-csv");
   })
   .on("end", async function() {
     for (let i = 0; i < csvFebData.length; i++ ){
+      
       // console.log(csvData[i])
       let year = csvFebData[i][0].slice(4, 8);
       let deal = csvFebData[i][0].slice(9, csvFebData[i][0].length);
       // console.log(year);
       // console.log(deal);
+     
       try{
-
+        console.log('----------------------------------------FEBFEBFEB----------------------------------------')
         let header = await CMOHeader.findOne({ where: {year: year, deal: deal, group: csvFebData[i][1]}})
 
         if (header){
@@ -47,9 +49,9 @@ const fastcsv = require("fast-csv");
 
   //this is loading currentData.csv into CurrentCMOS
   // sould be totally renamed March
-  let streamCurrentData = fs.createReadStream('currentData.csv');
+  let streamMarchData = fs.createReadStream('marchData.csv');
   let csvMarchData = [];
-  let csvCurrentStream = fastcsv
+  let csvMarchStream = fastcsv
   .parse()
   .on("data", function(data) {
     // console.log('here')
@@ -58,19 +60,46 @@ const fastcsv = require("fast-csv");
   })
   .on("end", async function() {
     for (let i = 0; i < csvMarchData.length; i++ ){
+      
       // console.log(csvMarchData[i][0])
       let year = csvMarchData[i][0].slice(4, 8);
       let deal = csvMarchData[i][0].slice(9, csvMarchData[i][0].length);
-      // console.log(year);
-      // console.log(deal);
-      // console.log(csvMarchData[i][1]);
+      console.log(year);
+      console.log(deal);
+      console.log(csvMarchData[i][1]);
       try{
+        console.log('----------------------------------------MARCH----------------------------------------')
       
       let header = await CMOHeader.findOne({ where: {year: year, deal: deal, group: csvMarchData[i][1]}})
       
       if (header){
-        await CMOBody.create({ residual: 0, actualCpr: 0, cpr: csvMarchData[i][2], cprNext: csvMarchData[i][3], vpr: csvMarchData[i][4], vprNext: csvMarchData[i][5], 
-          cdr: csvMarchData[i][6], cdrNext: csvMarchData[i][7], currFace: 0, cmoheaderId: header.id, month: 'MARCH' })
+
+        let body = await CMOBody.findOne({ where: {cmoheaderId: header.id, month: 'MARCH'}})
+        // console.log('----------------------------------------body----------------------------------------')
+      
+        // console.log(body)
+
+        if (body){
+          body.cpr = csvMarchData[i][2];
+          body.cprNext = csvMarchData[i][3];
+          body.vpr = csvMarchData[i][4];
+          body.vprNext = csvMarchData[i][5]; 
+          body.cdr = csvMarchData[i][6];
+          body.cdrNext = csvMarchData[i][7];
+
+          await body.save()
+
+        }
+        else{
+
+          await CMOBody.create({ residual: 0, actualCpr: 0, cpr: csvMarchData[i][2], cprNext: csvMarchData[i][3], vpr: csvMarchData[i][4], vprNext: csvMarchData[i][5], 
+            cdr: csvMarchData[i][6], cdrNext: csvMarchData[i][7], currFace: 0, cmoheaderId: header.id, month: 'MARCH' })
+          
+          // await CMOBody.update({ residual: 0, actualCpr: 0, cpr: csvMarchData[i][2], cprNext: csvMarchData[i][3], vpr: csvMarchData[i][4], vprNext: csvMarchData[i][5], 
+          //   cdr: csvMarchData[i][6], cdrNext: csvMarchData[i][7] })
+
+        }
+
       }
       else {
         let newHeader = await CMOHeader.create({ year: year, deal: deal, group: csvMarchData[i][1]})
@@ -89,6 +118,84 @@ const fastcsv = require("fast-csv");
       }
     }
   });
+
+   //this is loading currentData.csv into CurrentCMOS
+  // sould be totally renamed March
+  let streamMarchUpdateData = fs.createReadStream('marchUpdateData.csv');
+  let csvMarchUpdateData = [];
+  let csvMarchUpdateStream = fastcsv
+  .parse()
+  .on("data", function(data) {
+    // console.log('here')
+    // console.log(data)
+    csvMarchUpdateData.push(data);
+  })
+  .on("end", async function() {
+    for (let i = 0; i < csvMarchUpdateData.length; i++ ){
+  
+      console.log('----------------deal-----------------');
+  
+      console.log(csvMarchUpdateData[i])
+      let year = csvMarchUpdateData[i][0].slice(4, 8);
+      let deal = csvMarchUpdateData[i][0].slice(9, csvMarchUpdateData[i][0].length);
+      let group = csvMarchUpdateData[i][1];
+
+      let actualCpr = csvMarchUpdateData[i][2] * 100;
+
+      group = group.replace(/\s+/g, '');
+      // deal = deal.replace(/\s+/g, '');
+      
+      console.log(group);
+      console.log(deal);
+
+      deal = parseInt(deal, 10);
+      console.log(deal);
+      console.log(year);
+      // console.log(deal);
+      // console.log(csvMarchData[i][1]);
+      try{
+        console.log('----------------------------------------MARCH UPDATE----------------------------------------')
+      
+      let header = await CMOHeader.findOne({ where: {year: year, deal: deal, group: group}})
+      
+      if (header){
+
+        let body = await CMOBody.findOne({ where: {cmoheaderId: header.id, month: 'MARCH'}})
+        // console.log('----------------------------------------body----------------------------------------')
+      
+        // console.log(body)
+
+        if (body){
+          body.actualCpr = actualCpr
+
+          await body.save()
+        }
+        else{
+
+          await CMOBody.create({ currFace: 0, cmoheaderId: header.id, month: 'MARCH',  residual: 0, actualCpr: actualCpr, cpr: cpr, cprNext: 0, vpr: 0, vprNext: 0, cdr: 0, cdrNext: 0  })
+          
+        }
+
+      }
+      else {
+        let newHeader = await CMOHeader.create({ year: year, deal: deal, group: group})
+
+        await CMOBody.create({ currFace: 0, cmoheaderId: newHeader.id, month: 'MARCH',  residual: 0, actualCpr: actualCpr, cpr: 0, cprNext: 0, vpr: 0, vprNext: 0, cdr: 0, cdrNext: 0  })
+        // await CMOBody.create({ residual: 0, actualCpr: 0, cpr: csvMarchData[i][2], cprNext: csvMarchData[i][3], vpr: csvMarchData[i][4], vprNext: csvMarchData[i][5], 
+        //   cdr: csvMarchData[i][6], cdrNext: csvMarchData[i][7], currFace: 0, cmoheaderId: newHeader.id, month: 'MARCH' })
+        // console.log(newHeader.id);
+
+      }
+
+      // await CurrentCMOS.create({ deal: csvCurrentData[i][0], group: csvCurrentData[i][1], cpr: csvCurrentData[i][2], cprNext: csvCurrentData[i][3], vpr: csvCurrentData[i][4], vprNext: csvCurrentData[i][5], 
+      //   cdr: csvCurrentData[i][6], cdrNext: csvCurrentData[i][7] })
+      }
+      catch(ex){
+        console.log(ex)
+      }
+    }
+  });
+
 
 
   // this is for the table I have not tackled yet 
@@ -120,15 +227,29 @@ const fastcsv = require("fast-csv");
   });
 
 
+  const inputMarchData = async()=> {
+    
+    await streamMarchData.pipe(csvMarchStream);  
+
+    // streamCPN.pipe(csvStreamCPN);
+  };
+
+
+
   const syncAndSeed = async()=> {
     await db.sync({ force: true });
 
     await streamFeb.pipe(csvFebStream);
 
-    await streamCurrentData.pipe(csvCurrentStream);  
-
+    await streamMarchData.pipe(csvMarchStream); 
+    
+    await streamMarchUpdateData.pipe(csvMarchUpdateStream); 
+    // inputMarchData();
     // streamCPN.pipe(csvStreamCPN);
   };
 
   
-module.exports = syncAndSeed;
+module.exports = {
+  syncAndSeed,
+  inputMarchData
+};

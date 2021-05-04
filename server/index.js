@@ -1,11 +1,12 @@
 // const { db, models: { CMOS, CPN, CurrentCMOS } } = require('./db');
 const app = require('./api')
-const syncAndSeed = require('./syncAndSeed');
+const { syncAndSeed, inputMarchData }= require('./syncAndSeed');
 
 const init = async()=> {
     try {
       if (process.env.SEED){
         await syncAndSeed();
+        // await inputMarchData();
       }
       //no clue what this is doing but was in the Grace Shopper boiler plate should ask
       // else {

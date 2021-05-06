@@ -78,11 +78,13 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
   // console.log(groups);
 
   let years = [];
-  for (let i=2021; i > 1998; i--){
+  for (let i=2021; i > 2000; i--){
     years.push(i.toString())
   }
 
-  let months = ['FEB', 'MARCH'];
+  years.push('1999');
+
+  let months = ['FEB', 'MARCH', 'APRIL'];
   // console.log(searchA)
   // console.log(searchB)
   // console.log(searchYear)

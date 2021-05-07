@@ -215,7 +215,7 @@ const fastcsv = require("fast-csv");
     .on("end", async function() {
       for (let i = 0; i < csvAprilData.length; i++ ){
         
-        // console.log(csvMarchData[i][0])
+        // console.log(csvAprilData[i][0])
         let year = csvAprilData[i][0].slice(4, 8);
         let deal = csvAprilData[i][0].slice(9, csvAprilData[i][0].length) * 1;
         console.log(year);
@@ -234,16 +234,16 @@ const fastcsv = require("fast-csv");
           // console.log(body)
   
           if (body){
-            body.cpr = csvAprilData[i][2];
-            body.cprNext = csvAprilData[i][3];
-            body.vpr = csvAprilData[i][4];
-            body.vprNext = csvAprilData[i][5]; 
-            body.cdr = csvAprilData[i][6];
-            body.cdrNext = csvAprilData[i][7];
-            // body.residual = Math.round((body.actualCpr - csvAprilData[i][2]) * 10) / 10;
+            // body.cpr = csvAprilData[i][2];
+            // body.cprNext = csvAprilData[i][3];
+            // body.vpr = csvAprilData[i][4];
+            // body.vprNext = csvAprilData[i][5]; 
+            // body.cdr = csvAprilData[i][6];
+            // body.cdrNext = csvAprilData[i][7];
+            // // body.residual = Math.round((body.actualCpr - csvAprilData[i][2]) * 10) / 10;
   
-            // Math.round(actualCpr * 10) / 10
-            await body.save()
+            // // Math.round(actualCpr * 10) / 10
+            // await body.save()
   
           }
           else{

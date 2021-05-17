@@ -1,6 +1,6 @@
 // const { db, models: { CMOS, CPN, CurrentCMOS } } = require('./db');
 const app = require('./api')
-const { syncAndSeed, inputMarchData }= require('./syncAndSeed');
+const syncAndSeed = require('./syncAndSeed');
 
 const init = async()=> {
     try {

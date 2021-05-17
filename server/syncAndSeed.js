@@ -3,53 +3,11 @@
 const { db, models: { CMOHeader, CMOBody, CPN } } = require('./db');
 const fs = require("fs");
 const fastcsv = require("fast-csv");
-
-
-  //FEB FEB  FEB
-  let streamFeb = fs.createReadStream('febData.csv');  
-  let csvFebData = [];
-  let csvFebStream = fastcsv
-  .parse()
-  .on("data", function(data) {
-    // console.log('here')
-    csvFebData.push(data);
-  })
-  .on("end", async function() {
-    for (let i = 0; i < csvFebData.length; i++ ){
-      
-      // console.log(csvData[i])
-      let year = csvFebData[i][0].slice(4, 8);
-      let deal = csvFebData[i][0].slice(9, csvFebData[i][0].length);
-      // console.log(year);
-      // console.log(deal);
-     
-      try{
-        console.log('----------------------------------------FEBFEBFEB----------------------------------------')
-        let header = await CMOHeader.findOne({ where: {year: year, deal: deal, group: csvFebData[i][1]}})
-
-        if (header){
-          await CMOBody.create({ residual: csvFebData[i][4], actualCpr: csvFebData[i][2], cpr: csvFebData[i][3], 
-            cprNext: csvFebData[i][5], vpr: csvFebData[i][6], vprNext: csvFebData[i][7], 
-            cdr: csvFebData[i][8], cdrNext: csvFebData[i][9], currFace: csvFebData[i][10], cmoheaderId: header.id, month: 'FEB' })  
-        }
-        else {
-          // await CMOHeader.create({ year: year, deal: deal, group: csvMarchData[i][1]})
-          let newHeader =  await CMOHeader.create({ year: year, deal: deal, group: csvFebData[i][1]})
-      
-          await CMOBody.create({ residual: csvFebData[i][4], actualCpr: csvFebData[i][2], cpr: csvFebData[i][3], cprNext: csvFebData[i][5], vpr: csvFebData[i][6], vprNext: csvFebData[i][7], 
-          cdr: csvFebData[i][8], cdrNext: csvFebData[i][9], currFace: csvFebData[i][10], cmoheaderId: newHeader.id, month: 'FEB' })
-        }
-      }
-      catch(ex){
-        console.log(ex)
-      }
-      }
-  });
-
+const { streamFeb, csvFebStream } = require('./synchAndSeedHelpers/months.js');
 
 
   //MARCH MARCH MARCH 
-  let streamMarchData = fs.createReadStream('marchData.csv');
+  let streamMarchData = fs.createReadStream('data/marchData.csv');
   let csvMarchData = [];
   let csvMarchStream = fastcsv
   .parse()
@@ -119,7 +77,7 @@ const fastcsv = require("fast-csv");
   });
 
   //MARCH UPDATE MARCH UPDATE MARCH UPDATE 
-  let streamMarchUpdateData = fs.createReadStream('marchUpdateData.csv');
+  let streamMarchUpdateData = fs.createReadStream('data/marchUpdateData.csv');
   let csvMarchUpdateData = [];
   let csvMarchUpdateStream = fastcsv
   .parse()
@@ -203,7 +161,7 @@ const fastcsv = require("fast-csv");
 
 
     //APRIL APRIL APRIL 
-    let streamAprilData = fs.createReadStream('aprilData.csv');
+    let streamAprilData = fs.createReadStream('data/aprilData.csv');
     let csvAprilData = [];
     let csvAprilStream = fastcsv
     .parse()
@@ -278,7 +236,7 @@ const fastcsv = require("fast-csv");
 
 
     //APRIL UPDATE APRIL UPDATE APRIL UPDATE 
-  let streamAprilUpdateData = fs.createReadStream('aprilUpdateData.csv');
+  let streamAprilUpdateData = fs.createReadStream('data/aprilUpdateData.csv');
   let csvAprilUpdateData = [];
   let csvAprilUpdateStream = fastcsv
   .parse()
@@ -362,7 +320,7 @@ const fastcsv = require("fast-csv");
 
 
   // this is for the table I have not tackled yet 
-  let streamCPN = fs.createReadStream('cpn.csv');
+  let streamCPN = fs.createReadStream('data/cpn.csv');
   let csvDataCPN = [];
   let csvStreamCPN = fastcsv
   .parse()
@@ -393,7 +351,7 @@ const fastcsv = require("fast-csv");
 
 
       //CMOHEADER 
-      let streamCMOHeader = fs.createReadStream('CMOHeaderData.csv');
+      let streamCMOHeader = fs.createReadStream('data/CMOHeaderData.csv');
       let csvCMOHeaderData = [];
       let csvCMOHeaderStream = fastcsv
       .parse()
@@ -420,7 +378,7 @@ const fastcsv = require("fast-csv");
       });
 
     //CMOBODY 
-    let streamCMOBody = fs.createReadStream('CMOBodyData.csv');
+    let streamCMOBody = fs.createReadStream('data/CMOBodyData.csv');
     let csvCMOBodyData = [];
     let csvCMOBodyStream = fastcsv
     .parse()
@@ -450,20 +408,10 @@ const fastcsv = require("fast-csv");
     });
 
 
-
-  const inputMarchData = async()=> {
-    
-    // await streamMarchData.pipe(csvMarchStream);  
-
-    // streamCPN.pipe(csvStreamCPN);
-  };
-
-
-
   const syncAndSeed = async()=> {
     await db.sync({ force: true });
 
-    // await streamFeb.pipe(csvFebStream);
+    await streamFeb.pipe(csvFebStream);
 
     // await streamMarchData.pipe(csvMarchStream); 
     
@@ -473,15 +421,12 @@ const fastcsv = require("fast-csv");
 
     // await streamAprilUpdateData.pipe(csvAprilUpdateStream);
     
-    await streamCMOHeader.pipe(csvCMOHeaderStream);
+    // await streamCMOHeader.pipe(csvCMOHeaderStream);
 
-    await streamCMOBody.pipe(csvCMOBodyStream);
-    // inputMarchData();
+    // await streamCMOBody.pipe(csvCMOBodyStream);
+
     // streamCPN.pipe(csvStreamCPN);
   };
 
   
-module.exports = {
-  syncAndSeed,
-  inputMarchData
-};
+module.exports = syncAndSeed;

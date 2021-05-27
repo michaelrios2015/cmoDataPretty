@@ -18,7 +18,6 @@ const loadData = (arr) => {
     return rows;
 }
 
-
 const rowsReducer = (state = [], action) =>{
     if (action.type === LOAD_ROWS){
         state = action.rows

@@ -99,9 +99,9 @@ const {
 
     // await streamAprilUpdateData.pipe(csvAprilUpdateStream);
     
-    await streamCMOHeader.pipe(csvCMOHeaderStream);
+    // await streamCMOHeader.pipe(csvCMOHeaderStream);
 
-    await streamCMOBody.pipe(csvCMOBodyStream);
+    // await streamCMOBody.pipe(csvCMOBodyStream);
 
     // streamCPN.pipe(csvStreamCPN);
     

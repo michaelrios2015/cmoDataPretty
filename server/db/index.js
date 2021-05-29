@@ -2,6 +2,7 @@ const db = require("./db");
 const CMOBody = require("./models/CMOBody");
 const CMOHeader = require("./models/CMOHeader");
 const CPN = require("./models/CPN");
+const Pool = require("./models/Pool");
 
 
 CMOHeader.hasMany(CMOBody);
@@ -14,6 +15,7 @@ module.exports = {
 	models: {
 		CMOBody,
 		CMOHeader,
-		CPN
+		CPN,
+		Pool
 	},
 };

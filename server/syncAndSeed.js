@@ -1,8 +1,8 @@
 // this desperateley need to be seperated 
-
-const { db, models: { CMOHeader, CMOBody, CPN } } = require('./db');
+const { db, models: { CPN, Pool } } = require('./db');
 const fs = require("fs");
 const fastcsv = require("fast-csv");
+
 const { streamFeb, 
         csvFebStream, 
         streamMarchData,
@@ -50,25 +50,37 @@ const {
     }
   });
 
-  let streamPools = fs.createReadStream('data/pools.csv');
+
+  let streamPools = fs.createReadStream('data/pools.csv')
   let csvPools = [];
   let csvStreamPools = fastcsv
-  .parse()
+  .parse({
+    delimiter: '|'
+  })
   .on("data", function(data) {
     // console.log('here')
     csvPools.push(data);
   })
   .on("end", async function() {
-    for (let i = 0; i < 100; i++ ){
-      console.log("------------------------------------");
-      console.log(csvPools[i]);
-      // for (let j = 0; j < csvPools[i].length; j++ ){
-       
-      // }
-      
-    //   await CPN.create({ zero: csvDataCPN[i][0], one: csvDataCPN[i][1], two: csvDataCPN[i][2], three: csvDataCPN[i][3], four: csvDataCPN[i][4], five: csvDataCPN[i][5], six: csvDataCPN[i][6], 
-    //     seven: csvDataCPN[i][7], eight: csvDataCPN[i][8], nine: csvDataCPN[i][9], ten: csvDataCPN[i][10], eleven: csvDataCPN[i][11], 
-    //     twelve: csvDataCPN[i][12], thirteen: csvDataCPN[i][13], fourteen: csvDataCPN[i][14], fifteen: csvDataCPN[i][15]})
+    for (let i = 0; i < csvPools.length; i++ ){
+      // console.log("------------------------------------");
+      // console.log(i);
+      // console.log(csvPools[i][0]);
+
+      if (csvPools[i][0] === 'PS' ){
+        // console.log("------------------------------------");
+        // console.log(csvPools[i]);
+
+        try {
+         await Pool.create({ cusip: csvPools[i][1], name: csvPools[i][2], indicator: csvPools[i][3], type: csvPools[i][4], 
+            issueDate: csvPools[i][5], maturityDate: csvPools[i][7], originalFace: csvPools[i][8]})
+         }
+            catch(ex){
+              console.log(ex)
+            }
+
+      }
+
     }
   });
 
@@ -87,13 +99,13 @@ const {
 
     // await streamAprilUpdateData.pipe(csvAprilUpdateStream);
     
-    // await streamCMOHeader.pipe(csvCMOHeaderStream);
+    await streamCMOHeader.pipe(csvCMOHeaderStream);
 
-    // await streamCMOBody.pipe(csvCMOBodyStream);
+    await streamCMOBody.pipe(csvCMOBodyStream);
 
     // streamCPN.pipe(csvStreamCPN);
     
-    streamPools.pipe(csvStreamPools);
+    // streamPools.pipe(csvStreamPools);
   };
 
   

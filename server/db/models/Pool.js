@@ -1,11 +1,12 @@
 const db = require('../db')
 const Sequelize = require('sequelize');
-const { INTEGER, STRING, FLOAT } = Sequelize;
+const { INTEGER, STRING, FLOAT, VIRTUAL } = Sequelize;
 
 
 const Pool = db.define('pools', {
   cusip: { 
-    type: STRING, 
+    type: STRING,
+    primaryKey: true  
   },
   name: { 
     type: STRING, 
@@ -24,7 +25,19 @@ const Pool = db.define('pools', {
   },
   originalFace: { 
     type: FLOAT, 
-  }     
+  },
+  isTBAElig : { 
+    type: VIRTUAL,
+    get () 
+    {
+      if (this.getDataValue('originalFace') >= 250000 && this.getDataValue('type') === 'SF'){
+        return true
+    }
+      else {
+        return false
+      }
+    } 
+  }      
 },{ timestamps: false });
 
 

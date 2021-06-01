@@ -3,11 +3,15 @@ const CMOBody = require("./models/CMOBody");
 const CMOHeader = require("./models/CMOHeader");
 const CPN = require("./models/CPN");
 const Pool = require("./models/Pool");
+const PoolBody = require("./models/PoolBody");
 
 
 CMOHeader.hasMany(CMOBody);
 CMOBody.belongsTo(CMOHeader);
 
+
+Pool.hasMany(PoolBody);
+PoolBody.belongsTo(Pool);
 
 
 module.exports = {
@@ -16,6 +20,7 @@ module.exports = {
 		CMOBody,
 		CMOHeader,
 		CPN,
-		Pool
+		Pool,
+		PoolBody
 	},
 };

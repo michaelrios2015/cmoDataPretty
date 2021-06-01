@@ -62,7 +62,7 @@ const {
     csvPools.push(data);
   })
   .on("end", async function() {
-    for (let i = 0; i < csvPools.length; i++ ){
+    for (let i = 0; i < 100; i++ ){
       // console.log("------------------------------------");
       // console.log(i);
       // console.log(csvPools[i][0]);
@@ -89,6 +89,7 @@ const {
   const syncAndSeed = async()=> {
     // await db.sync({ force: true });
 
+    // await db.sync();
     // await streamFeb.pipe(csvFebStream);
 
     // await streamMarchData.pipe(csvMarchStream); 

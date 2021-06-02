@@ -1,10 +1,15 @@
 const router = require('express').Router();
-const { models: { Pool } } = require('../../db');
+const { models: { Pool, PoolBody } } = require('../../db');
 
 
 router.get('/', async(req, res, next)=> {
   try {
-    res.send(await Pool.findAll({}))
+    // console.log(await Pool.findAll())
+    res.send(await Pool.findAll({ 
+      include: [{
+      model: PoolBody,
+      }
+    ]}))
   }
   catch(ex){
     next(ex);

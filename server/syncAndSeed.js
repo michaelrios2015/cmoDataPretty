@@ -1,5 +1,5 @@
 // this desperateley need to be seperated 
-const { db, models: { CPN, Pool } } = require('./db');
+const { db, models: { CPN, Pool, PoolBody } } = require('./db');
 const fs = require("fs");
 const fastcsv = require("fast-csv");
 
@@ -85,6 +85,54 @@ const {
   });
 
 
+  let streamPoolBodies = fs.createReadStream('data/pools.csv')
+  let csvPoolBodies = [];
+  let csvStreamPoolBodies = fastcsv
+  .parse({
+    delimiter: '|'
+  })
+  .on("data", function(data) {
+    // console.log('here')
+    if (data === ''){
+      data = null
+      console.log(data)
+    } 
+    csvPoolBodies.push(data);
+  })
+  .on("end", async function() {
+    for (let i = 0; i < 100; i++ ){
+      // console.log("------------------------------------");
+      // console.log(i);
+      // console.log(csvPools[i][0]);
+
+      if (csvPoolBodies[i][0] === 'PS' ){
+        // console.log("------------------------------------");
+        // console.log(csvPoolBodies[i][1]);
+        // 36202BYW9 does not have 
+
+        if (csvPoolBodies[i][17] === ''){
+          csvPoolBodies[i][17] = null;
+        }
+        if (csvPoolBodies[i][18] === ''){
+          csvPoolBodies[i][18] = null;
+        }
+        if (csvPoolBodies[i][19] === ''){
+          csvPoolBodies[i][19] = null;
+        }
+
+        try {
+         await PoolBody.create({ poolCusip: csvPoolBodies[i][1], interestRate: csvPoolBodies[i][6], remainingBalance: csvPoolBodies[i][9], 
+            factor: csvPoolBodies[i][10], GWAC: csvPoolBodies[i][17], WAM: csvPoolBodies[i][18], WALA: csvPoolBodies[i][19]})
+         }
+            catch(ex){
+              console.log(ex)
+            }
+
+      }
+
+    }
+  });
+
 
   const syncAndSeed = async()=> {
     // await db.sync({ force: true });
@@ -107,6 +155,8 @@ const {
     // streamCPN.pipe(csvStreamCPN);
     
     // streamPools.pipe(csvStreamPools);
+
+    // streamPoolBodies.pipe(csvStreamPoolBodies);
   };
 
   

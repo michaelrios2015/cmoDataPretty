@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { Provider, connect } from 'react-redux';
 import store from './store';
 import BasicTable from './components/BasicTable';
+import PoolTable from './components/PoolTable';
 import NavBar from './components/NavBar';
 import { HashRouter as Router, Route, BrowserRouter } from 'react-router-dom';
 
@@ -21,7 +22,8 @@ class _App extends Component{
           {/* <NavBar /> */}
           <div>
             {/* <Route component={ CurrentMonth } path = '/current'  /> */}
-            <Route component={ BasicTable } path = '/' exact/>          
+            <Route component={ BasicTable } path = '/' exact/>        
+            <Route component={ PoolTable } path = '/pools' exact/>          
           </div>
         </Router>
     );

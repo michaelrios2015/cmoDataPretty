@@ -21,7 +21,10 @@ const PoolBody = db.define('poolbodies', {
   },
   WALA: { 
     type: INTEGER, 
-  }     
+  },
+  month: { 
+    type: STRING, 
+  }      
 },{ timestamps: false });
 
 

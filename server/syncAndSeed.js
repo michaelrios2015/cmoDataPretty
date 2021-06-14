@@ -26,7 +26,9 @@ const {
   streamPools,
   csvStreamPools,
   streamPoolBodies,
-  csvStreamPoolBodies
+  csvStreamPoolBodies,
+  streamPoolsPrediction,
+  csvStreamPoolsPredication
         } = require('./synchAndSeedHelpers/pools.js');
 
 
@@ -82,7 +84,9 @@ const {
     
     // streamPools.pipe(csvStreamPools);
 
-    streamPoolBodies.pipe(csvStreamPoolBodies);
+    // streamPoolBodies.pipe(csvStreamPoolBodies);
+
+    // streamPoolsPrediction.pipe(csvStreamPoolsPredication)
   };
 
   

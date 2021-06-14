@@ -4,7 +4,7 @@ const { models: { CMOHeader, CMOBody } } = require('../../db');
 
 router.get('/year/:year/:month', async(req, res, next)=> {
   try {
-    console.log(req.params.year);
+    // console.log(req.params.year);
     res.send(await CMOHeader.findAll({
       where: { 
         year: req.params.year 

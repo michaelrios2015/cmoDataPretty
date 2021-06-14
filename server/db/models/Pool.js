@@ -33,11 +33,11 @@ const Pool = db.define('pools', {
     {
       let start = Moment(this.getDataValue('issueDate'), "YYYYMMDD");
       let end = Moment(this.getDataValue('maturityDate'), "YYYYMMDD");
-      console.log(start);
-      console.log(end);
+      // console.log(start);
+      // console.log(end);
       
       const months = end.diff(start, 'months');
-      console.log(months);
+      // console.log(months);
       if (this.getDataValue('originalFace') >= 250000 && 
           this.getDataValue('type') === 'SF' &&
           (this.getDataValue('indicator') === 'X' || this.getDataValue('indicator') === 'M') &&

@@ -61,7 +61,7 @@ const {
 
 
   const syncAndSeed = async()=> {
-    await db.sync({ force: true });
+    // await db.sync({ force: true });
 
     // await db.sync();
     // await streamFeb.pipe(csvFebStream);
@@ -80,7 +80,7 @@ const {
 
     // streamCPN.pipe(csvStreamCPN);
     
-    streamPools.pipe(csvStreamPools);
+    // streamPools.pipe(csvStreamPools);
 
     streamPoolBodies.pipe(csvStreamPoolBodies);
   };

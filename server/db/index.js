@@ -14,8 +14,8 @@ CMOBody.belongsTo(CMOHeader);
 Pool.hasMany(PoolBody);
 PoolBody.belongsTo(Pool);
 
-PoolBody.hasOne(PoolPrediction);
-PoolPrediction.belongsTo(PoolBody);
+// PoolBody.hasOne(PoolPrediction);
+// PoolPrediction.belongsTo(PoolBody);
 
 
 module.exports = {

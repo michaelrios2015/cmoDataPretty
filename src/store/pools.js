@@ -20,15 +20,22 @@ const loadData = (arr) => {
     console.log(arr[0]);
 
     try {
+    // arr.forEach(item => {
+    //     rows.push(createData(item.cusip, item.name, item.type, item.indicator, item.issueDate, item.maturityDate, 
+    //         item.originalFace, item.isTBAElig, item.poolbodies[0].interestRate, item.poolbodies[0].remainingBalance,  
+    //         item.poolbodies[0].factor, item.poolbodies[0].GWAC, item.poolbodies[0].WAM, item.poolbodies[0].WALA,
+            
+    //         item.poolbodies[0].poolprediction.totalOutstanding, item.poolbodies[0].poolprediction.vpr, item.poolbodies[0].poolprediction.vprNext, 
+            
+    //         item.poolbodies[0].poolprediction.cdr, item.poolbodies[0].poolprediction.cdrNext, item.poolbodies[0].poolprediction.cpr, 
+    //         item.poolbodies[0].poolprediction.cprNext))
+    // });
+
     arr.forEach(item => {
         rows.push(createData(item.cusip, item.name, item.type, item.indicator, item.issueDate, item.maturityDate, 
-            item.originalFace, item.isTBAElig, item.poolbodies[0].interestRate, item.poolbodies[0].remainingBalance,  
-            item.poolbodies[0].factor, item.poolbodies[0].GWAC, item.poolbodies[0].WAM, item.poolbodies[0].WALA,
-            
-            item.poolbodies[0].poolprediction.totalOutstanding, item.poolbodies[0].poolprediction.vpr, item.poolbodies[0].poolprediction.vprNext, 
-            
-            item.poolbodies[0].poolprediction.cdr, item.poolbodies[0].poolprediction.cdrNext, item.poolbodies[0].poolprediction.cpr, 
-            item.poolbodies[0].poolprediction.cprNext))
+            item.originalFace, item.isTBAElig, item.interestRate, item.remainingBalance,  
+            item.factor, item.GWAC, item.WAM, item.WALA, item.totalOutstanding, item.vpr, item.vprNext, 
+            item.cdr, item.cdrNext, item.cpr, item.cprNext))
     });
     }
     catch(err){
@@ -59,12 +66,18 @@ export const loadPools = () =>{
         const tests = (await axios.get(`/api/pools/`)).data;
         console.log(tests[0]); 
         // so this will work to weed out ones that are null
-        tests.forEach(item => {if (!item.poolbodies[0].poolprediction){
-            console.log(item)
-        }})
-        // tests.forEach(item => {
-        //     console.log(item.poolbodies[0])
-        // })
+        // tests.forEach(item => {if (!item.poolbodies[0].poolprediction){
+        //     console.log(item)
+        // }})
+        tests.forEach(item => {
+            item.totalOutstanding = (item.totalOutstanding).toFixed(2);
+            item.vpr = (item.vpr * 100).toFixed(1);
+            item.vprNext = (item.vprNext * 100).toFixed(1);
+            item.cdr = (item.cdr * 100).toFixed(1);
+            item.cdrNext = (item.cdrNext * 100).toFixed(1);
+            item.cpr = (item.cpr * 100).toFixed(1);
+            item.cprNext = (item.cprNext * 100).toFixed(1);
+        })
         console.log(tests[0])    
 
 

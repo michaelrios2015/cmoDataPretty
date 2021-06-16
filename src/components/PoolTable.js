@@ -171,7 +171,13 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
                 <TableCell align="right">GWAC</TableCell>
                 <TableCell align="right">WAM</TableCell>
                 <TableCell align="right">WALA</TableCell>
-
+                <TableCell align="right">Total Outstanding</TableCell>
+                <TableCell align="right">VPR</TableCell>
+                <TableCell align="right">VPR Next</TableCell>
+                <TableCell align="right">CDR</TableCell>
+                <TableCell align="right">CDR Next</TableCell>
+                <TableCell align="right">CPR</TableCell>
+                <TableCell align="right">CPR Next</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -192,6 +198,13 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
                   <TableCell align="right">{row.GWAC}</TableCell>
                   <TableCell align="right">{row.WAM}</TableCell>
                   <TableCell align="right">{row.WALA}</TableCell>
+                  <TableCell align="right">{row.totalOutstanding}</TableCell>
+                  <TableCell align="right">{row.vpr}</TableCell>
+                  <TableCell align="right">{row.vprNext}</TableCell>
+                  <TableCell align="right">{row.cdr}</TableCell>
+                  <TableCell align="right">{row.cdrNext}</TableCell>
+                  <TableCell align="right">{row.cpr}</TableCell>
+                  <TableCell align="right">{row.cprNext}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

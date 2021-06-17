@@ -4,44 +4,77 @@ const fs = require("fs");
 const fastcsv = require("fast-csv");
 
 
-  let streamPools = fs.createReadStream('data/pools.csv')
-  let csvPools = [];
-  let csvStreamPools = fastcsv
+  let streamAprilPools = fs.createReadStream('data/pools/monthlySFPS_202104.csv')
+  let csvAprilPools = [];
+  let csvStreamAprilPools = fastcsv
   .parse({
     delimiter: '|'
   })
   .on("data", function(data) {
     // console.log('here')
-    csvPools.push(data);
+    csvAprilPools.push(data);
   })
   .on("end", async function() {
-    for (let i = 0; i < csvPools.length; i++ ){
+    for (let i = 0; i < csvAprilPools.length; i++ ){
     // for (let i = 0; i < 10; i++ ){    
       // console.log("------------------------------------");
       // console.log(i);
       // console.log(csvPools[i][0]);
-
-      if (csvPools[i][0] === 'PS' ){
+      if (csvAprilPools[i][0] === 'PS' ){
         // console.log("------------------------------------");
         // console.log(csvPools[i]);
-
         try {
-         await Pool.create({ cusip: csvPools[i][1], name: csvPools[i][2], indicator: csvPools[i][3], type: csvPools[i][4], 
-            issueDate: csvPools[i][5], maturityDate: csvPools[i][7], originalFace: csvPools[i][8]})
+         await Pool.create({ cusip: csvAprilPools[i][1], name: csvAprilPools[i][2], indicator: csvAprilPools[i][3], type: csvAprilPools[i][4], 
+            issueDate: csvAprilPools[i][5], maturityDate: csvAprilPools[i][7], originalFace: csvAprilPools[i][8]})
          }
-            catch(ex){
-              console.log(ex)
-            }
-
+        catch(ex){
+          console.log(ex)
+        }
       }
+    }
+  });
 
+  let streamMayPools = fs.createReadStream('data/pools/monthlySFPS_202105.csv')
+  let csvMayPools = [];
+  let csvStreamMayPools = fastcsv
+  .parse({
+    delimiter: '|'
+  })
+  .on("data", function(data) {
+    // console.log('here')
+    csvMayPools.push(data);
+  })
+  .on("end", async function() {
+    for (let i = 0; i < csvMayPools.length; i++ ){
+    // for (let i = 0; i < 10; i++ ){    
+      // console.log("------------------------------------");
+      // console.log(i);
+      // console.log(csvPools[i][0]);
+      
+
+      if (csvMayPools[i][0] === 'PS' ){
+        // console.log("------------------------------------");
+        // console.log(csvPools[i]);
+        let pool = await Pool.findByPk(csvMayPools[i][1])
+
+        if(!pool){
+
+          try {
+          await Pool.create({ cusip: csvMayPools[i][1], name: csvMayPools[i][2], indicator: csvMayPools[i][3], type: csvMayPools[i][4], 
+              issueDate: csvMayPools[i][5], maturityDate: csvMayPools[i][7], originalFace: csvMayPools[i][8]})
+          }
+          catch(ex){
+            console.log(ex)
+          }
+        }
+      }
     }
   });
 
 
-  let streamPoolBodies = fs.createReadStream('data/pools.csv')
-  let csvPoolBodies = [];
-  let csvStreamPoolBodies = fastcsv
+  let streamAprilPoolBodies = fs.createReadStream('data/pools/monthlySFPS_202104.csv')
+  let csvPoolAprilBodies = [];
+  let csvStreamAprilPoolBodies = fastcsv
   .parse({
     delimiter: '|'
   })
@@ -51,41 +84,39 @@ const fastcsv = require("fast-csv");
       data = null
       console.log(data)
     } 
-    csvPoolBodies.push(data);
+    csvPoolAprilBodies.push(data);
   })
   .on("end", async function() {
-    for (let i = 0; i < csvPoolBodies.length; i++ ){
+    for (let i = 0; i < csvPoolAprilBodies.length; i++ ){
     // for (let i = 0; i < 10; i++ ){    
 
       // console.log("------------------------------------");
       // console.log(i);
       // console.log(csvPools[i][0]);
 
-      if (csvPoolBodies[i][0] === 'PS' ){
+      if (csvPoolAprilBodies[i][0] === 'PS' ){
         // console.log("------------------------------------");
         // console.log(csvPoolBodies[i][1]);
         // 36202BYW9 does not have 
 
-        if (csvPoolBodies[i][17] === ''){
-          csvPoolBodies[i][17] = null;
+        if (csvPoolAprilBodies[i][17] === ''){
+          csvPoolAprilBodies[i][17] = null;
         }
-        if (csvPoolBodies[i][18] === ''){
-          csvPoolBodies[i][18] = null;
+        if (csvPoolAprilBodies[i][18] === ''){
+          csvPoolAprilBodies[i][18] = null;
         }
-        if (csvPoolBodies[i][19] === ''){
-          csvPoolBodies[i][19] = null;
+        if (csvPoolAprilBodies[i][19] === ''){
+          csvPoolAprilBodies[i][19] = null;
         }
 
         try {
-         await PoolBody.create({ poolCusip: csvPoolBodies[i][1], interestRate: csvPoolBodies[i][6], remainingBalance: csvPoolBodies[i][9], 
-            factor: csvPoolBodies[i][10], GWAC: csvPoolBodies[i][17], WAM: csvPoolBodies[i][18], WALA: csvPoolBodies[i][19], month: 'APRIL'})
-         }
-            catch(ex){
-              console.log(ex)
-            }
-
+          await PoolBody.create({ poolCusip: csvPoolAprilBodies[i][1], interestRate: csvPoolAprilBodies[i][6], remainingBalance: csvPoolAprilBodies[i][9], 
+          factor: csvPoolAprilBodies[i][10], GWAC: csvPoolAprilBodies[i][17], WAM: csvPoolAprilBodies[i][18], WALA: csvPoolAprilBodies[i][19], month: 'APRIL'})
+        }
+          catch(ex){
+          console.log(ex)
+        }
       }
-
     }
   });
 
@@ -129,10 +160,12 @@ const fastcsv = require("fast-csv");
 // CUSIP,total_outstanding,VPR,VPR_next,CDR,CDR_next,CPR,CPR_next
   
 module.exports = {
-    streamPools,
-    csvStreamPools,
-    streamPoolBodies,
-    csvStreamPoolBodies,
-    streamPoolsPrediction,
-    csvStreamPoolsPredication
+  streamAprilPools,
+  csvStreamAprilPools,
+  streamMayPools,
+  csvStreamMayPools,
+  streamAprilPoolBodies,
+  csvStreamAprilPoolBodies,
+  streamPoolsPrediction,
+  csvStreamPoolsPredication
 };

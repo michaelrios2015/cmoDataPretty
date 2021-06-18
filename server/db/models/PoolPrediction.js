@@ -28,7 +28,10 @@ const PoolPrediction = db.define('poolpredictions', {
   },
   cprNext: { 
     type: FLOAT, 
-  }     
+  },
+  month: { 
+    type: STRING, 
+  }       
 },{ timestamps: false });
 
 

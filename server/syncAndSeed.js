@@ -23,12 +23,18 @@ const {
 } = require('./synchAndSeedHelpers/cmos.js');
 
 const {
+  streamPools,
+  csvStreamPools,
   streamAprilPools,
   csvStreamAprilPools,
   streamMayPools,
   csvStreamMayPools,
+  streamPoolBodies,
+  csvStreamPoolBodies,
   streamAprilPoolBodies,
   csvStreamAprilPoolBodies,
+  streamMayPoolBodies,
+  csvStreamMayPoolBodies,
   streamPoolsPrediction,
   csvStreamPoolsPredication
         } = require('./synchAndSeedHelpers/pools.js');
@@ -83,12 +89,18 @@ const {
     // await streamCMOBody.pipe(csvCMOBodyStream);
 
     // streamCPN.pipe(csvStreamCPN);
-    
+
+    // streamPools.pipe(csvStreamPools);
+
     // streamAprilPools.pipe(csvStreamAprilPools);
+
+    // streamAprilPoolBodies.pipe(csvStreamAprilPoolBodies);
+
+    // streamPoolBodies.pipe(csvStreamPoolBodies);
 
     // streamMayPools.pipe(csvStreamMayPools);
 
-    // streamAprilPoolBodies.pipe(csvStreamAprilPoolBodies);
+    // streamMayPoolBodies.pipe(csvStreamMayPoolBodies);
 
     // streamPoolsPrediction.pipe(csvStreamPoolsPredication)
   };

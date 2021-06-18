@@ -23,12 +23,16 @@ router.get('/', async(req, res, next)=> {
 
   let [results, _] = (await db.query(
     // 'SELECT pools.cusip, poolbodies."poolCusip", poolpredictions.cusip as ppCusip ' +
-    'SELECT * ' +
+    `SELECT * ` +
     'FROM pools ' +
     'INNER JOIN poolbodies ' +
     'ON (pools.cusip = poolbodies."poolCusip") ' +
     'INNER JOIN poolpredictions ' +
     'ON (poolbodies."poolCusip" = poolpredictions.cusip) ' +
+    'WHERE ' + 
+    'poolbodies.month = \'MAY\' ' +
+    'AND ' +	
+    'poolpredictions.month = \'MAY\' ' +
     'LIMIT 10;'));
 
   res.send(results)

@@ -90,19 +90,19 @@ const {
 
     // streamCPN.pipe(csvStreamCPN);
 
-    streamPools.pipe(csvStreamPools);
+    // streamPools.pipe(csvStreamPools);
 
     // streamAprilPools.pipe(csvStreamAprilPools);
 
     // streamAprilPoolBodies.pipe(csvStreamAprilPoolBodies);
 
-    streamPoolBodies.pipe(csvStreamPoolBodies);
+    // streamPoolBodies.pipe(csvStreamPoolBodies);
 
     // streamMayPools.pipe(csvStreamMayPools);
 
     // streamMayPoolBodies.pipe(csvStreamMayPoolBodies);
 
-    streamPoolsPrediction.pipe(csvStreamPoolsPredication)
+    // streamPoolsPrediction.pipe(csvStreamPoolsPredication)
   };
 
   

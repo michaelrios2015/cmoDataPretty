@@ -15,15 +15,26 @@ let csvStreamPoolsBodyUpdate = fastcsv
 })
 .on("end", async function() {
   for (let i = 1; i < csvPoolsBodyUpdate.length; i++ ){
+    // for (let i = 1; i < 3; i++ ){
   
     // console.log(csvPoolsBodyUpdate[i]);
     try {
 
 //       cusip,factor,GWAC,WAM,WALA,cpr,cprNext,va,month
 // 36202A3U9,0.00031227,8.5,17,340,0.16731955842915347,0.1672208868779177,1,MAY
+        if (csvPoolsBodyUpdate[i][3] === ''){
+          csvPoolsBodyUpdate[i][3] = null;
+        }
+        if (csvPoolsBodyUpdate[i][4] === ''){
+          csvPoolsBodyUpdate[i][4] = null;
+        }
+        if (csvPoolsBodyUpdate[i][5] === ''){
+          csvPoolsBodyUpdate[i][5] = null;
+        }
 
-      await PoolBodyUpdate.create({ cusip: csvPoolsBodyUpdate[i][0], factor: csvPoolsBodyUpdate[i][1], gwac: csvPoolsBodyUpdate[i][2], wam: csvPoolsBodyUpdate[i][3], 
-        wala: csvPoolsBodyUpdate[i][4], cpr: csvPoolsBodyUpdate[i][5], cprNext: csvPoolsBodyUpdate[i][6], va: csvPoolsBodyUpdate[i][7], month: csvPoolsBodyUpdate[i][8]})
+
+      await PoolBodyUpdate.create({ cusip: csvPoolsBodyUpdate[i][0], interestrate: csvPoolsBodyUpdate[i][1], factor: csvPoolsBodyUpdate[i][2], gwac: csvPoolsBodyUpdate[i][3], wam: csvPoolsBodyUpdate[i][4], 
+        wala: csvPoolsBodyUpdate[i][5], cpr: csvPoolsBodyUpdate[i][6], cprNext: csvPoolsBodyUpdate[i][7], va: csvPoolsBodyUpdate[i][8], month: csvPoolsBodyUpdate[i][9]})
       }
     catch(ex){
       console.log(ex)

@@ -32,7 +32,7 @@ const loadData = (arr) => {
 
     arr.forEach(item => {
         rows.push(createData(item.cusip, item.name, item.issueDate,  
-            item.originalFace, item.interestRate,   
+            item.originalFace, item.interestrate,   
             item.factor, item.gwac, item.wam, item.wala, item.cpr, item.cprNext, item.currentFace, item.va))
     });
     }

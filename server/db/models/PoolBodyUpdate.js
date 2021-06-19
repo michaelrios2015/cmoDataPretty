@@ -7,6 +7,9 @@ const PoolBodyUpdate = db.define('poolbodyupdates', {
     cusip: { 
         type: STRING,
     },
+    interestrate: { 
+        type: FLOAT, 
+      },
     factor: { 
         type: FLOAT, 
     },

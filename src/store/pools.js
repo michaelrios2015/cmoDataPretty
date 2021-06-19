@@ -6,12 +6,11 @@ const loadData = (arr) => {
 
     function createData
     (cusip, name, type, indicator, issueDate, maturityDate, originalFace, isTBAElig, interestRate, 
-         remainingBalance, factor, GWAC, WAM, WALA, totalOutstanding, vpr, vprNext, cdr, cdrNext, cpr, cprNext) 
+         remainingBalance, factor, GWAC, WAM, WALA, totalOutstanding, vpr, vprNext, cdr, cdrNext, cpr, cprNext, currentFace) 
     {
         return { 
-                cusip, name, type, indicator, issueDate, maturityDate, 
-                originalFace, isTBAElig, interestRate,  remainingBalance, factor, GWAC, WAM, WALA,
-                totalOutstanding, vpr, vprNext, cdr, cdrNext, cpr, cprNext 
+                cusip, name, type, indicator, issueDate, maturityDate, originalFace, isTBAElig, interestRate,  
+                remainingBalance, factor, GWAC, WAM, WALA, totalOutstanding, vpr, vprNext, cdr, cdrNext, cpr, cprNext, currentFace 
                 };
     }
 
@@ -35,7 +34,7 @@ const loadData = (arr) => {
         rows.push(createData(item.cusip, item.name, item.type, item.indicator, item.issueDate, item.maturityDate, 
             item.originalFace, item.isTBAElig, item.interestRate, item.remainingBalance,  
             item.factor, item.GWAC, item.WAM, item.WALA, item.totalOutstanding, item.vpr, item.vprNext, 
-            item.cdr, item.cdrNext, item.cpr, item.cprNext))
+            item.cdr, item.cdrNext, item.cpr, item.cprNext, item.currentFace))
     });
     }
     catch(err){
@@ -77,6 +76,8 @@ export const loadPools = () =>{
             item.cdrNext = (item.cdrNext * 100).toFixed(1);
             item.cpr = (item.cpr * 100).toFixed(1);
             item.cprNext = (item.cprNext * 100).toFixed(1);
+            item.issueDate = item.issueDate.toString().slice(0, 6);
+            item.currentFace = ((item.originalFace * 1) * (item.factor * 1)).toFixed(2);
         })
         console.log(tests[0])    
 

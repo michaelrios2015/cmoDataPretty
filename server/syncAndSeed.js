@@ -102,7 +102,7 @@ const {
 
     // streamMayPoolBodies.pipe(csvStreamMayPoolBodies);
 
-    streamPoolsPrediction.pipe(csvStreamPoolsPredication)
+    // streamPoolsPrediction.pipe(csvStreamPoolsPredication)
   };
 
   

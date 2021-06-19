@@ -159,23 +159,23 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
               <TableRow>
                 <TableCell >CUSIP</TableCell>
                 <TableCell align="right">Name</TableCell>
-                <TableCell align="right">Type</TableCell>
-                <TableCell align="right">Indicator</TableCell>
+                {/* <TableCell align="right">Type</TableCell>
+                <TableCell align="right">Indicator</TableCell> */}
                 <TableCell align="right">Issue Date</TableCell>
-                <TableCell align="right">Maturity Date</TableCell>
-                <TableCell align="right">Original Face</TableCell>
-                <TableCell align="right">Is TBAE Lig</TableCell>
-                <TableCell align="right">Interest Rate</TableCell>
-                <TableCell align="right">Remaining Balance</TableCell>
-                <TableCell align="right">Factor</TableCell>
+                {/* <TableCell align="right">Maturity Date</TableCell> */}
+                <TableCell align="right">Current Face</TableCell>
+                {/* <TableCell align="right">Is TBAE Lig</TableCell> */}
+                <TableCell align="right">Coupon</TableCell>
+                {/* <TableCell align="right">Remaining Balance</TableCell> 
+                <TableCell align="right">Factor</TableCell> */}
                 <TableCell align="right">GWAC</TableCell>
                 <TableCell align="right">WAM</TableCell>
                 <TableCell align="right">WALA</TableCell>
-                <TableCell align="right">Total Outstanding</TableCell>
+                {/* <TableCell align="right">Total Outstanding</TableCell>
                 <TableCell align="right">VPR</TableCell>
                 <TableCell align="right">VPR Next</TableCell>
                 <TableCell align="right">CDR</TableCell>
-                <TableCell align="right">CDR Next</TableCell>
+                <TableCell align="right">CDR Next</TableCell> */}
                 <TableCell align="right">CPR</TableCell>
                 <TableCell align="right">CPR Next</TableCell>
               </TableRow>
@@ -186,23 +186,23 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
                 <TableRow key={row.cusip}>
                   <TableCell component="th" scope="row"> {row.cusip} </TableCell>
                   <TableCell align="right">{row.name}</TableCell>
-                  <TableCell align="right">{row.type}</TableCell>
-                  <TableCell align="right">{row.indicator}</TableCell>
+                  {/* <TableCell align="right">{row.type}</TableCell>
+                  <TableCell align="right">{row.indicator}</TableCell> */}
                   <TableCell align="right">{row.issueDate}</TableCell>
-                  <TableCell align="right">{row.maturityDate}</TableCell>
-                  <TableCell align="right">{row.originalFace}</TableCell>
-                  <TableCell align="right">{row.isTBAElig ? 'true' : 'false' }</TableCell>
+                  {/* <TableCell align="right">{row.maturityDate}</TableCell> */}
+                  <TableCell align="right">{row.currentFace}</TableCell>
+                  {/* <TableCell align="right">{row.isTBAElig ? 'true' : 'false' }</TableCell> */}
                   <TableCell align="right">{row.interestRate}</TableCell>
-                  <TableCell align="right">{row.remainingBalance}</TableCell>
-                  <TableCell align="right">{row.factor}</TableCell>
+                  {/* <TableCell align="right">{row.remainingBalance}</TableCell> 
+                  <TableCell align="right">{row.factor}</TableCell> */}
                   <TableCell align="right">{row.GWAC}</TableCell>
                   <TableCell align="right">{row.WAM}</TableCell>
                   <TableCell align="right">{row.WALA}</TableCell>
-                  <TableCell align="right">{row.totalOutstanding}</TableCell>
+              {/* <TableCell align="right">{row.totalOutstanding}</TableCell>
                   <TableCell align="right">{row.vpr}</TableCell>
                   <TableCell align="right">{row.vprNext}</TableCell>
                   <TableCell align="right">{row.cdr}</TableCell>
-                  <TableCell align="right">{row.cdrNext}</TableCell>
+                  <TableCell align="right">{row.cdrNext}</TableCell> */}
                   <TableCell align="right">{row.cpr}</TableCell>
                   <TableCell align="right">{row.cprNext}</TableCell>
                 </TableRow>

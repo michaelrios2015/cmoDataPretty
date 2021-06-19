@@ -178,6 +178,7 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
                 <TableCell align="right">CDR Next</TableCell> */}
                 <TableCell align="right">CPR</TableCell>
                 <TableCell align="right">CPR Next</TableCell>
+                <TableCell align="right">VA</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -205,6 +206,7 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
                   <TableCell align="right">{row.cdrNext}</TableCell> */}
                   <TableCell align="right">{row.cpr}</TableCell>
                   <TableCell align="right">{row.cprNext}</TableCell>
+                  <TableCell align="right">{row.va}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

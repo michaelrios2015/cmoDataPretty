@@ -25,14 +25,10 @@ router.get('/', async(req, res, next)=> {
     // 'SELECT pools.cusip, poolbodies."poolCusip", poolpredictions.cusip as ppCusip ' +
     `SELECT * ` +
     'FROM pools ' +
-    'INNER JOIN poolbodies ' +
-    'ON (pools.cusip = poolbodies."poolCusip") ' +
-    'INNER JOIN poolpredictions ' +
-    'ON (poolbodies."poolCusip" = poolpredictions.cusip) ' +
-    'WHERE ' + 
-    'poolbodies.month = \'MAY\' ' +
-    'AND ' +	
-    'poolpredictions.month = \'MAY\' ' +
+    'INNER JOIN poolbodyupdates ' +
+    'ON (pools.cusip = poolbodyupdates.cusip) ' +
+    'WHERE ' +
+    'poolbodyupdates.month = \'MAY\' ' +
     'LIMIT 10;'));
 
   res.send(results)

@@ -1,7 +1,35 @@
 // this desperateley need to be seperated 
-const { models: { Pool, PoolBody, PoolPrediction } } = require('../db');
+const { models: { Pool, PoolBody, PoolPrediction, PoolBodyUpdate } } = require('../db');
 const fs = require("fs");
 const fastcsv = require("fast-csv");
+
+// cusip, factor,GWAC,WAM,WALA,cpr,cprNext,va,month
+
+let streamPoolsBodyUpdate = fs.createReadStream('data/maypoolbodies.csv')
+let csvPoolsBodyUpdate = [];
+let csvStreamPoolsBodyUpdate = fastcsv
+.parse()
+.on("data", function(data) {
+  // console.log('here')
+  csvPoolsBodyUpdate.push(data);
+})
+.on("end", async function() {
+  for (let i = 1; i < csvPoolsBodyUpdate.length; i++ ){
+  
+    // console.log(csvPoolsBodyUpdate[i]);
+    try {
+
+//       cusip,factor,GWAC,WAM,WALA,cpr,cprNext,va,month
+// 36202A3U9,0.00031227,8.5,17,340,0.16731955842915347,0.1672208868779177,1,MAY
+
+      await PoolBodyUpdate.create({ cusip: csvPoolsBodyUpdate[i][0], factor: csvPoolsBodyUpdate[i][1], gwac: csvPoolsBodyUpdate[i][2], wam: csvPoolsBodyUpdate[i][3], 
+        wala: csvPoolsBodyUpdate[i][4], cpr: csvPoolsBodyUpdate[i][5], cprNext: csvPoolsBodyUpdate[i][6], va: csvPoolsBodyUpdate[i][7], month: csvPoolsBodyUpdate[i][8]})
+      }
+    catch(ex){
+      console.log(ex)
+    }
+  }
+});
 
 
   let streamAprilPools = fs.createReadStream('data/pools/monthlySFPS_202104.csv')
@@ -33,6 +61,9 @@ const fastcsv = require("fast-csv");
       }
     }
   });
+
+
+
 
   let streamMayPools = fs.createReadStream('data/pools/monthlySFPS_202105.csv')
   let csvMayPools = [];
@@ -276,5 +307,8 @@ module.exports = {
   streamMayPoolBodies,
   csvStreamMayPoolBodies,
   streamPoolsPrediction,
-  csvStreamPoolsPredication
+  csvStreamPoolsPredication,
+  streamPoolsBodyUpdate,
+  csvStreamPoolsBodyUpdate
+
 };

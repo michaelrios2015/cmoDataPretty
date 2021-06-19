@@ -5,12 +5,12 @@ const LOAD_POOLS = 'LOAD_POOLS';
 const loadData = (arr) => {
 
     function createData
-    (cusip, name, type, indicator, issueDate, maturityDate, originalFace, isTBAElig, interestRate, 
-         remainingBalance, factor, GWAC, WAM, WALA, totalOutstanding, vpr, vprNext, cdr, cdrNext, cpr, cprNext, currentFace) 
+    (cusip, name, issueDate, originalFace, interestRate, 
+         factor, GWAC, WAM, WALA, cpr, cprNext, currentFace, va) 
     {
         return { 
-                cusip, name, type, indicator, issueDate, maturityDate, originalFace, isTBAElig, interestRate,  
-                remainingBalance, factor, GWAC, WAM, WALA, totalOutstanding, vpr, vprNext, cdr, cdrNext, cpr, cprNext, currentFace 
+            cusip, name, issueDate, originalFace, interestRate, 
+            factor, GWAC, WAM, WALA, cpr, cprNext, currentFace, va
                 };
     }
 
@@ -31,10 +31,9 @@ const loadData = (arr) => {
     // });
 
     arr.forEach(item => {
-        rows.push(createData(item.cusip, item.name, item.type, item.indicator, item.issueDate, item.maturityDate, 
-            item.originalFace, item.isTBAElig, item.interestRate, item.remainingBalance,  
-            item.factor, item.GWAC, item.WAM, item.WALA, item.totalOutstanding, item.vpr, item.vprNext, 
-            item.cdr, item.cdrNext, item.cpr, item.cprNext, item.currentFace))
+        rows.push(createData(item.cusip, item.name, item.issueDate,  
+            item.originalFace, item.interestRate,   
+            item.factor, item.gwac, item.wam, item.wala, item.cpr, item.cprNext, item.currentFace, item.va))
     });
     }
     catch(err){
@@ -69,11 +68,11 @@ export const loadPools = () =>{
         //     console.log(item)
         // }})
         tests.forEach(item => {
-            item.totalOutstanding = (item.totalOutstanding).toFixed(2);
-            item.vpr = (item.vpr * 100).toFixed(1);
-            item.vprNext = (item.vprNext * 100).toFixed(1);
-            item.cdr = (item.cdr * 100).toFixed(1);
-            item.cdrNext = (item.cdrNext * 100).toFixed(1);
+            // item.totalOutstanding = (item.totalOutstanding).toFixed(2);
+            // item.vpr = (item.vpr * 100).toFixed(1);
+            // item.vprNext = (item.vprNext * 100).toFixed(1);
+            // item.cdr = (item.cdr * 100).toFixed(1);
+            // item.cdrNext = (item.cdrNext * 100).toFixed(1);
             item.cpr = (item.cpr * 100).toFixed(1);
             item.cprNext = (item.cprNext * 100).toFixed(1);
             item.issueDate = item.issueDate.toString().slice(0, 6);

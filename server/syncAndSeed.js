@@ -36,7 +36,9 @@ const {
   streamMayPoolBodies,
   csvStreamMayPoolBodies,
   streamPoolsPrediction,
-  csvStreamPoolsPredication
+  csvStreamPoolsPredication,
+  streamPoolsBodyUpdate,
+  csvStreamPoolsBodyUpdate
         } = require('./synchAndSeedHelpers/pools.js');
 
 
@@ -61,6 +63,7 @@ const {
 
         // console.log(csvDataCPN[i][j]);
       }
+  
       
       await CPN.create({ zero: csvDataCPN[i][0], one: csvDataCPN[i][1], two: csvDataCPN[i][2], three: csvDataCPN[i][3], four: csvDataCPN[i][4], five: csvDataCPN[i][5], six: csvDataCPN[i][6], 
         seven: csvDataCPN[i][7], eight: csvDataCPN[i][8], nine: csvDataCPN[i][9], ten: csvDataCPN[i][10], eleven: csvDataCPN[i][11], 
@@ -103,6 +106,8 @@ const {
     // streamMayPoolBodies.pipe(csvStreamMayPoolBodies);
 
     // streamPoolsPrediction.pipe(csvStreamPoolsPredication)
+
+    // streamPoolsBodyUpdate.pipe(csvStreamPoolsBodyUpdate)
   };
 
   

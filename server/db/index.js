@@ -5,7 +5,7 @@ const CPN = require("./models/CPN");
 const Pool = require("./models/Pool");
 const PoolBody = require("./models/PoolBody");
 const PoolPrediction = require("./models/PoolPrediction");
-
+const PoolBodyUpdate = require("./models/PoolBodyUpdate");
 
 CMOHeader.hasMany(CMOBody);
 CMOBody.belongsTo(CMOHeader);
@@ -26,6 +26,7 @@ module.exports = {
 		CPN,
 		Pool,
 		PoolBody,
-		PoolPrediction
+		PoolPrediction,
+		PoolBodyUpdate
 	},
 };

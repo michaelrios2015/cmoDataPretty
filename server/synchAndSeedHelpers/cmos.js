@@ -1,10 +1,12 @@
 // this desperateley need to be seperated 
 
 const { models: { CMOHeader, CMOBody } } = require('../db');
+
+
 const fs = require("fs");
 const fastcsv = require("fast-csv");
       //CMOHEADER 
-      let streamCMOHeader = fs.createReadStream('data/CMOHeaderData.csv');
+      let streamCMOHeader = fs.createReadStream('data/cmos/CMOHeaderData.csv');
       let csvCMOHeaderData = [];
       let csvCMOHeaderStream = fastcsv
       .parse()
@@ -31,7 +33,7 @@ const fastcsv = require("fast-csv");
       });
 
     //CMOBODY 
-    let streamCMOBody = fs.createReadStream('data/CMOBodyData.csv');
+    let streamCMOBody = fs.createReadStream('data/cmos/CMOBodyData.csv');
     let csvCMOBodyData = [];
     let csvCMOBodyStream = fastcsv
     .parse()

@@ -3,17 +3,6 @@ const { db, models: { CPN, Pool, PoolBody } } = require('./db');
 const fs = require("fs");
 const fastcsv = require("fast-csv");
 
-const { streamFeb, 
-        csvFebStream, 
-        streamMarchData,
-        csvMarchStream,
-        streamMarchUpdateData,
-        csvMarchUpdateStream,
-        streamAprilData, 
-        csvAprilStream,
-        streamAprilUpdateData, 
-        csvAprilUpdateStream } = require('./synchAndSeedHelpers/months.js');
-
 
 const {
   streamCMOHeader,
@@ -25,18 +14,8 @@ const {
 const {
   streamPools,
   csvStreamPools,
-  streamAprilPools,
-  csvStreamAprilPools,
-  streamMayPools,
-  csvStreamMayPools,
   streamPoolBodies,
   csvStreamPoolBodies,
-  streamAprilPoolBodies,
-  csvStreamAprilPoolBodies,
-  streamMayPoolBodies,
-  csvStreamMayPoolBodies,
-  streamPoolsPrediction,
-  csvStreamPoolsPredication,
   streamPoolsBodyUpdate,
   csvStreamPoolsBodyUpdate
         } = require('./synchAndSeedHelpers/pools.js');
@@ -77,15 +56,6 @@ const {
     // await db.sync({ force: true });
 
     // await db.sync();
-    // await streamFeb.pipe(csvFebStream);
-
-    // await streamMarchData.pipe(csvMarchStream); 
-    
-    // await streamMarchUpdateData.pipe(csvMarchUpdateStream); 
-    
-    // await streamAprilData.pipe(csvAprilStream);
-
-    // await streamAprilUpdateData.pipe(csvAprilUpdateStream);
     
     // await streamCMOHeader.pipe(csvCMOHeaderStream);
 
@@ -95,19 +65,7 @@ const {
 
     // streamPools.pipe(csvStreamPools);
 
-    // streamAprilPools.pipe(csvStreamAprilPools);
-
-    // streamAprilPoolBodies.pipe(csvStreamAprilPoolBodies);
-
-    // streamPoolBodies.pipe(csvStreamPoolBodies);
-
-    // streamMayPools.pipe(csvStreamMayPools);
-
-    // streamMayPoolBodies.pipe(csvStreamMayPoolBodies);
-
-    // streamPoolsPrediction.pipe(csvStreamPoolsPredication)
-
-    streamPoolsBodyUpdate.pipe(csvStreamPoolsBodyUpdate)
+    // streamPoolsBodyUpdate.pipe(csvStreamPoolsBodyUpdate)
   };
 
   

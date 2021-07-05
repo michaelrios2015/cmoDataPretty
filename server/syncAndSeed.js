@@ -1,5 +1,5 @@
 // this desperateley need to be seperated 
-const { db, models: { CPN, Pool, PoolBody } } = require('./db');
+const { db, models: { CPN } } = require('./db');
 const fs = require("fs");
 const fastcsv = require("fast-csv");
 
@@ -14,11 +14,14 @@ const {
 const {
   streamPools,
   csvStreamPools,
-  streamPoolBodies,
-  csvStreamPoolBodies,
   streamPoolsBodyUpdate,
   csvStreamPoolsBodyUpdate
         } = require('./synchAndSeedHelpers/pools.js');
+
+const {
+  platinumStreamer,
+  platinumBodyStreamer,
+        } = require('./synchAndSeedHelpers/platinums.js');
 
 
   // this is for the table I have not tackled yet 
@@ -66,6 +69,10 @@ const {
     // streamPools.pipe(csvStreamPools);
 
     // streamPoolsBodyUpdate.pipe(csvStreamPoolsBodyUpdate)
+
+    // platinumStreamer('data/platinums/platinumsheaders.csv');
+    // platinumBodyStreamer('data/platinums/platinumbodies2021_05.csv');
+  
   };
 
   

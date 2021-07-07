@@ -70,7 +70,7 @@ const {
 
     // streamPoolsBodyUpdate.pipe(csvStreamPoolsBodyUpdate)
 
-    // platinumStreamer('data/platinums/platinumsheaders.csv');
+    platinumStreamer('data/platinums/platinumsheaders.csv');
     // platinumBodyStreamer('data/platinums/platinumbodies2021_05.csv');
   
   };

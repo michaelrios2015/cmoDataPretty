@@ -63,8 +63,8 @@ const platinumBodyStreamer = async(csv) => {
     csvPlatinumBodies.push(data);
   })
   .on("end", async function() {
-    // for (let i = 1; i < csvPlatinumBodies.length; i++ ){
-      for (let i = 1; i < 10; i++ ){
+    for (let i = 1; i < csvPlatinumBodies.length; i++ ){
+      // for (let i = 1000; i < 2000; i++ ){
 
         // console.log(csvPlatinumBodies[i][7]/100);
 

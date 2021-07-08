@@ -208,7 +208,7 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
                   <TableCell align="right">{row.cpr}</TableCell>
                   <TableCell align="right">{row.cprNext}</TableCell>
                   <TableCell align="right">{row.va}</TableCell>
-                  <TableCell align="right">{row.originalfaceinplatinum}</TableCell>
+                  <TableCell align="right">{row.originalfaceinplatinum && numberWithCommas(row.originalfaceinplatinum)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

@@ -192,7 +192,7 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
                   <TableCell align="right">{row.indicator}</TableCell> */}
                   <TableCell align="right">{row.issueDate}</TableCell>
                   {/* <TableCell align="right">{row.maturityDate}</TableCell> */}
-                  <TableCell align="right">{row.currentFace}</TableCell>
+                  <TableCell align="right">{row.currentFace && numberWithCommas(row.currentFace)}</TableCell>
                   {/* <TableCell align="right">{row.isTBAElig ? 'true' : 'false' }</TableCell> */}
                   <TableCell align="right">{row.interestRate}</TableCell>
                   {/* <TableCell align="right">{row.remainingBalance}</TableCell> 

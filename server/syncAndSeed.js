@@ -59,12 +59,12 @@ const {
     
     // --------------------------for syching database
     // await db.sync({ force: true });
-    // await db.sync();
+    await db.sync();
     
 
     // ------------------------------ CMOs
     // await streamCMOHeader.pipe(csvCMOHeaderStream);
-    await streamCMOBody.pipe(csvCMOBodyStream);
+    // await streamCMOBody.pipe(csvCMOBodyStream);
 
     
     // ------------------------------ Cpns

@@ -31,11 +31,15 @@ let csvStreamPoolsBodyUpdate = fastcsv
         if (csvPoolsBodyUpdate[i][5] === ''){
           csvPoolsBodyUpdate[i][5] = null;
         }
+        if (csvPoolsBodyUpdate[i][10] === ''){
+          csvPoolsBodyUpdate[i][10] = null;
+        }
 
 
       await PoolBodyUpdate.create({ cusip: csvPoolsBodyUpdate[i][0], interestrate: csvPoolsBodyUpdate[i][1], factor: csvPoolsBodyUpdate[i][2], gwac: csvPoolsBodyUpdate[i][3], wam: csvPoolsBodyUpdate[i][4], 
-        wala: csvPoolsBodyUpdate[i][5], cpr: csvPoolsBodyUpdate[i][6], cprNext: csvPoolsBodyUpdate[i][7], va: csvPoolsBodyUpdate[i][8], month: csvPoolsBodyUpdate[i][9]})
-      }
+        wala: csvPoolsBodyUpdate[i][5], cpr: csvPoolsBodyUpdate[i][6], cprNext: csvPoolsBodyUpdate[i][7], va: csvPoolsBodyUpdate[i][8], month: csvPoolsBodyUpdate[i][9], originalfaceinplatinum: csvPoolsBodyUpdate[i][10]
+      })
+    }
     catch(ex){
       console.log(ex)
     }

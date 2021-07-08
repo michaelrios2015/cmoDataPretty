@@ -179,6 +179,7 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
                 <TableCell align="right">CPR</TableCell>
                 <TableCell align="right">CPR Next</TableCell>
                 <TableCell align="right">VA</TableCell>
+                <TableCell align="right">OF in Platinums</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -207,6 +208,7 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
                   <TableCell align="right">{row.cpr}</TableCell>
                   <TableCell align="right">{row.cprNext}</TableCell>
                   <TableCell align="right">{row.va}</TableCell>
+                  <TableCell align="right">{row.originalfaceinplatinum}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

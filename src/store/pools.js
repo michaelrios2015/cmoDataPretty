@@ -6,11 +6,11 @@ const loadData = (arr) => {
 
     function createData
     (cusip, name, issueDate, originalFace, interestRate, 
-         factor, GWAC, WAM, WALA, cpr, cprNext, currentFace, va) 
+         factor, GWAC, WAM, WALA, cpr, cprNext, currentFace, va, originalfaceinplatinum) 
     {
         return { 
             cusip, name, issueDate, originalFace, interestRate, 
-            factor, GWAC, WAM, WALA, cpr, cprNext, currentFace, va
+            factor, GWAC, WAM, WALA, cpr, cprNext, currentFace, va, originalfaceinplatinum
                 };
     }
 
@@ -33,7 +33,7 @@ const loadData = (arr) => {
     arr.forEach(item => {
         rows.push(createData(item.cusip, item.name, item.issueDate,  
             item.originalFace, item.interestrate,   
-            item.factor, item.gwac, item.wam, item.wala, item.cpr, item.cprNext, item.currentFace, item.va))
+            item.factor, item.gwac, item.wam, item.wala, item.cpr, item.cprNext, item.currentFace, item.va, item.originalfaceinplatinum))
     });
     }
     catch(err){
@@ -77,6 +77,9 @@ export const loadPools = () =>{
             item.cprNext = (item.cprNext * 100).toFixed(1);
             item.issueDate = item.issueDate.toString().slice(0, 6);
             item.currentFace = ((item.originalFace * 1) * (item.factor * 1)).toFixed(2);
+            if (item.originalfaceinplatinum){
+                item.originalfaceinplatinum = item.originalfaceinplatinum/100;
+            }
         })
         console.log(tests[0])    
 

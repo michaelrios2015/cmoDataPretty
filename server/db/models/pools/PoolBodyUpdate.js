@@ -33,7 +33,10 @@ const PoolBodyUpdate = db.define('poolbodyupdates', {
     },
     month: { 
         type: STRING, 
-    }      
+    },
+    originalfaceinplatinum: { 
+        type: FLOAT, 
+    },      
 },{ timestamps: false });
 
 

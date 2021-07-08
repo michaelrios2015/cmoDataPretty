@@ -180,7 +180,7 @@ function BasicTable({ rows, loadDataByDealandGroup, loadRowsByYear, bootstrap })
                   <TableCell component="th" scope="row"> {row.year} </TableCell>
                   <TableCell align="right">{row.deal}</TableCell>
                   <TableCell align="right">{row.group}</TableCell>
-                  <TableCell align="right">{numberWithCommas(row.currFace)}</TableCell>
+                  <TableCell align="right">{row.currFace && numberWithCommas(row.currFace)}</TableCell>
                   <TableCell align="right">{row.actualCpr}</TableCell>
                   <TableCell align="right">{row.residual}</TableCell>
                   <TableCell align="right">{row.cpr}</TableCell>

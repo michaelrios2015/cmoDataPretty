@@ -43,12 +43,19 @@ const fastcsv = require("fast-csv");
       csvCMOBodyData.push(data);
     })
     .on("end", async function() {
-      for (let i = 0; i < csvCMOBodyData.length; i++ ){
+      for (let i = 1; i < csvCMOBodyData.length; i++ ){
         
+        // for (let i = 0; i < 10000; i++ ){
         // console.log('----------------------------------------April----------------------------------------')
-        // console.log(csvCMOBodyData)
+        // console.log(csvCMOBodyData[i])
 
-        
+
+        for (let j = 0; j< csvCMOBodyData[i].length; j++){  
+          if (csvCMOBodyData[i][j] === ''){
+            csvCMOBodyData[i][j] = null;
+          }
+        }
+
         try{
               await CMOBody.create({ id: csvCMOBodyData[i][0], month: csvCMOBodyData[i][1], actualCpr: csvCMOBodyData[i][2], 
                 residual: csvCMOBodyData[i][3], cpr: csvCMOBodyData[i][4], cprNext: csvCMOBodyData[i][5], 

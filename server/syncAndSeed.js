@@ -58,7 +58,7 @@ const {
   const syncAndSeed = async()=> {
     // await db.sync({ force: true });
 
-    await db.sync();
+    // await db.sync();
     
     // await streamCMOHeader.pipe(csvCMOHeaderStream);
 

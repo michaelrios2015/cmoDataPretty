@@ -56,20 +56,25 @@ const {
 
 
   const syncAndSeed = async()=> {
+    
+    // --------------------------for syching database
     // await db.sync({ force: true });
-
     // await db.sync();
     
+
+    // ------------------------------ CMOs
     // await streamCMOHeader.pipe(csvCMOHeaderStream);
+    await streamCMOBody.pipe(csvCMOBodyStream);
 
-    // await streamCMOBody.pipe(csvCMOBodyStream);
-
+    
+    // ------------------------------ Cpns
     // streamCPN.pipe(csvStreamCPN);
 
+    // ------------------------------ Pools
     // streamPools.pipe(csvStreamPools);
-
     // streamPoolsBodyUpdate.pipe(csvStreamPoolsBodyUpdate)
 
+    // ------------------------------ Platinum
     // platinumStreamer('data/platinums/platinumsheaders.csv');
     // platinumBodyStreamer('data/platinums/platinumbodies2021_05.csv');
   

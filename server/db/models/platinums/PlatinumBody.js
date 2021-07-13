@@ -25,10 +25,10 @@ const PlatinumBody = db.define('platinumbodies', {
   wala: { 
     type: INTEGER, 
   },
-  // originalfaceinplatinum: { 
-  //   type: BIGINT, 
-  // },
   originalfaceinplatinum: { 
+    type: FLOAT, 
+  },
+  originalfaceincmo: { 
     type: FLOAT, 
   },
   month: { 

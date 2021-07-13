@@ -84,11 +84,14 @@ const platinumBodyStreamer = async(csv) => {
           csvPlatinumBodies[i][7] = (csvPlatinumBodies[i][7] * 1) / 100;
           console.log(csvPlatinumBodies[i][7]);
         }
+        if (csvPlatinumBodies[i][8] === ''){
+          csvPlatinumBodies[i][8] = null;
+        }
 
         //cusip,interestrate,remainingbalance,factor,gwac,wam,wala,orignalfaceinplatinum,month
         try {
           await PlatinumBody.create({ cusip: csvPlatinumBodies[i][0], interestrate: csvPlatinumBodies[i][1], remainingbalance: csvPlatinumBodies[i][2], 
-          factor: csvPlatinumBodies[i][3], gwac: csvPlatinumBodies[i][4], wam: csvPlatinumBodies[i][5], wala: csvPlatinumBodies[i][6], originalfaceinplatinum: csvPlatinumBodies[i][7], month: csvPlatinumBodies[i][8]})
+          factor: csvPlatinumBodies[i][3], gwac: csvPlatinumBodies[i][4], wam: csvPlatinumBodies[i][5], wala: csvPlatinumBodies[i][6], originalfaceinplatinum: csvPlatinumBodies[i][7], originalfaceincmo: csvPlatinumBodies[i][8], month: csvPlatinumBodies[i][9]})
         }
           catch(ex){
           console.log(ex)

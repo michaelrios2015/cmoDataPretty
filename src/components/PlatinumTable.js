@@ -180,6 +180,7 @@ function PlatinumTable({ pools, loadPools, platinums, loadPlatinums, loadRowsByY
                 <TableCell align="right">CDR</TableCell>
                 <TableCell align="right">CDR Next</TableCell> */}
                 <TableCell align="right">OF in a differnt Platinum</TableCell>
+                <TableCell align="right">OF in CMO</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -205,7 +206,8 @@ function PlatinumTable({ pools, loadPools, platinums, loadPlatinums, loadRowsByY
                   <TableCell align="right">{row.vprNext}</TableCell>
                   <TableCell align="right">{row.cdr}</TableCell>
                   <TableCell align="right">{row.cdrNext}</TableCell> */}
-                  <TableCell align="right">{numberWithCommas(row.originalfaceinplatinum)}</TableCell>
+                  <TableCell align="right">{row.originalfaceinplatinum && numberWithCommas(row.originalfaceinplatinum)}</TableCell>
+                  <TableCell align="right">{row.originalfaceincmo && numberWithCommas(row.originalfaceincmo)}</TableCell>
                   {/* <TableCell align="right">{row.cprNext}</TableCell>
                   <TableCell align="right">{row.va}</TableCell> */}
                 </TableRow>

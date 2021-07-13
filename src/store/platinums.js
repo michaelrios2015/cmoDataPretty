@@ -6,11 +6,11 @@ const loadData = (arr) => {
 
     function createData
     (cusip, name, indicator, type, issueDate,  maturityDate, originalFace, interestRate, 
-         remainingBalance, factor, GWAC, WAM, WALA, originalfaceinplatinum) 
+         remainingBalance, factor, GWAC, WAM, WALA, originalfaceinplatinum, originalfaceincmo) 
     {
         return { 
             cusip, name, indicator, type, issueDate,  maturityDate, originalFace, interestRate, 
-            remainingBalance, factor, GWAC, WAM, WALA, originalfaceinplatinum
+            remainingBalance, factor, GWAC, WAM, WALA, originalfaceinplatinum, originalfaceincmo
                 };
     }
 
@@ -23,7 +23,7 @@ const loadData = (arr) => {
     arr.forEach(item => {
         rows.push(createData(item.cusip, item.name, item.indicator, item.type, item.issueDate,  
             item.maturityDate, item.originalFace, item.interestrate, item.remainingBalance, item.factor, item.gwac, item.wam, 
-            item.wala, item.originalfaceinplatinum))
+            item.wala, item.originalfaceinplatinum, item.originalfaceincmo))
     });
     }
     catch(err){

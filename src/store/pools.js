@@ -6,11 +6,11 @@ const loadData = (arr) => {
 
     function createData
     (cusip, name, issueDate, originalFace, interestRate, 
-         factor, GWAC, WAM, WALA, cpr, cprNext, currentFace, va, originalfaceinplatinum) 
+         factor, GWAC, WAM, WALA, cpr, cprNext, currentFace, va, originalfaceinplatinum, originalfaceincmo) 
     {
         return { 
             cusip, name, issueDate, originalFace, interestRate, 
-            factor, GWAC, WAM, WALA, cpr, cprNext, currentFace, va, originalfaceinplatinum
+            factor, GWAC, WAM, WALA, cpr, cprNext, currentFace, va, originalfaceinplatinum, originalfaceincmo
                 };
     }
 
@@ -33,7 +33,7 @@ const loadData = (arr) => {
     arr.forEach(item => {
         rows.push(createData(item.cusip, item.name, item.issueDate,  
             item.originalFace, item.interestrate,   
-            item.factor, item.gwac, item.wam, item.wala, item.cpr, item.cprNext, item.currentFace, item.va, item.originalfaceinplatinum))
+            item.factor, item.gwac, item.wam, item.wala, item.cpr, item.cprNext, item.currentFace, item.va, item.originalfaceinplatinum, item.originalfaceincmo))
     });
     }
     catch(err){

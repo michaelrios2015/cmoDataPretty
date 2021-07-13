@@ -36,7 +36,10 @@ const PoolBodyUpdate = db.define('poolbodyupdates', {
     },
     originalfaceinplatinum: { 
         type: FLOAT, 
-    },      
+    },
+    originalfaceincmo: { 
+        type: FLOAT, 
+    },        
 },{ timestamps: false });
 
 

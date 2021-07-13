@@ -59,7 +59,7 @@ const {
     
     // --------------------------for syching database
     // await db.sync({ force: true });
-    await db.sync();
+    // await db.sync();
     
 
     // ------------------------------ CMOs
@@ -72,7 +72,7 @@ const {
 
     // ------------------------------ Pools
     // streamPools.pipe(csvStreamPools);
-    // streamPoolsBodyUpdate.pipe(csvStreamPoolsBodyUpdate)
+    streamPoolsBodyUpdate.pipe(csvStreamPoolsBodyUpdate)
 
     // ------------------------------ Platinum
     // platinumStreamer('data/platinums/platinumsheaders.csv');

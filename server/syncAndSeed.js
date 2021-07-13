@@ -59,7 +59,7 @@ const {
     
     // --------------------------for syching database
     // await db.sync({ force: true });
-    await db.sync();
+    // await db.sync();
     
 
     // ------------------------------ CMOs
@@ -76,7 +76,7 @@ const {
 
     // ------------------------------ Platinum
     // platinumStreamer('data/platinums/platinumsheaders.csv');
-    // platinumBodyStreamer('data/platinums/platinumbodies2021_05.csv');
+    platinumBodyStreamer('data/platinums/platinumbodies2021_05.csv');
   
   };
 

@@ -76,7 +76,7 @@ const {
 
     // ------------------------------ Platinum
     // platinumStreamer('data/platinums/platinumsheaders.csv');
-    platinumBodyStreamer('data/platinums/platinumbodies2021_05.csv');
+    // platinumBodyStreamer('data/platinums/platinumbodies2021_05.csv');
   
   };
 

@@ -3,7 +3,6 @@ const CMOBody = require("./models/cmos/CMOBody");
 const CMOHeader = require("./models/cmos/CMOHeader");
 const CPN = require("./models/CPN");
 const Pool = require("./models/pools/Pool");
-const PoolBodyUpdate = require("./models/pools/PoolBodyUpdate");
 const Platinum = require("./models/platinums/Platinum");
 const PlatinumBody = require("./models/platinums/PlatinumBody");
 
@@ -24,7 +23,6 @@ module.exports = {
 		CMOHeader,
 		CPN,
 		Pool,
-		PoolBodyUpdate,
 		Platinum,
 		PlatinumBody
 	},

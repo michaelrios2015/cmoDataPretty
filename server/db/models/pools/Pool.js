@@ -1,7 +1,10 @@
 const db = require('../../db')
 const Sequelize = require('sequelize');
 const Moment = require('moment');
-const { INTEGER, STRING, FLOAT, VIRTUAL } = Sequelize;
+const { INTEGER, STRING, FLOAT, DATEONLY } = Sequelize;
+
+
+// cusip,name,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,cprprediction,cprpredictionnext,date
 
 
 const Pool = db.define('pools', {
@@ -12,43 +15,49 @@ const Pool = db.define('pools', {
   name: { 
     type: STRING, 
   },
-  type: { 
-    type: STRING, 
+  issuedate: { 
+    type: DATEONLY, 
   },
-  indicator: { 
-    type: STRING, 
-  },
-  issueDate: { 
-    type: INTEGER, 
-  },
-  maturityDate: { 
-    type: INTEGER, 
-  },
-  originalFace: { 
+  currentface: { 
     type: FLOAT, 
   },
-  isTBAElig : { 
-    type: VIRTUAL,
-    get () 
-    {
-      let start = Moment(this.getDataValue('issueDate'), "YYYYMMDD");
-      let end = Moment(this.getDataValue('maturityDate'), "YYYYMMDD");
-      // console.log(start);
-      // console.log(end);
-      
-      const months = end.diff(start, 'months');
-      // console.log(months);
-      if (this.getDataValue('originalFace') >= 250000 && 
-          this.getDataValue('type') === 'SF' &&
-          (this.getDataValue('indicator') === 'X' || this.getDataValue('indicator') === 'M') &&
-          months  >= 336 ){
-            return true
-    }
-      else {
-        return false
-      }
-    } 
-  }      
+  cfincmo: { 
+    type: FLOAT, 
+  },
+  cfinfed: { 
+    type: FLOAT, 
+  },
+  cfinplat: { 
+    type: FLOAT, 
+  },
+  coupon: { 
+    type: FLOAT, 
+  },
+  gwac: { 
+      type: FLOAT, 
+  },
+  wala: { 
+      type: INTEGER, 
+  },
+  wam: { 
+      type: INTEGER, 
+  },
+  va: { 
+    type: FLOAT, 
+  },
+  cprprediction: { 
+      type: FLOAT, 
+  },
+  cprpredictionnext: { 
+      type: FLOAT, 
+  },
+  va: { 
+      type: FLOAT, 
+  },
+  date: { 
+    type: DATEONLY, 
+    primaryKey: true
+  },       
 },{ timestamps: false });
 
 

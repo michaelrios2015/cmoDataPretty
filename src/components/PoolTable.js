@@ -21,6 +21,9 @@ const useStyles = makeStyles({
 });
 
 function numberWithCommas(x) {
+  // console.log(x);
+  x = x * 1;
+  x = x.toFixed(2);
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return parts.join(".");
@@ -159,58 +162,43 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
               <TableRow>
                 <TableCell >CUSIP</TableCell>
                 <TableCell align="right">Name</TableCell>
-                {/* <TableCell align="right">Type</TableCell>
-                <TableCell align="right">Indicator</TableCell> */}
                 <TableCell align="right">Issue Date</TableCell>
-                {/* <TableCell align="right">Maturity Date</TableCell> */}
                 <TableCell align="right">Current Face</TableCell>
-                {/* <TableCell align="right">Is TBAE Lig</TableCell> */}
+                <TableCell align="right">CF in CMO</TableCell>
+                <TableCell align="right">CF in FED</TableCell>
+                <TableCell align="right">CF in Plat</TableCell>
+                <TableCell align="right">Float</TableCell>  
                 <TableCell align="right">Coupon</TableCell>
-                {/* <TableCell align="right">Remaining Balance</TableCell> 
-                <TableCell align="right">Factor</TableCell> */}
                 <TableCell align="right">GWAC</TableCell>
-                <TableCell align="right">WAM</TableCell>
                 <TableCell align="right">WALA</TableCell>
-                {/* <TableCell align="right">Total Outstanding</TableCell>
-                <TableCell align="right">VPR</TableCell>
-                <TableCell align="right">VPR Next</TableCell>
-                <TableCell align="right">CDR</TableCell>
-                <TableCell align="right">CDR Next</TableCell> */}
-                <TableCell align="right">CPR</TableCell>
-                <TableCell align="right">CPR Next</TableCell>
+                <TableCell align="right">WAM</TableCell>
                 <TableCell align="right">VA</TableCell>
-                <TableCell align="right">OF in Platinums</TableCell>
-                <TableCell align="right">OF in CMOs</TableCell>
+                <TableCell align="right">CPR Prediction</TableCell>
+                <TableCell align="right">CPR Prediction Next</TableCell>
+                <TableCell align="right">Date</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              
+            {/* cusip,name,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,cprprediction,cprpredictionnext,date */}
+
               {pools.map((row) => (
                 <TableRow key={row.cusip}>
                   <TableCell component="th" scope="row"> {row.cusip} </TableCell>
                   <TableCell align="right">{row.name}</TableCell>
-                  {/* <TableCell align="right">{row.type}</TableCell>
-                  <TableCell align="right">{row.indicator}</TableCell> */}
-                  <TableCell align="right">{row.issueDate}</TableCell>
-                  {/* <TableCell align="right">{row.maturityDate}</TableCell> */}
-                  <TableCell align="right">{row.currentFace && numberWithCommas(row.currentFace)}</TableCell>
-                  {/* <TableCell align="right">{row.isTBAElig ? 'true' : 'false' }</TableCell> */}
-                  <TableCell align="right">{row.interestRate}</TableCell>
-                  {/* <TableCell align="right">{row.remainingBalance}</TableCell> 
-                  <TableCell align="right">{row.factor}</TableCell> */}
-                  <TableCell align="right">{row.GWAC}</TableCell>
-                  <TableCell align="right">{row.WAM}</TableCell>
-                  <TableCell align="right">{row.WALA}</TableCell>
-              {/* <TableCell align="right">{row.totalOutstanding}</TableCell>
-                  <TableCell align="right">{row.vpr}</TableCell>
-                  <TableCell align="right">{row.vprNext}</TableCell>
-                  <TableCell align="right">{row.cdr}</TableCell>
-                  <TableCell align="right">{row.cdrNext}</TableCell> */}
-                  <TableCell align="right">{row.cpr}</TableCell>
-                  <TableCell align="right">{row.cprNext}</TableCell>
+                  <TableCell align="right">{row.issuedate}</TableCell>
+                  <TableCell align="right">{row.currentface && numberWithCommas(row.currentface)}</TableCell>
+                  <TableCell align="right">{row.cfincmo && numberWithCommas(row.cfincmo)}</TableCell>
+                  <TableCell align="right">{row.cfinfed && numberWithCommas(row.cfinfed)}</TableCell>
+                  <TableCell align="right">{row.cfinplat && numberWithCommas(row.cfinplat)}</TableCell>
+                  <TableCell align="right">{numberWithCommas(row.currentface - row.cfincmo - row.cfinfed - row.cfinplat)}</TableCell>
+                  <TableCell align="right">{row.coupon}</TableCell>
+                  <TableCell align="right">{row.gwac}</TableCell>
+                  <TableCell align="right">{row.wala}</TableCell>
+                  <TableCell align="right">{row.wam}</TableCell>
                   <TableCell align="right">{row.va}</TableCell>
-                  <TableCell align="right">{row.originalfaceinplatinum && numberWithCommas(row.originalfaceinplatinum)}</TableCell>
-                  <TableCell align="right">{row.originalfaceincmo && numberWithCommas(row.originalfaceincmo)}</TableCell>
+                  <TableCell align="right">{row.cprprediction}</TableCell>
+                  <TableCell align="right">{row.cprpredictionnext}</TableCell>
+                  <TableCell align="right">{row.date}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

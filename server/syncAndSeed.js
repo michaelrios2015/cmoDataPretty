@@ -12,10 +12,7 @@ const {
 } = require('./synchAndSeedHelpers/cmos.js');
 
 const {
-  streamPools,
-  csvStreamPools,
-  streamPoolsBodyUpdate,
-  csvStreamPoolsBodyUpdate
+  poolStreamer
         } = require('./synchAndSeedHelpers/pools.js');
 
 const {
@@ -71,8 +68,7 @@ const {
     // streamCPN.pipe(csvStreamCPN);
 
     // ------------------------------ Pools
-    // streamPools.pipe(csvStreamPools);
-    // streamPoolsBodyUpdate.pipe(csvStreamPoolsBodyUpdate)
+    // poolStreamer('data/pools/pools.csv')
 
     // ------------------------------ Platinum
     // platinumStreamer('data/platinums/platinumsheaders.csv');

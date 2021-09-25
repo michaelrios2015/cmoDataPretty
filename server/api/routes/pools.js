@@ -9,9 +9,12 @@ router.get('/', async(req, res, next)=> {
 
   let [results, _] = (await db.query(
     // 'SELECT pools.cusip, poolbodies."poolCusip", poolpredictions.cusip as ppCusip ' +
-    `SELECT *  
-     FROM pools  
-     LIMIT 100;` ));
+    `SELECT *,
+    currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) AS float
+    FROM pools
+    WHERE currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) > 1
+    ORDER BY currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) DESC
+    LIMIT 200;` ));
 
   res.send(results)
   }

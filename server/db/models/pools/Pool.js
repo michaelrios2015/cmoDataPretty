@@ -6,7 +6,6 @@ const { INTEGER, STRING, FLOAT, DATEONLY } = Sequelize;
 
 // cusip,name,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,cprprediction,cprpredictionnext,date
 
-
 const Pool = db.define('pools', {
   cusip: { 
     type: STRING,

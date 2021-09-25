@@ -68,7 +68,7 @@ const {
     // streamCPN.pipe(csvStreamCPN);
 
     // ------------------------------ Pools
-    // poolStreamer('data/pools/pools.csv')
+    poolStreamer('data/pools/pools.csv')
 
     // ------------------------------ Platinum
     // platinumStreamer('data/platinums/platinumsheaders.csv');

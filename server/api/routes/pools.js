@@ -14,7 +14,7 @@ router.get('/', async(req, res, next)=> {
     FROM pools
     WHERE currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) > 1
     ORDER BY currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) DESC
-    LIMIT 200;` ));
+    LIMIT 10000;` ));
 
   res.send(results)
   }

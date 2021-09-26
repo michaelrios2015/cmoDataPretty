@@ -3,7 +3,7 @@ const { models: { Pool } } = require('../db');
 const fs = require("fs");
 const fastcsv = require("fast-csv");
 
-// cusip,name,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,cprprediction,cprpredictionnext,date
+// cusip,name,indicator,type,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,cprprediction,cprpredictionnext,date
 
 const poolStreamer = async(csv, date) => {
   let streamPools = fs.createReadStream(csv)
@@ -29,19 +29,19 @@ const poolStreamer = async(csv, date) => {
 
         const cusip = csvPools[i][0];
         const name = csvPools[i][1];
-        const issuedate = csvPools[i][2];
-        const currentface = csvPools[i][3]
-        const cfincmo = csvPools[i][4];
-        const cfinfed = csvPools[i][5];
-        const cfinplat = csvPools[i][6];
-        const coupon = csvPools[i][7];
-        const gwac  = csvPools[i][8];
-        const wala  = csvPools[i][9];
-        const wam = csvPools[i][10];
-        const va  = csvPools[i][11];
-        const cprprediction  = csvPools[i][12];
-        const cprpredictionnext  = csvPools[i][13];
-        const date  = csvPools[i][14]; 
+        const issuedate = csvPools[i][4];
+        const currentface = csvPools[i][5]
+        const cfincmo = csvPools[i][6];
+        const cfinfed = csvPools[i][7];
+        const cfinplat = csvPools[i][8];
+        const coupon = csvPools[i][9];
+        const gwac  = csvPools[i][10];
+        const wala  = csvPools[i][11];
+        const wam = csvPools[i][12];
+        const va  = csvPools[i][13];
+        const cprprediction  = csvPools[i][14];
+        const cprpredictionnext  = csvPools[i][15];
+        const date  = csvPools[i][16]; 
 
 
       try {

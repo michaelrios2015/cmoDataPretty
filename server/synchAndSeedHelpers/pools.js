@@ -3,7 +3,7 @@ const { models: { Pool } } = require('../db');
 const fs = require("fs");
 const fastcsv = require("fast-csv");
 
-// cusip,name,indicator,type,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,cprprediction,cprpredictionnext,date
+// cusip,name,indicator,type,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,pastactcpr,curractualcpr,cprprediction,cprpredictionnext,pastactcdr,curractualcdr,cdrprediction,cdrpredictionnext,date
 
 const poolStreamer = async(csv, date) => {
   let streamPools = fs.createReadStream(csv)
@@ -29,6 +29,8 @@ const poolStreamer = async(csv, date) => {
 
         const cusip = csvPools[i][0];
         const name = csvPools[i][1];
+        const indicator = csvPools[i][2];
+        const type = csvPools[i][3];
         const issuedate = csvPools[i][4];
         const currentface = csvPools[i][5]
         const cfincmo = csvPools[i][6];
@@ -39,14 +41,21 @@ const poolStreamer = async(csv, date) => {
         const wala  = csvPools[i][11];
         const wam = csvPools[i][12];
         const va  = csvPools[i][13];
-        const cprprediction  = csvPools[i][14];
-        const cprpredictionnext  = csvPools[i][15];
-        const date  = csvPools[i][16]; 
+        const pastactcpr = csvPools[i][14];
+        const curractualcpr = csvPools[i][15];
+        const cprprediction  = csvPools[i][16];
+        const cprpredictionnext  = csvPools[i][17];
+        const pastactcdr = csvPools[i][18];
+        const curractualcdr = csvPools[i][19];
+        const cdrprediction = csvPools[i][20];
+        const cdrpredictionnext = csvPools[i][21];
+        const date  = csvPools[i][22]; 
 
 
       try {
        // cusip,name,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,cprprediction,cprpredictionnext,date
-      await Pool.create({ cusip, name, issuedate, currentface, cfincmo, cfinfed, cfinplat, coupon, gwac, wala, wam, va, cprprediction, cprpredictionnext, date })
+      await Pool.create({ cusip, name, indicator, type, issuedate, currentface, cfincmo, cfinfed, cfinplat, coupon, gwac, wala, wam, va, pastactcpr, 
+                          curractualcpr, cprprediction, cprpredictionnext, pastactcdr, curractualcdr, cdrprediction, cdrpredictionnext, date })
       }
       catch(ex){
         console.log(ex)

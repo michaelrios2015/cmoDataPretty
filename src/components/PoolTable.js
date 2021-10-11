@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 function numberWithCommas(x) {
   // console.log(x);
   x = x * 1;
-  x = x.toFixed(2);
+  x = x.toFixed(1);
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return parts.join(".");
@@ -142,22 +142,20 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                {/* <TableCell />
-                <TableCell />
-                <TableCell />
-                <TableCell />
+              <TableCell >2021-08</TableCell>
+                <TableCell align="center" colSpan={12}/>
                 <TableCell align="center" colSpan={2}>
-                  Actual {searchMonth}
+                  Actual CPR
                 </TableCell>
                 <TableCell align="center" colSpan={2}>
                   Predicted CPR
                 </TableCell>
                 <TableCell align="center" colSpan={2}>
-                  Predicted VPR
+                  Actual CDR
                 </TableCell>
                 <TableCell align="center" colSpan={2}>
                   Predicted CDR
-                </TableCell> */}
+                </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell >CUSIP</TableCell>
@@ -173,9 +171,15 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
                 <TableCell align="right">WALA</TableCell>
                 <TableCell align="right">WAM</TableCell>
                 <TableCell align="right">VA</TableCell>
+                <TableCell align="right">Previous CPR</TableCell>
+                <TableCell align="right">Current CPR</TableCell>
                 <TableCell align="right">CPR Prediction</TableCell>
                 <TableCell align="right">CPR Prediction Next</TableCell>
-                <TableCell align="right">Date</TableCell>
+                <TableCell align="right">Previous CDR</TableCell>
+                <TableCell align="right">Current CDR</TableCell>
+                <TableCell align="right">CDR Prediction</TableCell>
+                <TableCell align="right">CDR Prediction Next</TableCell>
+                {/* <TableCell align="right">Date</TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -196,9 +200,15 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
                   <TableCell align="right">{row.wala}</TableCell>
                   <TableCell align="right">{row.wam}</TableCell>
                   <TableCell align="right">{row.va}</TableCell>
+                  <TableCell align="right">{row.pastactcpr}</TableCell>
+                  <TableCell align="right">{row.curractualcpr}</TableCell>
                   <TableCell align="right">{row.cprprediction}</TableCell>
                   <TableCell align="right">{row.cprpredictionnext}</TableCell>
-                  <TableCell align="right">{row.date}</TableCell>
+                  <TableCell align="right">{row.pastactcdr}</TableCell>
+                  <TableCell align="right">{row.curractualcdr}</TableCell>
+                  <TableCell align="right">{row.cdrprediction}</TableCell>
+                  <TableCell align="right">{row.cdrpredictionnext}</TableCell>
+                  {/* <TableCell align="right">{row.date}</TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

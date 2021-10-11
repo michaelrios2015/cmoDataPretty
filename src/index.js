@@ -23,8 +23,8 @@ class _App extends Component{
           <NavBar />
           <div>
             {/* <Route component={ CurrentMonth } path = '/current'  /> */}
-            <Route component={ BasicTable } path = '/' exact/>        
-            <Route component={ PoolTable } path = '/pools' exact/>      
+            {/* <Route component={ BasicTable } path = '/' exact/>         */}
+            <Route component={ PoolTable } path = '/' exact/>      
             <Route component={ PlatinumTable } path = '/platinums' exact/>        
           </div>
         </Router>

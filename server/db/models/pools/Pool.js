@@ -4,7 +4,7 @@ const Moment = require('moment');
 const { INTEGER, STRING, FLOAT, DATEONLY } = Sequelize;
 
 
-// cusip,name,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,cprprediction,cprpredictionnext,date
+// cusip,name,indicator,type,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,pastactcpr,curractualcpr,cprprediction,cprpredictionnext,pastactcdr,curractualcdr,cdrprediction,cdrpredictionnext,date
 
 const Pool = db.define('pools', {
   cusip: { 
@@ -12,6 +12,12 @@ const Pool = db.define('pools', {
     primaryKey: true  
   },
   name: { 
+    type: STRING, 
+  },
+  indicator: { 
+    type: STRING, 
+  },
+  type: { 
     type: STRING, 
   },
   issuedate: { 
@@ -44,14 +50,29 @@ const Pool = db.define('pools', {
   va: { 
     type: FLOAT, 
   },
+  pastactcpr: { 
+    type: FLOAT, 
+  },
+  curractualcpr: { 
+    type: FLOAT, 
+  },
   cprprediction: { 
       type: FLOAT, 
   },
   cprpredictionnext: { 
       type: FLOAT, 
   },
-  va: { 
+  pastactcdr: { 
       type: FLOAT, 
+  },
+  curractualcdr: { 
+    type: FLOAT, 
+  },
+  cdrprediction: { 
+    type: FLOAT, 
+  },
+  cdrpredictionnext: { 
+    type: FLOAT, 
   },
   date: { 
     type: DATEONLY, 

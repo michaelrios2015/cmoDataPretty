@@ -69,7 +69,7 @@ const {
 
     // ------------------------------ Pools
     // poolStreamer('data/pools/G2pools.csv')
-    poolStreamer('data/platinums/G2plats.csv')
+    // poolStreamer('data/platinums/G2plats.csv')
 
     // ------------------------------ Platinum
     // platinumStreamer('data/platinums/platinumsheaders.csv');

@@ -13,7 +13,7 @@ router.get('/', async(req, res, next)=> {
     currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) AS float
     FROM pools
     ORDER BY coupon, currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) DESC
-    LIMIT 10;` ));
+    LIMIT 10000;` ));
 
   res.send(results)
   }

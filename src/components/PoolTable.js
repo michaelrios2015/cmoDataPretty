@@ -37,6 +37,7 @@ function PoolTable({ pools, loadPools, loadPoolsByCoupon, loadPoolsByFloats, loa
   const [searchMonth, setSearchMonth ] = useState('FEB');
   
   const [loading, setLoading ] = useState(true);
+  let name = 'sss';
 
   console.log(pools[0])
   //my homemade loading true or false again needed not sure
@@ -66,12 +67,6 @@ function PoolTable({ pools, loadPools, loadPoolsByCoupon, loadPoolsByFloats, loa
     console.log(searchA);
 
     setLoading(true);
-    // if(searchB){
-    // loadPoolsByCoupon(searchB);
-    // console.log(searchB);
-    // } else {
-    //   loadPools()
-    // }
 
     if(!searchA && !searchB){
       loadPools()
@@ -85,7 +80,6 @@ function PoolTable({ pools, loadPools, loadPoolsByCoupon, loadPoolsByFloats, loa
         console.log(searchB); 
       }
       else {
-
         loadPoolsByCouponsAndFloats(searchB, searchA)
         console.log(searchB);
         console.log(searchA);
@@ -94,13 +88,7 @@ function PoolTable({ pools, loadPools, loadPoolsByCoupon, loadPoolsByFloats, loa
   },[searchA, searchB, searchYear, searchMonth]);
 
   const classes = useStyles();
-      
-//   let dealNames = [];
-//   rows.forEach(item=>dealNames.push(item.deal.toString()));
-//   // seems to remove the duplicates
-//   dealNames = [...new Set(dealNames)]
-//   // console.log(dealNames);
-  
+        
 let floats = [];
 for (let i=1; i < 10; i++ ){
   floats.push(i.toString())
@@ -113,10 +101,8 @@ for (let i=1; i < 10; i++ ){
   }
 
   // console.log(coupon);
-
   // console.log(searchA)
   // console.log(searchB)
-  // console.log(searchYear)
 
   return (
     <div>
@@ -128,16 +114,7 @@ for (let i=1; i < 10; i++ ){
           onChange={(event, value)=>setSearchMonth(value)}
           renderInput={(params) => <TextField  {...params} label="Month" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchMonth('FEB')}  />}
         />  */}
-      <div className={ 'sideBySide' }>
-         {/* <Autocomplete
-          id="combo-box-demo"
-          options={years}
-          getOptionLabel={(option) => option}
-          style={{ width: 300 }}
-          onChange={(event, value)=>setSearchYear(value)}
-          renderInput={(params) => <TextField  {...params} label="Year" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchYear('2021')}  />}
-        /> */}
- 
+      <div className={ 'sideBySide' }> 
         
         <Autocomplete
           id="combo-box-pool-names"
@@ -145,16 +122,19 @@ for (let i=1; i < 10; i++ ){
           getOptionLabel={(option) => option}
           style={{ width: 300 }}
           onChange={(event, value)=>setSearchB(value)}
-          renderInput={(params) => <TextField  {...params} label="Coupons" variant="outlined" onClick = {(ev)=> console.log(ev) } />}
-          // !ev.target.value && setSearchB('All')
+          renderInput={(params) => <TextField  {...params} label="Coupons" variant="outlined"/>}
         />  
-               <Autocomplete
-          id="combo-box-demo"
-          options={floats}
-          getOptionLabel={(option) => option}
-          style={{ width: 300 }}
-          onChange={(event, value)=>setSearchA(value)}
-          renderInput={(params) => <TextField  {...params} label="Min Float" variant="outlined"   />}
+ 
+        <TextField  
+          label="Min Float" 
+          variant="outlined"   
+          // id="outlined-name"
+          value = {searchA}
+          onChange={(event)=>{
+                          if(!isNaN(event.target.value)){
+                          setSearchA(event.target.value)
+                          console.log(event.target.value)}
+                        }}
         /> 
       </div>
 
@@ -178,6 +158,8 @@ for (let i=1; i < 10; i++ ){
                 <TableCell align="center" colSpan={2}>
                   Predicted CPR
                 </TableCell>
+                <TableCell align="center" colSpan={1}>
+                </TableCell>
                 <TableCell align="center" colSpan={2}>
                   Actual CDR
                 </TableCell>
@@ -188,25 +170,26 @@ for (let i=1; i < 10; i++ ){
               <TableRow>
                 <TableCell >CUSIP</TableCell>
                 <TableCell align="right">Name</TableCell>
-                <TableCell align="right">Issue Date</TableCell>
+                <TableCell align="right">Issue Month</TableCell>
                 <TableCell align="right">Current Face</TableCell>
                 <TableCell align="right">CF in CMO</TableCell>
                 <TableCell align="right">CF in FED</TableCell>
                 <TableCell align="right">CF in Plat</TableCell>
-                <TableCell align="right">Float</TableCell>  
+                <TableCell align="right">Float MM</TableCell>  
                 <TableCell align="right">Coupon</TableCell>
                 <TableCell align="right">GWAC</TableCell>
                 <TableCell align="right">WALA</TableCell>
                 <TableCell align="right">WAM</TableCell>
                 <TableCell align="right">VA</TableCell>
-                <TableCell align="right">Previous CPR</TableCell>
-                <TableCell align="right">Current CPR</TableCell>
-                <TableCell align="right">CPR Prediction</TableCell>
-                <TableCell align="right">CPR Prediction Next</TableCell>
-                <TableCell align="right">Previous CDR</TableCell>
-                <TableCell align="right">Current CDR</TableCell>
-                <TableCell align="right">CDR Prediction</TableCell>
-                <TableCell align="right">CDR Prediction Next</TableCell>
+                <TableCell align="right">Previous Month's</TableCell>
+                <TableCell align="right">Current Month's</TableCell>
+                <TableCell align="right">Curent Month's</TableCell>
+                <TableCell align="right">Next Month's</TableCell>
+                <TableCell align="right">Current Month's RESID</TableCell>
+                <TableCell align="right">Previous Month's</TableCell>
+                <TableCell align="right">Current Month's</TableCell>
+                <TableCell align="right">Current Month's</TableCell>
+                <TableCell align="right">Next Month's</TableCell>
                 {/* <TableCell align="right">Date</TableCell> */}
               </TableRow>
             </TableHead>
@@ -232,6 +215,7 @@ for (let i=1; i < 10; i++ ){
                   <TableCell align="right">{row.curractualcpr}</TableCell>
                   <TableCell align="right">{row.cprprediction}</TableCell>
                   <TableCell align="right">{row.cprpredictionnext}</TableCell>
+                  <TableCell align="right">{row.curractualcpr - row.cprprediction}</TableCell>
                   <TableCell align="right">{row.pastactcdr}</TableCell>
                   <TableCell align="right">{row.curractualcdr}</TableCell>
                   <TableCell align="right">{row.cdrprediction}</TableCell>

@@ -197,7 +197,7 @@ export const loadPoolsByCouponsAndFloats = (coupon, float) =>{
             item.cdrpredictionnext = (item.cdrpredictionnext * 100).toFixed(1);
             item.issuedate = item.issuedate.toString().slice(0, 4) + item.issuedate.toString().slice(5, 7);
         })
-        // console.log(tests[0])    
+        console.log(tests[0])    
 
 
         dispatch(_loadPools(loadData(tests)));

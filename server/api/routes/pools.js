@@ -12,8 +12,8 @@ router.get('/', async(req, res, next)=> {
     `SELECT *,
     currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) AS float
     FROM pools
-    ORDER BY coupon, currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) DESC
-    LIMIT 10000;` ));
+    ORDER BY coupon, issuedate DESC
+    LIMIT 100;` ));
 
   res.send(results)
   }
@@ -35,7 +35,7 @@ router.get('/coupons/:coupon', async(req, res, next)=> {
     currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) AS float
     FROM pools
     WHERE coupon = ${req.params.coupon}
-    ORDER BY coupon, currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) DESC
+    ORDER BY coupon, issuedate DESC
     LIMIT 10000;` ));
 
   res.send(results)
@@ -60,8 +60,8 @@ router.get('/floats/:float', async(req, res, next)=> {
     `SELECT *,
     currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) AS float
     FROM pools
-    WHERE currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) > ${min}
-    ORDER BY coupon, currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) DESC
+    WHERE currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) >= ${min}
+    ORDER BY coupon, issuedate DESC
     LIMIT 10000;` ));
 
   res.send(results)
@@ -86,8 +86,8 @@ router.get('/couponsandfloats/:coupon/:float', async(req, res, next)=> {
     currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) AS float
     FROM pools
     WHERE coupon = ${req.params.coupon}
-    AND currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) > ${min}
-    ORDER BY coupon, currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) DESC
+    AND currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) >= ${min}
+    ORDER BY coupon, issuedate DESC
     LIMIT 10000;` ));
 
   res.send(results)

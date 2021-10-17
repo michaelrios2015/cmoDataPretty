@@ -4,6 +4,7 @@ import { Provider, connect } from 'react-redux';
 import store from './store';
 import BasicTable from './components/BasicTable';
 import PoolTable from './components/PoolTable';
+import G1Table from './components/G1Table';
 import PlatinumTable from './components/PlatinumTable';
 import NavBar from './components/NavBar';
 import { HashRouter as Router, Route, BrowserRouter } from 'react-router-dom';
@@ -25,7 +26,8 @@ class _App extends Component{
             {/* <Route component={ CurrentMonth } path = '/current'  /> */}
             {/* <Route component={ BasicTable } path = '/' exact/>         */}
             <Route component={ PoolTable } path = '/' exact/>      
-            <Route component={ PlatinumTable } path = '/platinums' exact/>        
+            <Route component={ PlatinumTable } path = '/platinums' exact/>   
+            <Route component={ G1Table } path = '/G1' exact/>        
           </div>
         </Router>
     );

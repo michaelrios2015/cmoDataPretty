@@ -12,7 +12,8 @@ const {
 } = require('./synchAndSeedHelpers/cmos.js');
 
 const {
-  poolStreamer
+  poolStreamer,
+  g1Streamer
         } = require('./synchAndSeedHelpers/pools.js');
 
 const {
@@ -70,6 +71,11 @@ const {
     // ------------------------------ Pools
     // poolStreamer('data/pools/G2pools.csv')
     // poolStreamer('data/platinums/G2plats.csv')
+
+    // ------------------------------ G1s
+    // g1Streamer('data/pools/G1pools.csv')
+    // g1Streamer('data/platinums/G1plats.csv')
+
 
     // ------------------------------ Platinum
     // platinumStreamer('data/platinums/platinumsheaders.csv');

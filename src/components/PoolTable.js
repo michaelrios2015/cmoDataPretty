@@ -31,15 +31,14 @@ function numberWithCommas(x) {
 
 //rows are now created in store :) 
 function PoolTable({ pools, loadPools, loadPoolsByCoupon, loadPoolsByFloats, loadPoolsByCouponsAndFloats }) {
-  const [searchA, setSearchA ] = useState(null);
-  const [searchB, setSearchB ] = useState(null);
-  const [searchYear, setSearchYear ] = useState('2021');
-  const [searchMonth, setSearchMonth ] = useState('FEB');
+  const [searchA, setSearchA ] = useState('');
+  const [searchB, setSearchB ] = useState('');
+  // const [searchYear, setSearchYear ] = useState('2021');
+  // const [searchMonth, setSearchMonth ] = useState('FEB');
   
   const [loading, setLoading ] = useState(true);
-  let name = 'sss';
 
-  console.log(pools[0])
+  // console.log(pools[0])
   //my homemade loading true or false again needed not sure
   useEffect(() => {
     console.log(pools.length)
@@ -63,8 +62,8 @@ function PoolTable({ pools, loadPools, loadPoolsByCoupon, loadPoolsByFloats, loa
       return;
     }
     
-    console.log(searchB);
-    console.log(searchA);
+    // console.log(searchB);
+    // console.log(searchA);
 
     setLoading(true);
 
@@ -73,19 +72,19 @@ function PoolTable({ pools, loadPools, loadPoolsByCoupon, loadPoolsByFloats, loa
       
       } else if (searchA && !searchB) {
         loadPoolsByFloats(searchA);
-      console.log(searchA);  
+        // console.log(searchA);  
       }
       else if (!searchA && searchB) {
         loadPoolsByCoupon(searchB);
-        console.log(searchB); 
+        // console.log(searchB); 
       }
       else {
         loadPoolsByCouponsAndFloats(searchB, searchA)
-        console.log(searchB);
-        console.log(searchA);
+        // console.log(searchB);
+        // console.log(searchA);
       }
 
-  },[searchA, searchB, searchYear, searchMonth]);
+  },[searchA, searchB ]);
 
   const classes = useStyles();
         
@@ -133,7 +132,8 @@ for (let i=1; i < 10; i++ ){
           onChange={(event)=>{
                           if(!isNaN(event.target.value)){
                           setSearchA(event.target.value)
-                          console.log(event.target.value)}
+                          // console.log(event.target.value)
+                        }
                         }}
         /> 
       </div>
@@ -215,7 +215,7 @@ for (let i=1; i < 10; i++ ){
                   <TableCell align="right">{row.curractualcpr}</TableCell>
                   <TableCell align="right">{row.cprprediction}</TableCell>
                   <TableCell align="right">{row.cprpredictionnext}</TableCell>
-                  <TableCell align="right">{row.curractualcpr - row.cprprediction}</TableCell>
+                  <TableCell align="right">{(row.curractualcpr - row.cprprediction).toFixed(1)}</TableCell>
                   <TableCell align="right">{row.pastactcdr}</TableCell>
                   <TableCell align="right">{row.curractualcdr}</TableCell>
                   <TableCell align="right">{row.cdrprediction}</TableCell>
@@ -238,12 +238,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    bootstrap: (year, month)=> {
-      // dispatch(loadRows());
-      // dispatch(loadInitialRows());
-      console.log(year)
-      dispatch(loadRowsByYear(year, month));
-    },
     loadPools: ()=> {
       dispatch(loadPools());
     },

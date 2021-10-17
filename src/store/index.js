@@ -5,13 +5,14 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { rowsReducer } from './cmos';
 import { poolsReducer } from './pools';
 import { platinumsReducer } from './platinums';
-
+import { g1sReducer } from './g1s';
 
 // the reducer
 const reducer = combineReducers({
     rows: rowsReducer,
     pools: poolsReducer,
-    platinums: platinumsReducer
+    platinums: platinumsReducer,
+    g1s: g1sReducer
 })
 
 //think this is just a fancy logger but not sure
@@ -25,5 +26,5 @@ export default store;
 export * from './cmos'
 export * from './pools'
 export * from './platinums'
-
+export * from './g1s'
 

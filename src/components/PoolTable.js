@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import { loadPools } from '../store';
+import { loadPools, loadPoolsByCoupon, loadPoolsByFloats, loadPoolsByCouponsAndFloats } from '../store';
 
 const useStyles = makeStyles({
   table: {
@@ -30,9 +30,9 @@ function numberWithCommas(x) {
 }
 
 //rows are now created in store :) 
-function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
-  const [searchA, setSearchA ] = useState('All');
-  const [searchB, setSearchB ] = useState('All');
+function PoolTable({ pools, loadPools, loadPoolsByCoupon, loadPoolsByFloats, loadPoolsByCouponsAndFloats }) {
+  const [searchA, setSearchA ] = useState(null);
+  const [searchB, setSearchB ] = useState(null);
   const [searchYear, setSearchYear ] = useState('2021');
   const [searchMonth, setSearchMonth ] = useState('FEB');
   
@@ -55,15 +55,43 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
 
   const firstUpdate = useRef(true);
 
-  //checks to see if deal name or group has changed but does not run the first time
-//   useLayoutEffect(() => {
-//     if (firstUpdate.current) {
-//       firstUpdate.current = false;
-//       return;
-//     }
-//     setLoading(true);
-//     loadDataByDealandGroup(searchA, searchB, searchYear, searchMonth);
-//   },[searchA, searchB, searchYear, searchMonth]);
+//checks to see if deal name or group has changed but does not run the first time
+  useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+    
+    console.log(searchB);
+    console.log(searchA);
+
+    setLoading(true);
+    // if(searchB){
+    // loadPoolsByCoupon(searchB);
+    // console.log(searchB);
+    // } else {
+    //   loadPools()
+    // }
+
+    if(!searchA && !searchB){
+      loadPools()
+      
+      } else if (searchA && !searchB) {
+        loadPoolsByFloats(searchA);
+      console.log(searchA);  
+      }
+      else if (!searchA && searchB) {
+        loadPoolsByCoupon(searchB);
+        console.log(searchB); 
+      }
+      else {
+
+        loadPoolsByCouponsAndFloats(searchB, searchA)
+        console.log(searchB);
+        console.log(searchA);
+      }
+
+  },[searchA, searchB, searchYear, searchMonth]);
 
   const classes = useStyles();
       
@@ -73,21 +101,19 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
 //   dealNames = [...new Set(dealNames)]
 //   // console.log(dealNames);
   
-//   let groups = [];
-//   rows.forEach(item=>groups.push(item.group));
-//   // data.forEach(item=>console.log(item.group));
-//   // seems to remove the duplicates
-//   groups = [...new Set(groups)]
-//   // console.log(groups);
+let floats = [];
+for (let i=1; i < 10; i++ ){
+  floats.push(i.toString())
+}
+// console.log(floats);
 
-//   let years = [];
-//   for (let i=2021; i > 2000; i--){
-//     years.push(i.toString())
-//   }
+  let coupon = [];
+  for (let i=1; i < 10; i += .5 ){
+    coupon.push(i.toString())
+  }
 
-//   years.push('1999');
+  // console.log(coupon);
 
-//   let months = ['FEB', 'MARCH', 'APRIL'];
   // console.log(searchA)
   // console.log(searchB)
   // console.log(searchYear)
@@ -101,34 +127,36 @@ function PoolTable({ pools, loadPools, loadRowsByYear, bootstrap }) {
           style={{ width: 300 }}
           onChange={(event, value)=>setSearchMonth(value)}
           renderInput={(params) => <TextField  {...params} label="Month" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchMonth('FEB')}  />}
-        /> 
+        />  */}
       <div className={ 'sideBySide' }>
-         <Autocomplete
+         {/* <Autocomplete
           id="combo-box-demo"
           options={years}
           getOptionLabel={(option) => option}
           style={{ width: 300 }}
           onChange={(event, value)=>setSearchYear(value)}
           renderInput={(params) => <TextField  {...params} label="Year" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchYear('2021')}  />}
-        /> 
-        <Autocomplete
-          id="combo-box-demo"
-          options={dealNames}
-          getOptionLabel={(option) => option}
-          style={{ width: 300 }}
-          onChange={(event, value)=>setSearchA(value)}
-          renderInput={(params) => <TextField  {...params} label="Deal Names" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchA('All')}  />}
-        />
+        /> */}
+ 
         
         <Autocomplete
           id="combo-box-pool-names"
-          options={groups}
+          options={coupon}
           getOptionLabel={(option) => option}
           style={{ width: 300 }}
           onChange={(event, value)=>setSearchB(value)}
-          renderInput={(params) => <TextField  {...params} label="Groups" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchB('All')} />}
+          renderInput={(params) => <TextField  {...params} label="Coupons" variant="outlined" onClick = {(ev)=> console.log(ev) } />}
+          // !ev.target.value && setSearchB('All')
         />  
-      </div> */}
+               <Autocomplete
+          id="combo-box-demo"
+          options={floats}
+          getOptionLabel={(option) => option}
+          style={{ width: 300 }}
+          onChange={(event, value)=>setSearchA(value)}
+          renderInput={(params) => <TextField  {...params} label="Min Float" variant="outlined"   />}
+        /> 
+      </div>
 
       {
         loading ? 
@@ -235,8 +263,14 @@ const mapDispatchToProps = (dispatch) => {
     loadPools: ()=> {
       dispatch(loadPools());
     },
-    loadRowsByYear: (year)=> {
-      dispatch(loadRowsByYear(year));
+    loadPoolsByCoupon:(coupon)=> {
+      dispatch(loadPoolsByCoupon(coupon));
+    },
+    loadPoolsByFloats:(float)=> {
+      dispatch(loadPoolsByFloats(float));
+    },
+    loadPoolsByCouponsAndFloats:(coupon, float)=> {
+      dispatch(loadPoolsByCouponsAndFloats(coupon, float));
     }
   };
 }

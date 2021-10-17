@@ -53,6 +53,125 @@ export const loadPools = () =>{
 
     return async(dispatch)=>{
         const tests = (await axios.get(`/api/pools/`)).data;
+        // console.log(tests[0]); 
+        // so this will work to weed out ones that are null
+        // tests.forEach(item => {if (!item.poolbodies[0].poolprediction){
+        //     console.log(item)
+        // }})
+        tests.forEach(item => {
+
+            item.currentface = (item.currentface/1000000).toFixed(1);
+            if (item.cfincmo){
+                item.cfincmo = (item.cfincmo/1000000).toFixed(1);
+            }
+            if (item.cfinplat){
+                item.cfinplat = (item.cfinplat/1000000).toFixed(1);
+            }
+            item.cfinfed = (item.cfinfed/1000000).toFixed(1);
+            item.pastactcpr = (item.pastactcpr * 100).toFixed(1); 
+            item.curractualcpr = (item.curractualcpr * 100).toFixed(1);
+            item.cprprediction = (item.cprprediction * 100).toFixed(1);
+            item.cprpredictionnext = (item.cprpredictionnext * 100).toFixed(1);
+            item.pastactcdr = (item.pastactcdr * 100).toFixed(1); 
+            item.curractualcdr = (item.curractualcdr * 100).toFixed(1);
+            item.cdrprediction = (item.cdrprediction * 100).toFixed(1);
+            item.cdrpredictionnext = (item.cdrpredictionnext * 100).toFixed(1);
+            item.issuedate = item.issuedate.toString().slice(0, 4) + item.issuedate.toString().slice(5, 7);
+        })
+        // console.log(tests[0])    
+
+
+        dispatch(_loadPools(loadData(tests)));
+    }
+};
+
+
+export const loadPoolsByCoupon = (coupon) =>{
+
+    console.log(coupon);
+
+    return async(dispatch)=>{
+        const tests = (await axios.get(`/api/pools/coupons/${coupon}`)).data;
+        // console.log(tests[0]); 
+        // so this will work to weed out ones that are null
+        // tests.forEach(item => {if (!item.poolbodies[0].poolprediction){
+        //     console.log(item)
+        // }})
+        tests.forEach(item => {
+
+            item.currentface = (item.currentface/1000000).toFixed(1);
+            if (item.cfincmo){
+                item.cfincmo = (item.cfincmo/1000000).toFixed(1);
+            }
+            if (item.cfinplat){
+                item.cfinplat = (item.cfinplat/1000000).toFixed(1);
+            }
+            item.cfinfed = (item.cfinfed/1000000).toFixed(1);
+            item.pastactcpr = (item.pastactcpr * 100).toFixed(1); 
+            item.curractualcpr = (item.curractualcpr * 100).toFixed(1);
+            item.cprprediction = (item.cprprediction * 100).toFixed(1);
+            item.cprpredictionnext = (item.cprpredictionnext * 100).toFixed(1);
+            item.pastactcdr = (item.pastactcdr * 100).toFixed(1); 
+            item.curractualcdr = (item.curractualcdr * 100).toFixed(1);
+            item.cdrprediction = (item.cdrprediction * 100).toFixed(1);
+            item.cdrpredictionnext = (item.cdrpredictionnext * 100).toFixed(1);
+            item.issuedate = item.issuedate.toString().slice(0, 4) + item.issuedate.toString().slice(5, 7);
+        })
+        // console.log(tests[0])    
+
+
+        dispatch(_loadPools(loadData(tests)));
+    }
+       
+};
+
+export const loadPoolsByFloats = (float) =>{
+
+    console.log(float);
+
+    return async(dispatch)=>{
+        const tests = (await axios.get(`/api/pools/floats/${float}`)).data;
+        // console.log(tests[0]); 
+        // so this will work to weed out ones that are null
+        // tests.forEach(item => {if (!item.poolbodies[0].poolprediction){
+        //     console.log(item)
+        // }})
+        tests.forEach(item => {
+
+            item.currentface = (item.currentface/1000000).toFixed(1);
+            if (item.cfincmo){
+                item.cfincmo = (item.cfincmo/1000000).toFixed(1);
+            }
+            if (item.cfinplat){
+                item.cfinplat = (item.cfinplat/1000000).toFixed(1);
+            }
+            item.cfinfed = (item.cfinfed/1000000).toFixed(1);
+            item.pastactcpr = (item.pastactcpr * 100).toFixed(1); 
+            item.curractualcpr = (item.curractualcpr * 100).toFixed(1);
+            item.cprprediction = (item.cprprediction * 100).toFixed(1);
+            item.cprpredictionnext = (item.cprpredictionnext * 100).toFixed(1);
+            item.pastactcdr = (item.pastactcdr * 100).toFixed(1); 
+            item.curractualcdr = (item.curractualcdr * 100).toFixed(1);
+            item.cdrprediction = (item.cdrprediction * 100).toFixed(1);
+            item.cdrpredictionnext = (item.cdrpredictionnext * 100).toFixed(1);
+            item.issuedate = item.issuedate.toString().slice(0, 4) + item.issuedate.toString().slice(5, 7);
+        })
+        // console.log(tests[0])    
+
+
+        dispatch(_loadPools(loadData(tests)));
+    }
+       
+};
+
+
+export const loadPoolsByCouponsAndFloats = (coupon, float) =>{
+
+    console.log("IN COUPONS AND FLOATS");
+    console.log(float);
+
+    return async(dispatch)=>{
+        const tests = (await axios.get(`/api/pools/couponsandfloats/${coupon}/${float}`)).data;
         console.log(tests[0]); 
         // so this will work to weed out ones that are null
         // tests.forEach(item => {if (!item.poolbodies[0].poolprediction){
@@ -78,13 +197,13 @@ export const loadPools = () =>{
             item.cdrpredictionnext = (item.cdrpredictionnext * 100).toFixed(1);
             item.issuedate = item.issuedate.toString().slice(0, 4) + item.issuedate.toString().slice(5, 7);
         })
-        console.log(tests[0])    
+        // console.log(tests[0])    
 
 
         dispatch(_loadPools(loadData(tests)));
     }
+       
 };
-
 
 // export const loadDataByDealandGroup = (deal, group, year, month) =>{
     

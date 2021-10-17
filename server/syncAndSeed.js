@@ -73,8 +73,8 @@ const {
     // poolStreamer('data/platinums/G2plats.csv')
 
     // ------------------------------ G1s
-    g1Streamer('data/pools/G1pools.csv')
-    // g1Streamer('data/platinums/G1plats.csv')
+    // g1Streamer('data/pools/G1pools.csv')
+    g1Streamer('data/platinums/G1plats.csv')
 
 
     // ------------------------------ Platinum

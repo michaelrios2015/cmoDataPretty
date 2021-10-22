@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import { loadG1s, loadG1sByCoupon, loadG1sByFloats, loadG1sByCouponsAndFloats } from '../store';
+import { loadG1s, loadG1sByCoupon, loadG1ByFloats, loadG1sByCouponsAndFloats } from '../store';
 
 const useStyles = makeStyles({
   table: {
@@ -245,7 +245,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(loadG1sByCoupon(coupon));
     },
     loadG1sByFloats:(float)=> {
-      dispatch(loadG1sByFloats(float));
+      dispatch(loadG1ByFloats(float));
     },
     loadG1sByCouponsAndFloats:(coupon, float)=> {
       dispatch(loadG1sByCouponsAndFloats(coupon, float));

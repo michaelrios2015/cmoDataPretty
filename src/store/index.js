@@ -4,14 +4,12 @@ import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { rowsReducer } from './cmos';
 import { poolsReducer } from './pools';
-import { platinumsReducer } from './platinums';
 import { g1sReducer } from './g1s';
 
 // the reducer
 const reducer = combineReducers({
     rows: rowsReducer,
     pools: poolsReducer,
-    platinums: platinumsReducer,
     g1s: g1sReducer
 })
 
@@ -25,6 +23,5 @@ const store = createStore(reducer, middleware);
 export default store;
 export * from './cmos'
 export * from './pools'
-export * from './platinums'
 export * from './g1s'
 

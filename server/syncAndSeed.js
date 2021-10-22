@@ -16,11 +16,6 @@ const {
   g1Streamer
         } = require('./synchAndSeedHelpers/pools.js');
 
-const {
-  platinumStreamer,
-  platinumBodyStreamer,
-        } = require('./synchAndSeedHelpers/platinums.js');
-
 
   // this is for the table I have not tackled yet 
   let streamCPN = fs.createReadStream('data/cpn.csv');
@@ -76,10 +71,6 @@ const {
     // g1Streamer('data/pools/G1pools.csv')
     // g1Streamer('data/platinums/G1plats.csv')
 
-
-    // ------------------------------ Platinum
-    // platinumStreamer('data/platinums/platinumsheaders.csv');
-    // platinumBodyStreamer('data/platinums/platinumbodies2021_05.csv');
   
   };
 

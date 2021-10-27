@@ -75,7 +75,7 @@ const {
     // g1Streamer('data/platinums/G1plats_202108.csv')
 
     // g1Streamer('data/pools/G1pools_202109.csv')
-    g1Streamer('data/platinums/G1plats_202109.csv')
+    // g1Streamer('data/platinums/G1plats_202109.csv')
 
   
   };

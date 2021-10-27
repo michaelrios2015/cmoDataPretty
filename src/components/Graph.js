@@ -13,6 +13,15 @@ const state = {
       borderColor: 'rgba(0,0,0,1)',
       borderWidth: 2,
       data: [65, 59, 80, 81, 56]
+    },
+    {
+      label: 'RainPaul',
+      fill: false,
+      lineTension: 0,
+      backgroundColor: 'rgba(75,192,192,1)',
+      borderColor: 'rgba(0,0,0,1)',
+      borderWidth: 2,
+      data: [5, 59, 37, 81, 50]
     }
   ]
 }
@@ -23,6 +32,9 @@ export default class Graph extends Component {
       <div>
         <Line
           data={state}
+          // very confusing.. but seems to work
+          height={"100%"}
+          // width={"800%"}
           options={{
             title:{
               display:true,
@@ -32,7 +44,9 @@ export default class Graph extends Component {
             legend:{
               display:true,
               position:'right'
-            }
+            },
+            // maintainAspectRatio: false 
+
           }}
         />
       </div>

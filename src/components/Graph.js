@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {Line} from 'react-chartjs-2';
 
 const state = {
-  labels: ['January', 'February', 'March',
-           'April', 'May'],
+  labels: ['20', '25', '30', '35', '40', '45', ' 50', '55', '60', '65', '70', '75', '80'],
   datasets: [
     {
       label: 'Rainfall',

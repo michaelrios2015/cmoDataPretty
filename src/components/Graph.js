@@ -5,26 +5,29 @@ const state = {
   labels: ['0', '5', '10', '15', '20', '25', '30', '35', '40', '45', ' 50', '55', '60', '65', '70', '75', '80', '85' , '90' , '95'],
   datasets: [
     {
-      label: 'G1 Pools, Coupon 5',
+      label: 'G2 Pools, Coupon 5',
       fill: false,
       lineTension: 0,
       backgroundColor: 'rgba(75,192,192,1)',
       borderColor: 'rgba(0,0,0,1)',
       borderWidth: 2,
-      data: [8933, 8794, 8636, 8410, 8120, 7300, 6419, 6189, 5853, 5422, 3859, 1949, 333, 11, 11, 11]
+      data: [ 9644, 9218, 9057, 8819, 8509, 7614, 6662, 6430, 6094, 5615, 4009, 2100, 333, 11, 11, 11 ]
     }
-    // ,
-    // {
-    //   label: 'RainPaul',
-    //   fill: false,
-    //   lineTension: 0,
-    //   backgroundColor: 'rgba(75,192,192,1)',
-    //   borderColor: 'rgba(0,0,0,1)',
-    //   borderWidth: 2,
-    //   data: [5, 59, 37, 81, 50]
-    // }
+    ,
+    {
+      label: 'Predicted CPR',
+      fill: false,
+      lineTension: 0,
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      // line color
+      borderColor: "#80b6f4",
+      borderWidth: 2,
+      data: [9291, 9291, 9234, 8757, 7476, 6311, 6122, 5622, 903]
+    }
   ]
 }
+ 
+
 
 export default class Graph extends Component {
   render() {

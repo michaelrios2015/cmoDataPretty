@@ -1,5 +1,9 @@
+// import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {Line} from 'react-chartjs-2';
+
+import { loadGraphData } from '../store';
 
 const state = {
   labels: ['0', '5', '10', '15', '20', '25', '30', '35', '40', '45', ' 50', '55', '60', '65', '70', '75', '80', '85' , '90' , '95'],
@@ -50,8 +54,20 @@ const state = {
  
 
 
-export default class Graph extends Component {
+class Graph extends Component {
+  constructor(){
+    super();
+  }
+  async componentDidMount(){
+    this.props.loadGraphData();
+    
+  }
+
+  
+
+
   render() {
+    console.log(this.props)
     return (
       <div>
         <Line
@@ -77,3 +93,18 @@ export default class Graph extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return state;
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadGraphData: ()=> {
+      dispatch(loadGraphData());
+    }
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Graph);

@@ -50,7 +50,7 @@ export const loadGraphData = () =>{
         const data = (await axios.get(`/api/graphdata/`)).data;
         // console.log(tests[0]); 
 
-        dispatch(_loadGraphData(loadData(data)));
+        dispatch(_loadGraphData(data));
     }
 };
 

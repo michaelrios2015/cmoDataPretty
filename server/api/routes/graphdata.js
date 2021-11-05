@@ -12,7 +12,7 @@ router.get('/', async(req, res, next)=> {
 
   let [results, _] = (await db.query(
     // 'SELECT pools.cusip, poolbodies."poolCusip", poolpredictions.cusip as ppCusip ' +
-    `SELECT *
+    `SELECT floatsum
     FROM sumoffloats
     WHERE coupon = 6
     ORDER BY cpr;` ));

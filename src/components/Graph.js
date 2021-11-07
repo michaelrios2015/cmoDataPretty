@@ -11,7 +11,7 @@ const state = {
   labels: ['0', '5', '10', '15', '20', '25', '30', '35', '40', '45', ' 50', '55', '60', '65', '70', '75', '80', '85' , '90' , '95'],
   datasets: [
     {
-      label: 'G2 Pools, Coupon 4.5',
+      label: 'G2 Pools, Actual CPR',
       fill: false,
       lineTension: 0,
       backgroundColor: 'rgba(75,192,192,1)',
@@ -21,7 +21,7 @@ const state = {
     }
     ,
     {
-      label: 'G2 Pools, Coupon 4.5 - Predicted CPR',
+      label: 'G2 Pools, Predicted CPR',
       fill: false,
       lineTension: 0,
       backgroundColor: 'rgba(255, 99, 132, 0.2)',

@@ -66,6 +66,19 @@ export const loadGraphDataByCoupon = (coupon) =>{
     }
 };
 
+export const loadGraphDataByGtypeandCoupon = (gtype, coupon) =>{
+
+    
+    return async(dispatch)=>{
+        const data = (await axios.get(`/api/graphdata/gtypeandcoupon/${gtype}/${coupon}`)).data;
+        // console.log(data); 
+
+
+        dispatch(_loadGraphData(data));
+    }
+};
+
+
 // export const loadG1sByCoupon = (coupon) =>{
 
 //     console.log(coupon);

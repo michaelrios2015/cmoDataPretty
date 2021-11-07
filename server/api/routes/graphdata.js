@@ -35,6 +35,7 @@ router.get('/coupons/:coupon', async(req, res, next)=> {
     `SELECT *
     FROM sumoffloats
     WHERE coupon = ${req.params.coupon}
+    AND gtype = 'g2s'
     ORDER BY cpr;` ));
     
 
@@ -44,6 +45,29 @@ router.get('/coupons/:coupon', async(req, res, next)=> {
     next(ex);
   }
 });
+
+router.get('/gtypeandcoupon/:gtype/:coupon', async(req, res, next)=> {
+  try {
+
+  console.log(req.params.coupon) 
+
+  
+
+  let [results, _] = (await db.query(
+    `SELECT *
+    FROM sumoffloats
+    WHERE coupon = ${req.params.coupon}
+    AND gtype = '${req.params.gtype}'
+    ORDER BY cpr;` ));
+    
+
+  res.send(results)
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
 
 
 // NOT UPDATED

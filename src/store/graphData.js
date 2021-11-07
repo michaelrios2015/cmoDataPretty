@@ -54,6 +54,17 @@ export const loadGraphData = () =>{
     }
 };
 
+export const loadGraphDataByCoupon = (coupon) =>{
+
+    
+    return async(dispatch)=>{
+        const data = (await axios.get(`/api/graphdata/coupons/${coupon}`)).data;
+        // console.log(data); 
+
+
+        dispatch(_loadGraphData(data));
+    }
+};
 
 // export const loadG1sByCoupon = (coupon) =>{
 

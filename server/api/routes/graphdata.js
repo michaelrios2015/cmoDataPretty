@@ -6,13 +6,12 @@ const { db } = require('../../db');
 
 router.get('/', async(req, res, next)=> {
   
-    console.log("try")
+    // console.log("try")
   
     try {
 
   let [results, _] = (await db.query(
-    // 'SELECT pools.cusip, poolbodies."poolCusip", poolpredictions.cusip as ppCusip ' +
-    `SELECT floatsum
+    `SELECT *
     FROM sumoffloats
     WHERE coupon = 6
     ORDER BY cpr;` ));
@@ -24,7 +23,6 @@ router.get('/', async(req, res, next)=> {
   }
 });
 
-// NOT UPDATED
 
 router.get('/coupons/:coupon', async(req, res, next)=> {
   try {
@@ -34,13 +32,11 @@ router.get('/coupons/:coupon', async(req, res, next)=> {
   
 
   let [results, _] = (await db.query(
-    // 'SELECT pools.cusip, poolbodies."poolCusip", poolpredictions.cusip as ppCusip ' +
-    `SELECT *,
-    currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) AS float
-    FROM g1s
+    `SELECT *
+    FROM sumoffloats
     WHERE coupon = ${req.params.coupon}
-    ORDER BY coupon, issuedate DESC
-    LIMIT 10000;` ));
+    ORDER BY cpr;` ));
+    
 
   res.send(results)
   }
@@ -49,6 +45,8 @@ router.get('/coupons/:coupon', async(req, res, next)=> {
   }
 });
 
+
+// NOT UPDATED
 
 router.get('/floats/:float', async(req, res, next)=> {
   try {

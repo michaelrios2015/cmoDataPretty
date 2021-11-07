@@ -25,7 +25,7 @@
     "moment": "^2.29.1",
     "pg": "^8.5.1",
     "react-chartjs-2": "^3.2.0",
-    "sequelize": "^6.5.0"
+    "sequelize": "^6.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

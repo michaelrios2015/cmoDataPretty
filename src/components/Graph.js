@@ -1,3 +1,5 @@
+// THIS NEEDS CLEAN UP 11/7/21
+
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 // import React, { Component } from 'react';
@@ -12,7 +14,6 @@ for(let i = 0; i<101; i++ ){
   labels.push(i)
 }
 
-
 const state = {
   labels: labels,
   datasets: [
@@ -23,9 +24,9 @@ const state = {
       backgroundColor: 'rgba(75,192,192,1)',
       borderColor: 'rgba(0,0,0,1)',
       borderWidth: 2,
+      // xAxisID: 'A',
       data: []
-    }
-    ,
+    },
     {
       label: 'Predicted CPR',
       fill: false,
@@ -35,13 +36,25 @@ const state = {
       borderColor: "#80b6f4",
       borderWidth: 2,
       data: [] 
-    }, 
-  
-
+    },
   ]
 }
  
+const legend = {
+  display: true,
+  position: "bottom",
+  labels: {
+    fontColor: "#323130",
+    fontSize: 14
+  }
+};
 
+const options =  {           
+title:{
+  display:true,
+  text:'Average Rainfall per month',
+  fontSize:20
+}};
 
 //rows are now created in store :) 
 function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataByGtypeandCoupon}) {
@@ -52,25 +65,12 @@ function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataB
   
   const [loading, setLoading ] = useState(true);
 
-  // console.log(g1s[0])
-  //my homemade loading true or false again needed not sure
-  // useEffect(() => {
-  //   console.log(g1s.length)
-  //   if (g1s.length > 0){
-  //     setLoading(false);
-  //   }
-  // },[g1s]);
-
   //should be the first thing to load
   // useEffect(() => {
   //   // setLoading(true);
   //   loadGraphData();
-
-    
   // },[]);
-
-  // const data = [];
-
+ 
   useLayoutEffect(() => {
     console.log(searchA);
     console.log(searchB);
@@ -89,21 +89,22 @@ function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataB
   });
 
   console.log(state)
-let coupon = [];
-for (let i=1; i < 10; i += .5 ){
-  coupon.push(i.toString())
-}
 
-const gtype = ['g1s', 'g2s'];
+  let coupon = [];
+  
+  for (let i=1; i < 10; i += .5 ){
+    coupon.push(i.toString())
+  }
+  
+  const gtype = ['g1s', 'g2s'];
 
-// const propertyValues = Object.values(graphData);
-
-    console.log(state.datasets[0]['data'])
-    console.log(Object.values(graphData));
+  // console.log(state.datasets[0]['data'])
+  // console.log(Object.values(graphData));
     // console.log( propertyValues)
     return (
       <div>
-                <Autocomplete
+        
+        <Autocomplete
           id="combo-box-pool-names"
           options={coupon}
           getOptionLabel={(option) => option}
@@ -126,22 +127,42 @@ const gtype = ['g1s', 'g2s'];
       </div>
         <Line
           data={state}
+
+          // legend={legend}
           // very confusing.. but seems to work
           height={"100%"}
           // width={"800%"}
-          options={{
+          options={ 
+            // options
+            {
             title:{
               display:true,
               text:'Average Rainfall per month',
               fontSize:20
-            },
-            legend:{
-              display:true,
-              position:'right'
-            },
-            // maintainAspectRatio: false 
+            }
+            // ,
+            // scales: {
+            //   y: [{
+            //     scaleLabel: {
+            //       display: true,
+            //       labelString: 'Y text'
+            //     }
+            //   }],
+            //   x: [{
+            //     scaleLabel: {
+            //       display: true,
+            //       labelString: 'X text'
+            //     }
+            //   }],
+            // },  
 
-          }}
+            // legend:{
+            //   display:true,
+            //   position:'right'
+            // },
+            
+        }
+      }
         />
       </div>
     );

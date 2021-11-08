@@ -103,7 +103,8 @@ function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataB
     // console.log( propertyValues)
     return (
       <div>
-        
+        <div className={ 'sideBySide' }> 
+
         <Autocomplete
           id="combo-box-pool-names"
           options={coupon}
@@ -121,9 +122,12 @@ function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataB
           onChange={(event, value)=>{setSearchA(value); console.log(searchA)}}
           renderInput={(params) => <TextField  {...params} label="G1 or G2" variant="outlined"/>}
         />  
+      </div>
 
       <div>
-        <h1>SEPTEMBER</h1>
+        <h4>Month: SEPTEMBER</h4>
+        <h4>Y Axis: Tradable Float in MM</h4>
+        <h4>X Axis: CPR</h4>
       </div>
         <Line
           data={state}

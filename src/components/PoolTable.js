@@ -150,8 +150,8 @@ for (let i=1; i < 10; i++ ){
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-              <TableCell ><b>G2s OCTOBER</b></TableCell>
-                <TableCell align="center" colSpan={12}/>
+              <TableCell colSpan={2}><b>G2s OCTOBER</b></TableCell>
+                <TableCell align="center" colSpan={11}/>
                 <TableCell align="center" colSpan={2}>
                   Actual CPR
                 </TableCell>

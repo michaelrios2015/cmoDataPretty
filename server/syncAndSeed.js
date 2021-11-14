@@ -71,7 +71,7 @@ const {
     // poolStreamer('data/platinums/G2plats_202109.csv')
 
     // poolStreamer('data/pools/G2pools_202110.csv')
-    poolStreamer('data/platinums/G2plats_202110.csv')
+    // poolStreamer('data/platinums/G2plats_202110.csv')
 
     // ------------------------------ G1s
     // g1Streamer('data/pools/G1pools_202108.csv')
@@ -80,7 +80,7 @@ const {
     // g1Streamer('data/pools/G1pools_202109.csv')
     // g1Streamer('data/platinums/G1plats_202109.csv')
     
-    // g1Streamer('data/pools/G1pools_202110.csv')
+    g1Streamer('data/pools/G1pools_202110.csv')
     // g1Streamer('data/platinums/G1plats_202110.csv')
   
   };

@@ -14,6 +14,7 @@ router.get('/', async(req, res, next)=> {
     `SELECT *
     FROM sumoffloats
     WHERE coupon = 6
+    AND date = '2021-10-01'
     ORDER BY cpr;` ));
 
   res.send(results)
@@ -36,6 +37,7 @@ router.get('/coupons/:coupon', async(req, res, next)=> {
     FROM sumoffloats
     WHERE coupon = ${req.params.coupon}
     AND gtype = 'g2s'
+    AND date = '2021-10-01'
     ORDER BY cpr;` ));
     
 
@@ -58,6 +60,7 @@ router.get('/gtypeandcoupon/:gtype/:coupon', async(req, res, next)=> {
     FROM sumoffloats
     WHERE coupon = ${req.params.coupon}
     AND gtype = '${req.params.gtype}'
+    AND date = '2021-10-01'
     ORDER BY cpr;` ));
     
 

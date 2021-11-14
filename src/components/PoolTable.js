@@ -32,7 +32,7 @@ function numberWithCommas(x) {
 //rows are now created in store :) 
 function PoolTable({ pools, loadPools, loadPoolsByCoupon, loadPoolsByFloats, loadPoolsByCouponsAndFloats }) {
   const [searchA, setSearchA ] = useState('');
-  const [searchB, setSearchB ] = useState('');
+  const [searchB, setSearchB ] = useState(3.5);
   // const [searchYear, setSearchYear ] = useState('2021');
   // const [searchMonth, setSearchMonth ] = useState('FEB');
   
@@ -50,7 +50,7 @@ function PoolTable({ pools, loadPools, loadPoolsByCoupon, loadPoolsByFloats, loa
   //should be the first thing to load
   useEffect(() => {
     // setLoading(true);
-    loadPools();
+    loadPoolsByCoupon(searchB);
   },[]);
 
   const firstUpdate = useRef(true);
@@ -150,7 +150,7 @@ for (let i=1; i < 10; i++ ){
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-              <TableCell >2021-09</TableCell>
+              <TableCell ><b>OCTOBER</b></TableCell>
                 <TableCell align="center" colSpan={12}/>
                 <TableCell align="center" colSpan={2}>
                   Actual CPR

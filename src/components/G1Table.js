@@ -50,7 +50,8 @@ function G1Table({ g1s, loadG1s, loadG1sByCoupon, loadG1sByFloats, loadG1sByCoup
   //should be the first thing to load
   useEffect(() => {
     // setLoading(true);
-    loadG1s();
+    // loadG1s();
+    loadG1sByCoupon(3.5)
   },[]);
 
   const firstUpdate = useRef(true);
@@ -130,11 +131,11 @@ for (let i=1; i < 10; i++ ){
           // id="outlined-name"
           value = {searchA}
           onChange={(event)=>{
-                          if(!isNaN(event.target.value)){
-                          setSearchA(event.target.value)
-                          // console.log(event.target.value)
-                        }
-                        }}
+          if(!isNaN(event.target.value)){
+          setSearchA(event.target.value)
+          // console.log(event.target.value)
+        }
+        }}
         /> 
       </div>
 
@@ -150,7 +151,7 @@ for (let i=1; i < 10; i++ ){
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-              <TableCell >2021-09</TableCell>
+              <TableCell > <b>OCTOBER</b></TableCell>
                 <TableCell align="center" colSpan={12}/>
                 <TableCell align="center" colSpan={2}>
                   Actual CPR

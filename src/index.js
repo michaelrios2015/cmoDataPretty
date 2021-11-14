@@ -29,7 +29,7 @@ class _App extends Component{
             <Route component={ PoolTable } path = '/' exact/>      
             <Route component={ G1Table } path = '/G1' exact/>  
             <Route component={ Graph } path = '/graph' exact/>     
-            <Route component={ Test } path = '/test' exact/>     
+            <Route component={ BasicTable } path = '/cmo' exact/>     
           </div>
         </Router>
     );

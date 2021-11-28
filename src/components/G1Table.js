@@ -38,6 +38,12 @@ function G1Table({ g1s, loadG1s, loadG1sByCoupon, loadG1sByFloats, loadG1sByCoup
   
   const [loading, setLoading ] = useState(true);
 
+  const previousmonth = 'September';
+  const currentmonth = 'October';
+  const nextmonth = 'November';
+  const feddate = '11/10/21';
+  
+
   // console.log(g1s[0])
   //my homemade loading true or false again needed not sure
   useEffect(() => {
@@ -174,7 +180,7 @@ for (let i=1; i < 10; i++ ){
                 <TableCell align="right">Issue Month</TableCell>
                 <TableCell align="right">Current Face</TableCell>
                 <TableCell align="right">CF in CMO</TableCell>
-                <TableCell align="right">CF in FED</TableCell>
+                <TableCell align="right">CF in FED {feddate}</TableCell>
                 <TableCell align="right">CF in Plat</TableCell>
                 <TableCell align="right">Float MM</TableCell>  
                 <TableCell align="right">Coupon</TableCell>
@@ -182,15 +188,15 @@ for (let i=1; i < 10; i++ ){
                 <TableCell align="right">WALA</TableCell>
                 <TableCell align="right">WAM</TableCell>
                 <TableCell align="right">VA</TableCell>
-                <TableCell align="right">Previous Month's</TableCell>
-                <TableCell align="right">Current Month's</TableCell>
-                <TableCell align="right">Curent Month's</TableCell>
-                <TableCell align="right">Next Month's</TableCell>
-                <TableCell align="right">Current Month's RESID</TableCell>
-                <TableCell align="right">Previous Month's</TableCell>
-                <TableCell align="right">Current Month's</TableCell>
-                <TableCell align="right">Current Month's</TableCell>
-                <TableCell align="right">Next Month's</TableCell>
+                <TableCell align="right">{previousmonth}</TableCell>
+                <TableCell align="right">{currentmonth}</TableCell>
+                <TableCell align="right">{currentmonth}</TableCell>
+                <TableCell align="right">{nextmonth}</TableCell>
+                <TableCell align="right">{currentmonth} RESID</TableCell>
+                <TableCell align="right">{previousmonth}</TableCell>
+                <TableCell align="right">{currentmonth}</TableCell>
+                <TableCell align="right">{currentmonth}</TableCell>
+                <TableCell align="right">{nextmonth}</TableCell>
                 {/* <TableCell align="right">Date</TableCell> */}
               </TableRow>
             </TableHead>
@@ -216,7 +222,7 @@ for (let i=1; i < 10; i++ ){
                   <TableCell align="right">{row.curractualcpr}</TableCell>
                   <TableCell align="right">{row.cprprediction}</TableCell>
                   <TableCell align="right">{row.cprpredictionnext}</TableCell>
-                  <TableCell align="right">{(row.curractualcpr - row.cprprediction).toFixed(1)}</TableCell>
+                  <TableCell align="right">{(row.curractualcpr - row.cprprediction).toFixed(1) != 0? (row.curractualcpr - row.cprprediction).toFixed(1) : ' '}</TableCell>
                   <TableCell align="right">{row.pastactcdr}</TableCell>
                   <TableCell align="right">{row.curractualcdr}</TableCell>
                   <TableCell align="right">{row.cdrprediction}</TableCell>

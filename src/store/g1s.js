@@ -37,30 +37,63 @@ const formatData = (arr) => {
 
     arr.forEach(item => {
 
+
+        // for (const property in item) {
+        //     if (item[property] * 1  == 0 || item[property] * 1 == -0){
+        //         item[property] = '';
+        //         console.log(`${property}: ${item[property]}`);
+        //     }    
+        // }
+
         item.currentface = (item.currentface/1000000).toFixed(1);
-        if (item.cfincmo){
-            item.cfincmo = (item.cfincmo/1000000).toFixed(1);
+        item.cfincmo = (item.cfincmo/1000000).toFixed(1);
+        item.cfinplat = (item.cfinplat/1000000).toFixed(1);
+        if (item.cfinfed){ 
+            item.cfinfed = (item.cfinfed/1000000).toFixed(1);
         }
-        if (item.cfinplat){
-            item.cfinplat = (item.cfinplat/1000000).toFixed(1);
+        if (item.pastactcpr){ 
+            item.pastactcpr = (item.pastactcpr * 100).toFixed(1); 
         }
-        item.cfinfed = (item.cfinfed/1000000).toFixed(1);
-        item.pastactcpr = (item.pastactcpr * 100).toFixed(1); 
-        item.curractualcpr = (item.curractualcpr * 100).toFixed(1);
-        if (item.curractualcpr * 1 === -0){
-            item.curractualcpr = Math.abs(item.curractualcpr * 1);
-            console.log(item.curractualcpr)
+        // if (item.curractualcpr){ 
+            item.curractualcpr = (item.curractualcpr * 100).toFixed(1);
+        // }
+        if (item.cprprediction){ 
+            item.cprprediction = (item.cprprediction * 100).toFixed(1);
         }
-        item.cprprediction = (item.cprprediction * 100).toFixed(1);
-        item.cprpredictionnext = (item.cprpredictionnext * 100).toFixed(1);
-        item.pastactcdr = (item.pastactcdr * 100).toFixed(1); 
-        item.curractualcdr = (item.curractualcdr * 100).toFixed(1);
-        item.cdrprediction = (item.cdrprediction * 100).toFixed(1);
-        item.cdrpredictionnext = (item.cdrpredictionnext * 100).toFixed(1);
-        item.issuedate = item.issuedate.toString().slice(0, 4) + item.issuedate.toString().slice(5, 7);
+        if (item.cprpredictionnext){ 
+            item.cprpredictionnext = (item.cprpredictionnext * 100).toFixed(1);
+        }
+        if (item.pastactcdr){ 
+            item.pastactcdr = (item.pastactcdr * 100).toFixed(1); 
+        }
+        if (item.curractualcdr){ 
+            item.curractualcdr = (item.curractualcdr * 100).toFixed(1);
+        }
+        if (item.cdrprediction){ 
+            item.cdrprediction = (item.cdrprediction * 100).toFixed(1);
+        }
+        if (item.cdrpredictionnext){ 
+            item.cdrpredictionnext = (item.cdrpredictionnext * 100).toFixed(1);
+        }
+        if (item.issuedate){ 
+            item.issuedate = item.issuedate.toString().slice(0, 4) + item.issuedate.toString().slice(5, 7);
+        }
+        if (item.va){ 
+            item.va = (item.va * 100).toFixed(0);
+        }    
+    
+        for (const property in item) {
+            if (item[property] * 1  == 0 || item[property] * 1 == -0){
+                item[property] = '';
+                console.log(`${property}: ${item[property]}`);
+            }    
+        }
+    
+    
     })
 
 }
+
 
 const g1sReducer = (state = [], action) =>{
     if (action.type === LOAD_G1S){

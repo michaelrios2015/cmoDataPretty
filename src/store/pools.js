@@ -38,29 +38,45 @@ const formatData = (arr) => {
     arr.forEach(item => {
 
         item.currentface = (item.currentface/1000000).toFixed(1);
-        if (item.cfincmo){
-            item.cfincmo = (item.cfincmo/1000000).toFixed(1);
-        }
-        if (item.cfinplat){
-            item.cfinplat = (item.cfinplat/1000000).toFixed(1);
-        }
+        
+        item.cfincmo = (item.cfincmo/1000000).toFixed(1);
+        
+        item.cfinplat = (item.cfinplat/1000000).toFixed(1);
+        
         item.cfinfed = (item.cfinfed/1000000).toFixed(1);
+        
         item.pastactcpr = (item.pastactcpr * 100).toFixed(1); 
+        
         item.curractualcpr = (item.curractualcpr * 100).toFixed(1);
-        if (item.curractualcpr * 1 === -0){
-            item.curractualcpr = Math.abs(item.curractualcpr * 1);
-            console.log(item.curractualcpr)
-        }
+        
         item.cprprediction = (item.cprprediction * 100).toFixed(1);
+        
         item.cprpredictionnext = (item.cprpredictionnext * 100).toFixed(1);
+        
         item.pastactcdr = (item.pastactcdr * 100).toFixed(1); 
+        
         item.curractualcdr = (item.curractualcdr * 100).toFixed(1);
+        
         item.cdrprediction = (item.cdrprediction * 100).toFixed(1);
+        
         item.cdrpredictionnext = (item.cdrpredictionnext * 100).toFixed(1);
+        
         item.issuedate = item.issuedate.toString().slice(0, 4) + item.issuedate.toString().slice(5, 7);
+        
+        item.va = (item.va * 100).toFixed(0);
+        
+        for (const property in item) {
+            if (item[property] * 1  == 0 || item[property] * 1 == -0){
+                item[property] = '';
+                console.log(`${property}: ${item[property]}`);
+            }    
+        }
+    
+    
     })
 
 }
+
 
 const poolsReducer = (state = [], action) =>{
     if (action.type === LOAD_POOLS){
@@ -82,6 +98,7 @@ export const loadPools = () =>{
 
     return async(dispatch)=>{
         const tests = (await axios.get(`/api/pools/`)).data;
+
         // console.log(tests[0]); 
 
         formatData(tests)
@@ -97,7 +114,8 @@ export const loadPoolsByCoupon = (coupon) =>{
 
     return async(dispatch)=>{
         const tests = (await axios.get(`/api/pools/coupons/${coupon}`)).data;
-        // console.log(tests[0]); 
+        console.log('tests[0]'); 
+        console.log(tests[0]); 
         formatData(tests)
 
         dispatch(_loadPools(loadData(tests)));

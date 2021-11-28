@@ -4,9 +4,14 @@ const { db } = require('../../db');
 
 // i can just use raw queries https://medium.com/@codemonk/writing-raw-sql-queries-in-sequelize-for-express-js-eaa095cd41e4
 
+// this should be incorprated better but it's ok for now
+const date = '2021-10-01';
+
 router.get('/', async(req, res, next)=> {
   
     // console.log("try")
+
+
   
     try {
 
@@ -37,7 +42,7 @@ router.get('/coupons/:coupon', async(req, res, next)=> {
     FROM sumoffloats
     WHERE coupon = ${req.params.coupon}
     AND gtype = 'g2s'
-    AND date = '2021-10-01'
+    AND date = '${date}'
     ORDER BY cpr;` ));
     
 
@@ -51,7 +56,10 @@ router.get('/coupons/:coupon', async(req, res, next)=> {
 router.get('/gtypeandcoupon/:gtype/:coupon', async(req, res, next)=> {
   try {
 
-  console.log(req.params.coupon) 
+  // console.log(req.params.coupon) 
+  // console.log('------------------------')   
+  // console.log(date) 
+
 
   
 
@@ -60,7 +68,7 @@ router.get('/gtypeandcoupon/:gtype/:coupon', async(req, res, next)=> {
     FROM sumoffloats
     WHERE coupon = ${req.params.coupon}
     AND gtype = '${req.params.gtype}'
-    AND date = '2021-10-01'
+    AND date = '${date}'
     ORDER BY cpr;` ));
     
 
@@ -104,8 +112,9 @@ router.get('/floats/:float', async(req, res, next)=> {
 router.get('/couponsandfloats/:coupon/:float', async(req, res, next)=> {
   try {
 
-
+  console.log('------------------------')   
   console.log(req.params.float) 
+  console.log(date) 
 
   const min = req.params.float * 1000000; 
 

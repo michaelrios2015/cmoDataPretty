@@ -56,6 +56,9 @@ const Pool = db.define('pools', {
   curractualcpr: { 
     type: FLOAT, 
   },
+  cprpastprediction: { 
+    type: FLOAT, 
+  },
   cprprediction: { 
       type: FLOAT, 
   },

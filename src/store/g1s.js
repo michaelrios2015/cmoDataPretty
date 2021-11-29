@@ -7,11 +7,11 @@ const LOAD_G1S = 'LOAD_G1S';
 
 const loadData = (arr) => {
 
-    function createData ( cusip, name, indicator, type, issuedate, currentface, cfincmo, cfinfed, cfinplat, coupon, gwac, wala, wam, va, pastactcpr, curractualcpr, cprprediction, cprpredictionnext, pastactcdr, curractualcdr, 
+    function createData ( cusip, name, indicator, type, issuedate, currentface, cfincmo, cfinfed, cfinplat, coupon, gwac, wala, wam, va, pastactcpr, curractualcpr, cprpastprediction, cprprediction, cprpredictionnext, pastactcdr, curractualcdr, 
                             cdrprediction, cdrpredictionnext, date ) 
     {
         return { 
-            cusip, name, indicator, type, issuedate, currentface, cfincmo, cfinfed, cfinplat, coupon, gwac, wala, wam, va, pastactcpr, curractualcpr, cprprediction, cprpredictionnext, pastactcdr, curractualcdr, 
+            cusip, name, indicator, type, issuedate, currentface, cfincmo, cfinfed, cfinplat, coupon, gwac, wala, wam, va, pastactcpr, curractualcpr, cprpastprediction, cprprediction, cprpredictionnext, pastactcdr, curractualcdr, 
             cdrprediction, cdrpredictionnext, date
                 };
     }
@@ -23,7 +23,7 @@ const loadData = (arr) => {
     try {
         arr.forEach(item => {
             rows.push(createData(item.cusip, item.name, item.indicator, item.type, item.issuedate, item.currentface,  
-                item.cfincmo, item.cfinfed, item.cfinplat, item.coupon, item.gwac, item.wala, item.wam, item.va, item.pastactcpr, item.curractualcpr, item.cprprediction, item.cprpredictionnext, 
+                item.cfincmo, item.cfinfed, item.cfinplat, item.coupon, item.gwac, item.wala, item.wam, item.va, item.pastactcpr, item.curractualcpr, item.cprpastprediction, item.cprprediction, item.cprpredictionnext, 
                 item.pastactcdr, item.curractualcdr, item.cdrprediction, item.cdrpredictionnext, item.date))
         });
     }
@@ -49,6 +49,8 @@ const formatData = (arr) => {
         
         item.curractualcpr = (item.curractualcpr * 100).toFixed(1);
         
+        item.cprpastprediction = (item.cprpastprediction * 100).toFixed(1);
+
         item.cprprediction = (item.cprprediction * 100).toFixed(1);
         
         item.cprpredictionnext = (item.cprpredictionnext * 100).toFixed(1);
@@ -68,7 +70,7 @@ const formatData = (arr) => {
         for (const property in item) {
             if (item[property] * 1  == 0 || item[property] * 1 == -0){
                 item[property] = '';
-                console.log(`${property}: ${item[property]}`);
+                // console.log(`${property}: ${item[property]}`);
             }    
         }
     

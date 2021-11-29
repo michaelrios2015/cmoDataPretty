@@ -56,6 +56,9 @@ const G1 = db.define('g1s', {
   curractualcpr: { 
     type: FLOAT, 
   },
+  cprpastprediction: { 
+    type: FLOAT, 
+  },
   cprprediction: { 
       type: FLOAT, 
   },

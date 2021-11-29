@@ -162,10 +162,11 @@ for (let i=1; i < 10; i++ ){
                 <TableCell align="center" colSpan={2}>
                   Actual CPR
                 </TableCell>
-                <TableCell align="center" colSpan={2}>
+                <TableCell align="center" colSpan={3}>
                   Predicted CPR
                 </TableCell>
-                <TableCell align="center" colSpan={1}>
+                <TableCell align="center" colSpan={2}>
+                  Resid
                 </TableCell>
                 <TableCell align="center" colSpan={2}>
                   Actual CDR
@@ -190,9 +191,11 @@ for (let i=1; i < 10; i++ ){
                 <TableCell align="right">VA</TableCell>
                 <TableCell align="right">{previousmonth}</TableCell>
                 <TableCell align="right">{currentmonth}</TableCell>
+                <TableCell align="right">{previousmonth}</TableCell>
                 <TableCell align="right">{currentmonth}</TableCell>
                 <TableCell align="right">{nextmonth}</TableCell>
-                <TableCell align="right">{currentmonth} RESID</TableCell>
+                <TableCell align="right">{previousmonth}</TableCell>
+                <TableCell align="right">{currentmonth}</TableCell>
                 <TableCell align="right">{previousmonth}</TableCell>
                 <TableCell align="right">{currentmonth}</TableCell>
                 <TableCell align="right">{currentmonth}</TableCell>
@@ -220,8 +223,10 @@ for (let i=1; i < 10; i++ ){
                   <TableCell align="right">{row.va}</TableCell>
                   <TableCell align="right">{row.pastactcpr}</TableCell>
                   <TableCell align="right">{row.curractualcpr}</TableCell>
+                  <TableCell align="right">{row.cprpastprediction}</TableCell>
                   <TableCell align="right">{row.cprprediction}</TableCell>
                   <TableCell align="right">{row.cprpredictionnext}</TableCell>
+                  <TableCell align="right">{(row.pastactcpr - row.cprpastprediction).toFixed(1) != 0? (row.pastactcpr - row.cprpastprediction).toFixed(1) : ' '}</TableCell>
                   <TableCell align="right">{(row.curractualcpr - row.cprprediction).toFixed(1) != 0? (row.curractualcpr - row.cprprediction).toFixed(1) : ' '}</TableCell>
                   <TableCell align="right">{row.pastactcdr}</TableCell>
                   <TableCell align="right">{row.curractualcdr}</TableCell>

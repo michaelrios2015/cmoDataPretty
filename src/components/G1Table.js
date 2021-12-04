@@ -41,7 +41,7 @@ function G1Table({ g1s, loadG1s, loadG1sByCoupon, loadG1sByFloats, loadG1sByCoup
   const previousmonth = 'September';
   const currentmonth = 'October';
   const nextmonth = 'November';
-  const feddate = '11/24/21';
+  const feddate = '12/01/21';
   
 
   // console.log(g1s[0])

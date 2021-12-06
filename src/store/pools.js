@@ -7,12 +7,14 @@ const LOAD_POOLS = 'LOAD_POOLS';
 
 const loadData = (arr) => {
 
-    function createData ( cusip, name, indicator, type, issuedate, currentface, cfincmo, cfinfed, cfinplat, coupon, gwac, wala, wam, va, pastactcpr, curractualcpr, cprpastprediction, cprprediction, cprpredictionnext, pastactcdr, curractualcdr, 
-                            cdrprediction, cdrpredictionnext, date ) 
+    function createData ( cusip, name, indicator, type, issuedate, currentface, cfincmo, cfinfed, cfinplat, coupon, gwac, wala, wam, va, 
+                            pastactcpr, curractualcpr, curractualcprnext, cprpastprediction, cprprediction, cprfutureprediction, cprfuturepredictionnext, curractualcdr, 
+                            currcdrprediction, cdrfutureprediction, date ) 
     {
         return { 
-            cusip, name, indicator, type, issuedate, currentface, cfincmo, cfinfed, cfinplat, coupon, gwac, wala, wam, va, pastactcpr, curractualcpr, cprpastprediction, cprprediction, cprpredictionnext, pastactcdr, curractualcdr, 
-            cdrprediction, cdrpredictionnext, date
+                    cusip, name, indicator, type, issuedate, currentface, cfincmo, cfinfed, cfinplat, coupon, gwac, wala, wam, va, 
+                    pastactcpr, curractualcpr, curractualcprnext, cprpastprediction, cprprediction, cprfutureprediction, cprfuturepredictionnext, 
+                    curractualcdr, currcdrprediction, cdrfutureprediction, date
                 };
     }
 
@@ -23,8 +25,9 @@ const loadData = (arr) => {
     try {
         arr.forEach(item => {
             rows.push(createData(item.cusip, item.name, item.indicator, item.type, item.issuedate, item.currentface,  
-                item.cfincmo, item.cfinfed, item.cfinplat, item.coupon, item.gwac, item.wala, item.wam, item.va, item.pastactcpr, item.curractualcpr, item.cprpastprediction, item.cprprediction, item.cprpredictionnext, 
-                item.pastactcdr, item.curractualcdr, item.cdrprediction, item.cdrpredictionnext, item.date))
+                item.cfincmo, item.cfinfed, item.cfinplat, item.coupon, item.gwac, item.wala, item.wam, item.va, 
+                item.pastactcpr, item.curractualcpr, item.curractualcprnext, item.cprpastprediction, item.cprprediction, item.cprfutureprediction, item.cprfuturepredictionnext, 
+                item.curractualcdr, item.currcdrprediction, item.cdrfutureprediction, item.date))
         });
     }
     catch(err){
@@ -49,19 +52,21 @@ const formatData = (arr) => {
         
         item.curractualcpr = (item.curractualcpr * 100).toFixed(1);
         
+        item.curractualcprnext = (item.curractualcprnext  * 100).toFixed(1);
+
         item.cprpastprediction = (item.cprpastprediction * 100).toFixed(1);
-        
+
         item.cprprediction = (item.cprprediction * 100).toFixed(1);
         
-        item.cprpredictionnext = (item.cprpredictionnext * 100).toFixed(1);
-        
-        item.pastactcdr = (item.pastactcdr * 100).toFixed(1); 
+        item.cprfutureprediction = (item.cprfutureprediction * 100).toFixed(1);
+
+        item.cprfuturepredictionnext = (item.cprfuturepredictionnext * 100).toFixed(1);
         
         item.curractualcdr = (item.curractualcdr * 100).toFixed(1);
         
-        item.cdrprediction = (item.cdrprediction * 100).toFixed(1);
+        item.currcdrprediction = (item.currcdrprediction * 100).toFixed(1);
         
-        item.cdrpredictionnext = (item.cdrpredictionnext * 100).toFixed(1);
+        item.cdrfutureprediction = (item.cdrfutureprediction * 100).toFixed(1);
         
         item.issuedate = item.issuedate.toString().slice(0, 4) + item.issuedate.toString().slice(5, 7);
         
@@ -78,6 +83,7 @@ const formatData = (arr) => {
     })
 
 }
+
 
 const poolsReducer = (state = [], action) =>{
     if (action.type === LOAD_POOLS){

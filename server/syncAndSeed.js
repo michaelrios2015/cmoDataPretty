@@ -52,7 +52,7 @@ const {
     
     // --------------------------for syching database
     // await db.sync({ force: true });
-    await db.sync();
+    // await db.sync();
     
 
     // ------------------------------ CMOs

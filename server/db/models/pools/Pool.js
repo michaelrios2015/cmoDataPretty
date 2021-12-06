@@ -56,31 +56,34 @@ const Pool = db.define('pools', {
   curractualcpr: { 
     type: FLOAT, 
   },
+  curractualcprnext: { 
+    type: FLOAT, 
+  },
   cprpastprediction: { 
     type: FLOAT, 
   },
   cprprediction: { 
       type: FLOAT, 
   },
-  cprpredictionnext: { 
-      type: FLOAT, 
+  cprfutureprediction: { 
+    type: FLOAT, 
   },
-  pastactcdr: { 
+  cprfuturepredictionnext: { 
       type: FLOAT, 
   },
   curractualcdr: { 
     type: FLOAT, 
   },
-  cdrprediction: { 
+  currcdrprediction: { 
     type: FLOAT, 
   },
-  cdrpredictionnext: { 
+  cdrfuturepediction: { 
     type: FLOAT, 
   },
   date: { 
     type: DATEONLY, 
     primaryKey: true
-  },       
+  },
 },{ timestamps: false });
 
 

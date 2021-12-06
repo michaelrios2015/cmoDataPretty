@@ -56,25 +56,28 @@ const G1 = db.define('g1s', {
   curractualcpr: { 
     type: FLOAT, 
   },
+  curractualcprnext: { 
+    type: FLOAT, 
+  },
   cprpastprediction: { 
     type: FLOAT, 
   },
   cprprediction: { 
       type: FLOAT, 
   },
-  cprpredictionnext: { 
-      type: FLOAT, 
+  cprfutureprediction: { 
+    type: FLOAT, 
   },
-  pastactcdr: { 
+  cprfuturepredictionnext: { 
       type: FLOAT, 
   },
   curractualcdr: { 
     type: FLOAT, 
   },
-  cdrprediction: { 
+  currcdrprediction: { 
     type: FLOAT, 
   },
-  cdrpredictionnext: { 
+  cdrfuturepediction: { 
     type: FLOAT, 
   },
   date: { 

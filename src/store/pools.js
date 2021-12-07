@@ -9,12 +9,12 @@ const loadData = (arr) => {
 
     function createData ( cusip, name, indicator, type, issuedate, currentface, cfincmo, cfinfed, cfinplat, coupon, gwac, wala, wam, va, 
                             pastactcpr, curractualcpr, curractualcprnext, cprpastprediction, cprprediction, cprfutureprediction, cprfuturepredictionnext, curractualcdr, 
-                            currcdrprediction, cdrfutureprediction, date ) 
+                            currcdrprediction, cdrfuturepediction, date ) 
     {
         return { 
                     cusip, name, indicator, type, issuedate, currentface, cfincmo, cfinfed, cfinplat, coupon, gwac, wala, wam, va, 
                     pastactcpr, curractualcpr, curractualcprnext, cprpastprediction, cprprediction, cprfutureprediction, cprfuturepredictionnext, 
-                    curractualcdr, currcdrprediction, cdrfutureprediction, date
+                    curractualcdr, currcdrprediction, cdrfuturepediction, date
                 };
     }
 
@@ -27,7 +27,7 @@ const loadData = (arr) => {
             rows.push(createData(item.cusip, item.name, item.indicator, item.type, item.issuedate, item.currentface,  
                 item.cfincmo, item.cfinfed, item.cfinplat, item.coupon, item.gwac, item.wala, item.wam, item.va, 
                 item.pastactcpr, item.curractualcpr, item.curractualcprnext, item.cprpastprediction, item.cprprediction, item.cprfutureprediction, item.cprfuturepredictionnext, 
-                item.curractualcdr, item.currcdrprediction, item.cdrfutureprediction, item.date))
+                item.curractualcdr, item.currcdrprediction, item.cdrfuturepediction, item.date))
         });
     }
     catch(err){
@@ -66,7 +66,8 @@ const formatData = (arr) => {
         
         item.currcdrprediction = (item.currcdrprediction * 100).toFixed(1);
         
-        item.cdrfutureprediction = (item.cdrfutureprediction * 100).toFixed(1);
+        item.cdrfuturepediction = (item.cdrfuturepediction * 100).toFixed(1);
+        console.log(item.cdrfuturepediction);
         
         item.issuedate = item.issuedate.toString().slice(0, 4) + item.issuedate.toString().slice(5, 7);
         

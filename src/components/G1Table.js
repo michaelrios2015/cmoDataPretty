@@ -38,10 +38,11 @@ function G1Table({ g1s, loadG1s, loadG1sByCoupon, loadG1sByFloats, loadG1sByCoup
   
   const [loading, setLoading ] = useState(true);
 
-  const previousmonth = 'September';
-  const currentmonth = 'October';
-  const nextmonth = 'November';
-  const feddate = '12/01/21';
+  const previousmonth = 'October';
+  const currentmonth = 'November';
+  const nextmonth = 'December';
+  const twomoremonths = 'January'
+  const feddate = '12/08/21';
   
 
   // console.log(g1s[0])
@@ -156,8 +157,8 @@ for (let i=1; i < 10; i++ ){
         (<TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
-              <TableRow>
-              <TableCell colSpan={2}><b>G2s OCTOBER</b></TableCell>
+            <TableRow>
+              <TableCell colSpan={2}><b>G1s NOVEMBER</b></TableCell>
                 <TableCell align="center" colSpan={11}/>
                 <TableCell align="center" colSpan={2}>
                   Predicted CPR
@@ -165,7 +166,7 @@ for (let i=1; i < 10; i++ ){
                 <TableCell align="center" colSpan={2}>
                   Actual CPR
                 </TableCell>
-                <TableCell align="center" colSpan={2}>
+                <TableCell align="center" colSpan={1}>
                   CPR Resid 
                 </TableCell>
                 <TableCell align="center" colSpan={1}>
@@ -192,12 +193,16 @@ for (let i=1; i < 10; i++ ){
                 <TableCell align="right">WALA</TableCell>
                 <TableCell align="right">WAM</TableCell>
                 <TableCell align="right">VA</TableCell>
-                <TableCell align="right">December</TableCell>
+                <TableCell align="right">{twomoremonths}</TableCell>
                 <TableCell align="right">{nextmonth}</TableCell>
-                <TableCell align="right">{nextmonth}</TableCell>
+                {/* <TableCell align="right">{nextmonth}</TableCell> */}
                 <TableCell align="right">{currentmonth}</TableCell>
-                <TableCell align="right">{nextmonth}</TableCell>
+                <TableCell align="right">{previousmonth}</TableCell>
+                {/* RESID */}
+                {/* <TableCell align="right">{nextmonth}</TableCell> */}
                 <TableCell align="right">{currentmonth}</TableCell>
+                {/* <TableCell align="right">{previousmonth}</TableCell> */}
+                {/* CDR */}
                 <TableCell align="right">{nextmonth}</TableCell>
                 <TableCell align="right">{currentmonth}</TableCell>
                 <TableCell align="right">{currentmonth}</TableCell>
@@ -225,10 +230,12 @@ for (let i=1; i < 10; i++ ){
                   <TableCell align="right">{row.va}</TableCell>
                   <TableCell align="right">{row.cprfuturepredictionnext}</TableCell>
                   <TableCell align="right">{row.cprfutureprediction}</TableCell>
-                  <TableCell align="right">{row.curractualcprnext}</TableCell>
+                  {/* <TableCell align="right">{row.curractualcprnext}</TableCell> */}
                   <TableCell align="right">{row.curractualcpr}</TableCell>
-                  <TableCell align="right">{(row.curractualcprnext - row.cprfutureprediction).toFixed(1) != 0? (row.curractualcprnext - row.cprfutureprediction).toFixed(1) : ' '}</TableCell>
-                  <TableCell align="right">{(row.curractualcpr - row.cprprediction).toFixed(1) != 0? (row.curractualcpr - row.cprprediction).toFixed(1) : ' '}</TableCell>
+                  <TableCell align="right">{row.pastactcpr}</TableCell>
+                  {/* <TableCell align="right">{(row.curractualcprnext - row.cprfutureprediction).toFixed(1) != 0? (row.curractualcprnext - row.cprfutureprediction).toFixed(1) : ' '}</TableCell> */}
+                  {/* <TableCell align="right">{(row.curractualcpr - row.cprprediction).toFixed(1) != 0? (row.curractualcpr - row.cprprediction).toFixed(1) : ' '}</TableCell> */}
+                  <TableCell align="right">{(row.pastactcpr - row.cprpastprediction).toFixed(1) != 0? (row.pastactcpr - row.cprpastprediction).toFixed(1) : ' '}</TableCell>
                   <TableCell align="right">{row.cdrfuturepediction}</TableCell>
                   <TableCell align="right">{row.curractualcdr}</TableCell>
                   <TableCell align="right">{(row.curractualcdr - row.currcdrprediction).toFixed(1) != 0 ? (row.curractualcdr - row.currcdrprediction).toFixed(1) : ' '}</TableCell>

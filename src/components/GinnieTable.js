@@ -84,6 +84,7 @@ function PoolTable({ ginnies, loadGinnies, loadGinniesByCoupon, loadGinniesByFlo
     else {
       indicator = 'M'
       console.log(searchC)
+      // does not trigger an infinite loop neat :)
       setSearchC('Ginnie Two');
     }
 

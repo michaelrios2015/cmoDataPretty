@@ -6,8 +6,7 @@ const NavBar = () => {
       <div>
         <div className = { 'nav' }>
           {/* <h2><Link to='/'>cmos</Link></h2> */}
-          <h2><Link to='/'>G2</Link></h2>
-          <h2><Link to='/G1'>G1s</Link></h2>
+          <h2><Link to='/'>Ginnies</Link></h2>
           <h2><Link to='/graph'>Graph</Link></h2>
         </div>
         <hr></hr>

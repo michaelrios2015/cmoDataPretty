@@ -33,7 +33,7 @@ function numberWithCommas(x) {
 function PoolTable({ ginnies, loadGinnies, loadGinniesByCoupon, loadGinniesByFloats, loadGinniesByCouponsAndFloats }) {
   const [searchA, setSearchA ] = useState('');
   const [searchB, setSearchB ] = useState(3.5);
-  const [searchC, setSearchC ] = useState('M');
+  const [searchC, setSearchC ] = useState('Ginnie Two');
 
   // const [searchYear, setSearchYear ] = useState('2021');
   // const [searchMonth, setSearchMonth ] = useState('FEB');
@@ -84,6 +84,7 @@ function PoolTable({ ginnies, loadGinnies, loadGinniesByCoupon, loadGinniesByFlo
     else {
       indicator = 'M'
       console.log(searchC)
+      setSearchC('Ginnie Two');
     }
 
     console.log(indicator)
@@ -182,7 +183,7 @@ for (let i=1; i < 10; i++ ){
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-              <TableCell colSpan={2}><b>G2s NOVEMBER</b></TableCell>
+              <TableCell colSpan={2}><b>{searchC} NOVEMBER</b></TableCell>
                 <TableCell align="center" colSpan={11}/>
                 <TableCell align="center" colSpan={2}>
                   Predicted CPR

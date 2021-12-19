@@ -67,7 +67,7 @@ const formatData = (arr) => {
         item.currcdrprediction = (item.currcdrprediction * 100).toFixed(1);
         
         item.cdrfuturepediction = (item.cdrfuturepediction * 100).toFixed(1);
-        console.log(item.cdrfuturepediction);
+        // console.log(item.cdrfuturepediction);
         
         item.issuedate = item.issuedate.toString().slice(0, 4) + item.issuedate.toString().slice(5, 7);
         
@@ -126,7 +126,8 @@ export const loadPoolsByCoupon = (coupon) =>{
         console.log(tests[0]); 
         formatData(tests)
 
-        dispatch(_loadPools(loadData(tests)));
+        // dispatch(_loadPools(loadData(tests)));
+        dispatch(_loadPools(tests));
     }
        
 };
@@ -149,7 +150,7 @@ export const loadPoolsByFloats = (float) =>{
 
 export const loadPoolsByCouponsAndFloats = (coupon, float) =>{
 
-    // console.log("IN COUPONS AND FLOATS");
+    console.log("IN COUPONS AND FLOATS");
     // console.log(float);
 
     return async(dispatch)=>{
@@ -160,7 +161,8 @@ export const loadPoolsByCouponsAndFloats = (coupon, float) =>{
         // console.log(tests[0])    
 
 
-        dispatch(_loadPools(loadData(tests)));
+        // dispatch(_loadPools(loadData(tests)));
+        dispatch(_loadPools(tests));
     }
        
 };

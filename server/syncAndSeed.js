@@ -11,11 +11,6 @@ const {
   csvCMOBodyStream
 } = require('./synchAndSeedHelpers/cmos.js');
 
-const {
-  poolStreamer,
-  g1Streamer
-        } = require('./synchAndSeedHelpers/pools.js');
-
 
   // this is for the table I have not tackled yet 
   let streamCPN = fs.createReadStream('data/cpn.csv');
@@ -52,7 +47,7 @@ const {
     
     // --------------------------for syching database
     // await db.sync({ force: true });
-    await db.sync();
+    // await db.sync();
     
 
     // ------------------------------ CMOs
@@ -63,25 +58,6 @@ const {
     // ------------------------------ Cpns
     // streamCPN.pipe(csvStreamCPN);
 
-    // ------------------------------ Pools
-    // poolStreamer('data/pools/G2pools_202108.csv')
-    // poolStreamer('data/platinums/G2plats_202108.csv')
-
-    // poolStreamer('data/pools/G2pools_202109.csv')
-    // poolStreamer('data/platinums/G2plats_202109.csv')
-
-    // poolStreamer('data/pools/G2pools_202110.csv')
-    // poolStreamer('data/platinums/G2plats_202110.csv')
-
-    // ------------------------------ G1s
-    // g1Streamer('data/pools/G1pools_202108.csv')
-    // g1Streamer('data/platinums/G1plats_202108.csv')
-
-    // g1Streamer('data/pools/G1pools_202109.csv')
-    // g1Streamer('data/platinums/G1plats_202109.csv')
-    
-    // g1Streamer('data/pools/G1pools_202110.csv')
-    // g1Streamer('data/platinums/G1plats_202110.csv')
   
   };
 

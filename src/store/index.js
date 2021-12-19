@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { rowsReducer } from './cmos';
 import { poolsReducer } from './pools';
 import { g1sReducer } from './g1s';
+import { ginniesReducer } from './ginnies';
 import { graphDataReducer } from './graphData';
 
 // the reducer
@@ -12,6 +13,7 @@ const reducer = combineReducers({
     rows: rowsReducer,
     pools: poolsReducer,
     g1s: g1sReducer,
+    ginnies: ginniesReducer,
     graphData: graphDataReducer
 })
 
@@ -26,4 +28,5 @@ export default store;
 export * from './cmos'
 export * from './pools'
 export * from './g1s'
+export * from './ginnies'
 export * from './graphData'

@@ -40,12 +40,12 @@ function PoolTable({ ginnies, loadGinnies, loadGinniesByCoupon, loadGinniesByFlo
   
   const [loading, setLoading ] = useState(true);
 
-  const twomonthspast = 'Septmber'
-  const previousmonth = 'October';
-  const currentmonth = 'November';
-  const nextmonth = 'December';
-  const twomoremonths = 'January'
-  const feddate = '12/08/21';
+  const twomonthspast = 'SEP'
+  const previousmonth = 'OCT';
+  const currentmonth = 'NOV';
+  const nextmonth = 'DEC';
+  const twomoremonths = 'JAN';
+  const feddate = '12/15/21';
 
   // console.log(ginnies[0])
   //my homemade loading true or false again needed not sure

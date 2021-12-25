@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import { loadCMOS, loadDataByDealandGroup, loadRowsByYear } from '../store';
+import { loadCMOS, loadCMOSYearDealGroup } from '../store';
 
 const useStyles = makeStyles({
   table: {
@@ -27,7 +27,7 @@ function numberWithCommas(x) {
 }
 
 //rows are now created in store :) 
-function CMOTable({ cmos, loadCMOS }) {
+function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   const [searchA, setSearchA ] = useState('All');
   const [searchB, setSearchB ] = useState('All');
   const [searchYear, setSearchYear ] = useState('2021');
@@ -52,29 +52,43 @@ function CMOTable({ cmos, loadCMOS }) {
 
   const firstUpdate = useRef(true);
 
-  //checks to see if deal name or group has changed but does not run the first time
-  // useLayoutEffect(() => {
-  //   if (firstUpdate.current) {
-  //     firstUpdate.current = false;
-  //     return;
-  //   }
-  //   setLoading(true);
-  //   loadDataByDealandGroup(searchA, searchB, searchYear, searchMonth);
-  // },[searchA, searchB, searchYear, searchMonth]);
+  // checks to see if deal name or group has changed but does not run the first time
+  useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+
+    if(!searchYear){
+      setSearchYear(2021);
+    }
+
+    if(!searchA){
+      setSearchA('All');
+    }
+
+    if(!searchB){
+      setSearchB('All');
+    }
+    
+    setLoading(true);
+    console.log(searchA, searchB, searchYear, searchMonth)
+    loadCMOSYearDealGroup (searchYear, searchA, searchB);
+  },[searchA, searchB, searchYear, searchMonth]);
 
   const classes = useStyles();
       
-  // let dealNames = [];
-  // rows.forEach(item=>dealNames.push(item.deal.toString()));
-  // // seems to remove the duplicates
-  // dealNames = [...new Set(dealNames)]
+  let dealNames = [];
+  cmos.forEach(item=>dealNames.push(item.deal.toString()));
+  // seems to remove the duplicates
+  dealNames = [...new Set(dealNames)]
   // // console.log(dealNames);
   
-  // let groups = [];
-  // rows.forEach(item=>groups.push(item.group));
-  // // data.forEach(item=>console.log(item.group));
-  // // seems to remove the duplicates
-  // groups = [...new Set(groups)]
+  let groups = [];
+  cmos.forEach(item=>groups.push(item.group));
+  // data.forEach(item=>console.log(item.group));
+  // seems to remove the duplicates
+  groups = [...new Set(groups)]
   // // console.log(groups);
 
   let years = [];
@@ -107,15 +121,15 @@ function CMOTable({ cmos, loadCMOS }) {
           getOptionLabel={(option) => option}
           style={{ width: 300 }}
           onChange={(event, value)=>setSearchYear(value)}
-          renderInput={(params) => <TextField  {...params} label="Year" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchYear('2021')}  />}
+          renderInput={(params) => <TextField  {...params} label="Year" variant="outlined"   />}
         /> 
-        {/* <Autocomplete
+        <Autocomplete
           id="combo-box-demo"
           options={dealNames}
           getOptionLabel={(option) => option}
           style={{ width: 300 }}
           onChange={(event, value)=>setSearchA(value)}
-          renderInput={(params) => <TextField  {...params} label="Deal Names" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchA('All')}  />}
+          renderInput={(params) => <TextField  {...params} label="Deal Names" variant="outlined" />}
         />
         
         <Autocomplete
@@ -124,8 +138,8 @@ function CMOTable({ cmos, loadCMOS }) {
           getOptionLabel={(option) => option}
           style={{ width: 300 }}
           onChange={(event, value)=>setSearchB(value)}
-          renderInput={(params) => <TextField  {...params} label="Groups" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchB('All')} />}
-        />   */}
+          renderInput={(params) => <TextField  {...params} label="Groups" variant="outlined" />}
+        />  
       </div>
 
       {
@@ -175,15 +189,15 @@ function CMOTable({ cmos, loadCMOS }) {
             </TableHead>
             <TableBody>
               
-              {cmos.map((row) => (
-                <TableRow key={row.id}>
+              {cmos.map((row, idx) => (
+                <TableRow key={idx}>
                   <TableCell component="th" scope="row"> {row.year} </TableCell>
-                  <TableCell align="right">{row.cmo}</TableCell>
-                  {/* <TableCell align="right">{row.group}</TableCell> */}
-                  <TableCell align="right">{row.currFace && numberWithCommas(row.currFace)}</TableCell>
-                  <TableCell align="right">{row.actualCpr}</TableCell>
-                  <TableCell align="right">{row.residual}</TableCell>
+                  <TableCell align="right">{row.deal}</TableCell>
+                  <TableCell align="right">{row.group}</TableCell>
+                  <TableCell align="right">{row.currface && numberWithCommas(row.currface)}</TableCell>
                   <TableCell align="right">{row.cpr}</TableCell>
+                  <TableCell align="right">{row.residual}</TableCell>
+                  <TableCell align="right">{row.predictedcpr}</TableCell>
                   <TableCell align="right">{row.cprNext}</TableCell>
                   <TableCell align="right">{row.vpr}</TableCell>
                   <TableCell align="right">{row.vprNext}</TableCell>
@@ -208,6 +222,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadCMOS: ()=> {
       dispatch(loadCMOS());
+    },
+    loadCMOSYearDealGroup: (year, deal, group)=> {
+      dispatch(loadCMOSYearDealGroup(year, deal, group));
     }
   };
 }

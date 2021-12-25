@@ -5,12 +5,14 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { rowsReducer } from './cmos';
 import { ginniesReducer } from './ginnies';
 import { graphDataReducer } from './graphData';
+import { cmosReducer } from './cmostwo';
 
 // the reducer
 const reducer = combineReducers({
     rows: rowsReducer,
     ginnies: ginniesReducer,
-    graphData: graphDataReducer
+    graphData: graphDataReducer,
+    cmos: cmosReducer
 })
 
 //think this is just a fancy logger but not sure
@@ -22,5 +24,6 @@ const store = createStore(reducer, middleware);
 
 export default store;
 export * from './cmos'
+export * from './cmostwo'
 export * from './ginnies'
 export * from './graphData'

@@ -4,6 +4,7 @@ import { Provider, connect } from 'react-redux';
 import store from './store';
 import BasicTable from './components/BasicTable';
 import GinnieTable from './components/GinnieTable';
+import CMOTable from './components/CMOTable';
 import NavBar from './components/NavBar';
 import { HashRouter as Router, Route, BrowserRouter } from 'react-router-dom';
 import Graph from './components/Graph';
@@ -26,7 +27,8 @@ class _App extends Component{
             {/* <Route component={ BasicTable } path = '/' exact/>         */}
             <Route component={ GinnieTable } path = '/' exact/>  
             <Route component={ Graph } path = '/graph' exact/>     
-            <Route component={ BasicTable } path = '/cmo' exact/>     
+            <Route component={ BasicTable } path = '/cmo' exact/>    
+            <Route component={ CMOTable } path = '/cmotwo' exact/>     
           </div>
         </Router>
     );

@@ -62,7 +62,7 @@ router.get('/yeardealgroup/:year/:deal/:group', async(req, res, next)=> {
 
   let [results, _] = (await db.query(
     // 'SELECT pools.cusip, poolbodies."poolCusip", poolpredictions.cusip as ppCusip ' +
-    `    SELECT 
+    `SELECT 
     cmos.cmo,
     cmos.currface,
     cmos.cpr,
@@ -80,7 +80,7 @@ LEFT JOIN (
   ) AS X
   ON cmos.cmo = X.cmo
   WHERE date = '2021-11-01'
-  and cmos.cmo LIKE '2021%' '${yeardealgroup}'` ));    
+  and cmos.cmo LIKE '${yeardealgroup}'` ));    
 
 
   res.send(results)

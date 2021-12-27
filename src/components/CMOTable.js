@@ -106,14 +106,14 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   return (
     <div>
       {/* <h1>February CMOs</h1> */}
-      <Autocomplete
+      {/* <Autocomplete
           id="combo-box-demo"
           options={months}
           getOptionLabel={(option) => option}
           style={{ width: 300 }}
           onChange={(event, value)=>setSearchMonth(value)}
           renderInput={(params) => <TextField  {...params} label="Month" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchMonth('FEB')}  />}
-        /> 
+        />  */}
       <div className={ 'sideBySide' }>
          <Autocomplete
           id="combo-box-demo"
@@ -154,12 +154,15 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
+                {/* <TableCell align="center" colSpan={3}>
+                  NOV 2021 Data
+                </TableCell> */}
                 <TableCell />
                 <TableCell />
                 <TableCell />
                 <TableCell />
                 <TableCell align="center" colSpan={2}>
-                  Predicted CPR {searchMonth}
+                  Predicted CPR 
                 </TableCell>
                 <TableCell align="center" colSpan={1}>
                   Actual CPR
@@ -167,12 +170,12 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                 <TableCell align="center" colSpan={1}>
                   CPR RESID
                 </TableCell>
-                <TableCell align="center" colSpan={2}>
+                {/* <TableCell align="center" colSpan={2}>
                   Predicted VPR
                 </TableCell>
                 <TableCell align="center" colSpan={2}>
-                  Predicted CDR
-                </TableCell>
+                  Predicted CDR 
+                </TableCell> */}
               </TableRow>
               <TableRow>
                 <TableCell >Year</TableCell>
@@ -185,11 +188,11 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                 {/* actual?? */}
                 <TableCell align="right">NOV</TableCell>
                 <TableCell align="right">NOV</TableCell>
-                <TableCell align="right">Currnet VPR</TableCell>
+                {/* <TableCell align="right">Currnet VPR</TableCell>
                 <TableCell align="right">Next VPR</TableCell>
                 <TableCell align="right">Currnet CDR</TableCell>
                 <TableCell align="right">Next CDR</TableCell>
-                
+                 */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -207,10 +210,10 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                   <TableCell align="right">{row.cpr}</TableCell>
                   {/* cpr resid */}
                   <TableCell align="right">{row.resid}</TableCell>
-                  <TableCell align="right">{row.vpr}</TableCell>
+                  {/* <TableCell align="right">{row.vpr}</TableCell>
                   <TableCell align="right">{row.vprNext}</TableCell>
                   <TableCell align="right">{row.cdr}</TableCell>
-                  <TableCell align="right">{row.cdrNext}</TableCell>
+                  <TableCell align="right">{row.cdrNext}</TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

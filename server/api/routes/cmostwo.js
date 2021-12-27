@@ -10,10 +10,25 @@ router.get('/', async(req, res, next)=> {
   try {
 
     let [results, _] = (await db.query(
-      `SELECT *
-      FROM cmos
-      WHERE date = '2021-11-01'
-      and cmo LIKE '2021%'` ));
+      `SELECT 
+      cmos.cmo,
+      cmos.currface,
+      cmos.cpr,
+      cmos.cpr - X.predictedcpr AS resid,
+      cmos.predictedcpr,
+      cmos.predictedcprnext
+  FROM cmos
+  LEFT JOIN (
+      SELECT 
+          cmo,
+          predictedcpr
+          FROM cmos
+          -- INTO TEMP TABLE predictedcpr
+          WHERE date = '2021-10-01'
+    ) AS X
+    ON cmos.cmo = X.cmo
+    WHERE date = '2021-11-01'
+    and cmos.cmo LIKE '2021%'` ));
 
   res.send(results)
   }
@@ -47,10 +62,25 @@ router.get('/yeardealgroup/:year/:deal/:group', async(req, res, next)=> {
 
   let [results, _] = (await db.query(
     // 'SELECT pools.cusip, poolbodies."poolCusip", poolpredictions.cusip as ppCusip ' +
-    `SELECT *
-    FROM cmos
-    WHERE date = '2021-11-01'
-    AND cmo LIKE '${yeardealgroup}'` ));    
+    `    SELECT 
+    cmos.cmo,
+    cmos.currface,
+    cmos.cpr,
+    cmos.cpr - X.predictedcpr AS resid,
+    cmos.predictedcpr,
+    cmos.predictedcprnext
+FROM cmos
+LEFT JOIN (
+    SELECT 
+        cmo,
+        predictedcpr
+        FROM cmos
+        -- INTO TEMP TABLE predictedcpr
+        WHERE date = '2021-10-01'
+  ) AS X
+  ON cmos.cmo = X.cmo
+  WHERE date = '2021-11-01'
+  and cmos.cmo LIKE '2021%' '${yeardealgroup}'` ));    
 
 
   res.send(results)

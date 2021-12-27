@@ -159,10 +159,13 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                 <TableCell />
                 <TableCell />
                 <TableCell align="center" colSpan={2}>
-                  Actual {searchMonth}
+                  Predicted CPR {searchMonth}
                 </TableCell>
-                <TableCell align="center" colSpan={2}>
-                  Predicted CPR
+                <TableCell align="center" colSpan={1}>
+                  Actual CPR
+                </TableCell>
+                <TableCell align="center" colSpan={1}>
+                  CPR RESID
                 </TableCell>
                 <TableCell align="center" colSpan={2}>
                   Predicted VPR
@@ -176,10 +179,12 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                 <TableCell align="right">Deal</TableCell>
                 <TableCell align="right">Group</TableCell>
                 <TableCell align="right">Current Face</TableCell>
-                <TableCell align="right">CPR</TableCell>
-                <TableCell align="right">Residual</TableCell>
-                <TableCell align="right">Currnet CPR</TableCell>
-                <TableCell align="right">Next CPR</TableCell>
+                {/* predicted cpr */}
+                <TableCell align="right">JAN</TableCell>
+                <TableCell align="right">DEC</TableCell>
+                {/* actual?? */}
+                <TableCell align="right">NOV</TableCell>
+                <TableCell align="right">NOV</TableCell>
                 <TableCell align="right">Currnet VPR</TableCell>
                 <TableCell align="right">Next VPR</TableCell>
                 <TableCell align="right">Currnet CDR</TableCell>
@@ -195,10 +200,13 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                   <TableCell align="right">{row.deal}</TableCell>
                   <TableCell align="right">{row.group}</TableCell>
                   <TableCell align="right">{row.currface && numberWithCommas(row.currface)}</TableCell>
-                  <TableCell align="right">{row.cpr}</TableCell>
-                  <TableCell align="right">{row.residual}</TableCell>
+                  {/* predicted cpr */}
+                  <TableCell align="right">{row.predictedcprnext}</TableCell>
                   <TableCell align="right">{row.predictedcpr}</TableCell>
-                  <TableCell align="right">{row.cprNext}</TableCell>
+                  {/* actual cpr */}
+                  <TableCell align="right">{row.cpr}</TableCell>
+                  {/* cpr resid */}
+                  <TableCell align="right">{row.resid}</TableCell>
                   <TableCell align="right">{row.vpr}</TableCell>
                   <TableCell align="right">{row.vprNext}</TableCell>
                   <TableCell align="right">{row.cdr}</TableCell>

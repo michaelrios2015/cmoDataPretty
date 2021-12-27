@@ -38,8 +38,15 @@ const formatData = (arr) => {
 
         item.currface = (item.currface/1000000).toFixed(1);
 
+        
         item.cpr = (item.cpr * 100).toFixed(1);
-       
+
+        item.resid = (item.resid * 100).toFixed(1);
+        
+        item.predictedcpr = (item.predictedcpr * 100).toFixed(1);
+
+        item.predictedcprnext = (item.predictedcprnext * 100).toFixed(1);
+
         for (const property in item) {
             if (item[property] * 1  == 0 || item[property] * 1 == -0){
                 item[property] = '';

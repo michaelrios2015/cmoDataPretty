@@ -35,7 +35,7 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   
   const [loading, setLoading ] = useState(true);
 
-  console.log(cmos)
+  // console.log(cmos)
   //my homemade loading true or false again needed not sure
   useEffect(() => {
     console.log(cmos.length)
@@ -160,39 +160,44 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                 <TableCell />
                 <TableCell />
                 <TableCell />
-                <TableCell />
+                <TableCell align="right" colSpan={1}>
+                  Current Face
+                </TableCell>  
                 <TableCell align="center" colSpan={2}>
                   Predicted CPR 
                 </TableCell>
-                <TableCell align="center" colSpan={1}>
+                <TableCell align="center" colSpan={3}>
                   Actual CPR
                 </TableCell>
-                <TableCell align="center" colSpan={1}>
+                <TableCell align="center" colSpan={3}>
                   CPR RESID
                 </TableCell>
-                {/* <TableCell align="center" colSpan={2}>
-                  Predicted VPR
+                <TableCell align="center" colSpan={1}>
+                  Predicted CDR
                 </TableCell>
-                <TableCell align="center" colSpan={2}>
-                  Predicted CDR 
-                </TableCell> */}
+                <TableCell align="center" colSpan={1}>
+                  Actual CDR 
+                </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell >Year</TableCell>
                 <TableCell align="right">Deal</TableCell>
                 <TableCell align="right">Group</TableCell>
-                <TableCell align="right">Current Face</TableCell>
+                <TableCell align="right">NOV</TableCell>
                 {/* predicted cpr */}
                 <TableCell align="right">JAN</TableCell>
                 <TableCell align="right">DEC</TableCell>
                 {/* actual?? */}
                 <TableCell align="right">NOV</TableCell>
+                <TableCell align="right">OCT</TableCell>
+                <TableCell align="right">SEP</TableCell>
+                {/* RESID */}
                 <TableCell align="right">NOV</TableCell>
-                {/* <TableCell align="right">Currnet VPR</TableCell>
-                <TableCell align="right">Next VPR</TableCell>
-                <TableCell align="right">Currnet CDR</TableCell>
-                <TableCell align="right">Next CDR</TableCell>
-                 */}
+                <TableCell align="right">OCT</TableCell>
+                <TableCell align="right">SEP</TableCell>
+                {/* CDR */}
+                <TableCell align="right">DEC</TableCell>
+                <TableCell align="right">NOV</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -208,12 +213,14 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                   <TableCell align="right">{row.predictedcpr}</TableCell>
                   {/* actual cpr */}
                   <TableCell align="right">{row.cpr}</TableCell>
+                  <TableCell align="right">{row.pastcpr}</TableCell>
+                  <TableCell align="right">{row.twomonthspastcpr}</TableCell>
                   {/* cpr resid */}
                   <TableCell align="right">{row.resid}</TableCell>
-                  {/* <TableCell align="right">{row.vpr}</TableCell>
-                  <TableCell align="right">{row.vprNext}</TableCell>
+                  <TableCell align="right">{row.pastresid}</TableCell>
+                  <TableCell align="right">{row.twomonthspastresid}</TableCell>
+                  <TableCell align="right">{row.predictedcdr}</TableCell>
                   <TableCell align="right">{row.cdr}</TableCell>
-                  <TableCell align="right">{row.cdrNext}</TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

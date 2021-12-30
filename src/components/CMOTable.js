@@ -109,6 +109,10 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   // console.log(searchB)
   // console.log(searchYear)
 
+  let futureMonth = 'DEC';
+  let currentMonth = 'NOV';
+  let pastMonth = 'OCT'
+
   return (
     <div>
       {/* <h1>February CMOs</h1> */}
@@ -176,10 +180,10 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                 <TableCell />
                 <TableCell />
                 <TableCell align="right" colSpan={1}>
-                  Current Face
+                  Coupon
                 </TableCell>  
                 <TableCell align="right" colSpan={1}>
-                  Coupon
+                  Current Face
                 </TableCell>  
                 <TableCell align="center" colSpan={2}>
                   Predicted CPR 
@@ -201,24 +205,24 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                 <TableCell >Year</TableCell>
                 <TableCell align="right">Deal</TableCell>
                 <TableCell align="right">Group</TableCell>
-                {/* current face  */}
-                <TableCell align="right">NOV</TableCell>
                 {/* coupon  */}
-                <TableCell align="right">NOV</TableCell>
+                <TableCell align="right">{currentMonth}</TableCell>
+                 {/* current face  */}
+                <TableCell align="right">{currentMonth}</TableCell>
                 {/* predicted cpr */}
                 <TableCell align="right">JAN</TableCell>
-                <TableCell align="right">DEC</TableCell>
+                <TableCell align="right">{futureMonth}</TableCell>
                 {/* actual?? */}
-                <TableCell align="right">NOV</TableCell>
-                <TableCell align="right">OCT</TableCell>
+                <TableCell align="right">{currentMonth}</TableCell>
+                <TableCell align="right">{pastMonth}</TableCell>
                 <TableCell align="right">SEP</TableCell>
                 {/* RESID */}
-                <TableCell align="right">NOV</TableCell>
-                <TableCell align="right">OCT</TableCell>
+                <TableCell align="right">{currentMonth}</TableCell>
+                <TableCell align="right">{pastMonth}</TableCell>
                 <TableCell align="right">SEP</TableCell>
                 {/* CDR */}
-                <TableCell align="right">DEC</TableCell>
-                <TableCell align="right">NOV</TableCell>
+                <TableCell align="right">{futureMonth}</TableCell>
+                <TableCell align="right">{currentMonth}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -228,10 +232,10 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                   <TableCell component="th" scope="row"> {row.year} </TableCell>
                   <TableCell align="right">{row.deal}</TableCell>
                   <TableCell align="right">{row.group}</TableCell>
+                  {/* coupon */}
+                  <TableCell align="right">{row.coupon}</TableCell>
                   {/* currface */}
                   <TableCell align="right">{row.currface && numberWithCommas(row.currface)}</TableCell>
-                  {/* predicted coupon */}
-                  <TableCell align="right">{row.coupon}</TableCell>
                   {/* predicted cpr */}
                   <TableCell align="right">{row.predictedcprnext}</TableCell>
                   <TableCell align="right">{row.predictedcpr}</TableCell>

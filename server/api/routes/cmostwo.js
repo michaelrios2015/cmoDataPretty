@@ -14,7 +14,8 @@ router.get('/', async(req, res, next)=> {
         *
         FROM cmos
         WHERE date = '2021-11-01'
-        AND cmo LIKE '2021%'` ));
+        AND cmo LIKE '2021%'
+        ORDER BY coupon` ));
 
   res.send(results)
   }
@@ -52,7 +53,8 @@ router.get('/yeardealgroup/:year/:deal/:group', async(req, res, next)=> {
     *
     FROM cmos
     WHERE date = '2021-11-01'
-  and cmos.cmo LIKE '${yeardealgroup}'` ));    
+    AND cmos.cmo LIKE '${yeardealgroup}'
+    ORDER BY coupon` ));    
 
 
   res.send(results)

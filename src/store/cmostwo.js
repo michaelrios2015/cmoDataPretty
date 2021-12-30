@@ -38,6 +38,8 @@ const formatData = (arr) => {
 
         item.currface = (item.currface/1000000).toFixed(1);
 
+        item.coupon = item.coupon.toFixed(1);
+
         item.cpr = (item.cpr * 100).toFixed(1);
 
         item.pastcpr = (item.pastcpr * 100).toFixed(1);

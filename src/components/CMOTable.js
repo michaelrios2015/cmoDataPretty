@@ -163,6 +163,9 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                 <TableCell align="right" colSpan={1}>
                   Current Face
                 </TableCell>  
+                <TableCell align="right" colSpan={1}>
+                  Coupon
+                </TableCell>  
                 <TableCell align="center" colSpan={2}>
                   Predicted CPR 
                 </TableCell>
@@ -183,6 +186,9 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                 <TableCell >Year</TableCell>
                 <TableCell align="right">Deal</TableCell>
                 <TableCell align="right">Group</TableCell>
+                {/* current face  */}
+                <TableCell align="right">NOV</TableCell>
+                {/* coupon  */}
                 <TableCell align="right">NOV</TableCell>
                 {/* predicted cpr */}
                 <TableCell align="right">JAN</TableCell>
@@ -207,7 +213,10 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                   <TableCell component="th" scope="row"> {row.year} </TableCell>
                   <TableCell align="right">{row.deal}</TableCell>
                   <TableCell align="right">{row.group}</TableCell>
+                  {/* currface */}
                   <TableCell align="right">{row.currface && numberWithCommas(row.currface)}</TableCell>
+                  {/* predicted coupon */}
+                  <TableCell align="right">{row.coupon}</TableCell>
                   {/* predicted cpr */}
                   <TableCell align="right">{row.predictedcprnext}</TableCell>
                   <TableCell align="right">{row.predictedcpr}</TableCell>

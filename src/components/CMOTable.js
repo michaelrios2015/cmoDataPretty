@@ -31,6 +31,7 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   const [searchA, setSearchA ] = useState('All');
   const [searchB, setSearchB ] = useState('All');
   const [searchYear, setSearchYear ] = useState('2021');
+  const [searchCoupon, setSearchCoupon ] = useState('ALL');
   const [searchMonth, setSearchMonth ] = useState('FEB');
   
   const [loading, setLoading ] = useState(true);
@@ -72,9 +73,9 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
     }
     
     setLoading(true);
-    console.log(searchA, searchB, searchYear, searchMonth)
-    loadCMOSYearDealGroup (searchYear, searchA, searchB);
-  },[searchA, searchB, searchYear, searchMonth]);
+    console.log(searchA, searchB, searchYear, searchMonth, searchCoupon)
+    loadCMOSYearDealGroup (searchYear, searchA, searchB, searchCoupon);
+  },[searchA, searchB, searchYear, searchMonth, searchCoupon]);
 
   const classes = useStyles();
       
@@ -90,6 +91,11 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   // seems to remove the duplicates
   groups = [...new Set(groups)]
   // // console.log(groups);
+
+  let coupons = [];
+  cmos.forEach(item=>coupons.push(item.coupon));
+  coupons = [...new Set(coupons)];
+  coupons.sort();
 
   let years = [];
   for (let i=2021; i > 2000; i--){
@@ -139,6 +145,15 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
           style={{ width: 300 }}
           onChange={(event, value)=>setSearchB(value)}
           renderInput={(params) => <TextField  {...params} label="Groups" variant="outlined" />}
+        />  
+
+      <Autocomplete
+          id="combo-box-pool-names"
+          options={coupons}
+          getOptionLabel={(option) => option}
+          style={{ width: 300 }}
+          onChange={(event, value)=>setSearchCoupon(value)}
+          renderInput={(params) => <TextField  {...params} label="Coupons" variant="outlined" />}
         />  
       </div>
 
@@ -250,8 +265,8 @@ const mapDispatchToProps = (dispatch) => {
     loadCMOS: ()=> {
       dispatch(loadCMOS());
     },
-    loadCMOSYearDealGroup: (year, deal, group)=> {
-      dispatch(loadCMOSYearDealGroup(year, deal, group));
+    loadCMOSYearDealGroup: (year, deal, group, coupon)=> {
+      dispatch(loadCMOSYearDealGroup(year, deal, group, coupon));
     }
   };
 }

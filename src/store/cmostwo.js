@@ -102,25 +102,11 @@ export const loadCMOS = ( ) =>{
 };
 
 
-export const loadCMOSYearDealGroup = ( year, deal, group ) =>{
+export const loadCMOSYearDealGroup = ( year, deal, group, coupon ) =>{
 
-    // let yeardealgroup = '';
-
-    // if (deal === 'All' && group === 'All'){
-    //     yeardealgroup = `${year}%`
-    // }
-    // else if (group === 'All'){
-    //     yeardealgroup = `${year}-${deal}-%`
-    // }
-    // else if (deal === 'All'){
-    //     yeardealgroup = `${year}-%-${group}`
-    // }
-    // else {
-    //     yeardealgroup = `${year}-${deal}-${group}`
-    // }
 
     return async(dispatch)=>{
-        const tests = (await axios.get(`/api/cmostwo/yeardealgroup/${year}/${deal}/${group}`)).data;
+        const tests = (await axios.get(`/api/cmostwo/yeardealgroup/${year}/${deal}/${group}/${coupon}`)).data;
         
         formatData(tests) 
         console.log(tests)
@@ -129,42 +115,6 @@ export const loadCMOSYearDealGroup = ( year, deal, group ) =>{
 };
 
 
-// export const loadRowsByYear = (year, month) =>{
-
-//     // there
-//     if(!year){
-//         year = '2021';
-//     }
-//     if(!month){
-//         month = 'FEB';
-//     }
-
-//     console.log(month);
-
-//     return async(dispatch)=>{
-//         const tests = (await axios.get(`/api/cmos/year/${year}/${month}`)).data;
-//         // console.log(tests) 
-//         dispatch(_loadRows(loadData(tests)));
-//     }
-// };
-
-
-// export const loadDataByDealandGroup = (deal, group, year, month) =>{
-    
-//     console.log(month);
-//     return async(dispatch)=>{
-//         console.log('---------------in loadDataByGroup dispath ----------');
-//         let data = [];
-//         if (deal === 'All' && group === 'All'){
-//             data = (await axios.get(`/api/cmos/year/${year}/${month}`)).data;
-//         }
-//         else {
-//             data = (await axios.get(`/api/cmos/dealandgroup/${deal}/${group}/${year}/${month}`)).data;
-//         }
-//         console.log(data);
-//         dispatch(_loadRows(loadData(data)));
-//     }
-// };
 
 export { cmosReducer };
 

@@ -15,7 +15,7 @@ router.get('/', async(req, res, next)=> {
         FROM cmos
         WHERE date = '2021-11-01'
         AND cmo LIKE '2021%'
-        ORDER BY coupon` ));
+        ORDER BY cmo DESC` ));
 
   res.send(results)
   }
@@ -25,7 +25,7 @@ router.get('/', async(req, res, next)=> {
 });
 
 
-router.get('/yeardealgroup/:year/:deal/:group', async(req, res, next)=> {
+router.get('/yeardealgroup/:year/:deal/:group/:coupon', async(req, res, next)=> {
   try {
 
    
@@ -45,20 +45,41 @@ router.get('/yeardealgroup/:year/:deal/:group', async(req, res, next)=> {
         yeardealgroup = `${req.params.year}-${req.params.deal}-${req.params.group}`
     }
 
-    console.log(yeardealgroup)
+    console.log(yeardealgroup);
 
-  let [results, _] = (await db.query(
-    // 'SELECT pools.cusip, poolbodies."poolCusip", poolpredictions.cusip as ppCusip ' +
-    `SELECT 
-    *
-    FROM cmos
-    WHERE date = '2021-11-01'
-    AND cmos.cmo LIKE '${yeardealgroup}'
-    ORDER BY coupon` ));    
+    console.log(req.params.coupon);
 
+  let results = [];  
 
-  res.send(results)
+  if (!isNaN(req.params.coupon)) {  
+    console.log("coupon is a number")
+    results = (await db.query(
+    
+      `SELECT 
+      *
+      FROM cmos
+      WHERE date = '2021-11-01'
+      AND cmos.cmo LIKE '${yeardealgroup}'
+      AND coupon = ${req.params.coupon}
+      ORDER BY cmo DESC` ));    
+  } 
+  else {
+  
+    console.log("coupon is NOT a number")
+
+    results = (await db.query(
+      `SELECT 
+      *
+      FROM cmos
+      WHERE date = '2021-11-01'
+      AND cmos.cmo LIKE '${yeardealgroup}'
+      ORDER BY cmo DESC` ));
   }
+
+  // console.log(results[0])
+  res.send(results[0]);
+  
+}
   catch(ex){
     next(ex);
   }

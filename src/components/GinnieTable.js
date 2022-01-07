@@ -223,19 +223,23 @@ for (let i=1; i < 10; i++ ){
                 <TableCell align="right">{twomoremonths}</TableCell>
                 <TableCell align="right">{nextmonth}</TableCell>
                 {/* actual cpr */}
-                {/* <TableCell align="right">{nextmonth}</TableCell> */}
-                <TableCell align="right">{currentmonth}</TableCell>
-                <TableCell align="right">{previousmonth}</TableCell>
-                <TableCell align="right">{twomonthspast}</TableCell>
-                {/* RESID */}
-                {/* <TableCell align="right">{nextmonth}</TableCell> */}
-                <TableCell align="right">{currentmonth}</TableCell>
-                <TableCell align="right">{previousmonth}</TableCell>
-                <TableCell align="right">{twomonthspast}</TableCell>
-                {/* CDR */}
                 <TableCell align="right">{nextmonth}</TableCell>
                 <TableCell align="right">{currentmonth}</TableCell>
+                <TableCell align="right">{previousmonth}</TableCell>
+                {/* <TableCell align="right">{twomonthspast}</TableCell> */}
+                {/* RESID */}
+                <TableCell align="right">{nextmonth}</TableCell>
                 <TableCell align="right">{currentmonth}</TableCell>
+                <TableCell align="right">{previousmonth}</TableCell>
+                {/* <TableCell align="right">{twomonthspast}</TableCell> */}
+                {/* CDR predicted*/}
+                <TableCell align="right">{nextmonth}</TableCell>
+                {/* CDR actual */}
+                <TableCell align="right">{nextmonth}</TableCell>
+                {/* <TableCell align="right">{currentmonth}</TableCell> */}
+                {/* CDR residual */}
+                <TableCell align="right">{nextmonth}</TableCell>
+                {/* <TableCell align="right">{currentmonth}</TableCell> */}
 
                 {/* <TableCell align="right">Date</TableCell> */}
               </TableRow>
@@ -258,20 +262,25 @@ for (let i=1; i < 10; i++ ){
                   <TableCell align="right">{row.wala}</TableCell>
                   <TableCell align="right">{row.wam}</TableCell>
                   <TableCell align="right">{row.va}</TableCell>
+                  {/* cpr prediction*/}
                   <TableCell align="right">{row.cprfuturepredictionnext}</TableCell>
                   <TableCell align="right">{row.cprfutureprediction}</TableCell>
-                  {/* <TableCell align="right">{row.curractualcprnext}</TableCell> */}
+                  {/* cpr actual  */}
+                  <TableCell align="right">{row.curractualcprnext}</TableCell>
                   <TableCell align="right">{row.curractualcpr}</TableCell>
                   <TableCell align="right">{row.pastactcpr}</TableCell>
-                  <TableCell align="right">{row.twomonthspastactcpr}</TableCell>
-                  {/* <TableCell align="right">{(row.curractualcprnext - row.cprfutureprediction).toFixed(1) != 0? (row.curractualcprnext - row.cprfutureprediction).toFixed(1) : ' '}</TableCell> */}
+                  {/* <TableCell align="right">{row.twomonthspastactcpr}</TableCell> */}
+                  {/* CPR residual */}
+                  <TableCell align="right">{(row.curractualcprnext - row.cprfutureprediction).toFixed(1) != 0? (row.curractualcprnext - row.cprfutureprediction).toFixed(1) : ' '}</TableCell>
                   <TableCell align="right">{(row.curractualcpr - row.cprprediction).toFixed(1) != 0? (row.curractualcpr - row.cprprediction).toFixed(1) : ' '}</TableCell>
                   <TableCell align="right">{(row.pastactcpr - row.cprpastprediction).toFixed(1) != 0? (row.pastactcpr - row.cprpastprediction).toFixed(1) : ' '}</TableCell>
-                  <TableCell align="right">{(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) != 0? (row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) : ' '}</TableCell>
+                  {/* <TableCell align="right">{(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) != 0? (row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) : ' '}</TableCell> */}
+                  {/* CDR */}
                   <TableCell align="right">{row.cdrfuturepediction}</TableCell>
-                  <TableCell align="right">{row.curractualcdr}</TableCell>
-                  {/* <TableCell align="right">{(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) != 0 ? (row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) : ' '}</TableCell> */}
-                  <TableCell align="right">{(row.curractualcdr - row.currcdrprediction).toFixed(1) != 0 ? (row.curractualcdr - row.currcdrprediction).toFixed(1) : ' '}</TableCell>
+                  <TableCell align="right">{row.curractualcdrnext}</TableCell>
+                  {/* <TableCell align="right">{row.curractualcdr}</TableCell> */}
+                  <TableCell align="right">{(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) != 0 ? (row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) : ' '}</TableCell>
+                  {/* <TableCell align="right">{(row.curractualcdr - row.currcdrprediction).toFixed(1) != 0 ? (row.curractualcdr - row.currcdrprediction).toFixed(1) : ' '}</TableCell> */}
 
                   {/* <TableCell align="right">{row.date}</TableCell> */}
                 </TableRow>

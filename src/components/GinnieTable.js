@@ -222,8 +222,8 @@ for (let i=1; i < 10; i++ ){
                 {/* Predicted CPR */}
                 <TableCell align="right">{twomoremonths}</TableCell>
                 <TableCell align="right">{nextmonth}</TableCell>
-                {/* actual cpr */}
-                <TableCell align="right">{nextmonth}</TableCell>
+                {/* actual cpr -- only one of first and last can be shown*/}
+                <TableCell align="right">{nextmonth}</TableCell> 
                 <TableCell align="right">{currentmonth}</TableCell>
                 <TableCell align="right">{previousmonth}</TableCell>
                 {/* <TableCell align="right">{twomonthspast}</TableCell> */}
@@ -265,7 +265,7 @@ for (let i=1; i < 10; i++ ){
                   {/* cpr prediction*/}
                   <TableCell align="right">{row.cprfuturepredictionnext}</TableCell>
                   <TableCell align="right">{row.cprfutureprediction}</TableCell>
-                  {/* cpr actual  */}
+                  {/* cpr actual  --- comment and uncommenting befings here */}
                   <TableCell align="right">{row.curractualcprnext}</TableCell>
                   <TableCell align="right">{row.curractualcpr}</TableCell>
                   <TableCell align="right">{row.pastactcpr}</TableCell>
@@ -281,8 +281,6 @@ for (let i=1; i < 10; i++ ){
                   {/* <TableCell align="right">{row.curractualcdr}</TableCell> */}
                   <TableCell align="right">{(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) != 0 ? (row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) : ' '}</TableCell>
                   {/* <TableCell align="right">{(row.curractualcdr - row.currcdrprediction).toFixed(1) != 0 ? (row.curractualcdr - row.currcdrprediction).toFixed(1) : ' '}</TableCell> */}
-
-                  {/* <TableCell align="right">{row.date}</TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

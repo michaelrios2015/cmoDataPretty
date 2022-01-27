@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Provider, connect } from 'react-redux';
 import store from './store';
-import BasicTable from './components/BasicTable';
 import GinnieTable from './components/GinnieTable';
 import CMOTable from './components/CMOTable';
 import NavBar from './components/NavBar';
@@ -24,10 +23,8 @@ class _App extends Component{
         <Router>
           <NavBar />
           <div>
-            {/* <Route component={ BasicTable } path = '/' exact/>         */}
             <Route component={ GinnieTable } path = '/' exact/>  
-            <Route component={ Graph } path = '/graph' exact/>     
-            <Route component={ BasicTable } path = '/cmo' exact/>    
+            <Route component={ Graph } path = '/graph' exact/>       
             <Route component={ CMOTable } path = '/cmotwo' exact/>     
           </div>
         </Router>

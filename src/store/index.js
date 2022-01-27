@@ -2,14 +2,12 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { rowsReducer } from './cmos';
 import { ginniesReducer } from './ginnies';
 import { graphDataReducer } from './graphData';
 import { cmosReducer } from './cmostwo';
 
 // the reducer
 const reducer = combineReducers({
-    rows: rowsReducer,
     ginnies: ginniesReducer,
     graphData: graphDataReducer,
     cmos: cmosReducer
@@ -23,7 +21,6 @@ const store = createStore(reducer, middleware);
 
 
 export default store;
-export * from './cmos'
 export * from './cmostwo'
 export * from './ginnies'
 export * from './graphData'

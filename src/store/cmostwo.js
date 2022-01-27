@@ -2,22 +2,6 @@ import axios from 'axios';
 
 const LOAD_CMOS = 'LOAD_CMOS';
 
-// const loadData = (arr) => {
-
-//     function createData(id, year, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr) {
-//         return {id, year, deal, group, cpr, cprNext, vpr, vprNext, cdr, cdrNext, currFace, residual, actualCpr };
-//     }
-
-//     const rows= [];
-
-//     arr.forEach(item => {
-//         rows.push(createData(item.id, item.year, item.deal, item.group, item.cmobodies[0].cpr, item.cmobodies[0].cprNext, item.cmobodies[0].vpr, item.cmobodies[0].vprNext, item.cmobodies[0].cdr, 
-//         item.cmobodies[0].cdrNext, item.cmobodies[0].currFace, item.cmobodies[0].residual, item.cmobodies[0].actualCpr))
-//     });
-
-//     return rows;
-// }
-
 
 const formatData = (arr) => {
 

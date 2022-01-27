@@ -1,7 +1,7 @@
 const router = require("express").Router();
 module.exports = router;
 
-router.use("/cmos", require("./cmos"));
+
 router.use("/cmostwo", require("./cmostwo"));
 router.use("/ginnies", require("./ginnies"));
 router.use("/graphdata", require("./graphdata"));

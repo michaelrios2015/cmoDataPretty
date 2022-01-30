@@ -109,9 +109,13 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   // console.log(searchB)
   // console.log(searchYear)
 
-  let futureMonth = 'DEC';
-  let currentMonth = 'NOV';
-  let pastMonth = 'OCT'
+// changes these
+
+  let futureTwoMonths = 'FEB';
+  let futureMonth = 'JAN';
+  let currentMonth = 'DEC';
+  let pastMonth = 'NOV'
+  let pastTwosMonths = 'OCT'
 
   return (
     <div>
@@ -210,16 +214,16 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                  {/* current face  */}
                 <TableCell align="right">{currentMonth}</TableCell>
                 {/* predicted cpr */}
-                <TableCell align="right">JAN</TableCell>
+                <TableCell align="right">{futureTwoMonths}</TableCell>
                 <TableCell align="right">{futureMonth}</TableCell>
                 {/* actual?? */}
                 <TableCell align="right">{currentMonth}</TableCell>
                 <TableCell align="right">{pastMonth}</TableCell>
-                <TableCell align="right">SEP</TableCell>
+                <TableCell align="right">{pastTwosMonths}</TableCell>
                 {/* RESID */}
                 <TableCell align="right">{currentMonth}</TableCell>
                 <TableCell align="right">{pastMonth}</TableCell>
-                <TableCell align="right">SEP</TableCell>
+                <TableCell align="right">{pastTwosMonths}</TableCell>
                 {/* CDR */}
                 <TableCell align="right">{futureMonth}</TableCell>
                 <TableCell align="right">{currentMonth}</TableCell>

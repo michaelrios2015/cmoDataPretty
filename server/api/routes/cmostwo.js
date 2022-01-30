@@ -3,17 +3,21 @@ const { db } = require('../../db');
 
 // i can just use raw queries https://medium.com/@codemonk/writing-raw-sql-queries-in-sequelize-for-express-js-eaa095cd41e4
 
+
+const currentMonth = '2021-12-01';
 router.get('/', async(req, res, next)=> {
   
     // console.log("try cmos")
   
+
+
   try {
 
     let [results, _] = (await db.query(
         `SELECT 
         *
         FROM cmos
-        WHERE date = '2021-11-01'
+        WHERE date = '${currentMonth}'
         AND cmo LIKE '2021%'
         ORDER BY cmo DESC` ));
 
@@ -58,7 +62,7 @@ router.get('/yeardealgroup/:year/:deal/:group/:coupon', async(req, res, next)=> 
       `SELECT 
       *
       FROM cmos
-      WHERE date = '2021-11-01'
+      WHERE date = '${currentMonth}'
       AND cmos.cmo LIKE '${yeardealgroup}'
       AND coupon = ${req.params.coupon}
       ORDER BY cmo DESC` ));    
@@ -71,7 +75,7 @@ router.get('/yeardealgroup/:year/:deal/:group/:coupon', async(req, res, next)=> 
       `SELECT 
       *
       FROM cmos
-      WHERE date = '2021-11-01'
+      WHERE date = '${currentMonth}'
       AND cmos.cmo LIKE '${yeardealgroup}'
       ORDER BY cmo DESC` ));
   }
@@ -89,13 +93,14 @@ router.get('/yeardealgroup/:year/:deal/:group/:coupon', async(req, res, next)=> 
 router.get('/year/:year', async(req, res, next)=> {
   try {
 
-  console.log(req.params.coupon) 
+  console.log(req.params.year)
+  console.log(currentMonth) 
 
   let [results, _] = (await db.query(
     // 'SELECT pools.cusip, poolbodies."poolCusip", poolpredictions.cusip as ppCusip ' +
     `SELECT *
     FROM cmos
-    WHERE date = '2021-11-01'
+    WHERE date = '${currentMonth}'
     AND cmo LIKE '${req.params.year}%'
     LIMIT 10;` ));    
 
@@ -117,7 +122,7 @@ router.get('/deal/:deal', async(req, res, next)=> {
     // 'SELECT pools.cusip, poolbodies."poolCusip", poolpredictions.cusip as ppCusip ' +
     `SELECT *
     FROM cmos
-    WHERE date = '2021-11-01'
+    WHERE date = '${currentMonth}'
     AND cmo LIKE '%-${req.params.deal}-%'
     LIMIT 10;` ));    
 

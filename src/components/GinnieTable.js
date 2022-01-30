@@ -184,7 +184,7 @@ for (let i=1; i < 10; i++ ){
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-              <TableCell colSpan={2}><b>{searchC} NOVEMBER</b></TableCell>
+              <TableCell colSpan={2}><b>{searchC} {currentmonth}</b></TableCell>
                 <TableCell align="center" colSpan={11}/>
                 <TableCell align="center" colSpan={2}>
                   Predicted CPR

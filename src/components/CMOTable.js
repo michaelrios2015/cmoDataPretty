@@ -104,11 +104,6 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
 
   years.push('1999');
 
-  let months = ['FEB', 'MARCH', 'APRIL'];
-  // console.log(searchA)
-  // console.log(searchB)
-  // console.log(searchYear)
-
 // changes these
 
   let futureTwoMonths = 'FEB';
@@ -119,15 +114,7 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
 
   return (
     <div>
-      {/* <h1>February CMOs</h1> */}
-      {/* <Autocomplete
-          id="combo-box-demo"
-          options={months}
-          getOptionLabel={(option) => option}
-          style={{ width: 300 }}
-          onChange={(event, value)=>setSearchMonth(value)}
-          renderInput={(params) => <TextField  {...params} label="Month" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchMonth('FEB')}  />}
-        />  */}
+
       <div className={ 'sideBySide' }>
          <Autocomplete
           id="combo-box-demo"

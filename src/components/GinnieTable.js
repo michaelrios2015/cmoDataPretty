@@ -278,8 +278,8 @@ for (let i=1; i < 10; i++ ){
                   {/* CDR prediction */}
                   <TableCell align="right">{row.cdrfuturepediction}</TableCell>
                   {/* CDR actual  --- this changes on the 4th and 6th */}
-                  {/* <TableCell align="right">{row.curractualcdrnext}</TableCell> */}
-                  <TableCell align="right">{row.curractualcdr}</TableCell>
+                  <TableCell align="right">{row.curractualcdrnext}</TableCell>
+                  {/* <TableCell align="right">{row.curractualcdr}</TableCell> */}
                   {/* CDR residual --- this changes on the 4th and 6th */}
                   <TableCell align="right">{(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) != 0 ? (row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) : ' '}</TableCell>
                   {/* <TableCell align="right">{(row.curractualcdr - row.currcdrprediction).toFixed(1) != 0 ? (row.curractualcdr - row.currcdrprediction).toFixed(1) : ' '}</TableCell> */}

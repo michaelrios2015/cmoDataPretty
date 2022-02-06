@@ -18,6 +18,9 @@ const useStyles = makeStyles({
     minWidth: 730,
     maxWidth: 1200
   },
+  customTableContainer: {
+    overflowX: "initial"
+  }
 });
 
 function numberWithCommas(x) {
@@ -160,9 +163,10 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
           </div>
         ) 
         :       
-        (<TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
+        (<TableContainer classes={{root: classes.customTableContainer}}>
+          {/* <Table className={classes.table} aria-label="sticky table"> */}
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead className={ 'head'}>
               <TableRow>
                 {/* <TableCell align="center" colSpan={3}>
                   NOV 2021 Data

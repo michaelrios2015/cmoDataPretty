@@ -13,11 +13,16 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import { loadGinnies, loadGinniesByCoupon, loadGinniesByFloats, loadGinniesByCouponsAndFloats } from '../store';
 
+
+
 const useStyles = makeStyles({
   table: {
     minWidth: 730,
     maxWidth: 1200
   },
+  customTableContainer: {
+    overflowX: "initial"
+  }
 });
 
 function numberWithCommas(x) {
@@ -138,7 +143,7 @@ for (let i=1; i < 10; i++ ){
           onChange={(event, value)=>setSearchMonth(value)}
           renderInput={(params) => <TextField  {...params} label="Month" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchMonth('FEB')}  />}
         />  */}
-      <div className={ 'sideBySide' }> 
+      <div  className={ 'sideBySide' } > 
         
         <Autocomplete
           id="combo-box-pool-names"
@@ -171,7 +176,6 @@ for (let i=1; i < 10; i++ ){
           }}
         /> 
       </div>
-
       {
         loading ? 
         (
@@ -180,10 +184,11 @@ for (let i=1; i < 10; i++ ){
           </div>
         ) 
         :       
-        (<TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
+        (<TableContainer classes={{root: classes.customTableContainer}}>
+          {/* <Table className={classes.table} aria-label="sticky table"> */}
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead className={ 'head'}>
+              <TableRow  >
               <TableCell colSpan={2}><b>{searchC} {currentmonth}</b></TableCell>
                 <TableCell align="center" colSpan={11}/>
                 <TableCell align="center" colSpan={2}>
@@ -205,8 +210,9 @@ for (let i=1; i < 10; i++ ){
                   CDR Resid
                 </TableCell>
               </TableRow>
+              
               <TableRow>
-                <TableCell >CUSIP</TableCell>
+                <TableCell className={ 'head'} >CUSIP</TableCell>
                 <TableCell align="right">Name</TableCell>
                 <TableCell align="right">Issue Month</TableCell>
                 <TableCell align="right">Current Face</TableCell>
@@ -242,6 +248,7 @@ for (let i=1; i < 10; i++ ){
                 {/* <TableCell align="right">{currentmonth}</TableCell> */}
 
                 {/* <TableCell align="right">Date</TableCell> */}
+              
               </TableRow>
             </TableHead>
             <TableBody>
@@ -271,9 +278,9 @@ for (let i=1; i < 10; i++ ){
                   <TableCell align="right">{row.pastactcpr}</TableCell>
                   {/* <TableCell align="right">{row.twomonthspastactcpr}</TableCell> */}
                   {/* CPR residual --- this changes on the 4th and 6th  */}
-                  <TableCell align="right">{(row.curractualcprnext - row.cprfutureprediction).toFixed(1) != 0? (row.curractualcprnext - row.cprfutureprediction).toFixed(1) : ' '}</TableCell>
-                  <TableCell align="right">{(row.curractualcpr - row.cprprediction).toFixed(1) != 0? (row.curractualcpr - row.cprprediction).toFixed(1) : ' '}</TableCell>
-                  <TableCell align="right">{(row.pastactcpr - row.cprpastprediction).toFixed(1) != 0? (row.pastactcpr - row.cprpastprediction).toFixed(1) : ' '}</TableCell>
+                  <TableCell align="right" className={(row.curractualcprnext - row.cprfutureprediction).toFixed(1)  < 0 ? 'negative': 'none' }>{(row.curractualcprnext - row.cprfutureprediction).toFixed(1) != 0? (row.curractualcprnext - row.cprfutureprediction).toFixed(1) : ' '}</TableCell>
+                  <TableCell align="right" className={(row.curractualcpr - row.cprprediction).toFixed(1)  < 0 ? 'negative': 'none' }>{(row.curractualcpr - row.cprprediction).toFixed(1) != 0? (row.curractualcpr - row.cprprediction).toFixed(1) : ' '}</TableCell>
+                  <TableCell align="right" className={(row.pastactcpr - row.cprpastprediction).toFixed(1)  < 0 ? 'negative': 'none' }>{(row.pastactcpr - row.cprpastprediction).toFixed(1) != 0? (row.pastactcpr - row.cprpastprediction).toFixed(1) : ' '}</TableCell>
                   {/* <TableCell align="right">{(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) != 0? (row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) : ' '}</TableCell> */}
                   {/* CDR prediction */}
                   <TableCell align="right">{row.cdrfuturepediction}</TableCell>
@@ -281,7 +288,7 @@ for (let i=1; i < 10; i++ ){
                   <TableCell align="right">{row.curractualcdrnext}</TableCell>
                   {/* <TableCell align="right">{row.curractualcdr}</TableCell> */}
                   {/* CDR residual --- this changes on the 4th and 6th */}
-                  <TableCell align="right">{(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) != 0 ? (row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) : ' '}</TableCell>
+                  <TableCell align="right" className={(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) < 0 ? 'negative': 'none' }>{(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) != 0 ? (row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) : ' '}</TableCell>
                   {/* <TableCell align="right">{(row.curractualcdr - row.currcdrprediction).toFixed(1) != 0 ? (row.curractualcdr - row.currcdrprediction).toFixed(1) : ' '}</TableCell> */}
                 </TableRow>
               ))}

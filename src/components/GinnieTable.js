@@ -278,18 +278,18 @@ for (let i=1; i < 10; i++ ){
                   <TableCell align="right">{row.pastactcpr}</TableCell>
                   {/* <TableCell align="right">{row.twomonthspastactcpr}</TableCell> */}
                   {/* CPR residual --- this changes on the 4th and 6th  */}
-                  <TableCell align="right" className={(row.curractualcprnext - row.cprfutureprediction).toFixed(1)  < 0 ? 'negative': 'none' }>{(row.curractualcprnext - row.cprfutureprediction).toFixed(1) != 0? (row.curractualcprnext - row.cprfutureprediction).toFixed(1) : ' '}</TableCell>
-                  <TableCell align="right" className={(row.curractualcpr - row.cprprediction).toFixed(1)  < 0 ? 'negative': 'none' }>{(row.curractualcpr - row.cprprediction).toFixed(1) != 0? (row.curractualcpr - row.cprprediction).toFixed(1) : ' '}</TableCell>
-                  <TableCell align="right" className={(row.pastactcpr - row.cprpastprediction).toFixed(1)  < 0 ? 'negative': 'none' }>{(row.pastactcpr - row.cprpastprediction).toFixed(1) != 0? (row.pastactcpr - row.cprpastprediction).toFixed(1) : ' '}</TableCell>
-                  {/* <TableCell align="right">{(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) != 0? (row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) : ' '}</TableCell> */}
+                  <TableCell align="right" style={(row.curractualcprnext - row.cprfutureprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcprnext - row.cprfutureprediction).toFixed(1) != 0? (row.curractualcprnext - row.cprfutureprediction).toFixed(1) : ' '}</TableCell>
+                  <TableCell align="right" style={(row.curractualcpr - row.cprprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcpr - row.cprprediction).toFixed(1) != 0? (row.curractualcpr - row.cprprediction).toFixed(1) : ' '}</TableCell>
+                  <TableCell align="right" style={(row.pastactcpr - row.cprpastprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.pastactcpr - row.cprpastprediction).toFixed(1) != 0? (row.pastactcpr - row.cprpastprediction).toFixed(1) : ' '}</TableCell>
+                  {/* <TableCell align="right" style={(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) != 0? (row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) : ' '}</TableCell> */}
                   {/* CDR prediction */}
                   <TableCell align="right">{row.cdrfuturepediction}</TableCell>
                   {/* CDR actual  --- this changes on the 4th and 6th */}
                   <TableCell align="right">{row.curractualcdrnext}</TableCell>
                   {/* <TableCell align="right">{row.curractualcdr}</TableCell> */}
                   {/* CDR residual --- this changes on the 4th and 6th */}
-                  <TableCell align="right" className={(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) < 0 ? 'negative': 'none' }>{(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) != 0 ? (row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) : ' '}</TableCell>
-                  {/* <TableCell align="right">{(row.curractualcdr - row.currcdrprediction).toFixed(1) != 0 ? (row.curractualcdr - row.currcdrprediction).toFixed(1) : ' '}</TableCell> */}
+                  <TableCell align="right" style={(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) != 0 ? (row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) : ' '}</TableCell>
+                  {/* <TableCell align="right" style={(row.curractualcdr - row.currcdrprediction).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcdr - row.currcdrprediction).toFixed(1) != 0 ? (row.curractualcdr - row.currcdrprediction).toFixed(1) : ' '}</TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

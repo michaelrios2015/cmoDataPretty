@@ -239,9 +239,9 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                   <TableCell align="right">{row.pastcpr}</TableCell>
                   <TableCell align="right">{row.twomonthspastcpr}</TableCell>
                   {/* cpr resid */}
-                  <TableCell align="right">{row.resid}</TableCell>
-                  <TableCell align="right">{row.pastresid}</TableCell>
-                  <TableCell align="right">{row.twomonthspastresid}</TableCell>
+                  <TableCell align="right" style={row.resid  > 0 ? {color: "red"}: {color: "black"}} >{row.resid}</TableCell>
+                  <TableCell align="right" style={row.pastresid  > 0 ? {color: "red"}: {color: "black"}}>{row.pastresid}</TableCell>
+                  <TableCell align="right" style={row.twomonthspastresid  > 0 ? {color: "red"}: {color: "black"}} >{row.twomonthspastresid}</TableCell>
                   <TableCell align="right">{row.predictedcdr}</TableCell>
                   <TableCell align="right">{row.cdr}</TableCell>
                 </TableRow>

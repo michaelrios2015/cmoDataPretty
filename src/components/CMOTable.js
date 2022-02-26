@@ -101,7 +101,7 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   coupons.sort();
 
   let years = [];
-  for (let i=2021; i > 2000; i--){
+  for (let i=2022; i > 2000; i--){
     years.push(i.toString())
   }
 
@@ -109,11 +109,11 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
 
 // changes these
 
-  let futureTwoMonths = 'FEB';
-  let futureMonth = 'JAN';
-  let currentMonth = 'DEC';
-  let pastMonth = 'NOV'
-  let pastTwosMonths = 'OCT'
+  let futureTwoMonths = 'MAR';
+  let futureMonth = 'FEB';
+  let currentMonth = 'JAN';
+  let pastMonth = 'DEC'
+  let pastTwosMonths = 'NOV'
 
   return (
     <div>

@@ -49,12 +49,13 @@ const legend = {
   }
 };
 
-const options =  {           
-title:{
-  display:true,
-  text:'Average Rainfall per month',
-  fontSize:20
-}};
+// should probably erease this 2/26/22
+// const options =  {           
+// title:{
+//   display:true,
+//   text:'Average Rainfall per month',
+//   fontSize:20
+// }};
 
 //rows are now created in store :) 
 function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataByGtypeandCoupon}) {
@@ -125,7 +126,7 @@ function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataB
       </div>
 
       <div>
-        <h4>Month: October</h4>
+        <h4>Date: January 2022</h4>
         <h4>Y Axis: Tradable Float in MM</h4>
         <h4>X Axis: CPR</h4>
       </div>

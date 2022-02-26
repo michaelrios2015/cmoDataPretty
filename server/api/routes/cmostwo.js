@@ -3,8 +3,8 @@ const { db } = require('../../db');
 
 // i can just use raw queries https://medium.com/@codemonk/writing-raw-sql-queries-in-sequelize-for-express-js-eaa095cd41e4
 
-
-const currentMonth = '2021-12-01';
+// fuckkkkk might have messed this up --- 2/26/22
+const currentMonth = '2022-01-01';
 router.get('/', async(req, res, next)=> {
   
     // console.log("try cmos")
@@ -18,7 +18,7 @@ router.get('/', async(req, res, next)=> {
         *
         FROM cmos
         WHERE date = '${currentMonth}'
-        AND cmo LIKE '2021%'
+        AND cmo LIKE '2022%'
         ORDER BY cmo DESC` ));
 
   res.send(results)

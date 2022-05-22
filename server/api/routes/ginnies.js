@@ -35,9 +35,11 @@ router.get('/coupons/:coupon/:indicator', async(req, res, next)=> {
   console.log(req.params.coupon); 
   console.log(req.params.indicator); 
     // can just check if idicator is g1 or g2 if not it is a type and we can change the bottom part 
+    // do I need anymore safeguards to make sure the two don't mix... maybe not sure.. don't think so but should propably double check 
     if (req.params.indicator == 'M' || req.params.indicator == 'X')
     {
-
+      // does this get me pools and plats... probably 
+      // this probably needs to be beefed up because 
       let [results, _] = (await db.query(
         
         `SELECT *,
@@ -45,6 +47,7 @@ router.get('/coupons/:coupon/:indicator', async(req, res, next)=> {
         FROM ginnies
         WHERE coupon = ${req.params.coupon}
         AND indicator = '${req.params.indicator}'
+        AND type IN ('SP', 'SF')
         ORDER BY coupon, issuedate DESC
         LIMIT 10000;` ));
 
@@ -52,7 +55,7 @@ router.get('/coupons/:coupon/:indicator', async(req, res, next)=> {
       res.send(results)
     }
     else {
-      
+      // this should be ok becuase the JM RG just care about type
       let [results, _] = (await db.query(
         `SELECT *,
         currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) AS float
@@ -91,6 +94,7 @@ router.get('/floats/:float/:indicator', async(req, res, next)=> {
         FROM ginnies
         WHERE currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) >= ${min}
         AND indicator = '${req.params.indicator}'
+        AND type IN ('SP', 'SF')
         ORDER BY coupon, issuedate DESC
         LIMIT 10000;` ));
 
@@ -137,6 +141,7 @@ router.get('/couponsandfloats/:coupon/:float/:indicator', async(req, res, next)=
         WHERE coupon = ${req.params.coupon}
         AND currentface - COALESCE(cfincmo, 0) - COALESCE(cfinfed, 0) - COALESCE(cfinplat, 0) >= ${min}
         AND indicator = '${req.params.indicator}'
+        AND type IN ('SP', 'SF')
         ORDER BY coupon, issuedate DESC
         LIMIT 10000;` ));
 

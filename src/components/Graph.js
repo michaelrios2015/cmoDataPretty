@@ -97,7 +97,7 @@ function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataB
     coupon.push(i.toString())
   }
   
-  const gtype = ['g1s', 'g2s'];
+  const gtype = ['g1s', 'g2s', 'RG', 'JM'];
 
   // console.log(state.datasets[0]['data'])
   // console.log(Object.values(graphData));

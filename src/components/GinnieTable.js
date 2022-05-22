@@ -70,7 +70,7 @@ function PoolTable({ ginnies, loadGinnies, loadGinniesByCoupon, loadGinniesByFlo
   const firstUpdate = useRef(true);
 
 //checks to see if deal name or group has changed but does not run the first time
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
       return;
@@ -86,11 +86,20 @@ function PoolTable({ ginnies, loadGinnies, loadGinniesByCoupon, loadGinniesByFlo
       indicator = 'X'
       console.log(searchC)
     }
-    else {
+    else if (searchC === 'Ginnie Two'){
       indicator = 'M'
       console.log(searchC)
       // does not trigger an infinite loop neat :)
       setSearchC('Ginnie Two');
+    }
+    else if (searchC === 'JM' || searchC === 'RG') {
+      indicator = searchC;
+      console.log(searchC)
+      setSearchC(indicator);
+    }
+    // so when you press the x you still have something 
+    else {
+      indicator = 'M'
     }
 
     console.log(indicator)
@@ -127,7 +136,7 @@ for (let i=1; i < 10; i++ ){
     coupon.push(i.toString())
   }
 
-  let ginniesOpt = ['Ginnie One', 'Ginnie Two']
+  let ginniesOpt = ['Ginnie One', 'Ginnie Two', 'JM', 'RG']
   
   // console.log(coupon);
   // console.log(searchA)

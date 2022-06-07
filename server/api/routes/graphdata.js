@@ -5,7 +5,7 @@ const { db } = require('../../db');
 // i can just use raw queries https://medium.com/@codemonk/writing-raw-sql-queries-in-sequelize-for-express-js-eaa095cd41e4
 
 // this should be incorprated better but it's ok for now
-const date = '2022-03-01';
+const date = '2022-04-01';
 
 // Am i using this 
 router.get('/', async(req, res, next)=> {

@@ -45,12 +45,12 @@ function PoolTable({ ginnies, loadGinnies, loadGinniesByCoupon, loadGinniesByFlo
   
   const [loading, setLoading ] = useState(true);
 
-  const twomonthspast = 'FEB'
-  const previousmonth = 'MAR';
-  const currentmonth = 'APR';
-  const nextmonth = 'MAY';
-  const twomoremonths = 'JUNE';
-  const feddate = '06/01/22';
+  const twomonthspast = 'MAR'
+  const previousmonth = 'APR';
+  const currentmonth = 'MAY';
+  const nextmonth = 'JUN';
+  const twomoremonths = 'JUL';
+  const feddate = '06/08/22';
 
   // console.log(ginnies[0])
   //my homemade loading true or false again needed not sure
@@ -200,7 +200,7 @@ for (let i=1; i < 10; i++ ){
               <TableRow  >
               <TableCell colSpan={2}><b>{searchC} {currentmonth}</b></TableCell>
                 <TableCell align="center" colSpan={11}/>
-                <TableCell align="center" colSpan={2}>
+                <TableCell align="center" colSpan={1}>
                   Predicted CPR
                 </TableCell>
                 <TableCell align="center" colSpan={3}>
@@ -209,7 +209,7 @@ for (let i=1; i < 10; i++ ){
                 <TableCell align="center" colSpan={3}>
                   CPR Resid 
                 </TableCell>
-                <TableCell align="center" colSpan={1}>
+                {/* <TableCell align="center" colSpan={1}>
                   Predicted CDR
                 </TableCell>
                 <TableCell align="center" colSpan={1}>
@@ -217,7 +217,7 @@ for (let i=1; i < 10; i++ ){
                 </TableCell>
                 <TableCell align="center" colSpan={1}>
                   CDR Resid
-                </TableCell>
+                </TableCell> */}
               </TableRow>
               
               <TableRow>
@@ -235,25 +235,27 @@ for (let i=1; i < 10; i++ ){
                 <TableCell align="right">WAM</TableCell>
                 <TableCell align="right">VA</TableCell>
                 {/* Predicted CPR */}
-                <TableCell align="right">{twomoremonths}</TableCell>
+                {/* <TableCell align="right">{twomoremonths}</TableCell> */}
                 <TableCell align="right">{nextmonth}</TableCell>
                 {/* actual cpr -- --- this changes on the 4th and 6th */}
-                <TableCell align="right">{nextmonth}</TableCell> 
+                {/* <TableCell align="right">{nextmonth}</TableCell>  */}
                 <TableCell align="right">{currentmonth}</TableCell>
                 <TableCell align="right">{previousmonth}</TableCell>
-                {/* <TableCell align="right">{twomonthspast}</TableCell> */}
+                <TableCell align="right">{twomonthspast}</TableCell>
                 {/* RESID --- this changes on the 4th and 6th */}
-                <TableCell align="right">{nextmonth}</TableCell>
+                {/* <TableCell align="right">{nextmonth}</TableCell> */}
                 <TableCell align="right">{currentmonth}</TableCell>
                 <TableCell align="right">{previousmonth}</TableCell>
-                {/* <TableCell align="right">{twomonthspast}</TableCell> */}
+                <TableCell align="right">{twomonthspast}</TableCell>
+              
+              {/* not being used at the moment */}
                 {/* CDR predicted*/}
-                <TableCell align="right">{nextmonth}</TableCell>
+                {/* <TableCell align="right">{nextmonth}</TableCell> */}
                 {/* CDR actual --- this changes on the 4th and 6th */}
-                <TableCell align="right">{nextmonth}</TableCell>
+                {/* <TableCell align="right">{nextmonth}</TableCell> */}
                 {/* <TableCell align="right">{currentmonth}</TableCell> */}
                 {/* CDR residual --- this changes on the 4th and 6th */}
-                <TableCell align="right">{nextmonth}</TableCell>
+                {/* <TableCell align="right">{nextmonth}</TableCell> */}
                 {/* <TableCell align="right">{currentmonth}</TableCell> */}
 
                 {/* <TableCell align="right">Date</TableCell> */}
@@ -279,25 +281,28 @@ for (let i=1; i < 10; i++ ){
                   <TableCell align="right">{row.wam}</TableCell>
                   <TableCell align="right">{row.va}</TableCell>
                   {/* cpr prediction*/}
-                  <TableCell align="right">{row.cprfuturepredictionnext}</TableCell>
+                  {/* <TableCell align="right">{row.cprfuturepredictionnext}</TableCell> */}
                   <TableCell align="right">{row.cprfutureprediction}</TableCell>
                   {/* cpr actual  --- this changes on the 4th and 6th  */}
-                  <TableCell align="right">{row.curractualcprnext}</TableCell>
+                  {/* <TableCell align="right">{row.curractualcprnext}</TableCell> */}
                   <TableCell align="right">{row.curractualcpr}</TableCell>
                   <TableCell align="right">{row.pastactcpr}</TableCell>
-                  {/* <TableCell align="right">{row.twomonthspastactcpr}</TableCell> */}
+                  <TableCell align="right">{row.twomonthspastactcpr}</TableCell>
                   {/* CPR residual --- this changes on the 4th and 6th  */}
-                  <TableCell align="right" style={(row.curractualcprnext - row.cprfutureprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcprnext - row.cprfutureprediction).toFixed(1) != 0? (row.curractualcprnext - row.cprfutureprediction).toFixed(1) : ' '}</TableCell>
+                  {/* <TableCell align="right" style={(row.curractualcprnext - row.cprfutureprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcprnext - row.cprfutureprediction).toFixed(1) != 0? (row.curractualcprnext - row.cprfutureprediction).toFixed(1) : ' '}</TableCell> */}
                   <TableCell align="right" style={(row.curractualcpr - row.cprprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcpr - row.cprprediction).toFixed(1) != 0? (row.curractualcpr - row.cprprediction).toFixed(1) : ' '}</TableCell>
                   <TableCell align="right" style={(row.pastactcpr - row.cprpastprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.pastactcpr - row.cprpastprediction).toFixed(1) != 0? (row.pastactcpr - row.cprpastprediction).toFixed(1) : ' '}</TableCell>
-                  {/* <TableCell align="right" style={(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) != 0? (row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) : ' '}</TableCell> */}
+                  <TableCell align="right" style={(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) != 0? (row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) : ' '}</TableCell>
+                  
+                  {/* not using right now  */}
+
                   {/* CDR prediction */}
-                  <TableCell align="right">{row.cdrfuturepediction}</TableCell>
+                  {/* <TableCell align="right">{row.cdrfuturepediction}</TableCell> */}
                   {/* CDR actual  --- this changes on the 4th and 6th */}
-                  <TableCell align="right">{row.curractualcdrnext}</TableCell>
+                  {/* <TableCell align="right">{row.curractualcdrnext}</TableCell> */}
                   {/* <TableCell align="right">{row.curractualcdr}</TableCell> */}
                   {/* CDR residual --- this changes on the 4th and 6th */}
-                  <TableCell align="right" style={(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) != 0 ? (row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) : ' '}</TableCell>
+                  {/* <TableCell align="right" style={(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) != 0 ? (row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) : ' '}</TableCell> */}
                   {/* <TableCell align="right" style={(row.curractualcdr - row.currcdrprediction).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcdr - row.currcdrprediction).toFixed(1) != 0 ? (row.curractualcdr - row.currcdrprediction).toFixed(1) : ' '}</TableCell> */}
                 </TableRow>
               ))}

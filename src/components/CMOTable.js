@@ -109,11 +109,11 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
 
 // changes these
 
-  let futureTwoMonths = 'JUNE';
-  let futureMonth = 'MAY';
-  let currentMonth = 'APR';
-  let pastMonth = 'MAR'
-  let pastTwosMonths = 'FEB'
+  let futureTwoMonths = 'JUL';
+  let futureMonth = 'JUN';
+  let currentMonth = 'MAY';
+  let pastMonth = 'APR'
+  let pastTwosMonths = 'MAR'
 
   return (
     <div>
@@ -180,7 +180,7 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                 <TableCell align="right" colSpan={1}>
                   Current Face
                 </TableCell>  
-                <TableCell align="center" colSpan={2}>
+                <TableCell align="center" colSpan={1}>
                   Predicted CPR 
                 </TableCell>
                 <TableCell align="center" colSpan={3}>
@@ -189,12 +189,16 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                 <TableCell align="center" colSpan={3}>
                   CPR RESID
                 </TableCell>
-                <TableCell align="center" colSpan={1}>
+                
+                {/* not using for the moment  */}
+                
+                {/* <TableCell align="center" colSpan={1}>
                   Predicted CDR
                 </TableCell>
                 <TableCell align="center" colSpan={1}>
                   Actual CDR 
-                </TableCell>
+                </TableCell> */}
+              
               </TableRow>
               <TableRow>
                 <TableCell >Year</TableCell>
@@ -205,7 +209,7 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                  {/* current face  */}
                 <TableCell align="right">{currentMonth}</TableCell>
                 {/* predicted cpr */}
-                <TableCell align="right">{futureTwoMonths}</TableCell>
+                {/* <TableCell align="right">{futureTwoMonths}</TableCell> */}
                 <TableCell align="right">{futureMonth}</TableCell>
                 {/* actual?? */}
                 <TableCell align="right">{currentMonth}</TableCell>
@@ -215,9 +219,11 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                 <TableCell align="right">{currentMonth}</TableCell>
                 <TableCell align="right">{pastMonth}</TableCell>
                 <TableCell align="right">{pastTwosMonths}</TableCell>
+               
+               {/* not using right now */}
                 {/* CDR */}
-                <TableCell align="right">{futureMonth}</TableCell>
-                <TableCell align="right">{currentMonth}</TableCell>
+                {/* <TableCell align="right">{futureMonth}</TableCell>
+                <TableCell align="right">{currentMonth}</TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -232,7 +238,7 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                   {/* currface */}
                   <TableCell align="right">{row.currface && numberWithCommas(row.currface)}</TableCell>
                   {/* predicted cpr */}
-                  <TableCell align="right">{row.predictedcprnext}</TableCell>
+                  {/* <TableCell align="right">{row.predictedcprnext}</TableCell> */}
                   <TableCell align="right">{row.predictedcpr}</TableCell>
                   {/* actual cpr */}
                   <TableCell align="right">{row.cpr}</TableCell>
@@ -242,8 +248,10 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
                   <TableCell align="right" style={row.resid  > 0 ? {color: "red"}: {color: "black"}} >{row.resid}</TableCell>
                   <TableCell align="right" style={row.pastresid  > 0 ? {color: "red"}: {color: "black"}}>{row.pastresid}</TableCell>
                   <TableCell align="right" style={row.twomonthspastresid  > 0 ? {color: "red"}: {color: "black"}} >{row.twomonthspastresid}</TableCell>
-                  <TableCell align="right">{row.predictedcdr}</TableCell>
-                  <TableCell align="right">{row.cdr}</TableCell>
+                  
+                  {/* not using right now */}
+                  {/* <TableCell align="right">{row.predictedcdr}</TableCell>
+                  <TableCell align="right">{row.cdr}</TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

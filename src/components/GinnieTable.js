@@ -45,12 +45,12 @@ function PoolTable({ ginnies, loadGinnies, loadGinniesByCoupon, loadGinniesByFlo
   
   const [loading, setLoading ] = useState(true);
 
-  const twomonthspast = 'MAY'
-  const previousmonth = 'JUN';
-  const currentmonth = 'JUL';
-  const nextmonth = 'AUG';
-  const twomoremonths = 'SEP';
-  const feddate = '09/07/22';
+  const twomonthspast = 'JUN'
+  const previousmonth = 'JUL';
+  const currentmonth = 'AUG';
+  const nextmonth = 'SEP';
+  const twomoremonths = 'OCT';
+  const feddate = '09/21/22';
 
   // console.log(ginnies[0])
   //my homemade loading true or false again needed not sure
@@ -238,15 +238,15 @@ for (let i=1; i < 10; i++ ){
                 {/* <TableCell align="right">{twomoremonths}</TableCell> */}
                 <TableCell align="right">{nextmonth}</TableCell>
                 {/* actual cpr -- --- this changes on the 4th and 6th */}
-                <TableCell align="right">{nextmonth}</TableCell> 
+                {/* <TableCell align="right">{nextmonth}</TableCell>  */}
                 <TableCell align="right">{currentmonth}</TableCell>
                 <TableCell align="right">{previousmonth}</TableCell>
-                {/* <TableCell align="right">{twomonthspast}</TableCell> */}
+                <TableCell align="right">{twomonthspast}</TableCell>
                 {/* RESID --- this changes on the 4th and 6th */}
-                <TableCell align="right">{nextmonth}</TableCell>
+                {/* <TableCell align="right">{nextmonth}</TableCell> */}
                 <TableCell align="right">{currentmonth}</TableCell>
                 <TableCell align="right">{previousmonth}</TableCell>
-                {/* <TableCell align="right">{twomonthspast}</TableCell> */}
+                <TableCell align="right">{twomonthspast}</TableCell>
               
               {/* not being used at the moment */}
                 {/* CDR predicted*/}
@@ -284,15 +284,15 @@ for (let i=1; i < 10; i++ ){
                   {/* <TableCell align="right">{row.cprfuturepredictionnext}</TableCell> */}
                   <TableCell align="right">{row.cprfutureprediction}</TableCell>
                   {/* cpr actual  --- this changes on the 4th and 6th  */}
-                  <TableCell align="right">{row.curractualcprnext}</TableCell>
+                  {/* <TableCell align="right">{row.curractualcprnext}</TableCell> */}
                   <TableCell align="right">{row.curractualcpr}</TableCell>
                   <TableCell align="right">{row.pastactcpr}</TableCell>
-                  {/* <TableCell align="right">{row.twomonthspastactcpr}</TableCell> */}
+                  <TableCell align="right">{row.twomonthspastactcpr}</TableCell>
                   {/* CPR residual --- this changes on the 4th and 6th  */}
-                  <TableCell align="right" style={(row.curractualcprnext - row.cprfutureprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcprnext - row.cprfutureprediction).toFixed(1) != 0? (row.curractualcprnext - row.cprfutureprediction).toFixed(1) : ' '}</TableCell>
+                  {/* <TableCell align="right" style={(row.curractualcprnext - row.cprfutureprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcprnext - row.cprfutureprediction).toFixed(1) != 0? (row.curractualcprnext - row.cprfutureprediction).toFixed(1) : ' '}</TableCell> */}
                   <TableCell align="right" style={(row.curractualcpr - row.cprprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcpr - row.cprprediction).toFixed(1) != 0? (row.curractualcpr - row.cprprediction).toFixed(1) : ' '}</TableCell>
                   <TableCell align="right" style={(row.pastactcpr - row.cprpastprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.pastactcpr - row.cprpastprediction).toFixed(1) != 0? (row.pastactcpr - row.cprpastprediction).toFixed(1) : ' '}</TableCell>
-                  {/* <TableCell align="right" style={(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) != 0? (row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) : ' '}</TableCell> */}
+                  <TableCell align="right" style={(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) != 0? (row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) : ' '}</TableCell>
                   
                   {/* not using right now  */}
 

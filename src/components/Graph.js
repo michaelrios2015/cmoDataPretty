@@ -126,7 +126,7 @@ function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataB
       </div>
 
       <div>
-        <h4>Date: SEPTEMBER 2022</h4>
+        <h4>Date: OCTOBER 2022</h4>
         <h4>Y Axis: Tradable Float in MM</h4>
         <h4>X Axis: CPR</h4>
       </div>

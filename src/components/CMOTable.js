@@ -109,11 +109,11 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
 
 // changes these
 
-  let futureTwoMonths = 'DEC';
-  let futureMonth = 'NOV';
-  let currentMonth = 'OCT';
-  let pastMonth = 'SEP'
-  let pastTwosMonths = 'AUG'
+  let futureTwoMonths = 'JAN';
+  let futureMonth = 'DEC';
+  let currentMonth = 'NOV';
+  let pastMonth = 'OCT'
+  let pastTwosMonths = 'SEP'
 
   return (
     <div>

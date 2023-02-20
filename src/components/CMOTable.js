@@ -33,7 +33,7 @@ function numberWithCommas(x) {
 function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   const [searchA, setSearchA ] = useState('All');
   const [searchB, setSearchB ] = useState('All');
-  const [searchYear, setSearchYear ] = useState('2022');
+  const [searchYear, setSearchYear ] = useState('2023');
   const [searchCoupon, setSearchCoupon ] = useState('ALL');
   const [searchMonth, setSearchMonth ] = useState('FEB');
   
@@ -64,7 +64,7 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
     }
 
     if(!searchYear){
-      setSearchYear(2022);
+      setSearchYear(2023);
     }
 
     if(!searchA){
@@ -101,7 +101,7 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   coupons.sort();
 
   let years = [];
-  for (let i=2022; i > 2000; i--){
+  for (let i=2023; i > 2000; i--){
     years.push(i.toString())
   }
 

@@ -4,7 +4,7 @@ const { db } = require('../../db');
 // i can just use raw queries https://medium.com/@codemonk/writing-raw-sql-queries-in-sequelize-for-express-js-eaa095cd41e4
 
 // fuckkkkk might have messed this up --- 2/26/22
-const currentMonth = '2023-01-01';
+const currentMonth = '2023-02-01';
 router.get('/', async(req, res, next)=> {
   
     // console.log("try cmos")

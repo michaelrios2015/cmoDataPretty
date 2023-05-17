@@ -7,13 +7,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import { loadGinnies, loadGinniesByCoupon, loadGinniesByFloats, loadGinniesByCouponsAndFloats } from '../store';
-
-
 
 const useStyles = makeStyles({
   table: {
@@ -40,18 +37,84 @@ function PoolTable({ ginnies, loadGinnies, loadGinniesByCoupon, loadGinniesByFlo
   const [searchB, setSearchB ] = useState(3.5);
   const [searchC, setSearchC ] = useState('Ginnie Two');
 
-  // const [searchYear, setSearchYear ] = useState('2021');
-  // const [searchMonth, setSearchMonth ] = useState('FEB');
-  
+
   const [loading, setLoading ] = useState(true);
 
-  const twomonthspast = 'FEB'
-  const previousmonth = 'MAR';
-  const currentmonth = 'APR';
-  const nextmonth = 'MAY';
-  const twomoremonths = 'JUN';
+  //change these  
   const feddate = '5/03/23';
+  const month = 3; 
+  const is4thday = false;
 
+  // so I am using this to litterally just get the month name to display, and there will always be three at the moment 
+  const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+  
+  var twomonthspast;
+  var previousmonth;
+
+  if (month - 1 < 0){
+    twomonthspast = months[month+10]
+    previousmonth = months[month+11]
+    
+  } 
+  else if (month - 2 < 0){
+    twomonthspast = months[month+10]
+    
+  }
+  else {
+    twomonthspast = months[month-2]
+    previousmonth = months[month-1]
+    
+  }
+
+  const currentmonth = months[month];
+  const nextmonth = months[(month+1)%12];
+  const twomoremonths = months[(month+2)%12];
+
+// So if we assign the months here
+
+var monthOne;
+var monthTwo;
+var monthThree;
+
+var cprOne;
+var cprTwo;
+var cprThree;
+
+var cprPredictOne;
+var cprPredictTwo;
+var cprPredictThree;
+
+// so we choose our three months here 
+if (is4thday){
+
+  monthOne = nextmonth;
+  monthTwo = currentmonth;
+  monthThree = previousmonth;
+
+  cprOne = 'curractualcprnext';
+  cprTwo = 'curractualcpr';
+  cprThree = 'pastactcpr';
+
+  cprPredictOne = 'cprfutureprediction';
+  cprPredictTwo = 'cprprediction';
+  cprPredictThree = 'cprpastprediction';
+
+
+} 
+else {
+  monthOne = currentmonth;
+  monthTwo = previousmonth;
+  monthThree = twomonthspast;
+
+  cprOne = 'curractualcpr';
+  cprTwo = 'pastactcpr';
+  cprThree = 'twomonthspastactcpr';
+    
+  cprPredictOne = 'cprprediction';
+  cprPredictTwo = 'cprpastprediction';
+  cprPredictThree = 'cprtwomontspastprediction';
+
+}
 
   // console.log(ginnies[0])
   //my homemade loading true or false again needed not sure
@@ -145,14 +208,7 @@ for (let i=1; i < 10; i++ ){
 
   return (
     <div>
-      {/* <Autocomplete
-          id="combo-box-demo"
-          options={months}
-          getOptionLabel={(option) => option}
-          style={{ width: 300 }}
-          onChange={(event, value)=>setSearchMonth(value)}
-          renderInput={(params) => <TextField  {...params} label="Month" variant="outlined" onClick = {(ev)=> !ev.target.value && setSearchMonth('FEB')}  />}
-        />  */}
+
       <div  className={ 'sideBySide' } > 
         
         <Autocomplete
@@ -239,15 +295,13 @@ for (let i=1; i < 10; i++ ){
                 {/* <TableCell align="right">{twomoremonths}</TableCell> */}
                 <TableCell align="right">{nextmonth}</TableCell>
                 {/* actual cpr -- --- this changes on the 4th and 6th */}
-                {/* <TableCell align="right">{nextmonth}</TableCell>  */}
-                <TableCell align="right">{currentmonth}</TableCell>
-                <TableCell align="right">{previousmonth}</TableCell>
-                <TableCell align="right">{twomonthspast}</TableCell>
+                <TableCell align="right" >{monthOne}</TableCell>
+                <TableCell align="right">{monthTwo}</TableCell>
+                <TableCell align="right">{monthThree}</TableCell>
                 {/* RESID --- this changes on the 4th and 6th */}
-                {/* <TableCell align="right">{nextmonth}</TableCell> */}
-                <TableCell align="right">{currentmonth}</TableCell>
-                <TableCell align="right">{previousmonth}</TableCell>
-                <TableCell align="right">{twomonthspast}</TableCell>
+                <TableCell align="right" >{monthOne}</TableCell>
+                <TableCell align="right">{monthTwo}</TableCell>
+                <TableCell align="right">{monthThree}</TableCell>
               
               {/* not being used at the moment */}
                 {/* CDR predicted*/}
@@ -285,18 +339,14 @@ for (let i=1; i < 10; i++ ){
                   {/* <TableCell align="right">{row.cprfuturepredictionnext}</TableCell> */}
                   <TableCell align="right">{row.cprfutureprediction}</TableCell>
                   {/* cpr actual  --- this changes on the 4th and 6th  */}
-                  {/* <TableCell align="right">{row.curractualcprnext}</TableCell> */}
-                  <TableCell align="right">{row.curractualcpr}</TableCell>
-                  <TableCell align="right">{row.pastactcpr}</TableCell>
-                  <TableCell align="right">{row.twomonthspastactcpr}</TableCell>
+                  <TableCell align="right" >{row[cprOne]}</TableCell>
+                  <TableCell align="right">{row[cprTwo]}</TableCell>
+                  <TableCell align="right">{row[cprThree]}</TableCell>
                   {/* CPR residual --- this changes on the 4th and 6th  */}
-                  {/* <TableCell align="right" style={(row.curractualcprnext - row.cprfutureprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcprnext - row.cprfutureprediction).toFixed(1) != 0? (row.curractualcprnext - row.cprfutureprediction).toFixed(1) : ' '}</TableCell> */}
-                  <TableCell align="right" style={(row.curractualcpr - row.cprprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcpr - row.cprprediction).toFixed(1) != 0? (row.curractualcpr - row.cprprediction).toFixed(1) : ' '}</TableCell>
-                  <TableCell align="right" style={(row.pastactcpr - row.cprpastprediction).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row.pastactcpr - row.cprpastprediction).toFixed(1) != 0? (row.pastactcpr - row.cprpastprediction).toFixed(1) : ' '}</TableCell>
-                  <TableCell align="right" style={(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) != 0? (row.twomonthspastactcpr - row.cprtwomontspastprediction).toFixed(1) : ' '}</TableCell>
-                  
+                  <TableCell align="right" style={(row[cprOne] - row[cprPredictOne]).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row[cprOne] - row[cprPredictOne]).toFixed(1) != 0? (row[cprOne] - row[cprPredictOne]).toFixed(1) : ' '}</TableCell>
+                  <TableCell align="right" style={(row[cprTwo] - row[cprPredictTwo]).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row[cprTwo] - row[cprPredictTwo]).toFixed(1) != 0? (row[cprTwo] - row[cprPredictTwo]).toFixed(1) : ' '}</TableCell>
+                  <TableCell align="right" style={(row[cprThree] - row[cprPredictThree]).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row[cprThree] - row[cprPredictThree]).toFixed(1) != 0? (row[cprThree] - row[cprPredictThree]).toFixed(1) : ' '}</TableCell>
                   {/* not using right now  */}
-
                   {/* CDR prediction */}
                   {/* <TableCell align="right">{row.cdrfuturepediction}</TableCell> */}
                   {/* CDR actual  --- this changes on the 4th and 6th */}

@@ -44,6 +44,7 @@ function PoolTable({ ginnies, loadGinnies, loadGinniesByCoupon, loadGinniesByFlo
   const feddate = '5/03/23';
   const month = 3; 
   const is4thday = false;
+  // nothing else should need changing 
 
   // so I am using this to litterally just get the month name to display, and there will always be three at the moment 
   const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']

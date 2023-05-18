@@ -7,7 +7,7 @@ import CMOTable from './components/CMOTable';
 import NavBar from './components/NavBar';
 import { HashRouter as Router, Route, BrowserRouter } from 'react-router-dom';
 import Graph from './components/Graph';
-import Test from './components/Test';
+
 
 // so I don't think is where I should load that data but nt sure how to do it with UseEffect
 class _App extends Component{

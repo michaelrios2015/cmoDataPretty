@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-// import React, { Component } from 'react';
 import {Line} from 'react-chartjs-2';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -24,7 +23,6 @@ const state = {
       backgroundColor: 'rgba(75,192,192,1)',
       borderColor: 'rgba(0,0,0,1)',
       borderWidth: 2,
-      // xAxisID: 'A',
       data: []
     },
     {
@@ -49,13 +47,6 @@ const legend = {
   }
 };
 
-// should probably erease this 2/26/22
-// const options =  {           
-// title:{
-//   display:true,
-//   text:'Average Rainfall per month',
-//   fontSize:20
-// }};
 
 //rows are now created in store :) 
 function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataByGtypeandCoupon}) {
@@ -101,7 +92,7 @@ function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataB
 
   // console.log(state.datasets[0]['data'])
   // console.log(Object.values(graphData));
-    // console.log( propertyValues)
+  // console.log( propertyValues)
     return (
       <div>
         <div className={ 'sideBySide' }> 
@@ -125,6 +116,7 @@ function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataB
         />  
       </div>
 
+      {/* change Date */}
       <div>
         <h4>Date: MAR 2023</h4>
         <h4>Y Axis: Tradable Float in MM</h4>
@@ -145,26 +137,6 @@ function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataB
               text:'Average Rainfall per month',
               fontSize:20
             }
-            // ,
-            // scales: {
-            //   y: [{
-            //     scaleLabel: {
-            //       display: true,
-            //       labelString: 'Y text'
-            //     }
-            //   }],
-            //   x: [{
-            //     scaleLabel: {
-            //       display: true,
-            //       labelString: 'X text'
-            //     }
-            //   }],
-            // },  
-
-            // legend:{
-            //   display:true,
-            //   position:'right'
-            // },
             
         }
       }

@@ -7,7 +7,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
@@ -35,7 +34,6 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   const [searchB, setSearchB ] = useState('All');
   const [searchYear, setSearchYear ] = useState('2023');
   const [searchCoupon, setSearchCoupon ] = useState('ALL');
-  const [searchMonth, setSearchMonth ] = useState('FEB');
   
   const [loading, setLoading ] = useState(true);
 
@@ -76,9 +74,9 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
     }
     
     setLoading(true);
-    console.log(searchA, searchB, searchYear, searchMonth, searchCoupon)
+    console.log(searchA, searchB, searchYear, searchCoupon)
     loadCMOSYearDealGroup (searchYear, searchA, searchB, searchCoupon);
-  },[searchA, searchB, searchYear, searchMonth, searchCoupon]);
+  },[searchA, searchB, searchYear, searchCoupon]);
 
   const classes = useStyles();
       
@@ -109,11 +107,35 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
 
 // changes these
 
-  let futureTwoMonths = 'JUN';
-  let futureMonth = 'MAY';
-  let currentMonth = 'APR';
-  let pastMonth = 'MAR'
-  let pastTwosMonths = 'FEB'
+  //change this  
+    const month = 3; 
+  // nothing else should need changing 
+
+  // so I am using this to litterally just get the month name to display, and there will always be three at the moment 
+  const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+  
+  let pastTwosMonths;
+  let pastMonth;
+
+  if (month - 1 < 0){
+    pastTwosMonths = months[month+10]
+    pastMonth = months[month+11]
+    
+  } 
+  else if (month - 2 < 0){
+    pastTwosMonths = months[month+10]
+    
+  }
+  else {
+    pastTwosMonths = months[month-2]
+    pastMonth = months[month-1]
+    
+  }
+
+  const currentMonth = months[month];
+  const futureMonth = months[(month+1)%12];
+  const futureTwoMonths = months[(month+2)%12];
+
 
   return (
     <div>

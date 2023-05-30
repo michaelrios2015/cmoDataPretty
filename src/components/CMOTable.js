@@ -9,8 +9,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
 import { loadCMOS, loadCMOSYearDealGroup } from '../store';
+import * as changeme from '../../data/changeme.js'
+
+
+//change this  
+const month = changeme.month; 
+// nothing else should need changing 
 
 const useStyles = makeStyles({
   table: {
@@ -104,12 +109,6 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   }
 
   years.push('1999');
-
-// changes these
-
-  //change this  
-    const month = 3; 
-  // nothing else should need changing 
 
   // so I am using this to litterally just get the month name to display, and there will always be three at the moment 
   const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']

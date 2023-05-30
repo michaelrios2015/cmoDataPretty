@@ -1,11 +1,13 @@
 const router = require('express').Router();
 const { db } = require('../../db');
 // const Sequelize = require('sequelize');
+const currentMonth = require('../../../data/servervar.js')
 
 // i can just use raw queries https://medium.com/@codemonk/writing-raw-sql-queries-in-sequelize-for-express-js-eaa095cd41e4
 
 // this should be incorprated better but it's ok for now
-const date = '2023-04-01';
+// const currentMonth = '2023-04-01';
+// const date = '2023-04-01';
 
 // Am i using this 
 router.get('/', async(req, res, next)=> {
@@ -20,7 +22,7 @@ router.get('/', async(req, res, next)=> {
     `SELECT *
     FROM sumoffloats
     WHERE coupon = 6
-    AND date = '${date}'
+    AND date = '${currentMonth}'
     ORDER BY cpr;` ));
 
   res.send(results)
@@ -43,7 +45,7 @@ router.get('/coupons/:coupon', async(req, res, next)=> {
     FROM sumoffloats
     WHERE coupon = ${req.params.coupon}
     AND gtype = 'g2s'
-    AND date = '${date}'
+    AND currentMonth = '${currentMonth}'
     ORDER BY cpr;` ));
     
 
@@ -69,7 +71,7 @@ router.get('/gtypeandcoupon/:gtype/:coupon', async(req, res, next)=> {
     FROM sumoffloats
     WHERE coupon = ${req.params.coupon}
     AND gtype = '${req.params.gtype}'
-    AND date = '${date}'
+    AND date = '${currentMonth}'
     ORDER BY cpr;` ));
     
 

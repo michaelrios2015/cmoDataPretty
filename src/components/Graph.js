@@ -7,6 +7,11 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import { loadGraphData, loadGraphDataByCoupon, loadGraphDataByGtypeandCoupon } from '../store';
+import * as changeme from '../../data/changeme.js'
+
+// change this
+const date = changeme.date;
+
 
 const labels =[];
 for(let i = 0; i<101; i++ ){
@@ -116,9 +121,8 @@ function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataB
         />  
       </div>
 
-      {/* change Date */}
       <div>
-        <h4>Date: MAR 2023</h4>
+        <h4>Date: {date}</h4>
         <h4>Y Axis: Tradable Float in MM</h4>
         <h4>X Axis: CPR</h4>
       </div>

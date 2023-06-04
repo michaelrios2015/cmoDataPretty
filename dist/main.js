@@ -2941,7 +2941,7 @@ eval("module.exports = JSON.parse('{\"_from\":\"axios@0.21.4\",\"_id\":\"axios@0
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"feddate\": () => (/* binding */ feddate),\n/* harmony export */   \"month\": () => (/* binding */ month),\n/* harmony export */   \"is4thday\": () => (/* binding */ is4thday),\n/* harmony export */   \"date\": () => (/* binding */ date)\n/* harmony export */ });\n// use these for cmo and ginnie tables \n// whenever I change fed data \nconst feddate = '5/03/23'; // changed on the 6th day \n\nconst month = 3; // changed on the 4th and 6th day \n\nconst is4thday = false; // use this for the graph \n// changed on the 6th day \n\nconst date = 'APRIL 2023';\n\n//# sourceURL=webpack://cmoDATA/./data/changeme.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"feddate\": () => (/* binding */ feddate),\n/* harmony export */   \"month\": () => (/* binding */ month),\n/* harmony export */   \"is4thday\": () => (/* binding */ is4thday),\n/* harmony export */   \"date\": () => (/* binding */ date)\n/* harmony export */ });\n// use these for cmo and ginnie tables \n// whenever I change fed data \nconst feddate = '5/31/23'; // changed on the 6th day \n\nconst month = 3; // changed on the 4th and 6th day \n\nconst is4thday = false; // use this for the graph \n// changed on the 6th day \n\nconst date = 'APRIL 2023';\n\n//# sourceURL=webpack://cmoDATA/./data/changeme.js?");
 
 /***/ }),
 

@@ -7,6 +7,9 @@ const LOAD_GINNIES = 'LOAD_GINNIES';
 
 const formatData = (arr) => {
 
+    const cprs = ['curractualcprnext', 'curractualcpr', 'pastactcpr', 'twomonthspastactcpr', 'va']
+        
+
     arr.forEach(item => {
 
         item.issuedate = item.issuedate.toString().slice(0, 4) + item.issuedate.toString().slice(5, 7);
@@ -19,15 +22,32 @@ const formatData = (arr) => {
         
         item.cfinfed = (item.cfinfed/1000000).toFixed(1);
 
-        item.va = (item.va * 100).toFixed(0);
+        if (item.va != null){
         
-        item.twomonthspastactcpr = (item.twomonthspastactcpr * 100).toFixed(1);
+            item.va = (item.va * 100).toFixed(0);
+        
+        }
+        
+        if (item.twomonthspastactcpr != null){
+        
+            item.twomonthspastactcpr = (item.twomonthspastactcpr * 100).toFixed(1);
+        
+        }
 
-        item.pastactcpr = (item.pastactcpr * 100).toFixed(1); 
+        if (item.pastactcpr != null){
         
-        item.curractualcpr = (item.curractualcpr * 100).toFixed(1);
+            item.pastactcpr = (item.pastactcpr * 100).toFixed(1); 
+        }
+
+        if (item.curractualcpr != null){
         
-        item.curractualcprnext = (item.curractualcprnext  * 100).toFixed(1);
+            item.curractualcpr = (item.curractualcpr * 100).toFixed(1);
+        }
+      
+        if (item.curractualcprnext != null){
+
+            item.curractualcprnext = (item.curractualcprnext  * 100).toFixed(1);
+        }
 
         item.cprtwomontspastprediction = (item.cprtwomontspastprediction * 100).toFixed(1);
 
@@ -48,10 +68,22 @@ const formatData = (arr) => {
         item.cdrfuturepediction = (item.cdrfuturepediction * 100).toFixed(1);
         // console.log(item.cdrfuturepediction);
         
+        // so I used this to convert my 0 to blank.. but we are now changing that 
+        
+        console.log(cprs)
         for (const property in item) {
-            if (item[property] * 1  == 0 || item[property] * 1 == -0){
-                item[property] = '';
+            if (item[property] == 0 || item[property] == -0){
+                item[property] = 0;
                 // console.log(`${property}: ${item[property]}`);
+            }    
+        }
+
+
+        for (const property in item) {
+            if (item[property] == 0 && !cprs.includes(property)){
+                // item[property] = 0;
+                item[property] = '';
+                console.log(`${property}: ${item[property]}`);
             }    
         }
     
@@ -98,9 +130,10 @@ export const loadGinniesByCoupon = (coupon, indicator) =>{
 
     return async(dispatch)=>{
         const tests = (await axios.get(`/api/ginnies/coupons/${coupon}/${indicator}`)).data;
-        console.log('tests[0]'); 
-        console.log(tests[0]); 
+        console.log('tests'); 
+        console.log(tests); 
         formatData(tests)
+        console.log(tests); 
 
         // dispatch(_loadGinnies(loadData(tests)));
         dispatch(_loadGinnies(tests));

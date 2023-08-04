@@ -5,6 +5,7 @@ import axios from 'axios';
 const LOAD_GINNIES = 'LOAD_GINNIES';
 
 
+// so for certain things when they are zero we want to show  and some we don't this works but could use some serious clean up
 const formatData = (arr) => {
 
     const cprs = ['curractualcprnext', 'curractualcpr', 'pastactcpr', 'twomonthspastactcpr', 'va']

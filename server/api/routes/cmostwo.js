@@ -21,7 +21,7 @@ router.get('/', async(req, res, next)=> {
         *
         FROM cmos
         WHERE date = '${currentMonth}'
-        AND cmo LIKE '2023%'
+        AND cmo LIKE '2024%'
         ORDER BY cmo DESC` ));
 
   res.send(results)

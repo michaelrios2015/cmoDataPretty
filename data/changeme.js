@@ -2,7 +2,7 @@
 // whenever I change fed data 
 export const feddate = '3/06/24';
 // changed on the 6th day 
-export const month = 0; 
+export const month = 1; 
 // changed on the 4th and 6th day 
 export const is4thday = false;
 

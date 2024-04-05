@@ -19,6 +19,9 @@ const month = changeme.month;
 const is4thday = changeme.is4thday;
 // nothing else should need changing 
 
+// for changing columnb visabilty 
+// https://mui.com/x/react-data-grid/column-visibility/
+
 const useStyles = makeStyles({
   table: {
     minWidth: 730,

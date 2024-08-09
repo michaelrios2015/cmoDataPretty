@@ -5,8 +5,10 @@ import store from './store';
 import GinnieTable from './components/GinnieTable';
 import CMOTable from './components/CMOTable';
 import NavBar from './components/NavBar';
-import { HashRouter as Router, Route, BrowserRouter } from 'react-router-dom';
 import Graph from './components/Graph';
+import test from './components/test';
+import { HashRouter as Router, Route, BrowserRouter } from 'react-router-dom';
+
 
 
 // so I don't think is where I should load that data but nt sure how to do it with UseEffect
@@ -25,7 +27,8 @@ class _App extends Component{
           <div>
             <Route component={ GinnieTable } path = '/' exact/>  
             <Route component={ Graph } path = '/graph' exact/>       
-            <Route component={ CMOTable } path = '/cmotwo' exact/>     
+            <Route component={ CMOTable } path = '/cmotwo' exact/>
+            <Route component={ test } path = '/test' exact/>     
           </div>
         </Router>
     );

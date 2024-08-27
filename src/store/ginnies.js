@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-// cusip,name,indicator,type,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,pastactcpr,curractualcpr,cprprediction,cprpredictionnext,pastactcdr,curractualcdr,cdrprediction,cdrpredictionnext,date
+// cusip,name,indicator,type,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,pastactcpr,curractualcpr,cprprediction,
+//cprpredictionnext,pastactcdr,curractualcdr,cdrprediction,cdrpredictionnext,date, fha_2, va_2, fha_cpr, va_cpr
 
 const LOAD_GINNIES = 'LOAD_GINNIES';
 
@@ -67,6 +68,15 @@ const formatData = (arr) => {
         item.currcdrprediction = (item.currcdrprediction * 100).toFixed(1);
         
         item.cdrfuturepediction = (item.cdrfuturepediction * 100).toFixed(1);
+
+        item.fha_2 = (item.fha_2 * 100).toFixed(0);
+        
+        item.va_2 = (item.va_2 * 100).toFixed(0);
+
+        item.fha_cpr = item.fha_cpr.toFixed(1);
+
+        item.va_cpr = item.va_cpr.toFixed(1);
+        
         // console.log(item.cdrfuturepediction);
         
         // so I used this to convert my 0 to blank.. but we are now changing that 

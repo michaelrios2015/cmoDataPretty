@@ -264,10 +264,13 @@ for (let i=1; i < 10; i++ ){
               <TableRow  >
               <TableCell colSpan={2}><b>{searchC} {currentmonth}</b></TableCell>
                 <TableCell align="center" colSpan={11}/>
+                <TableCell align="center" colSpan={2}>
+                  Streamline Eligible
+                </TableCell>
                 <TableCell align="center" colSpan={1}>
                   Predicted CPR
                 </TableCell>
-                <TableCell align="center" colSpan={3}>
+                <TableCell align="center" colSpan={5}>
                   Actual CPR
                 </TableCell>
                 <TableCell align="center" colSpan={3}>
@@ -298,11 +301,17 @@ for (let i=1; i < 10; i++ ){
                 <TableCell align="right">WALA</TableCell>
                 <TableCell align="right">WAM</TableCell>
                 <TableCell align="right">VA</TableCell>
+                <TableCell align="right">FHA</TableCell>
+                <TableCell align="right">VA</TableCell>
                 {/* Predicted CPR */}
                 {/* <TableCell align="right">{twomoremonths}</TableCell> */}
                 <TableCell align="right">{nextmonth}</TableCell>
                 {/* actual cpr -- --- this changes on the 4th and 6th */}
                 <TableCell align="right" >{monthOne}</TableCell>
+                {/* These are for the two new cprs.... not sure if they should change -- --- this changes on the 4th and 6th */}
+                <TableCell align="right" >FHA {monthOne}</TableCell>
+                <TableCell align="right" >VA {monthOne}</TableCell>
+                
                 <TableCell align="right">{monthTwo}</TableCell>
                 <TableCell align="right">{monthThree}</TableCell>
                 {/* RESID --- this changes on the 4th and 6th */}
@@ -342,11 +351,17 @@ for (let i=1; i < 10; i++ ){
                   <TableCell align="right">{row.wala}</TableCell>
                   <TableCell align="right">{row.wam}</TableCell>
                   <TableCell align="right">{row.va}</TableCell>
+                  <TableCell align="right">{row.fha_2}</TableCell>
+                  <TableCell align="right">{row.va_2}</TableCell>
                   {/* cpr prediction*/}
                   {/* <TableCell align="right">{row.cprfuturepredictionnext}</TableCell> */}
                   <TableCell align="right">{row.cprfutureprediction}</TableCell>
                   {/* cpr actual  --- this changes on the 4th and 6th  */}
                   <TableCell align="right" >{row[cprOne]}</TableCell>
+                  
+                  <TableCell align="right">{row.fha_cpr}</TableCell>
+                  <TableCell align="right">{row.va_cpr}</TableCell>
+                  
                   <TableCell align="right">{row[cprTwo]}</TableCell>
                   <TableCell align="right">{row[cprThree]}</TableCell>
                   {/* CPR residual --- this changes on the 4th and 6th  */}

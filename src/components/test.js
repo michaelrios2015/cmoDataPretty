@@ -13,6 +13,10 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { loadGinnies, loadGinniesByCoupon, loadGinniesByFloats, loadGinniesByCouponsAndFloats } from '../store/index.js';
 import * as changeme from '../../data/changeme.js'
 
+
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+
+
 //change these  
 const feddate = changeme.feddate;
 const month = changeme.month; 
@@ -31,6 +35,21 @@ const useStyles = makeStyles({
     overflowX: "initial"
   }
 });
+
+const rows = [
+  {
+    id: 1,
+    username: '@MUI',
+    age: 38,
+    desk: 'D-546',
+  },
+  {
+    id: 2,
+    username: '@MUI-X',
+    age: 25,
+    desk: 'D-042',
+  },
+];
 
 function numberWithCommas(x) {
   // console.log(x);
@@ -257,116 +276,24 @@ for (let i=1; i < 10; i++ ){
           </div>
         ) 
         :       
-        (<TableContainer classes={{root: classes.customTableContainer}}>
-          {/* <Table className={classes.table} aria-label="sticky table"> */}
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead className={ 'head'}>
-              <TableRow  >
-              <TableCell colSpan={2}><b>{searchC} {currentmonth} TEST TEST</b></TableCell>
-                <TableCell align="center" colSpan={11}/>
-                <TableCell align="center" colSpan={1}>
-                  Predicted CPR
-                </TableCell>
-                <TableCell align="center" colSpan={3}>
-                  Actual CPR
-                </TableCell>
-                <TableCell align="center" colSpan={3}>
-                  CPR Resid 
-                </TableCell>
-                {/* <TableCell align="center" colSpan={1}>
-                  Predicted CDR
-                </TableCell>
-                <TableCell align="center" colSpan={1}>
-                  Actual CDR
-                </TableCell>
-                <TableCell align="center" colSpan={1}>
-                  CDR Resid
-                </TableCell> */}
-              </TableRow>
-              
-              <TableRow>
-                <TableCell className={ 'head'} >CUSIP</TableCell>
-                <TableCell align="right">Name</TableCell>
-                <TableCell align="right">Issue Month</TableCell>
-                <TableCell align="right">Current Face</TableCell>
-                <TableCell align="right">CF in CMO</TableCell>
-                <TableCell align="right">CF in FED {feddate}</TableCell>
-                <TableCell align="right">CF in Plat</TableCell>
-                <TableCell align="right">Float MM</TableCell>  
-                <TableCell align="right">Coupon</TableCell>
-                <TableCell align="right">GWAC</TableCell>
-                <TableCell align="right">WALA</TableCell>
-                <TableCell align="right">WAM</TableCell>
-                <TableCell align="right">VA</TableCell>
-                {/* Predicted CPR */}
-                {/* <TableCell align="right">{twomoremonths}</TableCell> */}
-                <TableCell align="right">{nextmonth}</TableCell>
-                {/* actual cpr -- --- this changes on the 4th and 6th */}
-                <TableCell align="right" >{monthOne}</TableCell>
-                <TableCell align="right">{monthTwo}</TableCell>
-                <TableCell align="right">{monthThree}</TableCell>
-                {/* RESID --- this changes on the 4th and 6th */}
-                <TableCell align="right" >{monthOne}</TableCell>
-                <TableCell align="right">{monthTwo}</TableCell>
-                <TableCell align="right">{monthThree}</TableCell>
-              
-              {/* not being used at the moment */}
-                {/* CDR predicted*/}
-                {/* <TableCell align="right">{nextmonth}</TableCell> */}
-                {/* CDR actual --- this changes on the 4th and 6th */}
-                {/* <TableCell align="right">{nextmonth}</TableCell> */}
-                {/* <TableCell align="right">{currentmonth}</TableCell> */}
-                {/* CDR residual --- this changes on the 4th and 6th */}
-                {/* <TableCell align="right">{nextmonth}</TableCell> */}
-                {/* <TableCell align="right">{currentmonth}</TableCell> */}
-
-                {/* <TableCell align="right">Date</TableCell> */}
-              
-              </TableRow>
-            </TableHead>
-            <TableBody>
-            {/* cusip,name,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,cprprediction,cprpredictionnext,date */}
-
-              {ginnies.map((row) => (
-                <TableRow key={row.cusip}>
-                  <TableCell component="th" scope="row"> {row.cusip} </TableCell>
-                  <TableCell align="right">{row.name}</TableCell>
-                  <TableCell align="right">{row.issuedate}</TableCell>
-                  <TableCell align="right">{row.currentface && numberWithCommas(row.currentface)}</TableCell>
-                  <TableCell align="right">{row.cfincmo && numberWithCommas(row.cfincmo)}</TableCell>
-                  <TableCell align="right">{row.cfinfed && numberWithCommas(row.cfinfed)}</TableCell>
-                  <TableCell align="right">{row.cfinplat && numberWithCommas(row.cfinplat)}</TableCell>
-                  <TableCell align="right">{numberWithCommas(row.currentface - row.cfincmo - row.cfinfed - row.cfinplat)}</TableCell>
-                  <TableCell align="right">{row.coupon}</TableCell>
-                  <TableCell align="right">{row.gwac}</TableCell>
-                  <TableCell align="right">{row.wala}</TableCell>
-                  <TableCell align="right">{row.wam}</TableCell>
-                  <TableCell align="right">{row.va}</TableCell>
-                  {/* cpr prediction*/}
-                  {/* <TableCell align="right">{row.cprfuturepredictionnext}</TableCell> */}
-                  <TableCell align="right">{row.cprfutureprediction}</TableCell>
-                  {/* cpr actual  --- this changes on the 4th and 6th  */}
-                  <TableCell align="right" >{row[cprOne]}</TableCell>
-                  <TableCell align="right">{row[cprTwo]}</TableCell>
-                  <TableCell align="right">{row[cprThree]}</TableCell>
-                  {/* CPR residual --- this changes on the 4th and 6th  */}
-                  <TableCell align="right" style={(row[cprOne] - row[cprPredictOne]).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row[cprOne] - row[cprPredictOne]).toFixed(1) != 0? (row[cprOne] - row[cprPredictOne]).toFixed(1) : ' '}</TableCell>
-                  <TableCell align="right" style={(row[cprTwo] - row[cprPredictTwo]).toFixed(1)  > 0 ? {color: "red"}: {color: "black"} }>{(row[cprTwo] - row[cprPredictTwo]).toFixed(1) != 0? (row[cprTwo] - row[cprPredictTwo]).toFixed(1) : ' '}</TableCell>
-                  <TableCell align="right" style={(row[cprThree] - row[cprPredictThree]).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row[cprThree] - row[cprPredictThree]).toFixed(1) != 0? (row[cprThree] - row[cprPredictThree]).toFixed(1) : ' '}</TableCell>
-                  {/* not using right now  */}
-                  {/* CDR prediction */}
-                  {/* <TableCell align="right">{row.cdrfuturepediction}</TableCell> */}
-                  {/* CDR actual  --- this changes on the 4th and 6th */}
-                  {/* <TableCell align="right">{row.curractualcdrnext}</TableCell> */}
-                  {/* <TableCell align="right">{row.curractualcdr}</TableCell> */}
-                  {/* CDR residual --- this changes on the 4th and 6th */}
-                  {/* <TableCell align="right" style={(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) != 0 ? (row.curractualcdrnext - row.cdrfuturepediction).toFixed(1) : ' '}</TableCell> */}
-                  {/* <TableCell align="right" style={(row.curractualcdr - row.currcdrprediction).toFixed(1) > 0 ? {color: "red"}: {color: "black"} }>{(row.curractualcdr - row.currcdrprediction).toFixed(1) != 0 ? (row.curractualcdr - row.currcdrprediction).toFixed(1) : ' '}</TableCell> */}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>)   
+        (
+ 
+          <div>
+          <h1>LOADed</h1>
+          
+          <DataGrid
+          columns={[
+            { field: 'username', hideable: false },
+            { field: 'age' },
+            { field: 'desk' },
+          ]}
+          rows={rows}
+          components={{
+            Toolbar: GridToolbar,
+          }}
+        />
+        </div>
+        )
       }
 
      </div>

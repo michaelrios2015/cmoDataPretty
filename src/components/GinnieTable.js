@@ -265,7 +265,7 @@ for (let i=1; i < 10; i++ ){
               <TableCell colSpan={2}><b>{searchC} {currentmonth}</b></TableCell>
                 <TableCell align="center" colSpan={11}/>
                 <TableCell align="center" colSpan={2}>
-                  Streamline Eligible
+                  Streamline Ineligible
                 </TableCell>
                 <TableCell align="center" colSpan={1}>
                   Predicted CPR

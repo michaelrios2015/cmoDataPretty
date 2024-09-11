@@ -65,18 +65,32 @@ const formatData = (arr) => {
         
         item.curractualcdrnext = (item.curractualcdrnext * 100).toFixed(1);
 
-        item.currcdrprediction = (item.currcdrprediction * 100).toFixed(1);
-        
+        if (item.currcdrprediction){
+            item.currcdrprediction = (item.currcdrprediction * 100).toFixed(1);
+        }
+
+        if (item.cdrfuturepediction){
         item.cdrfuturepediction = (item.cdrfuturepediction * 100).toFixed(1);
-
-        item.fha_2 = (item.fha_2 * 100).toFixed(0);
+        }
         
-        item.va_2 = (item.va_2 * 100).toFixed(0);
+        if (item.fha_2) {
+            item.fha_2 = (item.fha_2 * 100).toFixed(0);
+        }
 
-        item.fha_cpr = item.fha_cpr.toFixed(1);
-
-        item.va_cpr = item.va_cpr.toFixed(1);
+        if (item.va_2) {
         
+            item.va_2 = (item.va_2 * 100).toFixed(0);
+        }
+
+        if (item.fha_cpr) {
+        
+            item.fha_cpr = item.fha_cpr.toFixed(1);
+
+        }
+        if (item.va_cpr) {
+        
+            item.va_cpr = item.va_cpr.toFixed(1);
+        }
         // console.log(item.cdrfuturepediction);
         
         // so I used this to convert my 0 to blank.. but we are now changing that 

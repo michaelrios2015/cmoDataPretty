@@ -4,7 +4,7 @@ export const feddate = '10/02/24';
 // changed on the 6th day 
 export const month = 8; 
 // changed on the 4th and 6th day 
-export const is4thday = false;
+export const is4thday = true;
 
 // use this for the graph 
 // changed on the 6th day 

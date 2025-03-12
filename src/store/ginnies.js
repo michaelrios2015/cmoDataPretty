@@ -85,6 +85,7 @@ const formatData = (arr) => {
         if (item.fha_cpr) {
         
             item.fha_cpr = item.fha_cpr.toFixed(1);
+            console.log(item.fha_cpr)
 
         }
         if (item.va_cpr) {

@@ -1,5 +1,5 @@
 // so I really vhang eboth at once???
 
-const currentMonth = '2025-01-01';
+const currentMonth = '2025-02-01';
 
 module.exports = currentMonth;

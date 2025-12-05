@@ -1,4 +1,4 @@
-// so I really vhang eboth at once???
+// so I really change both at once???
 
 const currentMonth = '2025-10-01';
 

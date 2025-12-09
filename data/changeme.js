@@ -1,13 +1,13 @@
 // use these for cmo and ginnie tables 
 // whenever I change fed data 
-export const feddate = '11/05/25';
+export const feddate = '12/03/25';
 // changed on the 6th day 
-export const month = 9; 
+export const month = 10; 
 // changed on the 4th and 6th day 
-export const is4thday = true;
+export const is4thday = false;
 
 // use this for the graph 
 // changed on the 6th day 
-export const date = 'November 2025';
+export const date = 'December 2025';
 
 

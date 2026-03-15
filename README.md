@@ -1,13 +1,59 @@
-# cmoDataPretty (aka CMO Data Pretty Viewer)
+# CMO Data Viewer
 
-`cmoDataPretty` is a clean, component-based web application for visualizing **Ginnie Mae** data. Built with a modular architecture separating frontend components, backend APIs, and a data source layer, it showcases custom REST endpoints to deliver processed mortgage data in a well-organized UI.
+A full-stack web application for visualizing Ginnie Mae mortgage-backed securities (MBS) pool data. Built with React/Redux on the frontend, a Node.js/Express REST API layer, and a PostgreSQL database — updated on a live business-day schedule.
+
+**Live app:** https://cmo-data-two.herokuapp.com/#/  
+**Data pipeline repo:** https://github.com/michaelrios2015/capstone_test
 
 ---
 
-## Features
+## What it does
 
-* **Separated UI and data logic** — Frontend components fetch JSON from custom API endpoints, ensuring leaner and decoupled layers.
-* **Custom APIs** — Backend routes to ingest, process, and serve Ginnie Mae-specific data (e.g., MBS pools, issuances, performance metrics).
-* **Component-driven UI** — Clean organization of display elements, data tables, charts, filters.
+Ginnie Mae publishes raw MBS pool data on a rolling business-day schedule. This application takes that data — after it has been downloaded, parsed, and processed by the data pipeline — and presents it in a clean, queryable web interface.
 
+Users can browse pool-level metrics, filter by date and issuer, and view calculated performance data including CPR speeds and issuance figures. The data is refreshed multiple times per month as new Ginnie Mae files are released.
 
+---
+
+## Architecture
+
+```
+Frontend (React/Redux)
+    ↓  HTTP requests
+REST API (Node.js / Express)
+    ↓  SQL queries
+PostgreSQL Database
+    ↑  populated by
+Data Pipeline (see capstone_test repo)
+```
+
+The application follows a strict separation of concerns:
+
+- **`src/`** — React components, Redux store, and API call logic
+- **`server/`** — Express routes and database query functions
+- **`data/`** — Static reference data used by the frontend
+- **`dist/`** — Webpack build output
+
+---
+
+## Tech stack
+
+| Layer       | Technology                          |
+| ----------- | ----------------------------------- |
+| Frontend    | React, Redux                        |
+| Backend     | Node.js, Express                    |
+| Database    | PostgreSQL                          |
+| Build tool  | Webpack                             |
+| Data source | Ginnie Mae (via automated pipeline) |
+
+---
+
+## Note on running locally
+
+This application depends on a PostgreSQL database populated by the data pipeline, including stored procedures that handle core calculations. The full database is not included in this repository. The best way to see the application in action is the [live app](https://cmo-data-two.herokuapp.com/#/).
+
+---
+
+## Related
+
+- [ginnie-mae-data-pipeline](https://github.com/michaelrios2015/capstone_test) — the Python pipeline that downloads, parses, and loads the underlying data

@@ -1,325 +1,191 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import * as XLSX from 'xlsx';
+import JSZip from 'jszip';
 
-import { loadGinnies, loadGinniesByCoupon, loadGinniesByFloats, loadGinniesByCouponsAndFloats } from '../store/index.js';
-import * as changeme from '../../data/changeme.js'
-
-
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-
-
-//change these  
-const feddate = changeme.feddate;
-const month = changeme.month; 
-const is4thday = changeme.is4thday;
-// nothing else should need changing 
-
-// for changing columnb visabilty 
-// https://mui.com/x/react-data-grid/column-visibility/
-
-const useStyles = makeStyles({
+const styles = {
+  wrapper: {
+    overflowX: 'auto',
+    fontFamily: 'Calibri, Arial, sans-serif',
+    fontSize: '11px',
+    padding: '10px',
+  },
   table: {
-    minWidth: 730,
-    maxWidth: 1200
+    borderCollapse: 'collapse',
+    marginBottom: '24px',
+    whiteSpace: 'nowrap',
   },
-  customTableContainer: {
-    overflowX: "initial"
-  }
-});
+  th: {
+    border: '1px solid #b0b0b0',
+    padding: '2px 6px',
+    backgroundColor: '#f2f2f2',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    minWidth: '36px',
+  },
+  td: {
+    border: '1px solid #d0d0d0',
+    padding: '2px 6px',
+    textAlign: 'right',
+  },
+  tdHeader: {
+    border: '1px solid #b0b0b0',
+    padding: '2px 6px',
+    backgroundColor: '#f2f2f2',
+    fontWeight: 'bold',
+    textAlign: 'right',
+  },
+  sectionLabel: {
+    fontWeight: 'bold',
+    fontSize: '13px',
+    marginBottom: '4px',
+  },
+};
 
-const rows = [
-  {
-    id: 1,
-    username: '@MUI',
-    age: 38,
-    desk: 'D-546',
-  },
-  {
-    id: 2,
-    username: '@MUI-X',
-    age: 25,
-    desk: 'D-042',
-  },
-];
-
-function numberWithCommas(x) {
-  // console.log(x);
-  x = x * 1;
-  x = x.toFixed(1);
-  var parts = x.toString().split(".");
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return parts.join(".");
+function fmt(val) {
+  if (val === '' || val === '--' || val == null) return val;
+  const n = Number(val);
+  if (isNaN(n)) return val;
+  if (n === 0) return '--';
+  return n.toFixed(1);
 }
 
-//rows are now created in store :) 
-function PoolTable({ ginnies, loadGinnies, loadGinniesByCoupon, loadGinniesByFloats, loadGinniesByCouponsAndFloats }) {
-  const [searchA, setSearchA ] = useState('');
-  const [searchB, setSearchB ] = useState(3.5);
-  const [searchC, setSearchC ] = useState('Ginnie Two');
+// Build a Set of style indices that use a red font, by parsing styles.xml directly
+async function buildRedStyleIds(zip) {
+  const stylesFile = zip.file('xl/styles.xml');
+  if (!stylesFile) return new Set();
 
+  const xml = await stylesFile.async('text');
+  const doc = new DOMParser().parseFromString(xml, 'application/xml');
 
-  const [loading, setLoading ] = useState(true);
+  // Find which font indices are red
+  const redFontIds = new Set();
+  const fontNodes = doc.querySelectorAll('fonts > font');
+  fontNodes.forEach((font, idx) => {
+    const color = font.querySelector('color');
+    if (!color) return;
+    const rgb = (color.getAttribute('rgb') || '').toUpperCase();
+    const indexed = color.getAttribute('indexed');
+    if (rgb.includes('FF0000') || indexed === '10') {
+      redFontIds.add(idx);
+    }
+  });
 
+  // Find which cell style indices (xf) reference a red font
+  const redStyleIds = new Set();
+  const xfNodes = doc.querySelectorAll('cellXfs > xf');
+  xfNodes.forEach((xf, idx) => {
+    const fontId = parseInt(xf.getAttribute('fontId') || '0', 10);
+    if (redFontIds.has(fontId)) {
+      redStyleIds.add(idx);
+    }
+  });
 
-
-  // so I am using this to litterally just get the month name to display, and there will always be three at the moment 
-  const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-  
-  var twomonthspast;
-  var previousmonth;
-
-  if (month - 1 < 0){
-    twomonthspast = months[month+10]
-    previousmonth = months[month+11]
-    
-  } 
-  else if (month - 2 < 0){
-    twomonthspast = months[month+10]
-    
-  }
-  else {
-    twomonthspast = months[month-2]
-    previousmonth = months[month-1]
-    
-  }
-
-  const currentmonth = months[month];
-  const nextmonth = months[(month+1)%12];
-  const twomoremonths = months[(month+2)%12];
-
-// So if we assign the months here
-
-var monthOne;
-var monthTwo;
-var monthThree;
-
-var cprOne;
-var cprTwo;
-var cprThree;
-
-var cprPredictOne;
-var cprPredictTwo;
-var cprPredictThree;
-
-// so we choose our three months here 
-if (is4thday){
-
-  monthOne = nextmonth;
-  monthTwo = currentmonth;
-  monthThree = previousmonth;
-
-  cprOne = 'curractualcprnext';
-  cprTwo = 'curractualcpr';
-  cprThree = 'pastactcpr';
-
-  cprPredictOne = 'cprfutureprediction';
-  cprPredictTwo = 'cprprediction';
-  cprPredictThree = 'cprpastprediction';
-
-
-} 
-else {
-  monthOne = currentmonth;
-  monthTwo = previousmonth;
-  monthThree = twomonthspast;
-
-  cprOne = 'curractualcpr';
-  cprTwo = 'pastactcpr';
-  cprThree = 'twomonthspastactcpr';
-    
-  cprPredictOne = 'cprprediction';
-  cprPredictTwo = 'cprpastprediction';
-  cprPredictThree = 'cprtwomontspastprediction';
-
+  return redStyleIds;
 }
 
-  // console.log(ginnies[0])
-  //my homemade loading true or false again needed not sure
-  useEffect(() => {
-    console.log(ginnies.length)
-    if (ginnies.length > 0){
-      setLoading(false);
+// Parse a worksheet into a 2D array of { value, red }
+// cell.s is the raw style index when cellStyles is NOT set
+function parseSheet(ws, redStyleIds) {
+  if (!ws || !ws['!ref']) return [];
+  const range = XLSX.utils.decode_range(ws['!ref']);
+  const rows = [];
+
+  for (let r = range.s.r; r <= range.e.r; r++) {
+    const row = [];
+    for (let c = range.s.c; c <= range.e.c; c++) {
+      const addr = XLSX.utils.encode_cell({ r, c });
+      const cell = ws[addr];
+      const value = cell ? (cell.v != null ? cell.v : '') : '';
+      const red = cell && cell.s !== undefined ? redStyleIds.has(cell.s) : false;
+      row.push({ value, red });
     }
-  },[ginnies]);
-
-  //should be the first thing to load
-  useEffect(() => {
-    // setLoading(true);
-    loadGinniesByCoupon(searchB, 'M');
-  },[]);
-
-  const firstUpdate = useRef(true);
-
-//checks to see if deal name or group has changed but does not run the first time
-  useEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
-    
-    let indicator = 'M'
-    // console.log(searchB);
-    // console.log(searchA);
-
-    setLoading(true);
-
-    if(searchC === 'Ginnie One'){
-      indicator = 'X'
-      console.log(searchC)
-    }
-    else if (searchC === 'Ginnie Two'){
-      indicator = 'M'
-      console.log(searchC)
-      // does not trigger an infinite loop neat :)
-      setSearchC('Ginnie Two');
-    }
-    else if (searchC === 'JM' || searchC === 'RG') {
-      indicator = searchC;
-      console.log(searchC)
-      setSearchC(indicator);
-    }
-    // so when you press the x you still have something 
-    else {
-      indicator = 'M'
-    }
-
-    console.log(indicator)
-    if(!searchA && !searchB){
-
-      loadGinniesByCoupon( 3.5, 'M');
-      
-      } else if (searchA && !searchB) {
-        loadGinniesByFloats(searchA, indicator);
-        // console.log(searchA);  
-      }
-      else if (!searchA && searchB) {
-        loadGinniesByCoupon(searchB, indicator);
-        // console.log(searchB); 
-      }
-      else {
-        loadGinniesByCouponsAndFloats(searchB, searchA, indicator)
-        // console.log(searchB);
-        // console.log(searchA);
-      }
-
-  },[searchA, searchB, searchC ]);
-
-  const classes = useStyles();
-        
-let floats = [];
-for (let i=1; i < 10; i++ ){
-  floats.push(i.toString())
-}
-// console.log(floats);
-
-  let coupon = [];
-  for (let i=1; i < 10; i += .5 ){
-    coupon.push(i.toString())
+    rows.push(row);
   }
+  return rows;
+}
 
-  let ginniesOpt = ['Ginnie One', 'Ginnie Two', 'JM', 'RG']
-  
-  // console.log(coupon);
-  // console.log(searchA)
-  // console.log(searchB)
+function SheetTable({ sheet }) {
+  if (!sheet || sheet.length === 0) return null;
+
+  const headerRow = sheet[0];
+  const dataRows = sheet.slice(1);
 
   return (
-    <div>
-
-      <div  className={ 'sideBySide' } > 
-        
-        <Autocomplete
-          id="combo-box-pool-names"
-          options={ginniesOpt}
-          getOptionLabel={(option) => option}
-          style={{ width: 300 }}
-          onChange={(event, value)=>setSearchC(value)}
-          renderInput={(params) => <TextField  {...params} label="Ginnies" variant="outlined"/>}
-        />
-
-        <Autocomplete
-          id="combo-box-pool-names"
-          options={coupon}
-          getOptionLabel={(option) => option}
-          style={{ width: 300 }}
-          onChange={(event, value)=>setSearchB(value)}
-          renderInput={(params) => <TextField  {...params} label="Coupons" variant="outlined"/>}
-        />  
- 
-        <TextField  
-          label="Min Float" 
-          variant="outlined"   
-          // id="outlined-name"
-          value = {searchA}
-          onChange={(event)=>{
-            if(!isNaN(event.target.value)){
-            setSearchA(event.target.value)
-            // console.log(event.target.value)
-          }
-          }}
-        /> 
-      </div>
-      {
-        loading ? 
-        (
-          <div>
-            <h1>LOADING</h1>
-          </div>
-        ) 
-        :       
-        (
- 
-          <div>
-          <h1>LOADed</h1>
-          
-          <DataGrid
-          columns={[
-            { field: 'username', hideable: false },
-            { field: 'age' },
-            { field: 'desk' },
-          ]}
-          rows={rows}
-          components={{
-            Toolbar: GridToolbar,
-          }}
-        />
-        </div>
-        )
-      }
-
-     </div>
+    <table style={styles.table}>
+      <thead>
+        <tr>
+          {headerRow.map((cell, i) => (
+            <th key={i} style={styles.th}>{cell.value}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {dataRows.map((row, ri) => (
+          <tr key={ri}>
+            {row.map((cell, ci) => {
+              const isRowHeader = ci === 0 || ci === 1;
+              return (
+                <td
+                  key={ci}
+                  style={{
+                    ...(isRowHeader ? styles.tdHeader : styles.td),
+                    color: cell.red ? 'red' : 'inherit',
+                  }}
+                >
+                  {fmt(cell.value)}
+                </td>
+              );
+            })}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 
-const mapStateToProps = (state) => {
-  return state;
+function PoolTable() {
+  const [sheets, setSheets] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch('/data/Book2.xlsx')
+      .then(res => {
+        if (!res.ok) throw new Error(`Could not load file: ${res.status}`);
+        return res.arrayBuffer();
+      })
+      .then(async buffer => {
+        const zip = await JSZip.loadAsync(buffer);
+        const redStyleIds = await buildRedStyleIds(zip);
+
+        // Read without cellStyles so cell.s remains the raw style index
+        const workbook = XLSX.read(buffer, { type: 'array' });
+
+        const parsed = workbook.SheetNames.map(name => ({
+          name,
+          data: parseSheet(workbook.Sheets[name], redStyleIds),
+        }));
+
+        setSheets(parsed);
+      })
+      .catch(err => setError(err.message));
+  }, []);
+
+  if (error) return <div style={{ color: 'red', padding: '20px' }}>Error: {error}</div>;
+  if (!sheets) return <div style={{ padding: '20px' }}>Loading...</div>;
+
+  return (
+    <div style={styles.wrapper}>
+      {sheets.map(sheet => (
+        <div key={sheet.name}>
+          <div style={styles.sectionLabel}>{sheet.name}</div>
+          <SheetTable sheet={sheet.data} />
+        </div>
+      ))}
+    </div>
+  );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadGinnies: ()=> {
-      dispatch(loadGinnies());
-    },
-    loadGinniesByCoupon:(coupon, indicator)=> {
-      dispatch(loadGinniesByCoupon(coupon, indicator));
-    },
-    loadGinniesByFloats:(float, indicator)=> {
-      dispatch(loadGinniesByFloats(float, indicator));
-    },
-    loadGinniesByCouponsAndFloats:(coupon, float, indicator)=> {
-      dispatch(loadGinniesByCouponsAndFloats(coupon, float, indicator));
-    }
-  };
-}
+const mapStateToProps = (state) => state;
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(PoolTable);
+export default connect(mapStateToProps, null)(PoolTable);

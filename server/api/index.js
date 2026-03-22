@@ -8,6 +8,7 @@ module.exports = app
 app.use(express.json());
 
 app.use('/dist', static(path.join(__dirname, '..', '..', 'dist')));
+app.use('/data', static(path.join(__dirname, '..', '..', 'data')));
 
 // is this supposed to be here??
 app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, '..', '..', 'index.html')));

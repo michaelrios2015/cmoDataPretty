@@ -7,7 +7,7 @@ import Link from '@mui/material/Link';
 
 const NavBar = () => {
     return (
-      
+
       <Box
       sx={{
         typography: 'body1',
@@ -22,7 +22,7 @@ const NavBar = () => {
         <h2><Link href="#/cmotwo">CMOS</Link></h2>
         </div>
     </Box>
-  
+
     );
   }
 

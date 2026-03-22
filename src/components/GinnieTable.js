@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { loadGinnies, loadGinniesByCoupon, loadGinniesByFloats, loadGinniesByCouponsAndFloats } from '../store';
 import * as changeme from '../../data/changeme.js'
@@ -252,29 +253,29 @@ for (let i=1; i < 10; i++ ){
       {
         loading ? 
         (
-          <div>
-            <h1>LOADING</h1>
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
+            <CircularProgress />
           </div>
         ) 
         :       
         (<TableContainer classes={{root: classes.customTableContainer}}>
           {/* <Table className={classes.table} aria-label="sticky table"> */}
-          <Table stickyHeader aria-label="sticky table">
+          <Table stickyHeader size="small" aria-label="sticky table">
             <TableHead className={ 'head'}>
               <TableRow  >
-              <TableCell colSpan={2}><b>{searchC} {currentmonth}</b></TableCell>
-                <TableCell align="center" colSpan={11}/>
-                <TableCell align="center" colSpan={2}>
+              <TableCell colSpan={2} style={{ borderBottom: '2px solid #999' }}><b>{searchC} {currentmonth}</b></TableCell>
+                <TableCell align="center" colSpan={11} style={{ borderBottom: '2px solid #999' }}/>
+                <TableCell align="center" colSpan={2} style={{ borderBottom: '2px solid #999' }}>
                   Streamline Ineligible
                 </TableCell>
-                <TableCell align="center" colSpan={1}>
+                <TableCell align="center" colSpan={1} style={{ borderBottom: '2px solid #999' }}>
                   Predicted CPR
                 </TableCell>
-                <TableCell align="center" colSpan={5}>
+                <TableCell align="center" colSpan={5} style={{ borderBottom: '2px solid #999' }}>
                   Actual CPR
                 </TableCell>
-                <TableCell align="center" colSpan={3}>
-                  CPR Resid 
+                <TableCell align="center" colSpan={3} style={{ borderBottom: '2px solid #999' }}>
+                  CPR Resid
                 </TableCell>
                 {/* <TableCell align="center" colSpan={1}>
                   Predicted CDR
@@ -336,8 +337,8 @@ for (let i=1; i < 10; i++ ){
             <TableBody>
             {/* cusip,name,issuedate,currface,cfincmo,cfinfed,cfinplat,coupon,gwac,wala,wam,va,cprprediction,cprpredictionnext,date */}
 
-              {ginnies.map((row) => (
-                <TableRow key={row.cusip}>
+              {ginnies.map((row, index) => (
+                <TableRow key={row.cusip} style={{ backgroundColor: index % 2 === 0 ? '#ffffff' : '#f9f9f9' }}>
                   <TableCell component="th" scope="row"> {row.cusip} </TableCell>
                   <TableCell align="right">{row.name}</TableCell>
                   <TableCell align="right">{row.issuedate}</TableCell>

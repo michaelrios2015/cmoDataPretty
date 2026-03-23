@@ -59,20 +59,21 @@ function PoolTable({ ginnies, loadGinnies, loadGinniesByCoupon, loadGinniesByFlo
   var twomonthspast;
   var previousmonth;
 
-  if (month - 1 < 0){
+  if (month == 0){
     twomonthspast = months[month+10]
     previousmonth = months[month+11]
     
   } 
-  else if (month - 2 < 0){
+  else if (month == 1){
     twomonthspast = months[month+10]
-    
+    previousmonth = months[month-1]
   }
   else {
     twomonthspast = months[month-2]
     previousmonth = months[month-1]
-    
+    // console.log(previousmonth)
   }
+
 
   const currentmonth = months[month];
   const nextmonth = months[(month+1)%12];
@@ -213,7 +214,7 @@ for (let i=1; i < 10; i++ ){
   // console.log(coupon);
   // console.log(searchA)
   // console.log(searchB)
-
+ console.log(previousmonth)
   return (
     <div>
 

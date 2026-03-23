@@ -85,7 +85,7 @@ const formatData = (arr) => {
         if (item.fha_cpr) {
         
             item.fha_cpr = item.fha_cpr.toFixed(1);
-            console.log(item.fha_cpr)
+            // console.log(item.fha_cpr)
 
         }
         if (item.va_cpr) {
@@ -96,7 +96,7 @@ const formatData = (arr) => {
         
         // so I used this to convert my 0 to blank.. but we are now changing that 
         
-        console.log(cprs)
+        // console.log(cprs)
         for (const property in item) {
             if (item[property] == 0 || item[property] == -0){
                 item[property] = 0;

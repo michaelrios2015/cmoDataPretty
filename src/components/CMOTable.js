@@ -45,7 +45,7 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   // console.log(cmos)
   //my homemade loading true or false again needed not sure
   useEffect(() => {
-    console.log(cmos.length)
+    // console.log(cmos.length)
     if (cmos.length > 0){
       setLoading(false);
     }
@@ -79,7 +79,7 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
     }
     
     setLoading(true);
-    console.log(searchA, searchB, searchYear, searchCoupon)
+    // console.log(searchA, searchB, searchYear, searchCoupon)
     loadCMOSYearDealGroup (searchYear, searchA, searchB, searchCoupon);
   },[searchA, searchB, searchYear, searchCoupon]);
 
@@ -123,6 +123,7 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
   } 
   else if (month - 2 < 0){
     pastTwosMonths = months[month+10]
+    pastMonth = months[month-1]
     
   }
   else {

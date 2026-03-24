@@ -7,6 +7,7 @@ import CMOTable from './components/CMOTable';
 import NavBar from './components/NavBar';
 import Graph from './components/Graph';
 import test from './components/test';
+import LoginTest from './components/LoginTest';
 import { HashRouter as Router, Route, BrowserRouter } from 'react-router-dom';
 
 
@@ -28,7 +29,8 @@ class _App extends Component{
             <Route component={ GinnieTable } path = '/' exact/>  
             <Route component={ Graph } path = '/graph' exact/>       
             <Route component={ CMOTable } path = '/cmotwo' exact/>
-            <Route component={ test } path = '/test' exact/>     
+            <Route component={ test } path = '/test' exact/>
+            <Route component={ LoginTest } path = '/logintest' exact/>
           </div>
         </Router>
     );

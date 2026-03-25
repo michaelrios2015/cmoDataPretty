@@ -25,10 +25,8 @@ class _App extends Component{
 
   //this works fine now need to figure out how to put my data into Material UI table and add search
   render(){
-    if (!this.state.loggedIn) {
-      return <LoginTest onLogin={this.handleLogin} />;
-    }
     return (
+      <div>
         <Router>
           <NavBar />
           <div>
@@ -36,8 +34,23 @@ class _App extends Component{
             <Route component={ Graph } path = '/graph' exact/>
             <Route component={ CMOTable } path = '/cmotwo' exact/>
             <Route component={ test } path = '/test' exact/>
-            </div>
+          </div>
         </Router>
+        {!this.state.loggedIn && (
+          <div style={{
+            position: 'fixed',
+            top: 0, left: 0, right: 0, bottom: 0,
+            backgroundColor: 'rgba(255,255,255,0.5)',
+            backdropFilter: 'blur(1px)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <LoginTest onLogin={this.handleLogin} />
+          </div>
+        )}
+      </div>
     );
   }
 }

@@ -19,6 +19,7 @@ const styles = {
     flexDirection: 'column',
     gap: '16px',
     width: '320px',
+    backgroundColor: 'white',
   },
   title: {
     margin: 0,
@@ -75,31 +76,27 @@ function LoginTest({ onLogin }) {
 
   if (submitted) {
     return (
-      <div style={styles.wrapper}>
-        <div style={styles.box}>
-          <h2 style={styles.title}>Thanks!</h2>
-          <p style={styles.success}>Your email has been saved.</p>
-        </div>
+      <div style={styles.box}>
+        <h2 style={styles.title}>Thanks!</h2>
+        <p style={styles.success}>Your email has been saved.</p>
       </div>
     );
   }
 
   return (
-    <div style={styles.wrapper}>
-      <div style={styles.box}>
-        <h2 style={styles.title}>Sign up for free</h2>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <input
-            style={styles.input}
-            type="email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {error && <div style={styles.error}>{error}</div>}
-          <button style={styles.button} type="submit">Continue</button>
-        </form>
-      </div>
+    <div style={styles.box}>
+      <h2 style={styles.title}>Sign up for free</h2>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+        <input
+          style={styles.input}
+          type="email"
+          placeholder="you@example.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        {error && <div style={styles.error}>{error}</div>}
+        <button style={styles.button} type="submit">Continue</button>
+      </form>
     </div>
   );
 }

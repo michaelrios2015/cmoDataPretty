@@ -51,9 +51,9 @@ const styles = {
   },
 };
 
-function LoginTest() {
+function LoginTest({ onLogin }) {
   const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(() => !!localStorage.getItem('visitorEmail'));
+  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
@@ -67,6 +67,7 @@ function LoginTest() {
       await axios.post('/api/visitors', { email });
       localStorage.setItem('visitorEmail', email);
       setSubmitted(true);
+      if (onLogin) onLogin();
     } catch (err) {
       setError('Something went wrong. Please try again.');
     }
@@ -86,7 +87,7 @@ function LoginTest() {
   return (
     <div style={styles.wrapper}>
       <div style={styles.box}>
-        <h2 style={styles.title}>Enter your email to continue</h2>
+        <h2 style={styles.title}>Sign up for free</h2>
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <input
             style={styles.input}

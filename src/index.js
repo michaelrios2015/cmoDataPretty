@@ -7,7 +7,7 @@ import CMOTable from './components/CMOTable';
 import NavBar from './components/NavBar';
 import Graph from './components/Graph';
 import test from './components/test';
-import LoginTest from './components/LoginTest';
+import LoginTest from './components/Login';
 import { HashRouter as Router, Route, BrowserRouter } from 'react-router-dom';
 
 
@@ -16,22 +16,27 @@ import { HashRouter as Router, Route, BrowserRouter } from 'react-router-dom';
 class _App extends Component{
   constructor(){
     super();
-    this.state = {};
+    this.state = { loggedIn: !!localStorage.getItem('visitorEmail') };
   }
 
+  handleLogin = () => {
+    this.setState({ loggedIn: true });
+  }
 
   //this works fine now need to figure out how to put my data into Material UI table and add search
   render(){
+    if (!this.state.loggedIn) {
+      return <LoginTest onLogin={this.handleLogin} />;
+    }
     return (
         <Router>
           <NavBar />
           <div>
-            <Route component={ GinnieTable } path = '/' exact/>  
-            <Route component={ Graph } path = '/graph' exact/>       
+            <Route component={ GinnieTable } path = '/' exact/>
+            <Route component={ Graph } path = '/graph' exact/>
             <Route component={ CMOTable } path = '/cmotwo' exact/>
             <Route component={ test } path = '/test' exact/>
-            <Route component={ LoginTest } path = '/logintest' exact/>
-          </div>
+            </div>
         </Router>
     );
   }

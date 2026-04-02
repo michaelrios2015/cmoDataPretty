@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { loadCMOS, loadCMOSYearDealGroup } from '../store';
 import * as changeme from '../../data/changeme.js'
 
@@ -178,37 +179,37 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
       </div>
 
       {
-        loading ? 
+        loading ?
         (
-          <div>
-            <h1>LOADING</h1>
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
+            <CircularProgress />
           </div>
         ) 
         :       
         (<TableContainer classes={{root: classes.customTableContainer}}>
           {/* <Table className={classes.table} aria-label="sticky table"> */}
-          <Table stickyHeader aria-label="sticky table">
+          <Table stickyHeader size="small" aria-label="sticky table">
             <TableHead className={ 'head'}>
               <TableRow>
                 {/* <TableCell align="center" colSpan={3}>
                   NOV 2021 Data
                 </TableCell> */}
-                <TableCell />
-                <TableCell />
-                <TableCell />
-                <TableCell align="right" colSpan={1}>
+                <TableCell style={{ borderBottom: '2px solid #999' }} />
+                <TableCell style={{ borderBottom: '2px solid #999' }} />
+                <TableCell style={{ borderBottom: '2px solid #999' }} />
+                <TableCell align="right" colSpan={1} style={{ borderBottom: '2px solid #999' }}>
                   Coupon
-                </TableCell>  
-                <TableCell align="right" colSpan={1}>
-                  Current Face
-                </TableCell>  
-                <TableCell align="center" colSpan={1}>
-                  Predicted CPR 
                 </TableCell>
-                <TableCell align="center" colSpan={3}>
+                <TableCell align="right" colSpan={1} style={{ borderBottom: '2px solid #999' }}>
+                  Current Face
+                </TableCell>
+                <TableCell align="center" colSpan={1} style={{ borderBottom: '2px solid #999' }}>
+                  Predicted CPR
+                </TableCell>
+                <TableCell align="center" colSpan={3} style={{ borderBottom: '2px solid #999' }}>
                   Actual CPR
                 </TableCell>
-                <TableCell align="center" colSpan={3}>
+                <TableCell align="center" colSpan={3} style={{ borderBottom: '2px solid #999' }}>
                   CPR RESID
                 </TableCell>
                 
@@ -251,7 +252,7 @@ function CMOTable({ cmos, loadCMOS, loadCMOSYearDealGroup }) {
             <TableBody>
               
               {cmos.map((row, idx) => (
-                <TableRow key={idx}>
+                <TableRow key={idx} style={{ backgroundColor: idx % 2 === 0 ? '#ffffff' : '#f9f9f9' }}>
                   <TableCell component="th" scope="row"> {row.year} </TableCell>
                   <TableCell align="right">{row.deal}</TableCell>
                   <TableCell align="right">{row.group}</TableCell>

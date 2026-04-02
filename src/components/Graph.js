@@ -24,32 +24,26 @@ const state = {
     {
       label: 'Actual CPR',
       fill: false,
-      lineTension: 0,
-      backgroundColor: 'rgba(75,192,192,1)',
-      borderColor: 'rgba(0,0,0,1)',
+      lineTension: 0.3,
+      backgroundColor: '#2196f3',
+      borderColor: '#2196f3',
       borderWidth: 2,
+      pointRadius: 2,
+      pointHoverRadius: 4,
       data: []
     },
     {
       label: 'Predicted CPR',
       fill: false,
-      lineTension: 0,
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      // line color
-      borderColor: "#80b6f4",
+      lineTension: 0.3,
+      backgroundColor: '#f44336',
+      borderColor: '#f44336',
       borderWidth: 2,
-      data: [] 
+      pointRadius: 2,
+      pointHoverRadius: 4,
+      data: []
     },
   ]
-}
- 
-const legend = {
-  display: true,
-  position: "bottom",
-  labels: {
-    fontColor: "#323130",
-    fontSize: 14
-  }
 };
 
 
@@ -121,29 +115,41 @@ function Graph({ graphData, loadGraphData, loadGraphDataByCoupon, loadGraphDataB
         />  
       </div>
 
-      <div>
-        <h4>Date: {date}</h4>
-        <h4>Y Axis: Tradable Float in MM</h4>
-        <h4>X Axis: CPR</h4>
+      <div style={{ display: 'flex', gap: '24px', padding: '8px 0 4px', fontSize: '13px', color: '#555', fontFamily: 'Arial, sans-serif' }}>
+        <span><b>Date:</b> {date}</span>
+        <span><b>Y Axis:</b> Tradable Float (MM)</span>
+        <span><b>X Axis:</b> CPR</span>
       </div>
         <Line
           data={state}
-
-          // legend={legend}
-          // very confusing.. but seems to work
           height={"100%"}
-          // width={"800%"}
-          options={ 
-            // options
-            {
-            title:{
-              display:true,
-              text:'Average Rainfall per month',
-              fontSize:20
-            }
-            
-        }
-      }
+          options={{
+            title: {
+              display: true,
+              text: 'Tradable Float by CPR',
+              fontSize: 16,
+              fontColor: '#333',
+            },
+            legend: {
+              display: true,
+              position: 'bottom',
+              labels: {
+                fontColor: '#333',
+                fontSize: 13,
+                padding: 20,
+              }
+            },
+            tooltips: {
+              backgroundColor: 'rgba(0,0,0,0.75)',
+              titleFontSize: 13,
+              bodyFontSize: 12,
+              cornerRadius: 4,
+            },
+            scales: {
+              xAxes: [{ gridLines: { color: 'rgba(0,0,0,0.05)' } }],
+              yAxes: [{ gridLines: { color: 'rgba(0,0,0,0.05)' } }],
+            },
+          }}
         />
       </div>
     );

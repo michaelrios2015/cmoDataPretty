@@ -141,7 +141,7 @@ export const loadGinnies = () =>{
     return async(dispatch)=>{
         const tests = (await axios.get(`/api/ginnies/`)).data;
 
-        // console.log(tests[0]); 
+        console.log(tests[0]); 
 
         formatData(tests)
 

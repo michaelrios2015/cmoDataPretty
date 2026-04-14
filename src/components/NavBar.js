@@ -20,6 +20,7 @@ const NavBar = () => {
         <h2><Link href="#/">Ginnies</Link></h2>
         <h2><Link href="#/graph">Graph</Link></h2>
         <h2><Link href="#/cmotwo">CMOS</Link></h2>
+        <h2><Link href="#/mqp">MQP</Link></h2>
         </div>
     </Box>
 

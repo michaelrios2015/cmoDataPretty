@@ -6,7 +6,7 @@ import GinnieTable from './components/GinnieTable';
 import CMOTable from './components/CMOTable';
 import NavBar from './components/NavBar';
 import Graph from './components/Graph';
-import MQP from './components/MQP';
+import MAP from './components/MAP';
 import LoginTest from './components/Login';
 import { HashRouter as Router, Route, BrowserRouter } from 'react-router-dom';
 
@@ -33,7 +33,7 @@ class _App extends Component{
             <Route component={ GinnieTable } path = '/' exact/>
             <Route component={ Graph } path = '/graph' exact/>
             <Route component={ CMOTable } path = '/cmotwo' exact/>
-            <Route component={ MQP } path = '/mqp' exact/>
+            <Route component={ MAP } path = '/map' exact/>
           </div>
         </Router>
         {!this.state.loggedIn && (

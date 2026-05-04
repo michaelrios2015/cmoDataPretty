@@ -47,7 +47,7 @@ function PoolTable({ ginnies, loadGinnies, loadGinniesByCoupon, loadGinniesByFlo
   const [searchA, setSearchA ] = useState('');
   const [searchB, setSearchB ] = useState(3.5);
   const [searchC, setSearchC ] = useState('Ginnie Two');
-
+  const [showCF, setShowCF] = useState(true);
 
   const [loading, setLoading ] = useState(true);
 
@@ -218,7 +218,7 @@ for (let i=1; i < 10; i++ ){
   return (
     <div>
 
-      <div  className={ 'sideBySide' } > 
+<div  className={ 'sideBySide' } > 
         
         <Autocomplete
           id="combo-box-pool-names"
@@ -265,7 +265,16 @@ for (let i=1; i < 10; i++ ){
             <TableHead className={ 'head'}>
               <TableRow  >
               <TableCell colSpan={2} style={{ borderBottom: '2px solid #999' }}><b>{searchC} {currentmonth}</b></TableCell>
-                <TableCell align="center" colSpan={11} style={{ borderBottom: '2px solid #999' }}/>
+                <TableCell align="center" colSpan={2} style={{ borderBottom: '2px solid #999' }}/>
+                <TableCell
+                  align="center"
+                  colSpan={showCF ? 3 : 1}
+                  onClick={() => setShowCF(!showCF)}
+                  style={{ borderBottom: '2px solid #999', cursor: 'pointer', backgroundColor: '#dce6f1', userSelect: 'none' }}
+                >
+                  {showCF ? '◀ CF' : 'CF ▶'}
+                </TableCell>
+                <TableCell align="center" colSpan={6} style={{ borderBottom: '2px solid #999' }}/>
                 <TableCell align="center" colSpan={2} style={{ borderBottom: '2px solid #999' }}>
                   Streamline Ineligible
                 </TableCell>
@@ -294,9 +303,9 @@ for (let i=1; i < 10; i++ ){
                 <TableCell align="right">Name</TableCell>
                 <TableCell align="right">Issue Month</TableCell>
                 <TableCell align="right">Current Face</TableCell>
-                <TableCell align="right">CF in CMO</TableCell>
-                <TableCell align="right">CF in FED {feddate}</TableCell>
-                <TableCell align="right">CF in Plat</TableCell>
+                {showCF && <TableCell align="right">CF in CMO</TableCell>}
+                {showCF && <TableCell align="right">CF in FED {feddate}</TableCell>}
+                {showCF && <TableCell align="right">CF in Plat</TableCell>}
                 <TableCell align="right">Float MM</TableCell>  
                 <TableCell align="right">Coupon</TableCell>
                 <TableCell align="right">GWAC</TableCell>
@@ -344,9 +353,9 @@ for (let i=1; i < 10; i++ ){
                   <TableCell align="right">{row.name}</TableCell>
                   <TableCell align="right">{row.issuedate}</TableCell>
                   <TableCell align="right">{row.currentface && numberWithCommas(row.currentface)}</TableCell>
-                  <TableCell align="right">{row.cfincmo && numberWithCommas(row.cfincmo)}</TableCell>
-                  <TableCell align="right">{row.cfinfed && numberWithCommas(row.cfinfed)}</TableCell>
-                  <TableCell align="right">{row.cfinplat && numberWithCommas(row.cfinplat)}</TableCell>
+                  {showCF && <TableCell align="right">{row.cfincmo && numberWithCommas(row.cfincmo)}</TableCell>}
+                  {showCF && <TableCell align="right">{row.cfinfed && numberWithCommas(row.cfinfed)}</TableCell>}
+                  {showCF && <TableCell align="right">{row.cfinplat && numberWithCommas(row.cfinplat)}</TableCell>}
                   <TableCell align="right">{numberWithCommas(row.currentface - row.cfincmo - row.cfinfed - row.cfinplat)}</TableCell>
                   <TableCell align="right">{row.coupon}</TableCell>
                   <TableCell align="right">{row.gwac}</TableCell>

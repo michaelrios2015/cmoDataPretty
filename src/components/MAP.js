@@ -37,6 +37,11 @@ const WAM_BUCKETS = [
 
 const PROGRAMS = ['All','F','V','R','N'];
 
+const FILES = [
+  { label: 'May', file: 'grid_2.xlsx' },
+  { label: 'April', file: 'grid.xlsx' },
+];
+
 const styles = {
   wrapper: {
     overflowX: 'auto',
@@ -254,9 +259,13 @@ function PoolTable() {
   const [report, setReport] = useState('CPR');
   const [minCount, setMinCount] = useState(100);
   const [minCountInput, setMinCountInput] = useState('100');
+  const [selectedFile, setSelectedFile] = useState(FILES[0].file);
 
   useEffect(() => {
-    fetch('/data/grid.xlsx')
+    setRawData(null);
+    setPeriods([]);
+    setError(null);
+    fetch('/data/' + selectedFile)
       .then(res => {
         if (!res.ok) throw new Error(`Could not load file: ${res.status}`);
         return res.arrayBuffer();
@@ -270,7 +279,7 @@ function PoolTable() {
         setRawData(data);
       })
       .catch(err => setError(err.message));
-  }, []);
+  }, [selectedFile]);
 
   if (error) return <div style={{ color: 'red', padding: '20px' }}>Error: {error}</div>;
   if (!rawData || periods.length === 0) return <div style={{ padding: '20px' }}>Loading...</div>;
@@ -321,6 +330,12 @@ function PoolTable() {
   return (
     <div style={styles.wrapper}>
       <div style={styles.controls}>
+        <div>
+          <span style={styles.label}>Month:</span>
+          <select style={styles.select} value={selectedFile} onChange={e => setSelectedFile(e.target.value)}>
+            {FILES.map(f => <option key={f.file} value={f.file}>{f.label}</option>)}
+          </select>
+        </div>
         <div>
           <span style={styles.label}>Program:</span>
           <select style={styles.select} value={program} onChange={e => setProgram(e.target.value)}>

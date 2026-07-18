@@ -38,8 +38,8 @@ const WAM_BUCKETS = [
 const PROGRAMS = ['All','F','V','R','N'];
 
 const FILES = [
-  { label: 'May', file: 'grid_2.xlsx' },
-  { label: 'April', file: 'grid.xlsx' },
+  { label: 'July', file: 'grid_2.xlsx' },
+  { label: 'June', file: 'grid.xlsx' },
 ];
 
 const styles = {
